@@ -1,4 +1,4 @@
-import Card from './card';
+import Card from '../card';
 
 function Home() {
     return (
@@ -25,14 +25,14 @@ function Home() {
                     logoSrc="link.png"
                     title="Nyttige linker"
                     description="Finn linker til ressursene du trenger i oppstarten"
-                    link="/systemvalg"
+                    link="/ressurser"
                 />
                 {/*task list*/}
                 <Card
                     logoSrc="task_list.png"
                     title="Oppgaveliste"
                     description="Det som gjenstår for å komme i gang"
-                    link="/systemvalg"
+                    link="/oppgaveliste"
                 />
             </div>
         </>
