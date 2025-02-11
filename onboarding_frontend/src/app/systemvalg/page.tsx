@@ -15,7 +15,7 @@ function SystemChoice() {
                     logoSrc="import.png"
                     title="Begynn importen"
                     description="Få inn nøkkeltall fra systemet du kommer fra"
-                    link="/systemvalg"
+                    link="/upload"
                 />
             </div>
         </>
