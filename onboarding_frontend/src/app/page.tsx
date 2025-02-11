@@ -13,20 +13,21 @@ function Home() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">
+                {/*import*/}
                 <Card
                     logoSrc="import.png"
                     title="Begynn importen"
                     description="Få inn nøkkeltall fra systemet du kommer fra"
                     link="/systemvalg"
                 />
-
+                {/*links*/}
                 <Card
                     logoSrc="link.png"
                     title="Nyttige linker"
                     description="Finn linker til ressursene du trenger i oppstarten"
                     link="/systemvalg"
                 />
-
+                {/*task list*/}
                 <Card
                     logoSrc="task_list.png"
                     title="Oppgaveliste"
