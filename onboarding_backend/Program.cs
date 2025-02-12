@@ -4,16 +4,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowNextJs", policy =>
+    options.AddPolicy("AllowLocalhostAllPorts", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy
+            .SetIsOriginAllowed(origin =>
+            {
+                var uri = new Uri(origin);
+                return uri.IsLoopback;
+            })
             .AllowAnyMethod()
             .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
-app.UseCors("AllowNextJs");
+app.UseCors("AllowLocalhostAllPorts");
 
 app.Use(async (context, next) =>
 {
