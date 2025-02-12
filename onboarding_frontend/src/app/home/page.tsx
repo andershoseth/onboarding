@@ -18,7 +18,7 @@ function Home() {
                     logoSrc="import.png"
                     title="Begynn importen"
                     description="Få inn nøkkeltall fra systemet du kommer fra"
-                    link="/upload"
+                    link="/systemvalg"
                 />
                 {/*links*/}
                 <Card
