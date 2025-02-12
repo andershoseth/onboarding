@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -30,7 +29,7 @@ export default function Navbar() {
     >
       <ul className="flex space-x-4">
         <li>
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/home" className="hover:underline">Home</Link>
         </li>
         <li>
           <Link href="/about" className="hover:underline">About</Link>

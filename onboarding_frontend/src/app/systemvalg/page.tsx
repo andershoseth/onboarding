@@ -1,4 +1,5 @@
 import Card from '../card';
+import Link from "next/link";
 
 function SystemChoice() {
     const cards = [
@@ -59,12 +60,12 @@ function SystemChoice() {
 
             </div>
             <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-                <a
+                <Link
                     className="flex items-center gap-2 hover:underline hover:underline-offset-4"
                     href="/home"
                 >
                     Home
-                </a>
+                </Link>
             </footer>
         </>
     );
