@@ -43,9 +43,7 @@ function SystemChoice() {
     return (
         <>
             <div className="flex flex-col items-center text-center mt-10">
-                <h1 className="text-4xl font-bold">
-                    <span className="text-blue-600">Hvilket system kommer du fra?</span>
-                </h1>
+                <h1 className="text-4xl font-bold">Hvilket system kommer du fra?</h1>
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">
@@ -60,6 +58,14 @@ function SystemChoice() {
                 ))}
 
             </div>
+            <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+                <a
+                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+                    href="/home"
+                >
+                    Home
+                </a>
+            </footer>
         </>
     );
 }

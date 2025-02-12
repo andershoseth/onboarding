@@ -5,7 +5,7 @@ function Home() {
         <>
             <div className="flex flex-col items-center text-center mt-10">
                 <h1 className="text-4xl font-bold">
-                    <span className="text-blue-600">VELKOMMEN</span>
+                    <span className="text-[#E17044]">VELKOMMEN</span>
                 </h1>
                 <h2 className="text-2xl mt-2 text-gray-700 dark:text-gray-300">
                     til PowerOffice konverteringsverktøy
