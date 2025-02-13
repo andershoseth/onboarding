@@ -2,6 +2,7 @@ import Card from '../card';
 import Link from "next/link";
 
 function SystemChoice() {
+    {/* liste over regnskapssystemer */ }
     const cards = [
         {
             logoSrc: "import.png",
@@ -48,6 +49,7 @@ function SystemChoice() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">
+                {/* genererer kort for hver item i lista */}
                 {cards.map((card, index) => (
                     <Card
                         key={index}
