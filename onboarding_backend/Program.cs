@@ -52,12 +52,22 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         await file.CopyToAsync(stream);
     }
 
-    // Here you might parse the file based on its extension (.csv, .xlsx, .saf-t)
-    // For example:
-    // if (Path.GetExtension(file.FileName).Equals(".csv", StringComparison.OrdinalIgnoreCase))
-    // {
-    //     // Use CsvHelper or similar to process CSV files.
-    // }
+    try
+    {
+        var xdoc = System.Xml.Linq.XDocument.Load(filePath);
+
+        var transactionIds = xdoc.Descendants().Where(e => e.Name.LocalName == "TransactionID").Select(e => e.Value);
+
+        foreach (var id in transactionIds)
+        {
+            Console.WriteLine($"TransactionID: {id}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error parsing XML: {ex.Message}");
+        return Results.BadRequest("Failed to parse the XML file");
+    }
 
     return Results.Ok(new { message = "File uploaded successfully", fileName = file.FileName });
 });
