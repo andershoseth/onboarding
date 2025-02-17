@@ -52,16 +52,21 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         await file.CopyToAsync(stream);
     }
 
+    var nameForFile = "Name";
     try
     {
         var xdoc = System.Xml.Linq.XDocument.Load(filePath);
 
-        var transactionIds = xdoc.Descendants().Where(e => e.Name.LocalName == "TransactionID").Select(e => e.Value);
+        var transactionIds = xdoc.Descendants().Where(e => e.Name.LocalName == nameForFile).Select(e => e.Value);
 
+        var transactionsList = new List<string>(); // list to display total of data extracted
         foreach (var id in transactionIds)
         {
-            Console.WriteLine($"TransactionID: {id}");
+            Console.WriteLine($"{nameForFile}: {id}");
+            transactionsList.Add(id);
         }
+
+        Console.WriteLine($"Total: {transactionIds.Count()}"); // print sum
     }
     catch (Exception ex)
     {
