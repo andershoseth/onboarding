@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+using onboarding_backend.Services;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,21 +54,10 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         await file.CopyToAsync(stream);
     }
 
-    var nameForFile = "Name";
+    XDocument saftXml;
     try
     {
-        var xdoc = System.Xml.Linq.XDocument.Load(filePath);
-
-        var transactionIds = xdoc.Descendants().Where(e => e.Name.LocalName == nameForFile).Select(e => e.Value);
-
-        var transactionsList = new List<string>(); // list to display total of data extracted
-        foreach (var id in transactionIds)
-        {
-            Console.WriteLine($"{nameForFile}: {id}");
-            transactionsList.Add(id);
-        }
-
-        Console.WriteLine($"Total: {transactionIds.Count()}"); // print sum
+        saftXml = XDocument.Load(filePath);
     }
     catch (Exception ex)
     {
@@ -74,7 +65,30 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         return Results.BadRequest("Failed to parse the XML file");
     }
 
-    return Results.Ok(new { message = "File uploaded successfully", fileName = file.FileName });
+    var customers = Converter.ExtractCustomers(saftXml);
+    var suppliers = Converter.ExtractSuppliers(saftXml);
+
+    var doc = new XDocument(
+        new XElement("PowerOfficeImport",
+            new XElement("Contacts",
+            customers.Concat(suppliers).Select(c =>
+                new XElement("Contact",
+                    new XElement("CustomerNo", c.CustomerNo),
+                    new XElement("ContactName", c.ContactName),
+                    new XElement("Phone", c.Phone),
+                    new XElement("Email", c.Email),
+                    new XElement("OrganizationNo", c.OrganizationNo)
+                    )
+                )
+            )
+        )
+    );
+
+    var filteredPath = Path.Combine(uploads, "filtered.xml");
+    doc.Save(filteredPath);
+
+
+    return Results.Ok(new { message = "File uploaded successfully", filteredFile = filteredPath });
 });
 
 app.Run();
