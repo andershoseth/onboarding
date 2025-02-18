@@ -1,4 +1,4 @@
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using onboarding_backend.Models;
 using onboarding_backend.Services;
 using System.Xml.Serialization;
@@ -71,7 +71,7 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         return Results.BadRequest("Failed to parse the XML file");
     }
 
-    var (customers, suppliers, contacts) = Converter.ConvertFromSaft(saft);
+    var (customers, suppliers) = Converter.ConvertFromSaft(saft);
 
     var doc = new XDocument(
         new XElement("PowerOfficeImport",
