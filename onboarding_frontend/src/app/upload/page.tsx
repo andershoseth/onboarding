@@ -9,11 +9,11 @@ export default function UploadPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
         </h1>
-    
+
         <p className="text-center">
           Get started by uploading your files to our server.
         </p>
-    
+
         {/* Render the FileUploader component here */}
         <div className="mx-auto">
           <FileUploader />
@@ -22,8 +22,13 @@ export default function UploadPage() {
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="/"
+<<<<<<< HEAD
+          href="/home"
           >
+=======
+          href="/home"
+        >
+>>>>>>> origin/main
           Home
         </a>
       </footer>

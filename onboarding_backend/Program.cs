@@ -6,16 +6,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowNextJs", policy =>
+    options.AddPolicy("AllowLocalhostAllPorts", policy =>
     {
+<<<<<<< HEAD
         policy.WithOrigins("http://localhost:3000")
               .AllowAnyMethod()
               .AllowAnyHeader();
+=======
+        policy
+            .SetIsOriginAllowed(origin =>
+            {
+                var uri = new Uri(origin);
+                return uri.IsLoopback;
+            })
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+>>>>>>> origin/main
     });
 });
 
 var app = builder.Build();
-app.UseCors("AllowNextJs");
+app.UseCors("AllowLocalhostAllPorts");
 
 // Øk maks request-body størrelse (f.eks. 100MB)
 app.Use(async (context, next) =>
