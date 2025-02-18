@@ -11,35 +11,33 @@
 // xscgen /Users/lc5466/Downloads/Norwegian_SAF-T_Financial_Schema_v_1.30.xsd -o SaftSchema.cs -n onboarding_backend.Models
 namespace onboarding_backend.Models
 {
-    
-    
     /// <summary>
     /// <para>Containing all information about sales invoices and suppliers invoices.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Containing all information about sales invoices and suppliers invoices.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructure
     {
-        
+
         /// <summary>
         /// <para>70 character text.</para>
         /// <para xml:lang="en">Maximum length: 70.</para>
         /// </summary>
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("InvoiceNo")]
         public string InvoiceNo { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("CustomerInfo")]
         public InvoiceStructureCustomerInfo CustomerInfo { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("SupplierInfo")]
         public InvoiceStructureSupplierInfo SupplierInfo { get; set; }
-        
+
         /// <summary>
         /// <para>General Ledger Account code of the customer / supplier. Can be including sub-account id. It can contain many different levels to identify the Account. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -52,7 +50,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         /// <summary>
         /// <para>Branch or Storenumber, additional segregation of customer/supplier, used if not included as part of the customer/supplier id.</para>
         /// <para>35 character text.</para>
@@ -63,14 +61,14 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("BranchStoreNumber")]
         public string BranchStoreNumber { get; set; }
-        
+
         /// <summary>
         /// <para>Accounting Period</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Accounting Period")]
         [System.Xml.Serialization.XmlElementAttribute("Period")]
         public string Period { get; set; }
-        
+
         /// <summary>
         /// <para>The year of the Accounting Period.</para>
         /// <para xml:lang="en">Minimum inclusive value: 1970.</para>
@@ -80,17 +78,17 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(ushort), "1970", "2100")]
         [System.Xml.Serialization.XmlElementAttribute("PeriodYear")]
         public ushort PeriodYear { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PeriodYear property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool PeriodYearSpecified { get; set; }
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("InvoiceDate", DataType="date")]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("InvoiceDate", DataType = "date")]
         public System.DateTime InvoiceDate { get; set; }
-        
+
         /// <summary>
         /// <para>Type of invoice: Debit invoice, Credit invoice, Cash, Ticket, etc.</para>
         /// <para>Text of max 9 characters.</para>
@@ -100,21 +98,21 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("InvoiceType")]
         public string InvoiceType { get; set; }
-        
+
         /// <summary>
         /// <para>Ship To details</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Ship To details")]
         [System.Xml.Serialization.XmlElementAttribute("ShipTo")]
         public ShippingPointStructure ShipTo { get; set; }
-        
+
         /// <summary>
         /// <para>Ship from Details</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Ship from Details")]
         [System.Xml.Serialization.XmlElementAttribute("ShipFrom")]
         public ShippingPointStructure ShipFrom { get; set; }
-        
+
         /// <summary>
         /// <para>Payments terms for this invoice</para>
         /// <para>70 character text.</para>
@@ -124,7 +122,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("PaymentTerms")]
         public string PaymentTerms { get; set; }
-        
+
         /// <summary>
         /// <para>Indicator showing if self-billing  is used for this invoice.</para>
         /// <para>Text of max 9 characters.</para>
@@ -134,7 +132,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("SelfBillingIndicator")]
         public string SelfBillingIndicator { get; set; }
-        
+
         /// <summary>
         /// <para>Details of person or application that entered the transaction</para>
         /// <para>35 character text.</para>
@@ -144,20 +142,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SourceID")]
         public string SourceId { get; set; }
-        
+
         /// <summary>
         /// <para>Date posting to GL</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date posting to GL")]
-        [System.Xml.Serialization.XmlElementAttribute("GLPostingDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("GLPostingDate", DataType = "date")]
         public System.DateTime GlPostingDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the GlPostingDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool GlPostingDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Systems generated ID for batch</para>
         /// <para>35 character text.</para>
@@ -167,7 +165,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("BatchID")]
         public string BatchId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique number created by the system for the document</para>
         /// <para>35 character text.</para>
@@ -177,7 +175,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SystemID")]
         public string SystemId { get; set; }
-        
+
         /// <summary>
         /// <para>Cross-reference to GL posting. It can contain many different levels to identify the transaction. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -189,7 +187,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionID")]
         public string TransactionId { get; set; }
-        
+
         /// <summary>
         /// <para>The number(s) of the receipt(s) on this "consolidated invoicerecord". Can be a single number, a range or a list.</para>
         /// <para>256 character text.</para>
@@ -200,11 +198,11 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("ReceiptNumbers")]
         public string ReceiptNumbers { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<InvoiceStructureLine> _line;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Line")]
         public System.Collections.ObjectModel.Collection<InvoiceStructureLine> Line
         {
@@ -217,7 +215,7 @@ namespace onboarding_backend.Models
                 _line = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="InvoiceStructure" /> class.</para>
         /// </summary>
@@ -225,22 +223,22 @@ namespace onboarding_backend.Models
         {
             this._line = new System.Collections.ObjectModel.Collection<InvoiceStructureLine>();
         }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("Settlement")]
         public InvoiceStructureSettlement Settlement { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("DocumentTotals")]
         public InvoiceStructureDocumentTotals DocumentTotals { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureCustomerInfo", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureCustomerInfo", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureCustomerInfo
     {
-        
+
         /// <summary>
         /// <para>Unique code for the customer</para>
         /// <para>35 character text.</para>
@@ -250,7 +248,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("CustomerID")]
         public string CustomerId { get; set; }
-        
+
         /// <summary>
         /// <para>Name of the customer</para>
         /// <para>70 character text.</para>
@@ -260,24 +258,24 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("Name")]
         public string Name { get; set; }
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("BillingAddress")]
         public AddressStructure BillingAddress { get; set; }
     }
-    
+
     /// <summary>
     /// <para>A common structure used wherever an address is required.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("A common structure used wherever an address is required.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AddressStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AddressStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AddressStructure
     {
-        
+
         /// <summary>
         /// <para>Address line 1. Normally street name or post box. Can also include house number.</para>
         /// <para>256 character text.</para>
@@ -287,7 +285,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("StreetName")]
         public string StreetName { get; set; }
-        
+
         /// <summary>
         /// <para>Address line 1. House number if available.</para>
         /// <para>70 character text.</para>
@@ -297,7 +295,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("Number")]
         public string Number { get; set; }
-        
+
         /// <summary>
         /// <para>Address line 2.</para>
         /// <para>256 character text.</para>
@@ -307,7 +305,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("AdditionalAddressDetail")]
         public string AdditionalAddressDetail { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use</para>
         /// <para>35 character text.</para>
@@ -317,7 +315,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("Building")]
         public string Building { get; set; }
-        
+
         /// <summary>
         /// <para>Name of the city/post district.</para>
         /// <para>256 character text.</para>
@@ -327,7 +325,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("City")]
         public string City { get; set; }
-        
+
         /// <summary>
         /// <para>Postal code for the relevant city/post district.</para>
         /// <para>70 character text.</para>
@@ -337,7 +335,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("PostalCode")]
         public string PostalCode { get; set; }
-        
+
         /// <summary>
         /// <para>Country specific code to indicate regions / provinces within the tax authority.</para>
         /// <para>256 character text.</para>
@@ -347,7 +345,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("Region")]
         public string Region { get; set; }
-        
+
         /// <summary>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard.</para>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard. Example: NO for the Norway.</para>
@@ -359,7 +357,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(2)]
         [System.Xml.Serialization.XmlElementAttribute("Country")]
         public string Country { get; set; }
-        
+
         /// <summary>
         /// <para>Field to differentiate between multiple addresses and to indicate the type of address. 
         ///Choose from the predefined enumerations: 
@@ -370,39 +368,39 @@ namespace onboarding_backend.Models
             "lingAddress, ShipToAddress, ShipFromAddress."))]
         [System.Xml.Serialization.XmlElementAttribute("AddressType")]
         public AddressStructureAddressType AddressType { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AddressType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AddressTypeSpecified { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AddressStructureAddressType", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AddressStructureAddressType", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum AddressStructureAddressType
     {
-        
+
         StreetAddress,
-        
+
         PostalAddress,
-        
+
         BillingAddress,
-        
+
         ShipToAddress,
-        
+
         ShipFromAddress,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureSupplierInfo", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureSupplierInfo", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureSupplierInfo
     {
-        
+
         /// <summary>
         /// <para>Unique code for the supplier</para>
         /// <para>35 character text.</para>
@@ -412,7 +410,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Name of the supplier</para>
         /// <para>70 character text.</para>
@@ -422,24 +420,24 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("Name")]
         public string Name { get; set; }
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("BillingAddress")]
         public AddressStructure BillingAddress { get; set; }
     }
-    
+
     /// <summary>
     /// <para>A structure that holds all shipping point information.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("A structure that holds all shipping point information.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("ShippingPointStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("ShippingPointStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ShippingPointStructure
     {
-        
+
         /// <summary>
         /// <para>Identification of the delivery</para>
         /// <para>35 character text.</para>
@@ -449,20 +447,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("DeliveryID")]
         public string DeliveryId { get; set; }
-        
+
         /// <summary>
         /// <para>Date goods are delivered</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date goods are delivered")]
-        [System.Xml.Serialization.XmlElementAttribute("DeliveryDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("DeliveryDate", DataType = "date")]
         public System.DateTime DeliveryDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DeliveryDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DeliveryDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Warehouse where goods held - also to identify work-in-progress, or stock-in-transit</para>
         /// <para>35 character text.</para>
@@ -473,7 +471,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("WarehouseID")]
         public string WarehouseId { get; set; }
-        
+
         /// <summary>
         /// <para>Location of goods in warehouse</para>
         /// <para>18 character text.</para>
@@ -483,7 +481,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("LocationID")]
         public string LocationId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique consignment reference number</para>
         /// <para>35 character text.</para>
@@ -493,19 +491,19 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("UCR")]
         public string Ucr { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("Address")]
         public AddressStructure Address { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLine", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLine", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureLine
     {
-        
+
         /// <summary>
         /// <para>Number of the invoiceline</para>
         /// <para>18 character text.</para>
@@ -515,7 +513,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("LineNumber")]
         public string LineNumber { get; set; }
-        
+
         /// <summary>
         /// <para>General Ledger Account code of the GL-revenue-account. Can be including sub-account id. It can contain many different levels to identify the Account. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -528,10 +526,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AnalysisStructure> _analysis;
-        
+
         /// <summary>
         /// <para>General Ledger analysis codes</para>
         /// </summary>
@@ -548,7 +546,7 @@ namespace onboarding_backend.Models
                 _analysis = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Analysis collection is empty.</para>
         /// </summary>
@@ -560,7 +558,7 @@ namespace onboarding_backend.Models
                 return (this.Analysis.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="InvoiceStructureLine" /> class.</para>
         /// </summary>
@@ -570,10 +568,10 @@ namespace onboarding_backend.Models
             this._orderReferences = new System.Collections.ObjectModel.Collection<InvoiceStructureLineOrderReferences>();
             this._taxInformation = new System.Collections.ObjectModel.Collection<TaxInformationStructure>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<InvoiceStructureLineOrderReferences> _orderReferences;
-        
+
         /// <summary>
         /// <para>Relevant order references</para>
         /// </summary>
@@ -590,7 +588,7 @@ namespace onboarding_backend.Models
                 _orderReferences = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the OrderReferences collection is empty.</para>
         /// </summary>
@@ -602,21 +600,21 @@ namespace onboarding_backend.Models
                 return (this.OrderReferences.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para>Ship To details</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Ship To details")]
         [System.Xml.Serialization.XmlElementAttribute("ShipTo")]
         public ShippingPointStructure ShipTo { get; set; }
-        
+
         /// <summary>
         /// <para>Ship from Details</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Ship from Details")]
         [System.Xml.Serialization.XmlElementAttribute("ShipFrom")]
         public ShippingPointStructure ShipFrom { get; set; }
-        
+
         /// <summary>
         /// <para>Indicator showing if goods or service</para>
         /// <para>Text of max 9 characters.</para>
@@ -626,7 +624,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("GoodsServicesID")]
         public string GoodsServicesId { get; set; }
-        
+
         /// <summary>
         /// <para>Product code</para>
         /// <para>70 character text.</para>
@@ -636,7 +634,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("ProductCode")]
         public string ProductCode { get; set; }
-        
+
         /// <summary>
         /// <para>Description of goods or services.</para>
         /// <para>256 character text.</para>
@@ -646,14 +644,14 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("ProductDescription")]
         public string ProductDescription { get; set; }
-        
+
         /// <summary>
         /// <para>Information about the date or timeframe of the delivery of the goods or services.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Information about the date or timeframe of the delivery of the goods or services.")]
         [System.Xml.Serialization.XmlElementAttribute("Delivery")]
         public InvoiceStructureLineDelivery Delivery { get; set; }
-        
+
         /// <summary>
         /// <para>Quantity of goods and services supplied.</para>
         /// <para>Used to describe a quantity. Monetary amount. 22 digits max, of which 6 can be fractional digits.</para>
@@ -663,13 +661,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Quantity of goods and services supplied.")]
         [System.Xml.Serialization.XmlElementAttribute("Quantity")]
         public decimal Quantity { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Quantity property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool QuantitySpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Quantity unit of measure e.g. pack of 12</para>
         /// <para>Text of max 9 characters.</para>
@@ -679,7 +677,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("InvoiceUOM")]
         public string InvoiceUom { get; set; }
-        
+
         /// <summary>
         /// <para>Conversion factor of the InvoiceUOM to UOM Base. Only needed when InvoiceUOM is reported and is different from the UOM Base.</para>
         /// </summary>
@@ -687,13 +685,13 @@ namespace onboarding_backend.Models
             "eported and is different from the UOM Base."))]
         [System.Xml.Serialization.XmlElementAttribute("UOMToUOMBaseConversionFactor")]
         public decimal UomToUomBaseConversionFactor { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the UomToUomBaseConversionFactor property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool UomToUomBaseConversionFactorSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Unit price for the unit/group of units per UOM in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -701,25 +699,25 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unit price for the unit/group of units per UOM in the header\'s default currency.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("UnitPrice")]
         public decimal UnitPrice { get; set; }
-        
+
         /// <summary>
         /// <para>Tax Point date where recorded or if not recorded then the Invoice date</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax Point date where recorded or if not recorded then the Invoice date")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("TaxPointDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("TaxPointDate", DataType = "date")]
         public System.DateTime TaxPointDate { get; set; }
-        
+
         /// <summary>
         /// <para>Credit Note references</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Credit Note references")]
         [System.Xml.Serialization.XmlElementAttribute("References")]
         public InvoiceStructureLineReferences References { get; set; }
-        
+
         /// <summary>
         /// <para>Description of Invoice Line.</para>
         /// <para>256 character text.</para>
@@ -727,38 +725,38 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of Invoice Line.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Amount for transaction excluding taxes and freightcharges.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Amount for transaction excluding taxes and freightcharges.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("InvoiceLineAmount")]
         public AmountStructure InvoiceLineAmount { get; set; }
-        
+
         /// <summary>
         /// <para>Indicates whether the amounts on line-level are debit or credit amounts. Entry must correspond to entry reflected in General Ledger Entry. Signing of lineamounts is relative to this indicator. E.g. a return can lead to a negative amount.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Indicates whether the amounts on line-level are debit or credit amounts. Entry mu" +
             "st correspond to entry reflected in General Ledger Entry. Signing of lineamounts" +
             " is relative to this indicator. E.g. a return can lead to a negative amount."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("DebitCreditIndicator")]
         public InvoiceStructureLineDebitCreditIndicator DebitCreditIndicator { get; set; }
-        
+
         /// <summary>
         /// <para>Amount for shipping/freight charges.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Amount for shipping/freight charges.")]
         [System.Xml.Serialization.XmlElementAttribute("ShippingCostsAmount")]
         public AmountStructure ShippingCostsAmount { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TaxInformationStructure> _taxInformation;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("TaxInformation")]
         public System.Collections.ObjectModel.Collection<TaxInformationStructure> TaxInformation
         {
@@ -771,7 +769,7 @@ namespace onboarding_backend.Models
                 _taxInformation = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxInformation collection is empty.</para>
         /// </summary>
@@ -784,20 +782,20 @@ namespace onboarding_backend.Models
             }
         }
     }
-    
+
     /// <summary>
     /// <para>General Ledger analysis codes.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("General Ledger analysis codes.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AnalysisStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AnalysisStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AnalysisPartyInfoStructure))]
     public partial class AnalysisStructure
     {
-        
+
         /// <summary>
         /// <para>Analysis type identifier/code for the dimension type (e.g. departments, projects, cost centers, etc.)</para>
         /// <para>Text of max 9 characters.</para>
@@ -806,10 +804,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute(("Analysis type identifier/code for the dimension type (e.g. departments, projects," +
             " cost centers, etc.)"))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AnalysisType")]
         public string AnalysisType { get; set; }
-        
+
         /// <summary>
         /// <para>Analysis ID of the specific dimension.</para>
         /// <para>256 character text.</para>
@@ -817,17 +815,17 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Analysis ID of the specific dimension.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AnalysisID")]
         public string AnalysisId { get; set; }
-        
+
         /// <summary>
         /// <para>Debit amount information for analysis.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Debit amount information for analysis.")]
         [System.Xml.Serialization.XmlElementAttribute("DebitAnalysisAmount")]
         public AmountStructure DebitAnalysisAmount { get; set; }
-        
+
         /// <summary>
         /// <para>Credit amount information for analysis.</para>
         /// </summary>
@@ -835,7 +833,7 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("CreditAnalysisAmount")]
         public AmountStructure CreditAnalysisAmount { get; set; }
     }
-    
+
     /// <summary>
     /// <para>A common structure used wherever an amount is required. Monetary amount with optional foreign currency exchange rate information.</para>
     /// </summary>
@@ -843,12 +841,12 @@ namespace onboarding_backend.Models
         "onal foreign currency exchange rate information."))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AmountStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AmountStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AmountStructure
     {
-        
+
         /// <summary>
         /// <para>Amount in the header’s default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -856,10 +854,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Amount in the header’s default currency.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Amount")]
         public decimal Amount { get; set; }
-        
+
         /// <summary>
         /// <para>Three-letter currency code according to ISO 4217 standard. 
         ///Required if CurrencyAmount is used.</para>
@@ -873,7 +871,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(3)]
         [System.Xml.Serialization.XmlElementAttribute("CurrencyCode")]
         public string CurrencyCode { get; set; }
-        
+
         /// <summary>
         /// <para>Amount in foreign currency. 
         ///Required if CurrencyCode is used.</para>
@@ -884,13 +882,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Amount in foreign currency. Required if CurrencyCode is used.")]
         [System.Xml.Serialization.XmlElementAttribute("CurrencyAmount")]
         public decimal CurrencyAmount { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the CurrencyAmount property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool CurrencyAmountSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>The exchange rate used. 
         ///CurrencyAmount x ExchangeRate = Amount</para>
@@ -901,22 +899,22 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("The exchange rate used. CurrencyAmount x ExchangeRate = Amount")]
         [System.Xml.Serialization.XmlElementAttribute("ExchangeRate")]
         public decimal ExchangeRate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ExchangeRate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ExchangeRateSpecified { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineOrderReferences", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineOrderReferences", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureLineOrderReferences
     {
-        
+
         /// <summary>
         /// <para>Origination Order Number</para>
         /// <para>70 character text.</para>
@@ -926,32 +924,32 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("OriginatingON")]
         public string OriginatingOn { get; set; }
-        
+
         /// <summary>
         /// <para>Date of order</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date of order")]
-        [System.Xml.Serialization.XmlElementAttribute("OrderDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("OrderDate", DataType = "date")]
         public System.DateTime OrderDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the OrderDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool OrderDateSpecified { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineDelivery", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineDelivery", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureLineDelivery
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _movementReference;
-        
+
         /// <summary>
         /// <para>Unique reference to the movement.</para>
         /// </summary>
@@ -968,7 +966,7 @@ namespace onboarding_backend.Models
                 _movementReference = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MovementReference collection is empty.</para>
         /// </summary>
@@ -980,7 +978,7 @@ namespace onboarding_backend.Models
                 return (this.MovementReference.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="InvoiceStructureLineDelivery" /> class.</para>
         /// </summary>
@@ -988,20 +986,20 @@ namespace onboarding_backend.Models
         {
             this._movementReference = new System.Collections.ObjectModel.Collection<string>();
         }
-        
+
         /// <summary>
         /// <para>The date of the delivery</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The date of the delivery")]
-        [System.Xml.Serialization.XmlElementAttribute("DeliveryDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("DeliveryDate", DataType = "date")]
         public System.DateTime DeliveryDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DeliveryDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DeliveryDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Timeframe of the deliveries</para>
         /// </summary>
@@ -1009,52 +1007,52 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("DeliveryPeriod")]
         public InvoiceStructureLineDeliveryDeliveryPeriod DeliveryPeriod { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineDeliveryDeliveryPeriod", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineDeliveryDeliveryPeriod", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureLineDeliveryDeliveryPeriod
     {
-        
+
         /// <summary>
         /// <para>Startdate of the deliveries</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Startdate of the deliveries")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("FromDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("FromDate", DataType = "date")]
         public System.DateTime FromDate { get; set; }
-        
+
         /// <summary>
         /// <para>Enddate of the deliveries</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Enddate of the deliveries")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("ToDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("ToDate", DataType = "date")]
         public System.DateTime ToDate { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineReferences", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineReferences", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureLineReferences
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("CreditNote")]
         public InvoiceStructureLineReferencesCreditNote CreditNote { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineReferencesCreditNote", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineReferencesCreditNote", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureLineReferencesCreditNote
     {
-        
+
         /// <summary>
         /// <para>Credit note reference (where applicable) to original invoice</para>
         /// <para>35 character text.</para>
@@ -1064,7 +1062,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("Reference")]
         public string Reference { get; set; }
-        
+
         /// <summary>
         /// <para>Credit note reason or rationale</para>
         /// <para>256 character text.</para>
@@ -1075,30 +1073,30 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("Reason")]
         public string Reason { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineDebitCreditIndicator", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureLineDebitCreditIndicator", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum InvoiceStructureLineDebitCreditIndicator
     {
-        
+
         D,
-        
+
         C,
     }
-    
+
     /// <summary>
     /// <para>Tax Amount information structure.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Tax Amount information structure.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("TaxInformationStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("TaxInformationStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TaxInformationStructure
     {
-        
+
         /// <summary>
         /// <para>Tax type for look-up in tables.
         ///If used, then the only valid value is "MVA".</para>
@@ -1106,13 +1104,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Tax type for look-up in tables. If used, then the only valid value is \"MVA\".")]
         [System.Xml.Serialization.XmlElementAttribute("TaxType")]
         public TaxInformationStructureTaxType TaxType { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxType property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxTypeSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Tax Code for lookup in tables.</para>
         /// <para>70 character text.</para>
@@ -1122,20 +1120,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TaxCode")]
         public string TaxCode { get; set; }
-        
+
         /// <summary>
         /// <para>Tax percentage.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax percentage.")]
         [System.Xml.Serialization.XmlElementAttribute("TaxPercentage")]
         public decimal TaxPercentage { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxPercentage property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxPercentageSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard.</para>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard. Example: NO for the Norway.</para>
@@ -1147,7 +1145,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(2)]
         [System.Xml.Serialization.XmlElementAttribute("Country")]
         public string Country { get; set; }
-        
+
         /// <summary>
         /// <para>The base on which the tax is calculated. This can be an amount, or a quantity, eg. Litres.</para>
         /// </summary>
@@ -1155,13 +1153,13 @@ namespace onboarding_backend.Models
             ". Litres."))]
         [System.Xml.Serialization.XmlElementAttribute("TaxBase")]
         public decimal TaxBase { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxBase property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxBaseSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the value in the TaxBase. Eg. Litres for excises on alcoholic bevarages.</para>
         /// <para>70 character text.</para>
@@ -1172,21 +1170,21 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TaxBaseDescription")]
         public string TaxBaseDescription { get; set; }
-        
+
         /// <summary>
         /// <para>Debit amount information for tax.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Debit amount information for tax.")]
         [System.Xml.Serialization.XmlElementAttribute("DebitTaxAmount")]
         public AmountStructure DebitTaxAmount { get; set; }
-        
+
         /// <summary>
         /// <para>Credit amount information for tax.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Credit amount information for tax.")]
         [System.Xml.Serialization.XmlElementAttribute("CreditTaxAmount")]
         public AmountStructure CreditTaxAmount { get; set; }
-        
+
         /// <summary>
         /// <para>Tax exemption or reduction reason or rationale</para>
         /// <para>70 character text.</para>
@@ -1196,7 +1194,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TaxExemptionReason")]
         public string TaxExemptionReason { get; set; }
-        
+
         /// <summary>
         /// <para>The identification of the declaration/return in which the taxamount is reported to the Revenue body.</para>
         /// <para>35 character text.</para>
@@ -1208,25 +1206,25 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("TaxDeclarationPeriod")]
         public string TaxDeclarationPeriod { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("TaxInformationStructureTaxType", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("TaxInformationStructureTaxType", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum TaxInformationStructureTaxType
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("MVA")]
         Mva,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureSettlement", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureSettlement", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureSettlement
     {
-        
+
         /// <summary>
         /// <para>Description Settlement / Other Discount</para>
         /// <para>35 character text.</para>
@@ -1236,28 +1234,28 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SettlementDiscount")]
         public string SettlementDiscount { get; set; }
-        
+
         /// <summary>
         /// <para>Settlement amount</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Settlement amount")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SettlementAmount")]
         public AmountStructure SettlementAmount { get; set; }
-        
+
         /// <summary>
         /// <para>Date settled</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date settled")]
-        [System.Xml.Serialization.XmlElementAttribute("SettlementDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("SettlementDate", DataType = "date")]
         public System.DateTime SettlementDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SettlementDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool SettlementDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Payment mechanism</para>
         /// <para>Text of max 9 characters.</para>
@@ -1268,18 +1266,18 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("PaymentMechanism")]
         public string PaymentMechanism { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureDocumentTotals", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("InvoiceStructureDocumentTotals", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InvoiceStructureDocumentTotals
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TaxInformationStructure> _taxInformationTotals;
-        
+
         /// <summary>
         /// <para>Control totals tax payable information. Per TaxType/TaxCode the TaxBase and TaxAmount are summarised.</para>
         /// </summary>
@@ -1297,7 +1295,7 @@ namespace onboarding_backend.Models
                 _taxInformationTotals = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxInformationTotals collection is empty.</para>
         /// </summary>
@@ -1309,7 +1307,7 @@ namespace onboarding_backend.Models
                 return (this.TaxInformationTotals.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="InvoiceStructureDocumentTotals" /> class.</para>
         /// </summary>
@@ -1317,7 +1315,7 @@ namespace onboarding_backend.Models
         {
             this._taxInformationTotals = new System.Collections.ObjectModel.Collection<TaxInformationStructure>();
         }
-        
+
         /// <summary>
         /// <para>Control total amount freight charges</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -1327,13 +1325,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Control total amount freight charges")]
         [System.Xml.Serialization.XmlElementAttribute("ShippingCostsAmountTotal")]
         public decimal ShippingCostsAmountTotal { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ShippingCostsAmountTotal property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ShippingCostsAmountTotalSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Control total sales value excluding tax and shippingcosts.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -1341,10 +1339,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Control total sales value excluding tax and shippingcosts.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("NetTotal")]
         public decimal NetTotal { get; set; }
-        
+
         /// <summary>
         /// <para>Control total amount including tax and shippingcosts.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -1352,36 +1350,36 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Control total amount including tax and shippingcosts.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("GrossTotal")]
         public decimal GrossTotal { get; set; }
     }
-    
+
     /// <summary>
     /// <para>Analysis structure (restricted) for use in PartyInfoStructure.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Analysis structure (restricted) for use in PartyInfoStructure.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AnalysisPartyInfoStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AnalysisPartyInfoStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AnalysisPartyInfoStructure : AnalysisStructure
     {
     }
-    
+
     /// <summary>
     /// <para>Balance account details for Customers and Suppliers in Masterfiles.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Balance account details for Customers and Suppliers in Masterfiles.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("BalanceAccountStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("BalanceAccountStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class BalanceAccountStructure
     {
-        
+
         /// <summary>
         /// <para>General ledger account code/number for this customer. This is the account code/number into where this sub account/accounts receivable is consolidated in the balance sheet.</para>
         /// <para>70 character text.</para>
@@ -1393,7 +1391,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         /// <summary>
         /// <para>Debit balance at the start date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -1404,13 +1402,13 @@ namespace onboarding_backend.Models
             "urrency."))]
         [System.Xml.Serialization.XmlElementAttribute("OpeningDebitBalance")]
         public decimal OpeningDebitBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the OpeningDebitBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool OpeningDebitBalanceSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Credit balance at the start date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -1421,13 +1419,13 @@ namespace onboarding_backend.Models
             "currency."))]
         [System.Xml.Serialization.XmlElementAttribute("OpeningCreditBalance")]
         public decimal OpeningCreditBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the OpeningCreditBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool OpeningCreditBalanceSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Debit balance at the end date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -1438,13 +1436,13 @@ namespace onboarding_backend.Models
             "rency."))]
         [System.Xml.Serialization.XmlElementAttribute("ClosingDebitBalance")]
         public decimal ClosingDebitBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ClosingDebitBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ClosingDebitBalanceSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Credit balance at the end date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -1455,14 +1453,14 @@ namespace onboarding_backend.Models
             "rrency."))]
         [System.Xml.Serialization.XmlElementAttribute("ClosingCreditBalance")]
         public decimal ClosingCreditBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ClosingCreditBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ClosingCreditBalanceSpecified { get; set; }
     }
-    
+
     /// <summary>
     /// <para>Bank account number information. IBAN number, or account number with optional information.</para>
     /// </summary>
@@ -1470,12 +1468,12 @@ namespace onboarding_backend.Models
         "ormation."))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("BankAccountStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("BankAccountStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class BankAccountStructure
     {
-        
+
         /// <summary>
         /// <para>International Bank Account Number, ISO 13616</para>
         /// <para>35 character text.</para>
@@ -1485,7 +1483,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("IBANNumber")]
         public string IbanNumber { get; set; }
-        
+
         /// <summary>
         /// <para>The number allocated to the account by the individual’s or company’s own bank.</para>
         /// <para>35 character text.</para>
@@ -1495,7 +1493,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("BankAccountNumber")]
         public string BankAccountNumber { get; set; }
-        
+
         /// <summary>
         /// <para>The name of the individual or company holding the bank account.</para>
         /// <para>70 character text.</para>
@@ -1505,7 +1503,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("BankAccountName")]
         public string BankAccountName { get; set; }
-        
+
         /// <summary>
         /// <para>Identifier for the bank branch at which the account is held. May be needed to uniquely identify the account. Also known as ABA Number or National Bank Code</para>
         /// <para>18 character text.</para>
@@ -1516,7 +1514,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("SortCode")]
         public string SortCode { get; set; }
-        
+
         /// <summary>
         /// <para>Bank Identifier Code.</para>
         /// <para>18 character text.</para>
@@ -1526,7 +1524,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("BIC")]
         public string Bic { get; set; }
-        
+
         /// <summary>
         /// <para>Currency Code for the Bank Account from ISO 4217.</para>
         /// <para>Three-letter currency code according to ISO 4217 standard. Example: EUR for the Euros or NOK for Norwegian kroner.</para>
@@ -1538,7 +1536,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(3)]
         [System.Xml.Serialization.XmlElementAttribute("CurrencyCode")]
         public string CurrencyCode { get; set; }
-        
+
         /// <summary>
         /// <para>Link to a General Ledger account.</para>
         /// <para>70 character text.</para>
@@ -1549,27 +1547,27 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("GeneralLedgerAccountID")]
         public string GeneralLedgerAccountId { get; set; }
     }
-    
+
     /// <summary>
     /// <para>CompanyStructure with mandatory RegistrationNumber and Telephone (Contact).</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("CompanyStructure with mandatory RegistrationNumber and Telephone (Contact).")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("CompanyHeaderStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("CompanyHeaderStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CompanyHeaderStructure : CompanyStructure
     {
     }
-    
+
     /// <summary>
     /// <para>Name, address, contact and identification information of a company.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Name, address, contact and identification information of a company.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("CompanyStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("CompanyStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuditFileMasterFilesCustomersCustomer))]
@@ -1578,7 +1576,7 @@ namespace onboarding_backend.Models
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CompanyHeaderStructure))]
     public partial class CompanyStructure
     {
-        
+
         /// <summary>
         /// <para>Organization number from The Brønnøysund Register Centre (Brønnøysundregistrene) or other relevant government authority. In case of private persons, the social security number can be used.</para>
         /// <para>35 character text.</para>
@@ -1590,7 +1588,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("RegistrationNumber")]
         public string RegistrationNumber { get; set; }
-        
+
         /// <summary>
         /// <para>The name of the company.</para>
         /// <para>256 character text.</para>
@@ -1598,13 +1596,13 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The name of the company.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Name")]
         public string Name { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AddressStructure> _address;
-        
+
         /// <summary>
         /// <para>Addresses of the company.</para>
         /// </summary>
@@ -1621,7 +1619,7 @@ namespace onboarding_backend.Models
                 _address = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Address collection is empty.</para>
         /// </summary>
@@ -1633,7 +1631,7 @@ namespace onboarding_backend.Models
                 return (this.Address.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="CompanyStructure" /> class.</para>
         /// </summary>
@@ -1644,10 +1642,10 @@ namespace onboarding_backend.Models
             this._taxRegistration = new System.Collections.ObjectModel.Collection<TaxIdStructure>();
             this._bankAccount = new System.Collections.ObjectModel.Collection<BankAccountStructure>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<ContactInformationStructure> _contact;
-        
+
         /// <summary>
         /// <para>Contacts of the company.</para>
         /// </summary>
@@ -1664,7 +1662,7 @@ namespace onboarding_backend.Models
                 _contact = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Contact collection is empty.</para>
         /// </summary>
@@ -1676,10 +1674,10 @@ namespace onboarding_backend.Models
                 return (this.Contact.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TaxIdStructure> _taxRegistration;
-        
+
         /// <summary>
         /// <para>Tax registration of the company.</para>
         /// </summary>
@@ -1696,7 +1694,7 @@ namespace onboarding_backend.Models
                 _taxRegistration = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxRegistration collection is empty.</para>
         /// </summary>
@@ -1708,10 +1706,10 @@ namespace onboarding_backend.Models
                 return (this.TaxRegistration.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<BankAccountStructure> _bankAccount;
-        
+
         /// <summary>
         /// <para>Bank accounts of the company.</para>
         /// </summary>
@@ -1728,7 +1726,7 @@ namespace onboarding_backend.Models
                 _bankAccount = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the BankAccount collection is empty.</para>
         /// </summary>
@@ -1741,28 +1739,28 @@ namespace onboarding_backend.Models
             }
         }
     }
-    
+
     /// <summary>
     /// <para>Contact information of a company.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Contact information of a company.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("ContactInformationStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("ContactInformationStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ContactHeaderStructure))]
     public partial class ContactInformationStructure
     {
-        
+
         /// <summary>
         /// <para>The name of the contact person.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The name of the contact person.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ContactPerson")]
         public PersonNameStructure ContactPerson { get; set; }
-        
+
         /// <summary>
         /// <para>Telephone number.</para>
         /// <para>18 character text.</para>
@@ -1772,7 +1770,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("Telephone")]
         public string Telephone { get; set; }
-        
+
         /// <summary>
         /// <para>Fax number.</para>
         /// <para>18 character text.</para>
@@ -1782,7 +1780,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("Fax")]
         public string Fax { get; set; }
-        
+
         /// <summary>
         /// <para>E-mail address.</para>
         /// <para>70 character text.</para>
@@ -1792,14 +1790,14 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("Email")]
         public string Email { get; set; }
-        
+
         /// <summary>
         /// <para>Website address.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Website address.")]
         [System.Xml.Serialization.XmlElementAttribute("Website")]
         public string Website { get; set; }
-        
+
         /// <summary>
         /// <para>The mobile phone number (for SMS messages).</para>
         /// <para>18 character text.</para>
@@ -1810,19 +1808,19 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("MobilePhone")]
         public string MobilePhone { get; set; }
     }
-    
+
     /// <summary>
     /// <para>All information about the name of a natural person.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("All information about the name of a natural person.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("PersonNameStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("PersonNameStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PersonNameStructure
     {
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// <para>Text of max 9 characters.</para>
@@ -1832,7 +1830,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("Title")]
         public string Title { get; set; }
-        
+
         /// <summary>
         /// <para>First name of the person. If the name of the person is in an unstructured form, insert “NotUsed” in this element and enter the full unstructured name in the LastName element.</para>
         /// <para>35 character text.</para>
@@ -1842,10 +1840,10 @@ namespace onboarding_backend.Models
             "nsert “NotUsed” in this element and enter the full unstructured name in the Last" +
             "Name element."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("FirstName")]
         public string FirstName { get; set; }
-        
+
         /// <summary>
         /// <para>Initials.</para>
         /// <para>18 character text.</para>
@@ -1855,7 +1853,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("Initials")]
         public string Initials { get; set; }
-        
+
         /// <summary>
         /// <para>A textual expression of a prefix that precedes this person's family name such as Van, Von.</para>
         /// <para>18 character text.</para>
@@ -1866,7 +1864,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("LastNamePrefix")]
         public string LastNamePrefix { get; set; }
-        
+
         /// <summary>
         /// <para>Last name of the person. If the FirstName element has the text “NotUsed” then this element should contain the full unstructured name of the person.</para>
         /// <para>70 character text.</para>
@@ -1875,10 +1873,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute(("Last name of the person. If the FirstName element has the text “NotUsed” then thi" +
             "s element should contain the full unstructured name of the person."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("LastName")]
         public string LastName { get; set; }
-        
+
         /// <summary>
         /// <para>Birth name of the person.</para>
         /// <para>70 character text.</para>
@@ -1888,7 +1886,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("BirthName")]
         public string BirthName { get; set; }
-        
+
         /// <summary>
         /// <para>A formal sign or expression of greeting, expressed as text, that is appropriate for this person such as Right Honourable, Monsignor or Madam.</para>
         /// <para>18 character text.</para>
@@ -1899,10 +1897,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("Salutation")]
         public string Salutation { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _otherTitles;
-        
+
         /// <summary>
         /// <para>Used for roles in the company, such as Daglig leder, Styreleder, Regnskapsfører, etc.</para>
         /// </summary>
@@ -1920,7 +1918,7 @@ namespace onboarding_backend.Models
                 _otherTitles = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the OtherTitles collection is empty.</para>
         /// </summary>
@@ -1932,7 +1930,7 @@ namespace onboarding_backend.Models
                 return (this.OtherTitles.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="PersonNameStructure" /> class.</para>
         /// </summary>
@@ -1941,19 +1939,19 @@ namespace onboarding_backend.Models
             this._otherTitles = new System.Collections.ObjectModel.Collection<string>();
         }
     }
-    
+
     /// <summary>
     /// <para>Tax information of a company.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Tax information of a company.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("TaxIDStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("TaxIDStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TaxIdStructure
     {
-        
+
         /// <summary>
         /// <para>The company’s VAT (MVA) number. 
         ///This is the unique number/organization number from The Brønnøysund Register Centre (Brønnøysundregistrene). This element is mandatory if the company is subject to VAT (MVA).</para>
@@ -1964,10 +1962,10 @@ namespace onboarding_backend.Models
             "m The Brønnøysund Register Centre (Brønnøysundregistrene). This element is manda" +
             "tory if the company is subject to VAT (MVA)."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxRegistrationNumber")]
         public string TaxRegistrationNumber { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// <para>Text of max 9 characters.</para>
@@ -1977,7 +1975,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("TaxType")]
         public string TaxType { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// <para>35 character text.</para>
@@ -1987,7 +1985,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("TaxNumber")]
         public string TaxNumber { get; set; }
-        
+
         /// <summary>
         /// <para>Identification of the Revenue Body to which this TaxType refers.
         ///The only valid value is “Skatteetaten ”.</para>
@@ -1996,64 +1994,64 @@ namespace onboarding_backend.Models
             "alue is “Skatteetaten ”."))]
         [System.Xml.Serialization.XmlElementAttribute("TaxAuthority")]
         public TaxIdStructureTaxAuthority TaxAuthority { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxAuthority property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxAuthoritySpecified { get; set; }
-        
+
         /// <summary>
         /// <para>The date that the tax registration details referred to above were last checked or when the tax registration was completed in the VAT register (Merverdiavgiftsregisteret).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("The date that the tax registration details referred to above were last checked or" +
             " when the tax registration was completed in the VAT register (Merverdiavgiftsreg" +
             "isteret)."))]
-        [System.Xml.Serialization.XmlElementAttribute("TaxVerificationDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("TaxVerificationDate", DataType = "date")]
         public System.DateTime TaxVerificationDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxVerificationDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxVerificationDateSpecified { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("TaxIdStructureTaxAuthority", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("TaxIdStructureTaxAuthority", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum TaxIdStructureTaxAuthority
     {
-        
+
         Skatteetaten,
     }
-    
+
     /// <summary>
     /// <para>ContactInformationStructure with madatory TelephoneNumber.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("ContactInformationStructure with madatory TelephoneNumber.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("ContactHeaderStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("ContactHeaderStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ContactHeaderStructure : ContactInformationStructure
     {
     }
-    
+
     /// <summary>
     /// <para>Overall information about this Standard Auditfile.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Overall information about this Standard Auditfile.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("HeaderStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("HeaderStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuditFileHeader))]
     public partial class HeaderStructure
     {
-        
+
         /// <summary>
         /// <para>Version of standard audit file being used. The version number to be used is displayed in an XML annotation in top of the XSD schema file.</para>
         /// <para>Text of max 9 characters.</para>
@@ -2062,10 +2060,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute(("Version of standard audit file being used. The version number to be used is displ" +
             "ayed in an XML annotation in top of the XSD schema file."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AuditFileVersion")]
         public string AuditFileVersion { get; set; }
-        
+
         /// <summary>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard.</para>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard. Example: NO for the Norway.</para>
@@ -2075,10 +2073,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Two-letter country code according to ISO 3166-1 alpha 2 standard.")]
         [System.ComponentModel.DataAnnotations.MinLengthAttribute(2)]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(2)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AuditFileCountry")]
         public string AuditFileCountry { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// <para>Text of max 9 characters.</para>
@@ -2088,15 +2086,15 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("AuditFileRegion")]
         public string AuditFileRegion { get; set; }
-        
+
         /// <summary>
         /// <para>Date of production of the audit file.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date of production of the audit file.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("AuditFileDateCreated", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("AuditFileDateCreated", DataType = "date")]
         public System.DateTime AuditFileDateCreated { get; set; }
-        
+
         /// <summary>
         /// <para>Name of the software company whose product created the audit file.</para>
         /// <para>70 character text.</para>
@@ -2104,10 +2102,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Name of the software company whose product created the audit file.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SoftwareCompanyName")]
         public string SoftwareCompanyName { get; set; }
-        
+
         /// <summary>
         /// <para>Name of the software that generated the audit file.</para>
         /// <para>256 character text.</para>
@@ -2115,10 +2113,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Name of the software that generated the audit file.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SoftwareID")]
         public string SoftwareId { get; set; }
-        
+
         /// <summary>
         /// <para>Version of the software that generated the audit file.</para>
         /// <para>18 character text.</para>
@@ -2126,18 +2124,18 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Version of the software that generated the audit file.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SoftwareVersion")]
         public string SoftwareVersion { get; set; }
-        
+
         /// <summary>
         /// <para>Company's name and address details.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Company\'s name and address details.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Company")]
         public CompanyHeaderStructure Company { get; set; }
-        
+
         /// <summary>
         /// <para>Three letter Currency Code  (ISO 4217) of local currency which is the default for the audit file.</para>
         /// <para>Three-letter currency code according to ISO 4217 standard. Example: EUR for the Euros or NOK for Norwegian kroner.</para>
@@ -2148,18 +2146,18 @@ namespace onboarding_backend.Models
             "the audit file."))]
         [System.ComponentModel.DataAnnotations.MinLengthAttribute(3)]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(3)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("DefaultCurrencyCode")]
         public string DefaultCurrencyCode { get; set; }
-        
+
         /// <summary>
         /// <para>Criteria set by the user to populate the audit files</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Criteria set by the user to populate the audit files")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SelectionCriteria")]
         public SelectionCriteriaStructure SelectionCriteria { get; set; }
-        
+
         /// <summary>
         /// <para>Space for any further generic comments on the audit file.</para>
         /// <para>256 character text.</para>
@@ -2170,19 +2168,19 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("HeaderComment")]
         public string HeaderComment { get; set; }
     }
-    
+
     /// <summary>
     /// <para>The selection criteria used to generate this Standard Auditfile.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("The selection criteria used to generate this Standard Auditfile.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("SelectionCriteriaStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("SelectionCriteriaStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SelectionCriteriaStructure
     {
-        
+
         /// <summary>
         /// <para>Identifies the tax jurisdiction for whose purpose the SAF has been created. Principally for use where a single Revenue body covers more than one territory.</para>
         /// <para>35 character text.</para>
@@ -2193,7 +2191,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("TaxReportingJurisdiction")]
         public string TaxReportingJurisdiction { get; set; }
-        
+
         /// <summary>
         /// <para>For use where data has been extracted from the full data set by reference to a specific corporate entity.</para>
         /// <para>70 character text.</para>
@@ -2204,40 +2202,40 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("CompanyEntity")]
         public string CompanyEntity { get; set; }
-        
+
         /// <summary>
         /// <para>The start date for the reporting period covered by the SAF.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The start date for the reporting period covered by the SAF.")]
-        [System.Xml.Serialization.XmlElementAttribute("SelectionStartDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("SelectionStartDate", DataType = "date")]
         public System.DateTime SelectionStartDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SelectionStartDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool SelectionStartDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>The end date for the reporting period covered by the SAF.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The end date for the reporting period covered by the SAF.")]
-        [System.Xml.Serialization.XmlElementAttribute("SelectionEndDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("SelectionEndDate", DataType = "date")]
         public System.DateTime SelectionEndDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SelectionEndDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool SelectionEndDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>The first Accounting Period covered by the SAF.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The first Accounting Period covered by the SAF.")]
         [System.Xml.Serialization.XmlElementAttribute("PeriodStart")]
         public string PeriodStart { get; set; }
-        
+
         /// <summary>
         /// <para>The Accounting Year in which the PeriodStart falls.</para>
         /// <para xml:lang="en">Minimum inclusive value: 1970.</para>
@@ -2247,20 +2245,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(ushort), "1970", "2100")]
         [System.Xml.Serialization.XmlElementAttribute("PeriodStartYear")]
         public ushort PeriodStartYear { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PeriodStartYear property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool PeriodStartYearSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>The last Accounting Period covered by the SAF.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The last Accounting Period covered by the SAF.")]
         [System.Xml.Serialization.XmlElementAttribute("PeriodEnd")]
         public string PeriodEnd { get; set; }
-        
+
         /// <summary>
         /// <para>The Accounting Year in which the PeriodEnd falls.</para>
         /// <para xml:lang="en">Minimum inclusive value: 1970.</para>
@@ -2270,13 +2268,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(ushort), "1970", "2100")]
         [System.Xml.Serialization.XmlElementAttribute("PeriodEndYear")]
         public ushort PeriodEndYear { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PeriodEndYear property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool PeriodEndYearSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Type of documents selected. For use where the data has been restricted by reference to particular transaction types.</para>
         /// <para>256 character text.</para>
@@ -2287,10 +2285,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("DocumentType")]
         public string DocumentType { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _otherCriteria;
-        
+
         /// <summary>
         /// <para>Any other criteria used in selecting data. Individual Revenue Bodies may wish to draw up a list of other acceptable selection criteria for use within their jurisdiction.</para>
         /// </summary>
@@ -2309,7 +2307,7 @@ namespace onboarding_backend.Models
                 _otherCriteria = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the OtherCriteria collection is empty.</para>
         /// </summary>
@@ -2321,7 +2319,7 @@ namespace onboarding_backend.Models
                 return (this.OtherCriteria.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="SelectionCriteriaStructure" /> class.</para>
         /// </summary>
@@ -2330,26 +2328,26 @@ namespace onboarding_backend.Models
             this._otherCriteria = new System.Collections.ObjectModel.Collection<string>();
         }
     }
-    
+
     /// <summary>
     /// <para>Additional party information.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Additional party information.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructure", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructure", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PartyInfoStructure
     {
-        
+
         /// <summary>
         /// <para>Payment terms of the party.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Payment terms of the party.")]
         [System.Xml.Serialization.XmlElementAttribute("PaymentTerms")]
         public PartyInfoStructurePaymentTerms PaymentTerms { get; set; }
-        
+
         /// <summary>
         /// <para>NACE (Nomenclature of Economic Activities) is the European statistical classification of economic activities.</para>
         /// <para>18 character text.</para>
@@ -2360,7 +2358,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("NaceCode")]
         public string NaceCode { get; set; }
-        
+
         /// <summary>
         /// <para>Three-letter currency code according to ISO 4217 standard.</para>
         /// <para>Three-letter currency code according to ISO 4217 standard. Example: EUR for the Euros or NOK for Norwegian kroner.</para>
@@ -2372,7 +2370,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(3)]
         [System.Xml.Serialization.XmlElementAttribute("CurrencyCode")]
         public string CurrencyCode { get; set; }
-        
+
         /// <summary>
         /// <para>Type of party.
         ///Enumerated: Private, Company, Government</para>
@@ -2380,13 +2378,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Type of party. Enumerated: Private, Company, Government")]
         [System.Xml.Serialization.XmlElementAttribute("Type")]
         public PartyInfoStructureType Type { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Type property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TypeSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Type of account.
         ///Enumerated: Active, Observation, Passive.</para>
@@ -2394,16 +2392,16 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Type of account. Enumerated: Active, Observation, Passive.")]
         [System.Xml.Serialization.XmlElementAttribute("Status")]
         public PartyInfoStructureStatus Status { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Status property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool StatusSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AnalysisPartyInfoStructure> _analysis;
-        
+
         /// <summary>
         /// <para>Standard analysis codes for the party, such as project, department, cost center, groups, etc.</para>
         /// </summary>
@@ -2421,7 +2419,7 @@ namespace onboarding_backend.Models
                 _analysis = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Analysis collection is empty.</para>
         /// </summary>
@@ -2433,7 +2431,7 @@ namespace onboarding_backend.Models
                 return (this.Analysis.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="PartyInfoStructure" /> class.</para>
         /// </summary>
@@ -2441,7 +2439,7 @@ namespace onboarding_backend.Models
         {
             this._analysis = new System.Collections.ObjectModel.Collection<AnalysisPartyInfoStructure>();
         }
-        
+
         /// <summary>
         /// <para>Notes.</para>
         /// </summary>
@@ -2449,36 +2447,36 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("Notes")]
         public string Notes { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructurePaymentTerms", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructurePaymentTerms", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PartyInfoStructurePaymentTerms
     {
-        
+
         /// <summary>
         /// <para>Days of respite before due date from invoice date.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Days of respite before due date from invoice date.")]
         [System.Xml.Serialization.XmlElementAttribute("Days")]
         public string Days { get; set; }
-        
+
         /// <summary>
         /// <para>Months of respite before due date from invoice date.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Months of respite before due date from invoice date.")]
         [System.Xml.Serialization.XmlElementAttribute("Months")]
         public string Months { get; set; }
-        
+
         /// <summary>
         /// <para>Number of days from the invoice date the cash discount can be deducted.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Number of days from the invoice date the cash discount can be deducted.")]
         [System.Xml.Serialization.XmlElementAttribute("CashDiscountDays")]
         public string CashDiscountDays { get; set; }
-        
+
         /// <summary>
         /// <para>Rate for calculating cash discount.</para>
         /// <para xml:lang="en">Minimum inclusive value: 0.00.</para>
@@ -2488,13 +2486,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(decimal), "0.00", "100.00")]
         [System.Xml.Serialization.XmlElementAttribute("CashDiscountRate")]
         public decimal CashDiscountRate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the CashDiscountRate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool CashDiscountRateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Indicator that states whether free billing month is used or not. Free billing month sets the deadline to the last date of the invoice month.</para>
         /// </summary>
@@ -2502,61 +2500,61 @@ namespace onboarding_backend.Models
             "th sets the deadline to the last date of the invoice month."))]
         [System.Xml.Serialization.XmlElementAttribute("FreeBillingMonth")]
         public bool FreeBillingMonth { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the FreeBillingMonth property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool FreeBillingMonthSpecified { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructureType", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructureType", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum PartyInfoStructureType
     {
-        
+
         Private,
-        
+
         Company,
-        
+
         Government,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructureStatus", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("PartyInfoStructureStatus", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum PartyInfoStructureStatus
     {
-        
+
         Active,
-        
+
         Observation,
-        
+
         Passive,
     }
-    
+
     /// <summary>
     /// <para>Root element of the Norwegian SAF-T file.</para>
     /// </summary>
     [System.ComponentModel.DescriptionAttribute("Root element of the Norwegian SAF-T file.")]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFile", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFile", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute("AuditFile", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlRootAttribute("AuditFile", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     public partial class AuditFile
     {
-        
+
         /// <summary>
         /// <para>Overall information about this Standard Audit file.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Overall information about this Standard Audit file.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Header")]
         public AuditFileHeader Header { get; set; }
-        
+
         /// <summary>
         /// <para>Holds standing data about general ledger account, suppliers, customers, products, etc.. An extension point is provided to allow Revenue Bodies to specify additional elements or structures such as tax rate tables.</para>
         /// </summary>
@@ -2565,14 +2563,14 @@ namespace onboarding_backend.Models
             "nal elements or structures such as tax rate tables."))]
         [System.Xml.Serialization.XmlElementAttribute("MasterFiles")]
         public AuditFileMasterFiles MasterFiles { get; set; }
-        
+
         /// <summary>
         /// <para>Accounting transactions.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Accounting transactions.")]
         [System.Xml.Serialization.XmlElementAttribute("GeneralLedgerEntries")]
         public AuditFileGeneralLedgerEntries GeneralLedgerEntries { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
@@ -2580,23 +2578,23 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("SourceDocuments")]
         public AuditFileSourceDocuments SourceDocuments { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileHeader", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileHeader", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileHeader : HeaderStructure
     {
-        
+
         /// <summary>
         /// <para>Type of data in the audit file. The only valid value is “A” (Accounting).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Type of data in the audit file. The only valid value is “A” (Accounting).")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxAccountingBasis")]
         public AuditFileHeaderTaxAccountingBasis TaxAccountingBasis { get; set; }
-        
+
         /// <summary>
         /// <para>Company / Division / Branch reference</para>
         /// <para>70 character text.</para>
@@ -2606,7 +2604,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TaxEntity")]
         public string TaxEntity { get; set; }
-        
+
         /// <summary>
         /// <para>ID of the user that generated the audit file.</para>
         /// <para>256 character text.</para>
@@ -2616,7 +2614,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("UserID")]
         public string UserId { get; set; }
-        
+
         /// <summary>
         /// <para>Information about the sender of the audit file if the sender is not the company that owns the data. This can be an accounting office, a parent company, etc.</para>
         /// </summary>
@@ -2625,33 +2623,33 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("AuditFileSender")]
         public CompanyStructure AuditFileSender { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileHeaderTaxAccountingBasis", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileHeaderTaxAccountingBasis", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum AuditFileHeaderTaxAccountingBasis
     {
-        
+
         A,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFiles", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFiles", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFiles
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesGeneralLedgerAccountsAccount> _generalLedgerAccounts;
-        
+
         /// <summary>
         /// <para>The general ledger accounts of a company.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The general ledger accounts of a company.")]
         [System.Xml.Serialization.XmlArrayAttribute("GeneralLedgerAccounts")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Account", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Account", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesGeneralLedgerAccountsAccount> GeneralLedgerAccounts
         {
             get
@@ -2663,7 +2661,7 @@ namespace onboarding_backend.Models
                 _generalLedgerAccounts = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the GeneralLedgerAccounts collection is empty.</para>
         /// </summary>
@@ -2675,7 +2673,7 @@ namespace onboarding_backend.Models
                 return (this.GeneralLedgerAccounts.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFiles" /> class.</para>
         /// </summary>
@@ -2694,16 +2692,16 @@ namespace onboarding_backend.Models
             this._owners = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesOwnersOwner>();
             this._assets = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAsset>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomy> _taxonomies;
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Not in use.")]
         [System.Xml.Serialization.XmlArrayAttribute("Taxonomies")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Taxonomy", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Taxonomy", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomy> Taxonomies
         {
             get
@@ -2715,7 +2713,7 @@ namespace onboarding_backend.Models
                 _taxonomies = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Taxonomies collection is empty.</para>
         /// </summary>
@@ -2727,16 +2725,16 @@ namespace onboarding_backend.Models
                 return (this.Taxonomies.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesCustomersCustomer> _customers;
-        
+
         /// <summary>
         /// <para>The customers of a company.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The customers of a company.")]
         [System.Xml.Serialization.XmlArrayAttribute("Customers")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Customer", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Customer", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesCustomersCustomer> Customers
         {
             get
@@ -2748,7 +2746,7 @@ namespace onboarding_backend.Models
                 _customers = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Customers collection is empty.</para>
         /// </summary>
@@ -2760,16 +2758,16 @@ namespace onboarding_backend.Models
                 return (this.Customers.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesSuppliersSupplier> _suppliers;
-        
+
         /// <summary>
         /// <para>The suppliers of a company.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The suppliers of a company.")]
         [System.Xml.Serialization.XmlArrayAttribute("Suppliers")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Supplier", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Supplier", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesSuppliersSupplier> Suppliers
         {
             get
@@ -2781,7 +2779,7 @@ namespace onboarding_backend.Models
                 _suppliers = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Suppliers collection is empty.</para>
         /// </summary>
@@ -2793,16 +2791,16 @@ namespace onboarding_backend.Models
                 return (this.Suppliers.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntry> _taxTable;
-        
+
         /// <summary>
         /// <para>The tax tables of a company.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The tax tables of a company.")]
         [System.Xml.Serialization.XmlArrayAttribute("TaxTable")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("TaxTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("TaxTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntry> TaxTable
         {
             get
@@ -2814,7 +2812,7 @@ namespace onboarding_backend.Models
                 _taxTable = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxTable collection is empty.</para>
         /// </summary>
@@ -2826,16 +2824,16 @@ namespace onboarding_backend.Models
                 return (this.TaxTable.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesUomTableUomTableEntry> _uomTable;
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Not in use.")]
         [System.Xml.Serialization.XmlArrayAttribute("UOMTable")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("UOMTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("UOMTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesUomTableUomTableEntry> UomTable
         {
             get
@@ -2847,7 +2845,7 @@ namespace onboarding_backend.Models
                 _uomTable = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the UomTable collection is empty.</para>
         /// </summary>
@@ -2859,10 +2857,10 @@ namespace onboarding_backend.Models
                 return (this.UomTable.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry> _analysisTypeTable;
-        
+
         /// <summary>
         /// <para>Table with the analysis code identifiers. Used for further specification of transaction data. Example: cost unit, cost center, project, department, provider, employees, etc.</para>
         /// </summary>
@@ -2870,7 +2868,7 @@ namespace onboarding_backend.Models
             "action data. Example: cost unit, cost center, project, department, provider, emp" +
             "loyees, etc."))]
         [System.Xml.Serialization.XmlArrayAttribute("AnalysisTypeTable")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("AnalysisTypeTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("AnalysisTypeTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry> AnalysisTypeTable
         {
             get
@@ -2882,7 +2880,7 @@ namespace onboarding_backend.Models
                 _analysisTypeTable = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the AnalysisTypeTable collection is empty.</para>
         /// </summary>
@@ -2894,16 +2892,16 @@ namespace onboarding_backend.Models
                 return (this.AnalysisTypeTable.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry> _movementTypeTable;
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Not in use.")]
         [System.Xml.Serialization.XmlArrayAttribute("MovementTypeTable")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("MovementTypeTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("MovementTypeTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry> MovementTypeTable
         {
             get
@@ -2915,7 +2913,7 @@ namespace onboarding_backend.Models
                 _movementTypeTable = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the MovementTypeTable collection is empty.</para>
         /// </summary>
@@ -2927,16 +2925,16 @@ namespace onboarding_backend.Models
                 return (this.MovementTypeTable.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProduct> _products;
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Not in use.")]
         [System.Xml.Serialization.XmlArrayAttribute("Products")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Product", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Product", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProduct> Products
         {
             get
@@ -2948,7 +2946,7 @@ namespace onboarding_backend.Models
                 _products = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Products collection is empty.</para>
         /// </summary>
@@ -2960,16 +2958,16 @@ namespace onboarding_backend.Models
                 return (this.Products.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesPhysicalStockPhysicalStockEntry> _physicalStock;
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Not in use.")]
         [System.Xml.Serialization.XmlArrayAttribute("PhysicalStock")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("PhysicalStockEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("PhysicalStockEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesPhysicalStockPhysicalStockEntry> PhysicalStock
         {
             get
@@ -2981,7 +2979,7 @@ namespace onboarding_backend.Models
                 _physicalStock = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the PhysicalStock collection is empty.</para>
         /// </summary>
@@ -2993,16 +2991,16 @@ namespace onboarding_backend.Models
                 return (this.PhysicalStock.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesOwnersOwner> _owners;
-        
+
         /// <summary>
         /// <para>The owners of a company.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The owners of a company.")]
         [System.Xml.Serialization.XmlArrayAttribute("Owners")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Owner", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Owner", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesOwnersOwner> Owners
         {
             get
@@ -3014,7 +3012,7 @@ namespace onboarding_backend.Models
                 _owners = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Owners collection is empty.</para>
         /// </summary>
@@ -3026,16 +3024,16 @@ namespace onboarding_backend.Models
                 return (this.Owners.Count != 0);
             }
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAsset> _assets;
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Not in use.")]
         [System.Xml.Serialization.XmlArrayAttribute("Assets")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Asset", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Asset", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAsset> Assets
         {
             get
@@ -3047,7 +3045,7 @@ namespace onboarding_backend.Models
                 _assets = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Assets collection is empty.</para>
         /// </summary>
@@ -3060,23 +3058,23 @@ namespace onboarding_backend.Models
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesGeneralLedgerAccounts", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesGeneralLedgerAccounts", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesGeneralLedgerAccounts
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesGeneralLedgerAccountsAccount> _account;
-        
+
         /// <summary>
         /// <para>General ledger account information.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("General ledger account information.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Account")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesGeneralLedgerAccountsAccount> Account
         {
@@ -3089,7 +3087,7 @@ namespace onboarding_backend.Models
                 _account = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesGeneralLedgerAccounts" /> class.</para>
         /// </summary>
@@ -3098,15 +3096,15 @@ namespace onboarding_backend.Models
             this._account = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesGeneralLedgerAccountsAccount>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesGeneralLedgerAccountsAccount", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesGeneralLedgerAccountsAccount", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesGeneralLedgerAccountsAccount
     {
-        
+
         /// <summary>
         /// <para>General ledger account code/number.</para>
         /// <para>70 character text.</para>
@@ -3114,10 +3112,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("General ledger account code/number.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         /// <summary>
         /// <para>Name of individual general ledger account.</para>
         /// <para>256 character text.</para>
@@ -3125,10 +3123,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Name of individual general ledger account.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AccountDescription")]
         public string AccountDescription { get; set; }
-        
+
         /// <summary>
         /// <para>Use in conjunction with GroupingCode. Use category from codelists.</para>
         /// <para>256 character text.</para>
@@ -3136,10 +3134,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Use in conjunction with GroupingCode. Use category from codelists.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("GroupingCategory")]
         public string GroupingCategory { get; set; }
-        
+
         /// <summary>
         /// <para>Use in conjunction with GroupingCategory. Use code from codelists.</para>
         /// <para>35 character text.</para>
@@ -3147,32 +3145,32 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Use in conjunction with GroupingCategory. Use code from codelists.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("GroupingCode")]
         public string GroupingCode { get; set; }
-        
+
         /// <summary>
         /// <para>Type of account. Set standard account in the StandardAccountID element. The only valid value is “GL” (General Ledger).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Type of account. Set standard account in the StandardAccountID element. The only " +
             "valid value is “GL” (General Ledger)."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AccountType")]
         public AuditFileMasterFilesGeneralLedgerAccountsAccountAccountType AccountType { get; set; }
-        
+
         /// <summary>
         /// <para>Date of when the general ledger account was created.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date of when the general ledger account was created.")]
-        [System.Xml.Serialization.XmlElementAttribute("AccountCreationDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("AccountCreationDate", DataType = "date")]
         public System.DateTime AccountCreationDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AccountCreationDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccountCreationDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Debit balance at the start date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -3183,13 +3181,13 @@ namespace onboarding_backend.Models
             "urrency."))]
         [System.Xml.Serialization.XmlElementAttribute("OpeningDebitBalance")]
         public decimal OpeningDebitBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the OpeningDebitBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool OpeningDebitBalanceSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Credit balance at the start date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -3200,13 +3198,13 @@ namespace onboarding_backend.Models
             "currency."))]
         [System.Xml.Serialization.XmlElementAttribute("OpeningCreditBalance")]
         public decimal OpeningCreditBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the OpeningCreditBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool OpeningCreditBalanceSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Debit balance at the end date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -3217,13 +3215,13 @@ namespace onboarding_backend.Models
             "rency."))]
         [System.Xml.Serialization.XmlElementAttribute("ClosingDebitBalance")]
         public decimal ClosingDebitBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ClosingDebitBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ClosingDebitBalanceSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Credit balance at the end date of the selection period in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -3234,36 +3232,36 @@ namespace onboarding_backend.Models
             "rrency."))]
         [System.Xml.Serialization.XmlElementAttribute("ClosingCreditBalance")]
         public decimal ClosingCreditBalance { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ClosingCreditBalance property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ClosingCreditBalanceSpecified { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesGeneralLedgerAccountsAccountAccountType", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesGeneralLedgerAccountsAccountAccountType", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum AuditFileMasterFilesGeneralLedgerAccountsAccountAccountType
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("GL")]
         Gl,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxonomies", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxonomies", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesTaxonomies
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomy> _taxonomy;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Taxonomy")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomy> Taxonomy
         {
@@ -3276,7 +3274,7 @@ namespace onboarding_backend.Models
                 _taxonomy = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesTaxonomies" /> class.</para>
         /// </summary>
@@ -3285,15 +3283,15 @@ namespace onboarding_backend.Models
             this._taxonomy = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomy>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxonomiesTaxonomy", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxonomiesTaxonomy", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesTaxonomiesTaxonomy
     {
-        
+
         /// <summary>
         /// <para>Reference to the taxonomy that applies to the GL Account.</para>
         /// <para>256 character text.</para>
@@ -3301,13 +3299,13 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Reference to the taxonomy that applies to the GL Account.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxonomyReference")]
         public string TaxonomyReference { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomyTaxonomyElement> _taxonomyElement;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("TaxonomyElement")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomyTaxonomyElement> TaxonomyElement
         {
@@ -3320,7 +3318,7 @@ namespace onboarding_backend.Models
                 _taxonomyElement = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxonomyElement collection is empty.</para>
         /// </summary>
@@ -3332,7 +3330,7 @@ namespace onboarding_backend.Models
                 return (this.TaxonomyElement.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesTaxonomiesTaxonomy" /> class.</para>
         /// </summary>
@@ -3341,15 +3339,15 @@ namespace onboarding_backend.Models
             this._taxonomyElement = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxonomiesTaxonomyTaxonomyElement>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxonomiesTaxonomyTaxonomyElement", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxonomiesTaxonomyTaxonomyElement", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesTaxonomiesTaxonomyTaxonomyElement
     {
-        
+
         /// <summary>
         /// <para>Reference to specific taxonomy element</para>
         /// <para>256 character text.</para>
@@ -3357,10 +3355,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Reference to specific taxonomy element")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxonomyCode")]
         public string TaxonomyCode { get; set; }
-        
+
         /// <summary>
         /// <para>Additional reference to specific taxonomy element</para>
         /// <para>256 character text.</para>
@@ -3370,7 +3368,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("TaxonomyClusterID")]
         public string TaxonomyClusterId { get; set; }
-        
+
         /// <summary>
         /// <para>256 character text.</para>
         /// <para xml:lang="en">Maximum length: 256.</para>
@@ -3378,7 +3376,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("TaxonomyClusterContextID")]
         public string TaxonomyClusterContextId { get; set; }
-        
+
         /// <summary>
         /// <para>General Ledger Account code for this TaxanomyReference/TaxonomyCode. Can be including sub-account id. It can contain many different levels to identify the Account. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -3386,27 +3384,27 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(@"General Ledger Account code for this TaxanomyReference/TaxonomyCode. Can be including sub-account id. It can contain many different levels to identify the Account. It could include cost centres such as company, division, region, group and branch/department.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesCustomers", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesCustomers", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesCustomers
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesCustomersCustomer> _customer;
-        
+
         /// <summary>
         /// <para>Customer information.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Customer information.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Customer")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesCustomersCustomer> Customer
         {
@@ -3419,7 +3417,7 @@ namespace onboarding_backend.Models
                 _customer = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesCustomers" /> class.</para>
         /// </summary>
@@ -3428,15 +3426,15 @@ namespace onboarding_backend.Models
             this._customer = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesCustomersCustomer>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesCustomersCustomer", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesCustomersCustomer", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesCustomersCustomer : CompanyStructure
     {
-        
+
         /// <summary>
         /// <para>Unique account code/number for the customer.</para>
         /// <para>35 character text.</para>
@@ -3444,10 +3442,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unique account code/number for the customer.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("CustomerID")]
         public string CustomerId { get; set; }
-        
+
         /// <summary>
         /// <para>Indicator showing if a self-billing agreement exists between the customer and the supplier.</para>
         /// <para>Text of max 9 characters.</para>
@@ -3458,10 +3456,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("SelfBillingIndicator")]
         public string SelfBillingIndicator { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<BalanceAccountStructure> _balanceAccount;
-        
+
         /// <summary>
         /// <para>Balance account details for customer.</para>
         /// </summary>
@@ -3478,7 +3476,7 @@ namespace onboarding_backend.Models
                 _balanceAccount = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the BalanceAccount collection is empty.</para>
         /// </summary>
@@ -3490,7 +3488,7 @@ namespace onboarding_backend.Models
                 return (this.BalanceAccount.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesCustomersCustomer" /> class.</para>
         /// </summary>
@@ -3498,7 +3496,7 @@ namespace onboarding_backend.Models
         {
             this._balanceAccount = new System.Collections.ObjectModel.Collection<BalanceAccountStructure>();
         }
-        
+
         /// <summary>
         /// <para>Additional party information.</para>
         /// </summary>
@@ -3506,23 +3504,23 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("PartyInfo")]
         public PartyInfoStructure PartyInfo { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesSuppliers", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesSuppliers", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesSuppliers
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesSuppliersSupplier> _supplier;
-        
+
         /// <summary>
         /// <para>Supplier information.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Supplier information.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Supplier")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesSuppliersSupplier> Supplier
         {
@@ -3535,7 +3533,7 @@ namespace onboarding_backend.Models
                 _supplier = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesSuppliers" /> class.</para>
         /// </summary>
@@ -3544,15 +3542,15 @@ namespace onboarding_backend.Models
             this._supplier = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesSuppliersSupplier>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesSuppliersSupplier", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesSuppliersSupplier", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesSuppliersSupplier : CompanyStructure
     {
-        
+
         /// <summary>
         /// <para>Unique account code/number for the supplier.</para>
         /// <para>35 character text.</para>
@@ -3560,10 +3558,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unique account code/number for the supplier.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Indicator showing if a self-billing agreement exists between the customer and the supplier.</para>
         /// <para>Text of max 9 characters.</para>
@@ -3574,10 +3572,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("SelfBillingIndicator")]
         public string SelfBillingIndicator { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<BalanceAccountStructure> _balanceAccount;
-        
+
         /// <summary>
         /// <para>Balance account details for supplier.</para>
         /// </summary>
@@ -3594,7 +3592,7 @@ namespace onboarding_backend.Models
                 _balanceAccount = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the BalanceAccount collection is empty.</para>
         /// </summary>
@@ -3606,7 +3604,7 @@ namespace onboarding_backend.Models
                 return (this.BalanceAccount.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesSuppliersSupplier" /> class.</para>
         /// </summary>
@@ -3614,7 +3612,7 @@ namespace onboarding_backend.Models
         {
             this._balanceAccount = new System.Collections.ObjectModel.Collection<BalanceAccountStructure>();
         }
-        
+
         /// <summary>
         /// <para>Additional party information.</para>
         /// </summary>
@@ -3622,23 +3620,23 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("PartyInfo")]
         public PartyInfoStructure PartyInfo { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTable", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTable", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesTaxTable
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntry> _taxTableEntry;
-        
+
         /// <summary>
         /// <para>Tax entry information.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax entry information.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxTableEntry")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntry> TaxTableEntry
         {
@@ -3651,7 +3649,7 @@ namespace onboarding_backend.Models
                 _taxTableEntry = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesTaxTable" /> class.</para>
         /// </summary>
@@ -3660,39 +3658,39 @@ namespace onboarding_backend.Models
             this._taxTableEntry = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntry>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesTaxTableTaxTableEntry
     {
-        
+
         /// <summary>
         /// <para>Tax type for look-up in tables. “MVA” is the only valid value.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax type for look-up in tables. “MVA” is the only valid value.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxType")]
         public AuditFileMasterFilesTaxTableTaxTableEntryTaxType TaxType { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the Tax Type. “Merverdiavgift” is the only valid value.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the Tax Type. “Merverdiavgift” is the only valid value.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public AuditFileMasterFilesTaxTableTaxTableEntryDescription Description { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntryTaxCodeDetails> _taxCodeDetails;
-        
+
         /// <summary>
         /// <para>Tax code details of the tax table entry.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax code details of the tax table entry.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxCodeDetails")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntryTaxCodeDetails> TaxCodeDetails
         {
@@ -3705,7 +3703,7 @@ namespace onboarding_backend.Models
                 _taxCodeDetails = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesTaxTableTaxTableEntry" /> class.</para>
         /// </summary>
@@ -3714,34 +3712,34 @@ namespace onboarding_backend.Models
             this._taxCodeDetails = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesTaxTableTaxTableEntryTaxCodeDetails>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntryTaxType", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntryTaxType", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum AuditFileMasterFilesTaxTableTaxTableEntryTaxType
     {
-        
+
         [System.Xml.Serialization.XmlEnumAttribute("MVA")]
         Mva,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntryDescription", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntryDescription", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum AuditFileMasterFilesTaxTableTaxTableEntryDescription
     {
-        
+
         Merverdiavgift,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntryTaxCodeDetails", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesTaxTableTaxTableEntryTaxCodeDetails", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesTaxTableTaxTableEntryTaxCodeDetails
     {
-        
+
         /// <summary>
         /// <para>Tax Code for lookup in tables.</para>
         /// <para>70 character text.</para>
@@ -3749,36 +3747,36 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax Code for lookup in tables.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TaxCode")]
         public string TaxCode { get; set; }
-        
+
         /// <summary>
         /// <para>Representing the starting date for this entry.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Representing the starting date for this entry.")]
-        [System.Xml.Serialization.XmlElementAttribute("EffectiveDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("EffectiveDate", DataType = "date")]
         public System.DateTime EffectiveDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the EffectiveDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool EffectiveDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Representing the ending date for this entry.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Representing the ending date for this entry.")]
-        [System.Xml.Serialization.XmlElementAttribute("ExpirationDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("ExpirationDate", DataType = "date")]
         public System.DateTime ExpirationDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ExpirationDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ExpirationDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the Tax Code.</para>
         /// <para>256 character text.</para>
@@ -3788,27 +3786,27 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Tax percentage.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax percentage.")]
         [System.Xml.Serialization.XmlElementAttribute("TaxPercentage")]
         public decimal TaxPercentage { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxPercentage property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxPercentageSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Not in use.")]
         [System.Xml.Serialization.XmlElementAttribute("FlatTaxRate")]
         public AmountStructure FlatTaxRate { get; set; }
-        
+
         /// <summary>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard.</para>
         /// <para>Two-letter country code according to ISO 3166-1 alpha 2 standard. Example: NO for the Norway.</para>
@@ -3818,10 +3816,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Two-letter country code according to ISO 3166-1 alpha 2 standard.")]
         [System.ComponentModel.DataAnnotations.MinLengthAttribute(2)]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(2)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Country")]
         public string Country { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// <para>Text of max 9 characters.</para>
@@ -3831,7 +3829,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("Region")]
         public string Region { get; set; }
-        
+
         /// <summary>
         /// <para>Standard Tax Code. Must always be used to map all VAT codes to standard VAT Tax codes. In situations when mapping is not possible, please use “NA” as value for StandardTaxCode.</para>
         /// <para xml:lang="en">Pattern: [0-9anAN]{1,2}.</para>
@@ -3840,33 +3838,33 @@ namespace onboarding_backend.Models
             "odes. In situations when mapping is not possible, please use “NA” as value for S" +
             "tandardTaxCode."))]
         [System.ComponentModel.DataAnnotations.RegularExpressionAttribute("[0-9anAN]{1,2}")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("StandardTaxCode")]
         public string StandardTaxCode { get; set; }
-        
+
         /// <summary>
         /// <para>Indicates if the Tax Code is used for compensation.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Indicates if the Tax Code is used for compensation.")]
         [System.Xml.Serialization.XmlElementAttribute("Compensation")]
         public bool Compensation { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Compensation property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool CompensationSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<decimal> _baseRate;
-        
+
         /// <summary>
         /// <para>Base rates used for the tax code. Standard is 100 (the whole amount is tax deductible). Example: 60 if only 60% of the total amount is tax deductible. Enter all standard base rates used for the tax code.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Base rates used for the tax code. Standard is 100 (the whole amount is tax deduct" +
             "ible). Example: 60 if only 60% of the total amount is tax deductible. Enter all " +
             "standard base rates used for the tax code."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("BaseRate")]
         public System.Collections.ObjectModel.Collection<decimal> BaseRate
         {
@@ -3879,7 +3877,7 @@ namespace onboarding_backend.Models
                 _baseRate = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesTaxTableTaxTableEntryTaxCodeDetails" /> class.</para>
         /// </summary>
@@ -3888,19 +3886,19 @@ namespace onboarding_backend.Models
             this._baseRate = new System.Collections.ObjectModel.Collection<decimal>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesUomTable", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesUomTable", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesUomTable
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesUomTableUomTableEntry> _uomTableEntry;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("UOMTableEntry")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesUomTableUomTableEntry> UomTableEntry
         {
@@ -3913,7 +3911,7 @@ namespace onboarding_backend.Models
                 _uomTableEntry = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesUomTable" /> class.</para>
         /// </summary>
@@ -3922,15 +3920,15 @@ namespace onboarding_backend.Models
             this._uomTableEntry = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesUomTableUomTableEntry>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesUomTableUomTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesUomTableUomTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesUomTableUomTableEntry
     {
-        
+
         /// <summary>
         /// <para>Quantity unit of measure e.g. pack of 12</para>
         /// <para>Text of max 9 characters.</para>
@@ -3938,10 +3936,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Quantity unit of measure e.g. pack of 12")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("UnitOfMeasure")]
         public string UnitOfMeasure { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the UOM</para>
         /// <para>256 character text.</para>
@@ -3949,27 +3947,27 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the UOM")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAnalysisTypeTable", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAnalysisTypeTable", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAnalysisTypeTable
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry> _analysisTypeTableEntry;
-        
+
         /// <summary>
         /// <para>Analysis entry information.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Analysis entry information.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AnalysisTypeTableEntry")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry> AnalysisTypeTableEntry
         {
@@ -3982,7 +3980,7 @@ namespace onboarding_backend.Models
                 _analysisTypeTableEntry = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesAnalysisTypeTable" /> class.</para>
         /// </summary>
@@ -3991,15 +3989,15 @@ namespace onboarding_backend.Models
             this._analysisTypeTableEntry = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry
     {
-        
+
         /// <summary>
         /// <para>Analysis type identifier/code for the dimension type (e.g. departments, projects, cost centers, employees, etc.).</para>
         /// <para>Text of max 9 characters.</para>
@@ -4008,10 +4006,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute(("Analysis type identifier/code for the dimension type (e.g. departments, projects," +
             " cost centers, employees, etc.)."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AnalysisType")]
         public string AnalysisType { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the dimension type.</para>
         /// <para>256 character text.</para>
@@ -4019,10 +4017,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the dimension type.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AnalysisTypeDescription")]
         public string AnalysisTypeDescription { get; set; }
-        
+
         /// <summary>
         /// <para>Analysis ID of the specific dimension entity.</para>
         /// <para>35 character text.</para>
@@ -4030,10 +4028,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Analysis ID of the specific dimension entity.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AnalysisID")]
         public string AnalysisId { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the specific dimension entity.</para>
         /// <para>256 character text.</para>
@@ -4041,36 +4039,36 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the specific dimension entity.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AnalysisIDDescription")]
         public string AnalysisIdDescription { get; set; }
-        
+
         /// <summary>
         /// <para>Start date.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Start date.")]
-        [System.Xml.Serialization.XmlElementAttribute("StartDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("StartDate", DataType = "date")]
         public System.DateTime StartDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the StartDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool StartDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>End date.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("End date.")]
-        [System.Xml.Serialization.XmlElementAttribute("EndDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("EndDate", DataType = "date")]
         public System.DateTime EndDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the EndDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool EndDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Status of the analysis entry. Choose from the predefined enumerations: Active, Closed, Observation, Passive.</para>
         /// </summary>
@@ -4078,16 +4076,16 @@ namespace onboarding_backend.Models
             "osed, Observation, Passive."))]
         [System.Xml.Serialization.XmlElementAttribute("Status")]
         public AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntryStatus Status { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Status property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool StatusSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AnalysisPartyInfoStructure> _analysis;
-        
+
         /// <summary>
         /// <para>Standard linked analysis codes for the analysis entry, such as project, department, cost center, groups, etc.</para>
         /// </summary>
@@ -4105,7 +4103,7 @@ namespace onboarding_backend.Models
                 _analysis = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Analysis collection is empty.</para>
         /// </summary>
@@ -4117,7 +4115,7 @@ namespace onboarding_backend.Models
                 return (this.Analysis.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntry" /> class.</para>
         /// </summary>
@@ -4126,34 +4124,34 @@ namespace onboarding_backend.Models
             this._analysis = new System.Collections.ObjectModel.Collection<AnalysisPartyInfoStructure>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntryStatus", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntryStatus", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum AuditFileMasterFilesAnalysisTypeTableAnalysisTypeTableEntryStatus
     {
-        
+
         Active,
-        
+
         Closed,
-        
+
         Observation,
-        
+
         Passive,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesMovementTypeTable", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesMovementTypeTable", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesMovementTypeTable
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry> _movementTypeTableEntry;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("MovementTypeTableEntry")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry> MovementTypeTableEntry
         {
@@ -4166,7 +4164,7 @@ namespace onboarding_backend.Models
                 _movementTypeTableEntry = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesMovementTypeTable" /> class.</para>
         /// </summary>
@@ -4175,15 +4173,15 @@ namespace onboarding_backend.Models
             this._movementTypeTableEntry = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesMovementTypeTableMovementTypeTableEntry
     {
-        
+
         /// <summary>
         /// <para>Identify kind of movement or movement line. E.g. sale, purchase, adjustment, etc.  Or  efficiencyloss, use of components in production, etc. Predescribed TABLE is possible.</para>
         /// <para>Text of max 9 characters.</para>
@@ -4193,10 +4191,10 @@ namespace onboarding_backend.Models
             " Or efficiencyloss, use of components in production, etc. Predescribed TABLE is " +
             "possible."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("MovementType")]
         public string MovementType { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the movement(sub)type</para>
         /// <para>256 character text.</para>
@@ -4204,23 +4202,23 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the movement(sub)type")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesProducts", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesProducts", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesProducts
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProduct> _product;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Product")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProduct> Product
         {
@@ -4233,7 +4231,7 @@ namespace onboarding_backend.Models
                 _product = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesProducts" /> class.</para>
         /// </summary>
@@ -4242,15 +4240,15 @@ namespace onboarding_backend.Models
             this._product = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProduct>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesProductsProduct", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesProductsProduct", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesProductsProduct
     {
-        
+
         /// <summary>
         /// <para>Product code</para>
         /// <para>70 character text.</para>
@@ -4258,10 +4256,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Product code")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ProductCode")]
         public string ProductCode { get; set; }
-        
+
         /// <summary>
         /// <para>Indicator showing if goods or services (Predescribed TABLE is possible)</para>
         /// <para>Text of max 9 characters.</para>
@@ -4271,7 +4269,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("GoodsServicesID")]
         public string GoodsServicesId { get; set; }
-        
+
         /// <summary>
         /// <para>Code identifying aggregated level at which similar products are grouped</para>
         /// <para>70 character text.</para>
@@ -4281,7 +4279,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("ProductGroup")]
         public string ProductGroup { get; set; }
-        
+
         /// <summary>
         /// <para>Description of goods or services.</para>
         /// <para>256 character text.</para>
@@ -4289,10 +4287,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of goods or services.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Classification for import / export</para>
         /// <para>35 character text.</para>
@@ -4302,7 +4300,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("ProductCommodityCode")]
         public string ProductCommodityCode { get; set; }
-        
+
         /// <summary>
         /// <para>EAN or other code</para>
         /// <para>70 character text.</para>
@@ -4312,7 +4310,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("ProductNumberCode")]
         public string ProductNumberCode { get; set; }
-        
+
         /// <summary>
         /// <para>FIFO, LIFO, Average cost etc.</para>
         /// <para>Text of max 9 characters.</para>
@@ -4322,7 +4320,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("ValuationMethod")]
         public string ValuationMethod { get; set; }
-        
+
         /// <summary>
         /// <para>Unit of measure for Stock Administration for this product Predescribed TABLE is possible.</para>
         /// <para>Text of max 9 characters.</para>
@@ -4331,10 +4329,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute(("Unit of measure for Stock Administration for this product Predescribed TABLE is p" +
             "ossible."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("UOMBase")]
         public string UomBase { get; set; }
-        
+
         /// <summary>
         /// <para>A Standard Unit of Measure applicable for this product, f.i. Kilo, Metres, Litres (Predescribed TABLE is possible)</para>
         /// <para>Text of max 9 characters.</para>
@@ -4345,23 +4343,23 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("UOMStandard")]
         public string UomStandard { get; set; }
-        
+
         /// <summary>
         /// <para>Conversion factor of the UOM to UOM Base</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Conversion factor of the UOM to UOM Base")]
         [System.Xml.Serialization.XmlElementAttribute("UOMToUOMBaseConversionFactor")]
         public decimal UomToUomBaseConversionFactor { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the UomToUomBaseConversionFactor property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool UomToUomBaseConversionFactorSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProductTax> _tax;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("Tax")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProductTax> Tax
         {
@@ -4374,7 +4372,7 @@ namespace onboarding_backend.Models
                 _tax = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Tax collection is empty.</para>
         /// </summary>
@@ -4386,7 +4384,7 @@ namespace onboarding_backend.Models
                 return (this.Tax.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesProductsProduct" /> class.</para>
         /// </summary>
@@ -4395,15 +4393,15 @@ namespace onboarding_backend.Models
             this._tax = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesProductsProductTax>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesProductsProductTax", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesProductsProductTax", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesProductsProductTax
     {
-        
+
         /// <summary>
         /// <para>Tax Type for lookup in tables</para>
         /// <para>Text of max 9 characters.</para>
@@ -4413,7 +4411,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("TaxType")]
         public string TaxType { get; set; }
-        
+
         /// <summary>
         /// <para>Tax Code for lookup in tables</para>
         /// <para>Text of max 9 characters.</para>
@@ -4424,19 +4422,19 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("TaxCode")]
         public string TaxCode { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesPhysicalStock", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesPhysicalStock", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesPhysicalStock
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesPhysicalStockPhysicalStockEntry> _physicalStockEntry;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("PhysicalStockEntry")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesPhysicalStockPhysicalStockEntry> PhysicalStockEntry
         {
@@ -4449,7 +4447,7 @@ namespace onboarding_backend.Models
                 _physicalStockEntry = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesPhysicalStock" /> class.</para>
         /// </summary>
@@ -4458,15 +4456,15 @@ namespace onboarding_backend.Models
             this._physicalStockEntry = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesPhysicalStockPhysicalStockEntry>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesPhysicalStockPhysicalStockEntry", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesPhysicalStockPhysicalStockEntry", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesPhysicalStockPhysicalStockEntry
     {
-        
+
         /// <summary>
         /// <para>Warehouse where goods held - possoble also to identify work-in-progress, or stock-in-transit</para>
         /// <para>35 character text.</para>
@@ -4477,7 +4475,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("WarehouseID")]
         public string WarehouseId { get; set; }
-        
+
         /// <summary>
         /// <para>Location of goods in warehouse</para>
         /// <para>18 character text.</para>
@@ -4487,7 +4485,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("LocationID")]
         public string LocationId { get; set; }
-        
+
         /// <summary>
         /// <para>Product code</para>
         /// <para>70 character text.</para>
@@ -4495,10 +4493,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Product code")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ProductCode")]
         public string ProductCode { get; set; }
-        
+
         /// <summary>
         /// <para>Stock batch, lot, serial identification. Not used when there is exactly 1 PhysicalStock entry per ProductCode</para>
         /// <para>70 character text.</para>
@@ -4509,7 +4507,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("StockAccountNo")]
         public string StockAccountNo { get; set; }
-        
+
         /// <summary>
         /// <para>To determine whether the product/stockaccount is raw material, work-in-progress, finished good, merchandise for resale, etc.</para>
         /// <para>18 character text.</para>
@@ -4520,7 +4518,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("ProductType")]
         public string ProductType { get; set; }
-        
+
         /// <summary>
         /// <para>To determine whether the product/stockaccount is discontinued, damaged, obsolete, active, etc.</para>
         /// <para>18 character text.</para>
@@ -4531,7 +4529,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("ProductStatus")]
         public string ProductStatus { get; set; }
-        
+
         /// <summary>
         /// <para>Classification for import / export</para>
         /// <para>35 character text.</para>
@@ -4541,7 +4539,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("StockAccountCommodityCode")]
         public string StockAccountCommodityCode { get; set; }
-        
+
         /// <summary>
         /// <para>Reference to the owner Master File</para>
         /// <para>35 character text.</para>
@@ -4551,7 +4549,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("OwnerID")]
         public string OwnerId { get; set; }
-        
+
         /// <summary>
         /// <para>Unit of Measurement for this Physical Stock position</para>
         /// <para>Text of max 9 characters.</para>
@@ -4561,20 +4559,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("UOMPhysicalStock")]
         public string UomPhysicalStock { get; set; }
-        
+
         /// <summary>
         /// <para>Conversion factor of the UOM to UOM Base</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Conversion factor of the UOM to UOM Base")]
         [System.Xml.Serialization.XmlElementAttribute("UOMToUOMBaseConversionFactor")]
         public decimal UomToUomBaseConversionFactor { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the UomToUomBaseConversionFactor property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool UomToUomBaseConversionFactorSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Base Unit price for this stock account  in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -4584,13 +4582,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Base Unit price for this stock account in the header\'s default currency.")]
         [System.Xml.Serialization.XmlElementAttribute("UnitPrice")]
         public decimal UnitPrice { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the UnitPrice property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool UnitPriceSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>In UOM Physical Stock for selection period</para>
         /// <para>Used to describe a quantity. Monetary amount. 22 digits max, of which 6 can be fractional digits.</para>
@@ -4598,10 +4596,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 6.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("In UOM Physical Stock for selection period")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("OpeningStockQuantity")]
         public decimal OpeningStockQuantity { get; set; }
-        
+
         /// <summary>
         /// <para>In  the header's currency code for selection period</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -4611,13 +4609,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("In the header\'s currency code for selection period")]
         [System.Xml.Serialization.XmlElementAttribute("OpeningStockValue")]
         public decimal OpeningStockValue { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the OpeningStockValue property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool OpeningStockValueSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>In UOM Physical Stock for selection period</para>
         /// <para>Used to describe a quantity. Monetary amount. 22 digits max, of which 6 can be fractional digits.</para>
@@ -4625,10 +4623,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 6.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("In UOM Physical Stock for selection period")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ClosingStockQuantity")]
         public decimal ClosingStockQuantity { get; set; }
-        
+
         /// <summary>
         /// <para>Closing stock value  in the header's default currency for selection period</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -4638,33 +4636,33 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Closing stock value in the header\'s default currency for selection period")]
         [System.Xml.Serialization.XmlElementAttribute("ClosingStockValue")]
         public decimal ClosingStockValue { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ClosingStockValue property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ClosingStockValueSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("StockCharacteristics")]
         public AuditFileMasterFilesPhysicalStockPhysicalStockEntryStockCharacteristics StockCharacteristics { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesPhysicalStockPhysicalStockEntryStockCharacteristics", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesPhysicalStockPhysicalStockEntryStockCharacteristics", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesPhysicalStockPhysicalStockEntryStockCharacteristics
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _stockCharacteristic;
-        
+
         /// <summary>
         /// <para>User definable characteristics of the goods. Predescribed TABLE is possible.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("User definable characteristics of the goods. Predescribed TABLE is possible.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("StockCharacteristic")]
         public System.Collections.ObjectModel.Collection<string> StockCharacteristic
         {
@@ -4677,7 +4675,7 @@ namespace onboarding_backend.Models
                 _stockCharacteristic = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesPhysicalStockPhysicalStockEntryStockCharacteristics" /> class.</para>
         /// </summary>
@@ -4686,15 +4684,15 @@ namespace onboarding_backend.Models
             this._stockCharacteristic = new System.Collections.ObjectModel.Collection<string>();
             this._stockCharacteristicValue = new System.Collections.ObjectModel.Collection<string>();
         }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<string> _stockCharacteristicValue;
-        
+
         /// <summary>
         /// <para>The weight, pack size, colour etc.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The weight, pack size, colour etc.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("StockCharacteristicValue")]
         public System.Collections.ObjectModel.Collection<string> StockCharacteristicValue
         {
@@ -4708,23 +4706,23 @@ namespace onboarding_backend.Models
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesOwners", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesOwners", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesOwners
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesOwnersOwner> _owner;
-        
+
         /// <summary>
         /// <para>Owner information.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Owner information.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Owner")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesOwnersOwner> Owner
         {
@@ -4737,7 +4735,7 @@ namespace onboarding_backend.Models
                 _owner = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesOwners" /> class.</para>
         /// </summary>
@@ -4746,15 +4744,15 @@ namespace onboarding_backend.Models
             this._owner = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesOwnersOwner>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesOwnersOwner", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesOwnersOwner", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesOwnersOwner : CompanyStructure
     {
-        
+
         /// <summary>
         /// <para>Unique ID code/number for the owner.</para>
         /// <para>35 character text.</para>
@@ -4764,7 +4762,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("OwnerID")]
         public string OwnerId { get; set; }
-        
+
         /// <summary>
         /// <para>General ledger account code for this owner. Can be including sub-account id. It can contain many different levels to identify the Account.</para>
         /// <para>70 character text.</para>
@@ -4776,19 +4774,19 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssets", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssets", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAssets
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAsset> _asset;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Asset")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAsset> Asset
         {
@@ -4801,7 +4799,7 @@ namespace onboarding_backend.Models
                 _asset = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesAssets" /> class.</para>
         /// </summary>
@@ -4810,15 +4808,15 @@ namespace onboarding_backend.Models
             this._asset = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAsset>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAsset", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAsset", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAssetsAsset
     {
-        
+
         /// <summary>
         /// <para>Unique identifier of the asset</para>
         /// <para>35 character text.</para>
@@ -4826,10 +4824,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unique identifier of the asset")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AssetID")]
         public string AssetId { get; set; }
-        
+
         /// <summary>
         /// <para>General Ledger Account code. Can be including sub-account id. It can contain many different levels to identify the Account. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -4839,10 +4837,10 @@ namespace onboarding_backend.Models
             " different levels to identify the Account. It could include cost centres such as" +
             " company, division, region, group and branch/department."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         /// <summary>
         /// <para>Description of this asset</para>
         /// <para>256 character text.</para>
@@ -4850,13 +4848,13 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of this asset")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetSupplier> _supplier;
-        
+
         /// <summary>
         /// <para>Contains the information of all suppliers, including the historical suppliers.</para>
         /// </summary>
@@ -4873,7 +4871,7 @@ namespace onboarding_backend.Models
                 _supplier = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Supplier collection is empty.</para>
         /// </summary>
@@ -4885,7 +4883,7 @@ namespace onboarding_backend.Models
                 return (this.Supplier.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesAssetsAsset" /> class.</para>
         /// </summary>
@@ -4894,52 +4892,52 @@ namespace onboarding_backend.Models
             this._supplier = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetSupplier>();
             this._valuations = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuation>();
         }
-        
+
         /// <summary>
         /// <para>Date of the purchase order of this asset</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date of the purchase order of this asset")]
-        [System.Xml.Serialization.XmlElementAttribute("PurchaseOrderDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("PurchaseOrderDate", DataType = "date")]
         public System.DateTime PurchaseOrderDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PurchaseOrderDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool PurchaseOrderDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Date of the acquisition of the asset (usually the date of delivery).</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date of the acquisition of the asset (usually the date of delivery).")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("DateOfAcquisition", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("DateOfAcquisition", DataType = "date")]
         public System.DateTime DateOfAcquisition { get; set; }
-        
+
         /// <summary>
         /// <para>Commissioning date of the asset.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Commissioning date of the asset.")]
-        [System.Xml.Serialization.XmlElementAttribute("StartUpDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("StartUpDate", DataType = "date")]
         public System.DateTime StartUpDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the StartUpDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool StartUpDateSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuation> _valuations;
-        
+
         /// <summary>
         /// <para>The data can be reported for different purposes. More than one can be in this SAF.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("The data can be reported for different purposes. More than one can be in this SAF" +
             "."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlArrayAttribute("Valuations")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Valuation", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Valuation", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuation> Valuations
         {
             get
@@ -4952,15 +4950,15 @@ namespace onboarding_backend.Models
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAssetSupplier", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAssetSupplier", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAssetsAssetSupplier
     {
-        
+
         /// <summary>
         /// <para>Name of the supplier of the asset</para>
         /// <para>70 character text.</para>
@@ -4968,10 +4966,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Name of the supplier of the asset")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierName")]
         public string SupplierName { get; set; }
-        
+
         /// <summary>
         /// <para>Unique code for the supplier</para>
         /// <para>35 character text.</para>
@@ -4981,28 +4979,28 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Address information of the supplier of the asset</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Address information of the supplier of the asset")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("PostalAddress")]
         public AddressStructure PostalAddress { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAssetValuations", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAssetValuations", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAssetsAssetValuations
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuation> _valuation;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Valuation")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuation> Valuation
         {
@@ -5015,7 +5013,7 @@ namespace onboarding_backend.Models
                 _valuation = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesAssetsAssetValuations" /> class.</para>
         /// </summary>
@@ -5024,15 +5022,15 @@ namespace onboarding_backend.Models
             this._valuation = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuation>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAssetValuationsValuation", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileMasterFilesAssetsAssetValuationsValuation", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAssetsAssetValuationsValuation
     {
-        
+
         /// <summary>
         /// <para>Describes the purpose for the reporting: f.i. commercial, tax  in country 1, tax in country 2, etc.</para>
         /// <para>18 character text.</para>
@@ -5043,7 +5041,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("AssetValuationType")]
         public string AssetValuationType { get; set; }
-        
+
         /// <summary>
         /// <para>This describes the classification of the asset for (tax) reporting purposes.</para>
         /// <para>18 character text.</para>
@@ -5053,7 +5051,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("ValuationClass")]
         public string ValuationClass { get; set; }
-        
+
         /// <summary>
         /// <para>Total costs of acquisition and/or production of the asset at SelectionStartDate in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5062,10 +5060,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Total costs of acquisition and/or production of the asset at SelectionStartDate i" +
             "n the header\'s default currency."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AcquisitionAndProductionCostsBegin")]
         public decimal AcquisitionAndProductionCostsBegin { get; set; }
-        
+
         /// <summary>
         /// <para>Total costs of acquisition and/or production of the asset at SelectionEndDate in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5074,10 +5072,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Total costs of acquisition and/or production of the asset at SelectionEndDate in " +
             "the header\'s default currency."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AcquisitionAndProductionCostsEnd")]
         public decimal AcquisitionAndProductionCostsEnd { get; set; }
-        
+
         /// <summary>
         /// <para>Total amount of investment support for this asset in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5088,39 +5086,39 @@ namespace onboarding_backend.Models
             "y."))]
         [System.Xml.Serialization.XmlElementAttribute("InvestmentSupport")]
         public decimal InvestmentSupport { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the InvestmentSupport property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool InvestmentSupportSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Periode of useful life in years</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Periode of useful life in years")]
         [System.Xml.Serialization.XmlElementAttribute("AssetLifeYear")]
         public decimal AssetLifeYear { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AssetLifeYear property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AssetLifeYearSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Period of useful life in months</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Period of useful life in months")]
         [System.Xml.Serialization.XmlElementAttribute("AssetLifeMonth")]
         public decimal AssetLifeMonth { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AssetLifeMonth property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AssetLifeMonthSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Bookvalue of the acquisition and/or production of the asset in the  Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5131,13 +5129,13 @@ namespace onboarding_backend.Models
             "d in the header\'s default currency."))]
         [System.Xml.Serialization.XmlElementAttribute("AssetAddition")]
         public decimal AssetAddition { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AssetAddition property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AssetAdditionSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Book value of the transfers of the asset during the Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5148,13 +5146,13 @@ namespace onboarding_backend.Models
             "\'s default currency."))]
         [System.Xml.Serialization.XmlElementAttribute("Transfers")]
         public decimal Transfers { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Transfers property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TransfersSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Book value of the disposals of the asset during the Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5165,13 +5163,13 @@ namespace onboarding_backend.Models
             "\'s default currency."))]
         [System.Xml.Serialization.XmlElementAttribute("AssetDisposal")]
         public decimal AssetDisposal { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AssetDisposal property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AssetDisposalSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Bookvalue at the beginning of the Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5182,13 +5180,13 @@ namespace onboarding_backend.Models
             "y."))]
         [System.Xml.Serialization.XmlElementAttribute("BookValueBegin")]
         public decimal BookValueBegin { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the BookValueBegin property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool BookValueBeginSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Method of normal depreciation during the Selectionperiod.</para>
         /// <para>35 character text.</para>
@@ -5198,7 +5196,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("DepreciationMethod")]
         public string DepreciationMethod { get; set; }
-        
+
         /// <summary>
         /// <para>The rate of the normal depreciation per year or month (depends on choice useful life periode)</para>
         /// </summary>
@@ -5206,13 +5204,13 @@ namespace onboarding_backend.Models
             "ife periode)"))]
         [System.Xml.Serialization.XmlElementAttribute("DepreciationPercentage")]
         public decimal DepreciationPercentage { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DepreciationPercentage property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DepreciationPercentageSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Total amouunt of normal depreciation during the Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5221,10 +5219,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Total amouunt of normal depreciation during the Selectionperiod in the header\'s d" +
             "efault currency."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("DepreciationForPeriod")]
         public decimal DepreciationForPeriod { get; set; }
-        
+
         /// <summary>
         /// <para>Total amouunt of appreciation during the Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5235,22 +5233,22 @@ namespace onboarding_backend.Models
             "currency."))]
         [System.Xml.Serialization.XmlElementAttribute("AppreciationForPeriod")]
         public decimal AppreciationForPeriod { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AppreciationForPeriod property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AppreciationForPeriodSpecified { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriodExtraordinaryDepreciationForPeriod> _extraordinaryDepreciationsForPeriod;
-        
+
         /// <summary>
         /// <para>Extraordinary depreciations for this asset during the Selectionperiod.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Extraordinary depreciations for this asset during the Selectionperiod.")]
         [System.Xml.Serialization.XmlArrayAttribute("ExtraordinaryDepreciationsForPeriod")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("ExtraordinaryDepreciationForPeriod", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("ExtraordinaryDepreciationForPeriod", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriodExtraordinaryDepreciationForPeriod> ExtraordinaryDepreciationsForPeriod
         {
             get
@@ -5262,7 +5260,7 @@ namespace onboarding_backend.Models
                 _extraordinaryDepreciationsForPeriod = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the ExtraordinaryDepreciationsForPeriod collection is empty.</para>
         /// </summary>
@@ -5274,7 +5272,7 @@ namespace onboarding_backend.Models
                 return (this.ExtraordinaryDepreciationsForPeriod.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesAssetsAssetValuationsValuation" /> class.</para>
         /// </summary>
@@ -5282,7 +5280,7 @@ namespace onboarding_backend.Models
         {
             this._extraordinaryDepreciationsForPeriod = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriodExtraordinaryDepreciationForPeriod>();
         }
-        
+
         /// <summary>
         /// <para>Total amount of depreciation for this asset</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5292,13 +5290,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Total amount of depreciation for this asset")]
         [System.Xml.Serialization.XmlElementAttribute("AccumulatedDepreciation")]
         public decimal AccumulatedDepreciation { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the AccumulatedDepreciation property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccumulatedDepreciationSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Bookvalue at the end of the Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5306,24 +5304,24 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Bookvalue at the end of the Selectionperiod in the header\'s default currency.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("BookValueEnd")]
         public decimal BookValueEnd { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(("AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPe" +
-        "riod"), Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+        "riod"), Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriod
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriodExtraordinaryDepreciationForPeriod> _extraordinaryDepreciationForPeriod;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ExtraordinaryDepreciationForPeriod")]
         public System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriodExtraordinaryDepreciationForPeriod> ExtraordinaryDepreciationForPeriod
         {
@@ -5336,7 +5334,7 @@ namespace onboarding_backend.Models
                 _extraordinaryDepreciationForPeriod = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriod" /> class.</para>
         /// </summary>
@@ -5345,16 +5343,16 @@ namespace onboarding_backend.Models
             this._extraordinaryDepreciationForPeriod = new System.Collections.ObjectModel.Collection<AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriodExtraordinaryDepreciationForPeriod>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(("AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPe" +
-        "riodExtraordinaryDepreciationForPeriod"), Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+        "riodExtraordinaryDepreciationForPeriod"), Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileMasterFilesAssetsAssetValuationsValuationExtraordinaryDepreciationsForPeriodExtraordinaryDepreciationForPeriod
     {
-        
+
         /// <summary>
         /// <para>Method of extraordinary depreciation during the Selectionperiod.</para>
         /// <para>35 character text.</para>
@@ -5362,10 +5360,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Method of extraordinary depreciation during the Selectionperiod.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ExtraordinaryDepreciationMethod")]
         public string ExtraordinaryDepreciationMethod { get; set; }
-        
+
         /// <summary>
         /// <para>Amouunt of extraordinary depreciation during the Selectionperiod in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5374,28 +5372,28 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Amouunt of extraordinary depreciation during the Selectionperiod in the header\'s " +
             "default currency."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ExtraordinaryDepreciationForPeriod")]
         public decimal ExtraordinaryDepreciationForPeriod { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntries", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntries", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileGeneralLedgerEntries
     {
-        
+
         /// <summary>
         /// <para>Number of entries. This is the total number of Transaction entries (accounting documents/vouchers) from all Journals included in the audit file.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Number of entries. This is the total number of Transaction entries (accounting do" +
             "cuments/vouchers) from all Journals included in the audit file."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("NumberOfEntries")]
         public string NumberOfEntries { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all debit amounts in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5403,10 +5401,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all debit amounts in the header\'s default currency.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalDebit")]
         public decimal TotalDebit { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all credit amounts in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -5414,13 +5412,13 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all credit amounts in the header\'s default currency.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalCredit")]
         public decimal TotalCredit { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileGeneralLedgerEntriesJournal> _journal;
-        
+
         /// <summary>
         /// <para>Journal information.</para>
         /// </summary>
@@ -5437,7 +5435,7 @@ namespace onboarding_backend.Models
                 _journal = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Journal collection is empty.</para>
         /// </summary>
@@ -5449,7 +5447,7 @@ namespace onboarding_backend.Models
                 return (this.Journal.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileGeneralLedgerEntries" /> class.</para>
         /// </summary>
@@ -5458,15 +5456,15 @@ namespace onboarding_backend.Models
             this._journal = new System.Collections.ObjectModel.Collection<AuditFileGeneralLedgerEntriesJournal>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntriesJournal", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntriesJournal", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileGeneralLedgerEntriesJournal
     {
-        
+
         /// <summary>
         /// <para>Source GL journal identifier, or invoices and payments in single ledger systems.</para>
         /// <para>18 character text.</para>
@@ -5474,10 +5472,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Source GL journal identifier, or invoices and payments in single ledger systems.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("JournalID")]
         public string JournalId { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the Journal.</para>
         /// <para>256 character text.</para>
@@ -5485,10 +5483,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the Journal.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Grouping mechanism for journals. Please use the examples in the technical description when appropriate.</para>
         /// <para>Text of max 9 characters.</para>
@@ -5497,13 +5495,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute(("Grouping mechanism for journals. Please use the examples in the technical descrip" +
             "tion when appropriate."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Type")]
         public string Type { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileGeneralLedgerEntriesJournalTransaction> _transaction;
-        
+
         /// <summary>
         /// <para>Accounting transactions.</para>
         /// </summary>
@@ -5520,7 +5518,7 @@ namespace onboarding_backend.Models
                 _transaction = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Transaction collection is empty.</para>
         /// </summary>
@@ -5532,7 +5530,7 @@ namespace onboarding_backend.Models
                 return (this.Transaction.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileGeneralLedgerEntriesJournal" /> class.</para>
         /// </summary>
@@ -5541,15 +5539,15 @@ namespace onboarding_backend.Models
             this._transaction = new System.Collections.ObjectModel.Collection<AuditFileGeneralLedgerEntriesJournalTransaction>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntriesJournalTransaction", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntriesJournalTransaction", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileGeneralLedgerEntriesJournalTransaction
     {
-        
+
         /// <summary>
         /// <para>The number/ID of the accounting document/voucher.</para>
         /// <para>70 character text.</para>
@@ -5557,18 +5555,18 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The number/ID of the accounting document/voucher.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionID")]
         public string TransactionId { get; set; }
-        
+
         /// <summary>
         /// <para>Accounting Period.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Accounting Period.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Period")]
         public string Period { get; set; }
-        
+
         /// <summary>
         /// <para>The year of the Accounting Period. Restriction: 1970-2100.</para>
         /// <para xml:lang="en">Minimum inclusive value: 1970.</para>
@@ -5576,18 +5574,18 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The year of the Accounting Period. Restriction: 1970-2100.")]
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(ushort), "1970", "2100")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("PeriodYear")]
         public ushort PeriodYear { get; set; }
-        
+
         /// <summary>
         /// <para>The date of the accounting document/voucher.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The date of the accounting document/voucher.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("TransactionDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("TransactionDate", DataType = "date")]
         public System.DateTime TransactionDate { get; set; }
-        
+
         /// <summary>
         /// <para>Details of person or application that entered the transaction.</para>
         /// <para>35 character text.</para>
@@ -5597,7 +5595,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SourceID")]
         public string SourceId { get; set; }
-        
+
         /// <summary>
         /// <para>Type of voucher. Voucher type (bilagsart) should always be used on all transactions.</para>
         /// <para>70 character text.</para>
@@ -5608,7 +5606,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("VoucherType")]
         public string VoucherType { get; set; }
-        
+
         /// <summary>
         /// <para>Description of voucher type</para>
         /// <para>70 character text.</para>
@@ -5618,7 +5616,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("VoucherDescription")]
         public string VoucherDescription { get; set; }
-        
+
         /// <summary>
         /// <para>Type of journaltransaction: normal, (automated) periodically, etc.</para>
         /// <para>18 character text.</para>
@@ -5628,7 +5626,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionType")]
         public string TransactionType { get; set; }
-        
+
         /// <summary>
         /// <para>Description of Journal Transaction.</para>
         /// <para>256 character text.</para>
@@ -5636,10 +5634,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of Journal Transaction.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Systems generated ID for batch.</para>
         /// <para>35 character text.</para>
@@ -5649,41 +5647,41 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("BatchID")]
         public string BatchId { get; set; }
-        
+
         /// <summary>
         /// <para>Date captured by system. The date when the transaction was entered into the system - manual entry, imported transaction, etc. If this date is not available in your system, use the TransactionDate.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Date captured by system. The date when the transaction was entered into the syste" +
             "m - manual entry, imported transaction, etc. If this date is not available in yo" +
             "ur system, use the TransactionDate."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("SystemEntryDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("SystemEntryDate", DataType = "date")]
         public System.DateTime SystemEntryDate { get; set; }
-        
+
         /// <summary>
         /// <para>Date posting to the general ledger account. The date when the transaction was updated to the database. If this date is not available in your system, use the TransactionDate.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Date posting to the general ledger account. The date when the transaction was upd" +
             "ated to the database. If this date is not available in your system, use the Tran" +
             "sactionDate."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("GLPostingDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("GLPostingDate", DataType = "date")]
         public System.DateTime GlPostingDate { get; set; }
-        
+
         /// <summary>
         /// <para>Date for modification of the accounting document/voucher (the latest change). The date when the transaction was modified and updated to the database.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Date for modification of the accounting document/voucher (the latest change). The" +
             " date when the transaction was modified and updated to the database."))]
-        [System.Xml.Serialization.XmlElementAttribute("ModificationDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("ModificationDate", DataType = "date")]
         public System.DateTime ModificationDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ModificationDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModificationDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// <para>35 character text.</para>
@@ -5693,7 +5691,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("CustomerID")]
         public string CustomerId { get; set; }
-        
+
         /// <summary>
         /// <para>Not in use.</para>
         /// <para>35 character text.</para>
@@ -5703,7 +5701,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique ID/number created by the system for the accounting document/voucher.</para>
         /// <para>18 character text.</para>
@@ -5713,15 +5711,15 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("SystemID")]
         public string SystemId { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileGeneralLedgerEntriesJournalTransactionLine> _line;
-        
+
         /// <summary>
         /// <para>Transaction lines.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Transaction lines.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Line")]
         public System.Collections.ObjectModel.Collection<AuditFileGeneralLedgerEntriesJournalTransactionLine> Line
         {
@@ -5734,7 +5732,7 @@ namespace onboarding_backend.Models
                 _line = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileGeneralLedgerEntriesJournalTransaction" /> class.</para>
         /// </summary>
@@ -5743,15 +5741,15 @@ namespace onboarding_backend.Models
             this._line = new System.Collections.ObjectModel.Collection<AuditFileGeneralLedgerEntriesJournalTransactionLine>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntriesJournalTransactionLine", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileGeneralLedgerEntriesJournalTransactionLine", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileGeneralLedgerEntriesJournalTransactionLine
     {
-        
+
         /// <summary>
         /// <para>Identifier to trace entry to journal line or posting reference.</para>
         /// <para>18 character text.</para>
@@ -5759,10 +5757,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Identifier to trace entry to journal line or posting reference.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("RecordID")]
         public string RecordId { get; set; }
-        
+
         /// <summary>
         /// <para>General ledger account code/number. If this Line is a ledger/sub account (accounts payable or accounts receivable) entry, then this is the account code/number into where this ledger/sub account is consolidated in the balance sheet.</para>
         /// <para>70 character text.</para>
@@ -5772,13 +5770,13 @@ namespace onboarding_backend.Models
             "s payable or accounts receivable) entry, then this is the account code/number in" +
             "to where this ledger/sub account is consolidated in the balance sheet."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AnalysisStructure> _analysis;
-        
+
         /// <summary>
         /// <para>General Ledger analysis codes</para>
         /// </summary>
@@ -5795,7 +5793,7 @@ namespace onboarding_backend.Models
                 _analysis = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Analysis collection is empty.</para>
         /// </summary>
@@ -5807,7 +5805,7 @@ namespace onboarding_backend.Models
                 return (this.Analysis.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileGeneralLedgerEntriesJournalTransactionLine" /> class.</para>
         /// </summary>
@@ -5816,21 +5814,21 @@ namespace onboarding_backend.Models
             this._analysis = new System.Collections.ObjectModel.Collection<AnalysisStructure>();
             this._taxInformation = new System.Collections.ObjectModel.Collection<TaxInformationStructure>();
         }
-        
+
         /// <summary>
         /// <para>Effective date from which interest charged. To be reported when this date or this Line of the accounting document/voucher differs from the TransactionDate.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Effective date from which interest charged. To be reported when this date or this" +
             " Line of the accounting document/voucher differs from the TransactionDate."))]
-        [System.Xml.Serialization.XmlElementAttribute("ValueDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("ValueDate", DataType = "date")]
         public System.DateTime ValueDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the ValueDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ValueDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Source document number to which line relates.</para>
         /// <para>35 character text.</para>
@@ -5840,7 +5838,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SourceDocumentID")]
         public string SourceDocumentId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique account code/number for the customer. Is only used if this Line is a ledger/sub account (accounts payable or accounts receivable) entry. Must not be used in conjunction with SupplierID.</para>
         /// <para>35 character text.</para>
@@ -5852,7 +5850,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("CustomerID")]
         public string CustomerId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique account code/number for the supplier. Is only used if this Line is a ledger/sub account (accounts payable or accounts receivable) entry. Must not be used in conjunction with CustomerID.</para>
         /// <para>35 character text.</para>
@@ -5864,7 +5862,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the Journal Line.</para>
         /// <para>256 character text.</para>
@@ -5872,27 +5870,27 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the Journal Line.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Debit amount information for transaction.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Debit amount information for transaction.")]
         [System.Xml.Serialization.XmlElementAttribute("DebitAmount")]
         public AmountStructure DebitAmount { get; set; }
-        
+
         /// <summary>
         /// <para>Credit amount information for transaction.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Credit amount information for transaction.")]
         [System.Xml.Serialization.XmlElementAttribute("CreditAmount")]
         public AmountStructure CreditAmount { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TaxInformationStructure> _taxInformation;
-        
+
         /// <summary>
         /// <para>Tax information for the accounting line.</para>
         /// </summary>
@@ -5909,7 +5907,7 @@ namespace onboarding_backend.Models
                 _taxInformation = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxInformation collection is empty.</para>
         /// </summary>
@@ -5921,7 +5919,7 @@ namespace onboarding_backend.Models
                 return (this.TaxInformation.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para>The reference number, such as invoice or credit note number.</para>
         /// <para>35 character text.</para>
@@ -5931,7 +5929,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("ReferenceNumber")]
         public string ReferenceNumber { get; set; }
-        
+
         /// <summary>
         /// <para>The CID number.</para>
         /// <para>35 character text.</para>
@@ -5941,20 +5939,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("CID")]
         public string Cid { get; set; }
-        
+
         /// <summary>
         /// <para>The due date.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The due date.")]
-        [System.Xml.Serialization.XmlElementAttribute("DueDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("DueDate", DataType = "date")]
         public System.DateTime DueDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the DueDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DueDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Quantity.</para>
         /// <para>Used to describe a quantity. Monetary amount. 22 digits max, of which 6 can be fractional digits.</para>
@@ -5964,13 +5962,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Quantity.")]
         [System.Xml.Serialization.XmlElementAttribute("Quantity")]
         public decimal Quantity { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the Quantity property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool QuantitySpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Cross-reference. Information about matched documents/records.</para>
         /// <para>35 character text.</para>
@@ -5980,21 +5978,21 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("CrossReference")]
         public string CrossReference { get; set; }
-        
+
         /// <summary>
         /// <para>Time captured by system. The time when the transaction was entered into the system - manual entry, imported transaction, etc.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Time captured by system. The time when the transaction was entered into the syste" +
             "m - manual entry, imported transaction, etc."))]
-        [System.Xml.Serialization.XmlElementAttribute("SystemEntryTime", DataType="dateTime")]
+        [System.Xml.Serialization.XmlElementAttribute("SystemEntryTime", DataType = "dateTime")]
         public System.DateTime SystemEntryTime { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SystemEntryTime property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool SystemEntryTimeSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>The unique ID code/number for the owner.</para>
         /// <para>35 character text.</para>
@@ -6005,27 +6003,27 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("OwnerID")]
         public string OwnerId { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocuments", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocuments", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocuments
     {
-        
+
         [System.Xml.Serialization.XmlElementAttribute("SalesInvoices")]
         public AuditFileSourceDocumentsSalesInvoices SalesInvoices { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("PurchaseInvoices")]
         public AuditFileSourceDocumentsPurchaseInvoices PurchaseInvoices { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("Payments")]
         public AuditFileSourceDocumentsPayments Payments { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("MovementOfGoods")]
         public AuditFileSourceDocumentsMovementOfGoods MovementOfGoods { get; set; }
-        
+
         /// <summary>
         /// <para>Details of all transactions related to an asset during the Selectionperiod.</para>
         /// </summary>
@@ -6033,23 +6031,23 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("AssetTransactions")]
         public AuditFileSourceDocumentsAssetTransactions AssetTransactions { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsSalesInvoices", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsSalesInvoices", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsSalesInvoices
     {
-        
+
         /// <summary>
         /// <para>Number of entries</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Number of entries")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("NumberOfEntries")]
         public string NumberOfEntries { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all debit amounts in the header's default currency</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6057,10 +6055,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all debit amounts in the header\'s default currency")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalDebit")]
         public decimal TotalDebit { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all credit amounts in the header's default currency</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6068,14 +6066,14 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all credit amounts in the header\'s default currency")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalCredit")]
         public decimal TotalCredit { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<InvoiceStructure> _invoice;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Invoice")]
         public System.Collections.ObjectModel.Collection<InvoiceStructure> Invoice
         {
@@ -6088,7 +6086,7 @@ namespace onboarding_backend.Models
                 _invoice = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsSalesInvoices" /> class.</para>
         /// </summary>
@@ -6097,23 +6095,23 @@ namespace onboarding_backend.Models
             this._invoice = new System.Collections.ObjectModel.Collection<InvoiceStructure>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPurchaseInvoices", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPurchaseInvoices", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsPurchaseInvoices
     {
-        
+
         /// <summary>
         /// <para>Number of entries</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Number of entries")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("NumberOfEntries")]
         public string NumberOfEntries { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all debit amounts in the header's default currency</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6121,10 +6119,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all debit amounts in the header\'s default currency")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalDebit")]
         public decimal TotalDebit { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all credit amounts in the header's default currency</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6132,14 +6130,14 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all credit amounts in the header\'s default currency")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalCredit")]
         public decimal TotalCredit { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<InvoiceStructure> _invoice;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Invoice")]
         public System.Collections.ObjectModel.Collection<InvoiceStructure> Invoice
         {
@@ -6152,7 +6150,7 @@ namespace onboarding_backend.Models
                 _invoice = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsPurchaseInvoices" /> class.</para>
         /// </summary>
@@ -6161,23 +6159,23 @@ namespace onboarding_backend.Models
             this._invoice = new System.Collections.ObjectModel.Collection<InvoiceStructure>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPayments", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPayments", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsPayments
     {
-        
+
         /// <summary>
         /// <para>Number of entries</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Number of entries")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("NumberOfEntries")]
         public string NumberOfEntries { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all debit amounts in the header's default currency</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6185,10 +6183,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all debit amounts in the header\'s default currency")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalDebit")]
         public decimal TotalDebit { get; set; }
-        
+
         /// <summary>
         /// <para>The total of all credit amounts in the header's default currency</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6196,14 +6194,14 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("The total of all credit amounts in the header\'s default currency")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalCredit")]
         public decimal TotalCredit { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsPaymentsPayment> _payment;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Payment")]
         public System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsPaymentsPayment> Payment
         {
@@ -6216,7 +6214,7 @@ namespace onboarding_backend.Models
                 _payment = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsPayments" /> class.</para>
         /// </summary>
@@ -6225,15 +6223,15 @@ namespace onboarding_backend.Models
             this._payment = new System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsPaymentsPayment>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPayment", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPayment", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsPaymentsPayment
     {
-        
+
         /// <summary>
         /// <para>Unique reference number for payment</para>
         /// <para>35 character text.</para>
@@ -6241,17 +6239,17 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unique reference number for payment")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("PaymentRefNo")]
         public string PaymentRefNo { get; set; }
-        
+
         /// <summary>
         /// <para>Accounting Period</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Accounting Period")]
         [System.Xml.Serialization.XmlElementAttribute("Period")]
         public string Period { get; set; }
-        
+
         /// <summary>
         /// <para>The year of the Accounting Period.</para>
         /// <para xml:lang="en">Minimum inclusive value: 1970.</para>
@@ -6261,13 +6259,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.RangeAttribute(typeof(ushort), "1970", "2100")]
         [System.Xml.Serialization.XmlElementAttribute("PeriodYear")]
         public ushort PeriodYear { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the PeriodYear property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool PeriodYearSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Cross-reference to GL posting. It can contain many different levels to identify the transaction. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -6279,15 +6277,15 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionID")]
         public string TransactionId { get; set; }
-        
+
         /// <summary>
         /// <para>Document date</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Document date")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("TransactionDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("TransactionDate", DataType = "date")]
         public System.DateTime TransactionDate { get; set; }
-        
+
         /// <summary>
         /// <para>Cheque, Bank, Giro, Cash, etc.</para>
         /// <para>Text of max 9 characters.</para>
@@ -6297,7 +6295,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("PaymentMethod")]
         public string PaymentMethod { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the payment.</para>
         /// <para>256 character text.</para>
@@ -6305,10 +6303,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Description of the payment.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Systems generated ID for batch</para>
         /// <para>35 character text.</para>
@@ -6318,7 +6316,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("BatchID")]
         public string BatchId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique number created by the system for the document</para>
         /// <para>35 character text.</para>
@@ -6328,7 +6326,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SystemID")]
         public string SystemId { get; set; }
-        
+
         /// <summary>
         /// <para>Details of person or application that entered the transaction</para>
         /// <para>35 character text.</para>
@@ -6338,11 +6336,11 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SourceID")]
         public string SourceId { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsPaymentsPaymentLine> _line;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Line")]
         public System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsPaymentsPaymentLine> Line
         {
@@ -6355,7 +6353,7 @@ namespace onboarding_backend.Models
                 _line = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsPaymentsPayment" /> class.</para>
         /// </summary>
@@ -6363,22 +6361,22 @@ namespace onboarding_backend.Models
         {
             this._line = new System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsPaymentsPaymentLine>();
         }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("Settlement")]
         public AuditFileSourceDocumentsPaymentsPaymentSettlement Settlement { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("DocumentTotals")]
         public AuditFileSourceDocumentsPaymentsPaymentDocumentTotals DocumentTotals { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentLine", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentLine", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsPaymentsPaymentLine
     {
-        
+
         /// <summary>
         /// <para>Number of the paymentline</para>
         /// <para>18 character text.</para>
@@ -6388,7 +6386,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("LineNumber")]
         public string LineNumber { get; set; }
-        
+
         /// <summary>
         /// <para>The source document to which the line relates</para>
         /// <para>35 character text.</para>
@@ -6398,7 +6396,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SourceDocumentID")]
         public string SourceDocumentId { get; set; }
-        
+
         /// <summary>
         /// <para>General Ledger Account code. Can be including sub-account id. It can contain many different levels to identify the Account. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -6410,10 +6408,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AnalysisStructure> _analysis;
-        
+
         /// <summary>
         /// <para>General Ledger analysis codes</para>
         /// </summary>
@@ -6430,7 +6428,7 @@ namespace onboarding_backend.Models
                 _analysis = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the Analysis collection is empty.</para>
         /// </summary>
@@ -6442,7 +6440,7 @@ namespace onboarding_backend.Models
                 return (this.Analysis.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsPaymentsPaymentLine" /> class.</para>
         /// </summary>
@@ -6451,7 +6449,7 @@ namespace onboarding_backend.Models
             this._analysis = new System.Collections.ObjectModel.Collection<AnalysisStructure>();
             this._taxInformation = new System.Collections.ObjectModel.Collection<TaxInformationStructure>();
         }
-        
+
         /// <summary>
         /// <para>Unique code for the customer</para>
         /// <para>35 character text.</para>
@@ -6461,7 +6459,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("CustomerID")]
         public string CustomerId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique code for the supplier</para>
         /// <para>35 character text.</para>
@@ -6471,20 +6469,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Tax Point date where recorded or if not recorded then the Invoice date</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Tax Point date where recorded or if not recorded then the Invoice date")]
-        [System.Xml.Serialization.XmlElementAttribute("TaxPointDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("TaxPointDate", DataType = "date")]
         public System.DateTime TaxPointDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxPointDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxPointDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the payment line.</para>
         /// <para>256 character text.</para>
@@ -6494,28 +6492,28 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Indicates whether the amounts on line-level are debit or credit amounts. Entry must correspond to entry reflected in General Ledger Entry. Signing of lineamounts is relative to this indicator. E.g. a return can lead to a negative amount.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Indicates whether the amounts on line-level are debit or credit amounts. Entry mu" +
             "st correspond to entry reflected in General Ledger Entry. Signing of lineamounts" +
             " is relative to this indicator. E.g. a return can lead to a negative amount."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("DebitCreditIndicator")]
         public AuditFileSourceDocumentsPaymentsPaymentLineDebitCreditIndicator DebitCreditIndicator { get; set; }
-        
+
         /// <summary>
         /// <para>Amount for transaction excluding taxes.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Amount for transaction excluding taxes.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("PaymentLineAmount")]
         public AmountStructure PaymentLineAmount { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TaxInformationStructure> _taxInformation;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("TaxInformation")]
         public System.Collections.ObjectModel.Collection<TaxInformationStructure> TaxInformation
         {
@@ -6528,7 +6526,7 @@ namespace onboarding_backend.Models
                 _taxInformation = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxInformation collection is empty.</para>
         /// </summary>
@@ -6541,26 +6539,26 @@ namespace onboarding_backend.Models
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentLineDebitCreditIndicator", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentLineDebitCreditIndicator", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     public enum AuditFileSourceDocumentsPaymentsPaymentLineDebitCreditIndicator
     {
-        
+
         D,
-        
+
         C,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentSettlement", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentSettlement", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsPaymentsPaymentSettlement
     {
-        
+
         /// <summary>
         /// <para>Description Settlement / Other Discount</para>
         /// <para>35 character text.</para>
@@ -6570,27 +6568,27 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SettlementDiscount")]
         public string SettlementDiscount { get; set; }
-        
+
         /// <summary>
         /// <para>Settlement amount</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Settlement amount")]
         [System.Xml.Serialization.XmlElementAttribute("SettlementAmount")]
         public AmountStructure SettlementAmount { get; set; }
-        
+
         /// <summary>
         /// <para>Date settled</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date settled")]
-        [System.Xml.Serialization.XmlElementAttribute("SettlementDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("SettlementDate", DataType = "date")]
         public System.DateTime SettlementDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the SettlementDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool SettlementDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Payment mechanism</para>
         /// <para>Text of max 9 characters.</para>
@@ -6601,18 +6599,18 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("PaymentMechanism")]
         public string PaymentMechanism { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentDocumentTotals", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsPaymentsPaymentDocumentTotals", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsPaymentsPaymentDocumentTotals
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TaxInformationStructure> _taxInformationTotals;
-        
+
         /// <summary>
         /// <para>Control totals tax payable information. Per TaxType/TaxCode the TaxBase and TaxAmount are summarised.</para>
         /// </summary>
@@ -6630,7 +6628,7 @@ namespace onboarding_backend.Models
                 _taxInformationTotals = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxInformationTotals collection is empty.</para>
         /// </summary>
@@ -6642,7 +6640,7 @@ namespace onboarding_backend.Models
                 return (this.TaxInformationTotals.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsPaymentsPaymentDocumentTotals" /> class.</para>
         /// </summary>
@@ -6650,7 +6648,7 @@ namespace onboarding_backend.Models
         {
             this._taxInformationTotals = new System.Collections.ObjectModel.Collection<TaxInformationStructure>();
         }
-        
+
         /// <summary>
         /// <para>Total amount excluding tax in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6660,13 +6658,13 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute("Total amount excluding tax in the header\'s default currency.")]
         [System.Xml.Serialization.XmlElementAttribute("NetTotal")]
         public decimal NetTotal { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the NetTotal property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool NetTotalSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Total amount including tax in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -6674,27 +6672,27 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 2.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Total amount including tax in the header\'s default currency.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("GrossTotal")]
         public decimal GrossTotal { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoods", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoods", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsMovementOfGoods
     {
-        
+
         /// <summary>
         /// <para>Number of movementlines in selected period</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Number of movementlines in selected period")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("NumberOfMovementLines")]
         public string NumberOfMovementLines { get; set; }
-        
+
         /// <summary>
         /// <para>Quantity of goods received</para>
         /// <para>Used to describe a quantity. Monetary amount. 22 digits max, of which 6 can be fractional digits.</para>
@@ -6702,10 +6700,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 6.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Quantity of goods received")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalQuantityReceived")]
         public decimal TotalQuantityReceived { get; set; }
-        
+
         /// <summary>
         /// <para>Quantity of goods issued in selected period</para>
         /// <para>Used to describe a quantity. Monetary amount. 22 digits max, of which 6 can be fractional digits.</para>
@@ -6713,14 +6711,14 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 6.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Quantity of goods issued in selected period")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("TotalQuantityIssued")]
         public decimal TotalQuantityIssued { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsMovementOfGoodsStockMovement> _stockMovement;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("StockMovement")]
         public System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsMovementOfGoodsStockMovement> StockMovement
         {
@@ -6733,7 +6731,7 @@ namespace onboarding_backend.Models
                 _stockMovement = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsMovementOfGoods" /> class.</para>
         /// </summary>
@@ -6742,15 +6740,15 @@ namespace onboarding_backend.Models
             this._stockMovement = new System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsMovementOfGoodsStockMovement>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoodsStockMovement", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoodsStockMovement", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsMovementOfGoodsStockMovement
     {
-        
+
         /// <summary>
         /// <para>Unique reference to the movement.</para>
         /// <para>35 character text.</para>
@@ -6758,57 +6756,57 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unique reference to the movement.")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("MovementReference")]
         public string MovementReference { get; set; }
-        
+
         /// <summary>
         /// <para>Document date</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Document date")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("MovementDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("MovementDate", DataType = "date")]
         public System.DateTime MovementDate { get; set; }
-        
+
         /// <summary>
         /// <para>Date of posting of the movement if different to Movement Date</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date of posting of the movement if different to Movement Date")]
-        [System.Xml.Serialization.XmlElementAttribute("MovementPostingDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("MovementPostingDate", DataType = "date")]
         public System.DateTime MovementPostingDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the MovementPostingDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool MovementPostingDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Time of posting of the movement</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Time of posting of the movement")]
-        [System.Xml.Serialization.XmlElementAttribute("MovementPostingTime", DataType="time")]
+        [System.Xml.Serialization.XmlElementAttribute("MovementPostingTime", DataType = "time")]
         public System.DateTime MovementPostingTime { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the MovementPostingTime property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool MovementPostingTimeSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Date of supply of goods</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Date of supply of goods")]
-        [System.Xml.Serialization.XmlElementAttribute("TaxPointDate", DataType="date")]
+        [System.Xml.Serialization.XmlElementAttribute("TaxPointDate", DataType = "date")]
         public System.DateTime TaxPointDate { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the TaxPointDate property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool TaxPointDateSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>The movementtype expresses the type of the process for the underlaying lines. E.g. production, sales, purchase. Predescribed TABLE is possible.</para>
         /// <para>Text of max 9 characters.</para>
@@ -6817,10 +6815,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DescriptionAttribute(("The movementtype expresses the type of the process for the underlaying lines. E.g" +
             ". production, sales, purchase. Predescribed TABLE is possible."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("MovementType")]
         public string MovementType { get; set; }
-        
+
         /// <summary>
         /// <para>Details of person or application that entered the transaction</para>
         /// <para>35 character text.</para>
@@ -6830,7 +6828,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SourceID")]
         public string SourceId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique number created by the system for the document</para>
         /// <para>35 character text.</para>
@@ -6840,14 +6838,14 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SystemID")]
         public string SystemId { get; set; }
-        
+
         [System.Xml.Serialization.XmlElementAttribute("DocumentReference")]
         public AuditFileSourceDocumentsMovementOfGoodsStockMovementDocumentReference DocumentReference { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsMovementOfGoodsStockMovementLine> _line;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Line")]
         public System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsMovementOfGoodsStockMovementLine> Line
         {
@@ -6860,7 +6858,7 @@ namespace onboarding_backend.Models
                 _line = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsMovementOfGoodsStockMovement" /> class.</para>
         /// </summary>
@@ -6869,15 +6867,15 @@ namespace onboarding_backend.Models
             this._line = new System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsMovementOfGoodsStockMovementLine>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoodsStockMovementDocumentReference", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoodsStockMovementDocumentReference", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsMovementOfGoodsStockMovementDocumentReference
     {
-        
+
         /// <summary>
         /// <para>Type of document</para>
         /// <para>18 character text.</para>
@@ -6885,10 +6883,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Type of document")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("DocumentType")]
         public string DocumentType { get; set; }
-        
+
         /// <summary>
         /// <para>Reference number of the document</para>
         /// <para>35 character text.</para>
@@ -6896,10 +6894,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Reference number of the document")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("DocumentNumber")]
         public string DocumentNumber { get; set; }
-        
+
         /// <summary>
         /// <para>Line number of the document</para>
         /// <para>18 character text.</para>
@@ -6910,15 +6908,15 @@ namespace onboarding_backend.Models
         [System.Xml.Serialization.XmlElementAttribute("DocumentLine")]
         public string DocumentLine { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoodsStockMovementLine", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsMovementOfGoodsStockMovementLine", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsMovementOfGoodsStockMovementLine
     {
-        
+
         /// <summary>
         /// <para>Number of the movementline</para>
         /// <para>18 character text.</para>
@@ -6926,10 +6924,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Number of the movementline")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("LineNumber")]
         public string LineNumber { get; set; }
-        
+
         /// <summary>
         /// <para>General Ledger Account code. Can be including sub-account id.</para>
         /// <para>70 character text.</para>
@@ -6939,7 +6937,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("AccountID")]
         public string AccountId { get; set; }
-        
+
         /// <summary>
         /// <para>Cross-reference to GL posting. It can contain many different levels to identify the transaction. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -6951,7 +6949,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionID")]
         public string TransactionId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique code for the customer</para>
         /// <para>35 character text.</para>
@@ -6961,7 +6959,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("CustomerID")]
         public string CustomerId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique code for the supplier</para>
         /// <para>35 character text.</para>
@@ -6971,21 +6969,21 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Ship To details</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Ship To details")]
         [System.Xml.Serialization.XmlElementAttribute("ShipTo")]
         public ShippingPointStructure ShipTo { get; set; }
-        
+
         /// <summary>
         /// <para>Ship from Details</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Ship from Details")]
         [System.Xml.Serialization.XmlElementAttribute("ShipFrom")]
         public ShippingPointStructure ShipFrom { get; set; }
-        
+
         /// <summary>
         /// <para>Product code</para>
         /// <para>70 character text.</para>
@@ -6993,10 +6991,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Product code")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("ProductCode")]
         public string ProductCode { get; set; }
-        
+
         /// <summary>
         /// <para>Stock batch, lot, serial identification. Not used when there is exactly 1 PhysicalStock entry per ProductCode</para>
         /// <para>70 character text.</para>
@@ -7007,7 +7005,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("StockAccountNo")]
         public string StockAccountNo { get; set; }
-        
+
         /// <summary>
         /// <para>Quantity of goods</para>
         /// <para>Used to describe a quantity. Monetary amount. 22 digits max, of which 6 can be fractional digits.</para>
@@ -7015,10 +7013,10 @@ namespace onboarding_backend.Models
         /// <para xml:lang="en">Total number of digits in fraction: 6.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Quantity of goods")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("Quantity")]
         public decimal Quantity { get; set; }
-        
+
         /// <summary>
         /// <para>Quantity unit of measure e.g. pack of 12</para>
         /// <para>Text of max 9 characters.</para>
@@ -7028,20 +7026,20 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
         [System.Xml.Serialization.XmlElementAttribute("UnitOfMeasure")]
         public string UnitOfMeasure { get; set; }
-        
+
         /// <summary>
         /// <para>Conversion factor of the UOM to UOM Physical Stock</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Conversion factor of the UOM to UOM Physical Stock")]
         [System.Xml.Serialization.XmlElementAttribute("UOMToUOMPhysicalStockConversionFactor")]
         public decimal UomToUomPhysicalStockConversionFactor { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the UomToUomPhysicalStockConversionFactor property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool UomToUomPhysicalStockConversionFactorSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Value of the transaction line as registrerd in the general ledger in the header's default currency.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -7052,13 +7050,13 @@ namespace onboarding_backend.Models
             " default currency."))]
         [System.Xml.Serialization.XmlElementAttribute("BookValue")]
         public decimal BookValue { get; set; }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets or sets a value indicating whether the BookValue property is specified.</para>
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool BookValueSpecified { get; set; }
-        
+
         /// <summary>
         /// <para>Indentify the type of the movement on line / article level. A movement(type) production contains f.i. use of components, getting finished product, efficiencyloss as movementsubtypes. Predescribed TABLE is possible.</para>
         /// <para>Text of max 9 characters.</para>
@@ -7068,10 +7066,10 @@ namespace onboarding_backend.Models
             "uction contains f.i. use of components, getting finished product, efficiencyloss" +
             " as movementsubtypes. Predescribed TABLE is possible."))]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("MovementSubType")]
         public string MovementSubType { get; set; }
-        
+
         /// <summary>
         /// <para>A reason for the movement</para>
         /// <para>256 character text.</para>
@@ -7081,10 +7079,10 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("MovementComments")]
         public string MovementComments { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<TaxInformationStructure> _taxInformation;
-        
+
         [System.Xml.Serialization.XmlElementAttribute("TaxInformation")]
         public System.Collections.ObjectModel.Collection<TaxInformationStructure> TaxInformation
         {
@@ -7097,7 +7095,7 @@ namespace onboarding_backend.Models
                 _taxInformation = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Gets a value indicating whether the TaxInformation collection is empty.</para>
         /// </summary>
@@ -7109,7 +7107,7 @@ namespace onboarding_backend.Models
                 return (this.TaxInformation.Count != 0);
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsMovementOfGoodsStockMovementLine" /> class.</para>
         /// </summary>
@@ -7118,27 +7116,27 @@ namespace onboarding_backend.Models
             this._taxInformation = new System.Collections.ObjectModel.Collection<TaxInformationStructure>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsAssetTransactions", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsAssetTransactions", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsAssetTransactions
     {
-        
+
         /// <summary>
         /// <para>Number of movementlines during selected period</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Number of movementlines during selected period")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("NumberOfAssetTransactions")]
         public string NumberOfAssetTransactions { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransaction> _assetTransaction;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AssetTransaction")]
         public System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransaction> AssetTransaction
         {
@@ -7151,7 +7149,7 @@ namespace onboarding_backend.Models
                 _assetTransaction = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsAssetTransactions" /> class.</para>
         /// </summary>
@@ -7160,15 +7158,15 @@ namespace onboarding_backend.Models
             this._assetTransaction = new System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransaction>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsAssetTransactionsAssetTransaction", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsAssetTransactionsAssetTransaction", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsAssetTransactionsAssetTransaction
     {
-        
+
         /// <summary>
         /// <para>Unique Identification  of the transaction</para>
         /// <para>70 character text.</para>
@@ -7176,10 +7174,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unique Identification of the transaction")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AssetTransactionID")]
         public string AssetTransactionId { get; set; }
-        
+
         /// <summary>
         /// <para>Unique identifier of the asset</para>
         /// <para>35 character text.</para>
@@ -7187,10 +7185,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Unique identifier of the asset")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AssetID")]
         public string AssetId { get; set; }
-        
+
         /// <summary>
         /// <para>Code for the type of the transaction</para>
         /// <para>Text of max 9 characters.</para>
@@ -7198,10 +7196,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Code for the type of the transaction")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(9)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AssetTransactionType")]
         public string AssetTransactionType { get; set; }
-        
+
         /// <summary>
         /// <para>Description of the type of the transaction.</para>
         /// <para>256 character text.</para>
@@ -7211,23 +7209,23 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(256)]
         [System.Xml.Serialization.XmlElementAttribute("Description")]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// <para>Recording date of the transaction type (e. g. assets: date of the addition of the asset)</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Recording date of the transaction type (e. g. assets: date of the addition of the" +
             " asset)"))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
-        [System.Xml.Serialization.XmlElementAttribute("AssetTransactionDate", DataType="date")]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
+        [System.Xml.Serialization.XmlElementAttribute("AssetTransactionDate", DataType = "date")]
         public System.DateTime AssetTransactionDate { get; set; }
-        
+
         /// <summary>
         /// <para>Information about the supplier of the asset</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Information about the supplier of the asset")]
         [System.Xml.Serialization.XmlElementAttribute("Supplier")]
         public AuditFileSourceDocumentsAssetTransactionsAssetTransactionSupplier Supplier { get; set; }
-        
+
         /// <summary>
         /// <para>Cross-reference to GL posting in the journal. It can contain many different levels to identify the transaction. It could include cost centres such as company, division, region, group and branch/department.</para>
         /// <para>70 character text.</para>
@@ -7239,17 +7237,17 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionID")]
         public string TransactionId { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuationsAssetTransactionValuation> _assetTransactionValuations;
-        
+
         /// <summary>
         /// <para>These amounts of the transaction can differ per asset valuation type.</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("These amounts of the transaction can differ per asset valuation type.")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlArrayAttribute("AssetTransactionValuations")]
-        [System.Xml.Serialization.XmlArrayItemAttribute("AssetTransactionValuation", Namespace="urn:StandardAuditFile-Taxation-Financial:NO")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("AssetTransactionValuation", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO")]
         public System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuationsAssetTransactionValuation> AssetTransactionValuations
         {
             get
@@ -7261,7 +7259,7 @@ namespace onboarding_backend.Models
                 _assetTransactionValuations = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsAssetTransactionsAssetTransaction" /> class.</para>
         /// </summary>
@@ -7270,15 +7268,15 @@ namespace onboarding_backend.Models
             this._assetTransactionValuations = new System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuationsAssetTransactionValuation>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsAssetTransactionsAssetTransactionSupplier", Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+    [System.Xml.Serialization.XmlTypeAttribute("AuditFileSourceDocumentsAssetTransactionsAssetTransactionSupplier", Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsAssetTransactionsAssetTransactionSupplier
     {
-        
+
         /// <summary>
         /// <para>Name of the supplier of the asset</para>
         /// <para>70 character text.</para>
@@ -7286,10 +7284,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Name of the supplier of the asset")]
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(70)]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierName")]
         public string SupplierName { get; set; }
-        
+
         /// <summary>
         /// <para>Unique code for the supplier</para>
         /// <para>35 character text.</para>
@@ -7299,29 +7297,29 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(35)]
         [System.Xml.Serialization.XmlElementAttribute("SupplierID")]
         public string SupplierId { get; set; }
-        
+
         /// <summary>
         /// <para>Address information of the supplier of the asset</para>
         /// </summary>
         [System.ComponentModel.DescriptionAttribute("Address information of the supplier of the asset")]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("PostalAddress")]
         public AddressStructure PostalAddress { get; set; }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(("AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuatio" +
-        "ns"), Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+        "ns"), Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuations
     {
-        
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         private System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuationsAssetTransactionValuation> _assetTransactionValuation;
-        
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AssetTransactionValuation")]
         public System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuationsAssetTransactionValuation> AssetTransactionValuation
         {
@@ -7334,7 +7332,7 @@ namespace onboarding_backend.Models
                 _assetTransactionValuation = value;
             }
         }
-        
+
         /// <summary>
         /// <para xml:lang="en">Initializes a new instance of the <see cref="AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuations" /> class.</para>
         /// </summary>
@@ -7343,16 +7341,16 @@ namespace onboarding_backend.Models
             this._assetTransactionValuation = new System.Collections.ObjectModel.Collection<AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuationsAssetTransactionValuation>();
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XmlSchemaClassGenerator", "2.1.1179.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(("AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuatio" +
-        "nsAssetTransactionValuation"), Namespace="urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType=true)]
+        "nsAssetTransactionValuation"), Namespace = "urn:StandardAuditFile-Taxation-Financial:NO", AnonymousType = true)]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AuditFileSourceDocumentsAssetTransactionsAssetTransactionAssetTransactionValuationsAssetTransactionValuation
     {
-        
+
         /// <summary>
         /// <para>Describes the purpose for the reporting: f.i. commercial, tax  in country 1, tax in country 2, etc.</para>
         /// <para>18 character text.</para>
@@ -7363,7 +7361,7 @@ namespace onboarding_backend.Models
         [System.ComponentModel.DataAnnotations.MaxLengthAttribute(18)]
         [System.Xml.Serialization.XmlElementAttribute("AssetValuationType")]
         public string AssetValuationType { get; set; }
-        
+
         /// <summary>
         /// <para>Costs of acquisition and/or production of related asset transaction in the header's default currency at date of transaction.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -7372,10 +7370,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Costs of acquisition and/or production of related asset transaction in the header" +
             "\'s default currency at date of transaction."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AcquisitionAndProductionCostsOnTransaction")]
         public decimal AcquisitionAndProductionCostsOnTransaction { get; set; }
-        
+
         /// <summary>
         /// <para>Bookvalue of related asset transaction in the header's default currency at date of transaction.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -7384,10 +7382,10 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Bookvalue of related asset transaction in the header\'s default currency at date o" +
             "f transaction."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("BookValueOnTransaction")]
         public decimal BookValueOnTransaction { get; set; }
-        
+
         /// <summary>
         /// <para>Net Amount of related asset transaction in the header's default currency, for instance the net sales revenue.</para>
         /// <para>Monetary amount.18 digits max, of which 2 can be fractional digits.</para>
@@ -7396,7 +7394,7 @@ namespace onboarding_backend.Models
         /// </summary>
         [System.ComponentModel.DescriptionAttribute(("Net Amount of related asset transaction in the header\'s default currency, for ins" +
             "tance the net sales revenue."))]
-        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings=true)]
+        [System.ComponentModel.DataAnnotations.RequiredAttribute(AllowEmptyStrings = true)]
         [System.Xml.Serialization.XmlElementAttribute("AssetTransactionAmount")]
         public decimal AssetTransactionAmount { get; set; }
     }

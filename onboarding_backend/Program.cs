@@ -1,5 +1,7 @@
 using System.Xml.Linq;
+using onboarding_backend.Models;
 using onboarding_backend.Services;
+using System.Xml.Serialization;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,10 +56,14 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         await file.CopyToAsync(stream);
     }
 
-    XDocument saftXml;
+    AuditFile saft;
     try
     {
-        saftXml = XDocument.Load(filePath);
+        var serializer = new XmlSerializer(typeof(AuditFile));
+        using (var reader = new FileStream(filePath, FileMode.Open))
+        {
+            saft = (AuditFile)serializer.Deserialize(reader)!;
+        }
     }
     catch (Exception ex)
     {
@@ -65,26 +71,38 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         return Results.BadRequest("Failed to parse the XML file");
     }
 
-    var customers = Converter.ExtractCustomers(saftXml);
-    var suppliers = Converter.ExtractSuppliers(saftXml);
+    var (customers, suppliers, contacts) = Converter.ConvertFromSaft(saft);
 
     var doc = new XDocument(
         new XElement("PowerOfficeImport",
-            new XElement("Contacts",
-            customers.Concat(suppliers).Select(c =>
-                new XElement("Contact",
-                    new XElement("CustomerNo", c.CustomerNo),
-                    new XElement("ContactName", c.ContactName),
-                    new XElement("Phone", c.Phone),
-                    new XElement("Email", c.Email),
-                    new XElement("OrganizationNo", c.OrganizationNo)
+            new XElement("Customer",
+                customers.Select(c =>
+                    new XElement("Customer",
+                        new XElement("CustomerNo", c.CustomerNo),
+                        new XElement("Name", c.Name),
+                        new XElement("Phone", c.Phone),
+                        new XElement("Email", c.Email),
+                        new XElement("OrganizationNo", c.OrganizationNo)
+                    )
+                )
+            ),
+        new XElement("PowerOfficeImport",
+            new XElement("Suppliers",
+                suppliers.Select(c =>
+                    new XElement("Supplier",
+                        new XElement("SupplierNO", c.SupplierNo),
+                        new XElement("Name", c.Name),
+                        new XElement("Phone", c.Phone),
+                        new XElement("Email", c.Email),
+                        new XElement("OrganizationNo", c.OrganizationNo)
+                        )
                     )
                 )
             )
         )
     );
 
-    var filteredPath = Path.Combine(uploads, "filtered.xml");
+    var filteredPath = Path.Combine(uploads, "New_SAF-T.xml");
     doc.Save(filteredPath);
 
 
