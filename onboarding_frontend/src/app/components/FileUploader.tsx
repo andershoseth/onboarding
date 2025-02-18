@@ -1,15 +1,14 @@
 'use client'
-// components/FileUploader.tsx
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 export default function FileUploader() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadResult, setUploadResult] = useState<unknown>(null);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+    setSelectedFile(e.target.files[0]);
+  }
 
   const uploadFile = async () => {
     if (!selectedFile) return;
@@ -23,13 +22,13 @@ export default function FileUploader() {
         body: formData,
       });
 
-      interface UploadResponse {
-        message: string;
-        fileName: string;
+      if (!res.ok) {
+        throw new Error(`Error! status: ${res.status}`);
       }
 
-      const data: UploadResponse = await res.json();
-      console.log(data);
+      const data = await res.json();
+      setUploadResult(data); // ⬅ Lagrer responsen i state
+
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -37,8 +36,18 @@ export default function FileUploader() {
 
   return (
     <div>
+      <h1>File Uploader</h1>
+
       <input type="file" onChange={handleFileChange} />
       <button onClick={uploadFile}>Upload</button>
+
+      {/* Viser JSON på nettsiden i en PRE-blokk */}
+      {uploadResult && (
+        <div style={{ marginTop: "1rem" }}>
+          <h2>Upload Result:</h2>
+          <pre>{JSON.stringify(uploadResult, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default function UploadPage() {
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="/"
-        >
+          >
           Home
         </a>
       </footer>

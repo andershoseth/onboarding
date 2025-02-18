@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuditFile xmlns="urn:OECD:StandardAuditFile-Tax:0.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="urn:OECD:StandardAuditFile-Tax:0.1 SAF-T.xsd">
+  <!-- Header-delen med selskapsinformasjon -->
+  <Header>
+    <AuditFileVersion>1.0</AuditFileVersion>
+    <CompanyID>123456789</CompanyID>
+    <TaxRegistrationNumber>987654321</TaxRegistrationNumber>
+    <CompanyName>Dummy AS</CompanyName>
+    <BusinessName>Dummy Business</BusinessName>
+    <CompanyAddress>
+      <AddressDetail>Testveien 1</AddressDetail>
+      <City>Oslo</City>
+      <PostalCode>0001</PostalCode>
+      <Country>NO</Country>
+    </CompanyAddress>
+    <FiscalYear>2024</FiscalYear>
+    <StartDate>2024-01-01</StartDate>
+    <EndDate>2024-12-31</EndDate>
+  </Header>
+
+  <!-- MasterFiles-delen med hovedbokskonti, kunder og leverandører -->
+  <MasterFiles>
+    <!-- Hovedbokskonti -->
+    <GeneralLedgerAccounts>
+      <Account>
+        <AccountID>1000</AccountID>
+        <AccountDescription>Kundefordringer</AccountDescription>
+        <OpeningDebitBalance>15000.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>2000</AccountID>
+        <AccountDescription>Leverandørgjeld</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>15000.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>3000</AccountID>
+        <AccountDescription>Kontanter</AccountDescription>
+        <OpeningDebitBalance>5000.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>4000</AccountID>
+        <AccountDescription>Salgsinntekter</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>5000</AccountID>
+        <AccountDescription>Varekostnad</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>6000</AccountID>
+        <AccountDescription>Lønnskostnader</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>7000</AccountID>
+        <AccountDescription>Driftskostnader</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>8000</AccountID>
+        <AccountDescription>Andre inntekter</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>9000</AccountID>
+        <AccountDescription>Andre kostnader</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+      <Account>
+        <AccountID>1010</AccountID>
+        <AccountDescription>Bankkonto</AccountDescription>
+        <OpeningDebitBalance>0.00</OpeningDebitBalance>
+        <OpeningCreditBalance>0.00</OpeningCreditBalance>
+      </Account>
+    </GeneralLedgerAccounts>
+
+    <!-- Kunder -->
+    <Customers>
+      <Customer>
+        <CustomerID>C001</CustomerID>
+        <CustomerName>Kunde A</CustomerName>
+        <AddressDetail>Gate 1</AddressDetail>
+        <City>Oslo</City>
+        <PostalCode>0123</PostalCode>
+        <Country>NO</Country>
+      </Customer>
+      <Customer>
+        <CustomerID>C002</CustomerID>
+        <CustomerName>Kunde B</CustomerName>
+        <AddressDetail>Gate 2</AddressDetail>
+        <City>Bergen</City>
+        <PostalCode>5000</PostalCode>
+        <Country>NO</Country>
+      </Customer>
+      <Customer>
+        <CustomerID>C003</CustomerID>
+        <CustomerName>Kunde C</CustomerName>
+        <AddressDetail>Gate 3</AddressDetail>
+        <City>Trondheim</City>
+        <PostalCode>7000</PostalCode>
+        <Country>NO</Country>
+      </Customer>
+    </Customers>
+
+    <!-- Leverandører -->
+    <Suppliers>
+      <Supplier>
+        <SupplierID>S001</SupplierID>
+        <SupplierName>Leverandør A</SupplierName>
+        <AddressDetail>Industriveien 1</AddressDetail>
+        <City>Stavanger</City>
+        <PostalCode>4000</PostalCode>
+        <Country>NO</Country>
+      </Supplier>
+      <Supplier>
+        <SupplierID>S002</SupplierID>
+        <SupplierName>Leverandør B</SupplierName>
+        <AddressDetail>Industri-veg 2</AddressDetail>
+        <City>Kristiansand</City>
+        <PostalCode>4600</PostalCode>
+        <Country>NO</Country>
+      </Supplier>
+      <Supplier>
+        <SupplierID>S003</SupplierID>
+        <SupplierName>Leverandør C</SupplierName>
+        <AddressDetail>Industri-veg 3</AddressDetail>
+        <City>Drammen</City>
+        <PostalCode>3000</PostalCode>
+        <Country>NO</Country>
+      </Supplier>
+    </Suppliers>
+  </MasterFiles>
+
+  <!-- GeneralLedgerEntries-delen med flere journaldeler og transaksjoner -->
+  <GeneralLedgerEntries>
+    <!-- Journal for åpningsbalanse -->
+    <Journal>
+      <JournalID>JNL001</JournalID>
+      <Description>Åpningsbalanse</Description>
+      <Transaction>
+        <TransactionID>T001</TransactionID>
+        <Period>1</Period>
+        <TransactionDate>2024-01-01</TransactionDate>
+        <Description>Åpningsbalanse for kundefordringer og leverandørgjeld</Description>
+        <DocumentNumber>OB001</DocumentNumber>
+        <Line>
+          <RecordID>1</RecordID>
+          <AccountID>1000</AccountID>
+          <DebitAmount>15000.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>2</RecordID>
+          <AccountID>2000</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>15000.00</CreditAmount>
+        </Line>
+      </Transaction>
+      <Transaction>
+        <TransactionID>T002</TransactionID>
+        <Period>1</Period>
+        <TransactionDate>2024-01-01</TransactionDate>
+        <Description>Åpningsbalanse for kontanter og bank</Description>
+        <DocumentNumber>OB002</DocumentNumber>
+        <Line>
+          <RecordID>3</RecordID>
+          <AccountID>3000</AccountID>
+          <DebitAmount>5000.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>4</RecordID>
+          <AccountID>1010</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>5000.00</CreditAmount>
+        </Line>
+      </Transaction>
+    </Journal>
+
+    <!-- Journal for salg -->
+    <Journal>
+      <JournalID>JNL002</JournalID>
+      <Description>Salgsjournal</Description>
+      <Transaction>
+        <TransactionID>T010</TransactionID>
+        <Period>2</Period>
+        <TransactionDate>2024-02-15</TransactionDate>
+        <Description>Salgsfaktura Kunde A</Description>
+        <DocumentNumber>INV1001</DocumentNumber>
+        <Line>
+          <RecordID>5</RecordID>
+          <AccountID>1000</AccountID>
+          <DebitAmount>2000.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>6</RecordID>
+          <AccountID>4000</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>2000.00</CreditAmount>
+        </Line>
+      </Transaction>
+      <Transaction>
+        <TransactionID>T011</TransactionID>
+        <Period>2</Period>
+        <TransactionDate>2024-02-20</TransactionDate>
+        <Description>Salgsfaktura Kunde B</Description>
+        <DocumentNumber>INV1002</DocumentNumber>
+        <Line>
+          <RecordID>7</RecordID>
+          <AccountID>1000</AccountID>
+          <DebitAmount>3500.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>8</RecordID>
+          <AccountID>4000</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>3500.00</CreditAmount>
+        </Line>
+      </Transaction>
+      <Transaction>
+        <TransactionID>T012</TransactionID>
+        <Period>2</Period>
+        <TransactionDate>2024-02-28</TransactionDate>
+        <Description>Salgsfaktura Kunde C</Description>
+        <DocumentNumber>INV1003</DocumentNumber>
+        <Line>
+          <RecordID>9</RecordID>
+          <AccountID>1000</AccountID>
+          <DebitAmount>1500.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>10</RecordID>
+          <AccountID>4000</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>1500.00</CreditAmount>
+        </Line>
+      </Transaction>
+    </Journal>
+
+    <!-- Journal for kjøp -->
+    <Journal>
+      <JournalID>JNL003</JournalID>
+      <Description>Kjøpsjournal</Description>
+      <Transaction>
+        <TransactionID>T020</TransactionID>
+        <Period>3</Period>
+        <TransactionDate>2024-03-10</TransactionDate>
+        <Description>Kjøpsfaktura Leverandør A</Description>
+        <DocumentNumber>INV2001</DocumentNumber>
+        <Line>
+          <RecordID>11</RecordID>
+          <AccountID>5000</AccountID>
+          <DebitAmount>1200.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>12</RecordID>
+          <AccountID>2000</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>1200.00</CreditAmount>
+        </Line>
+      </Transaction>
+      <Transaction>
+        <TransactionID>T021</TransactionID>
+        <Period>3</Period>
+        <TransactionDate>2024-03-15</TransactionDate>
+        <Description>Kjøpsfaktura Leverandør B</Description>
+        <DocumentNumber>INV2002</DocumentNumber>
+        <Line>
+          <RecordID>13</RecordID>
+          <AccountID>5000</AccountID>
+          <DebitAmount>1800.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>14</RecordID>
+          <AccountID>2000</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>1800.00</CreditAmount>
+        </Line>
+      </Transaction>
+    </Journal>
+
+    <!-- Journal for banktransaksjoner -->
+    <Journal>
+      <JournalID>JNL004</JournalID>
+      <Description>Banktransaksjoner</Description>
+      <Transaction>
+        <TransactionID>T030</TransactionID>
+        <Period>4</Period>
+        <TransactionDate>2024-04-05</TransactionDate>
+        <Description>Bankinnskudd</Description>
+        <DocumentNumber>BANK1001</DocumentNumber>
+        <Line>
+          <RecordID>15</RecordID>
+          <AccountID>1010</AccountID>
+          <DebitAmount>3000.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>16</RecordID>
+          <AccountID>3000</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>3000.00</CreditAmount>
+        </Line>
+      </Transaction>
+      <Transaction>
+        <TransactionID>T031</TransactionID>
+        <Period>4</Period>
+        <TransactionDate>2024-04-10</TransactionDate>
+        <Description>Bankuttak</Description>
+        <DocumentNumber>BANK1002</DocumentNumber>
+        <Line>
+          <RecordID>17</RecordID>
+          <AccountID>3000</AccountID>
+          <DebitAmount>1500.00</DebitAmount>
+          <CreditAmount>0.00</CreditAmount>
+        </Line>
+        <Line>
+          <RecordID>18</RecordID>
+          <AccountID>1010</AccountID>
+          <DebitAmount>0.00</DebitAmount>
+          <CreditAmount>1500.00</CreditAmount>
+        </Line>
+      </Transaction>
+    </Journal>
+  </GeneralLedgerEntries>
+</AuditFile>

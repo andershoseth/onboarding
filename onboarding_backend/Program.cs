@@ -1,4 +1,6 @@
+﻿using System.Text.Json;
 using Microsoft.AspNetCore.Http.Features;
+using onboarding_backend; // Inneholder SaftParser og StandardImport
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,20 +9,26 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowNextJs", policy =>
     {
         policy.WithOrigins("http://localhost:3000")
-            .AllowAnyMethod()
-            .AllowAnyHeader();
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
 app.UseCors("AllowNextJs");
 
+// Øk maks request-body størrelse (f.eks. 100MB)
 app.Use(async (context, next) =>
 {
-    context.Features.Get<IHttpMaxRequestBodySizeFeature>()!.MaxRequestBodySize = 104857600; // e.g., 100MB
+    var maxRequestBodySizeFeature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+    if (maxRequestBodySizeFeature != null)
+    {
+        maxRequestBodySizeFeature.MaxRequestBodySize = 104857600; // 100 MB
+    }
     await next.Invoke();
 });
 
+// API-endepunkt for filopplasting
 app.MapPost("/api/upload", async (HttpRequest request) =>
 {
     if (!request.HasFormContentType)
@@ -29,32 +37,42 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
     }
 
     var form = await request.ReadFormAsync();
-    var file = form.Files["file"]; // ensure your form data key is "file"
+    var file = form.Files["file"];
 
     if (file == null || file.Length == 0)
     {
         return Results.BadRequest("No file uploaded.");
     }
 
-    // Define where to store the file temporarily (or process it immediately)
-    var uploads = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
-    Directory.CreateDirectory(uploads);
-    var filePath = Path.Combine(uploads, file.FileName);
+    var saftParser = new SaftParser();
+    // Kaller parseren -> får StandardImport-objekt
+    StandardImport stdImport = await saftParser.ProcessSaftFileAsync(file);
 
-    // Save the file locally
-    using (var stream = new FileStream(filePath, FileMode.Create))
+    // Du kan sjekke om vi fant noen data (f.eks. kontakter, bilag, osv.)
+    bool hasData = (stdImport.Contacts.Any() ||
+                    stdImport.Products.Any() ||
+                    stdImport.Projects.Any() ||
+                    stdImport.ProjectTeamMembers.Any() ||
+                    stdImport.ProjectActivities.Any() ||
+                    stdImport.Departments.Any() ||
+                    stdImport.Vouchers.Any());
+
+    if (!hasData)
     {
-        await file.CopyToAsync(stream);
+        return Results.BadRequest(new { error = "No valid data found in XML file." });
     }
 
-    // Here you might parse the file based on its extension (.csv, .xlsx, .saf-t)
-    // For example:
-    // if (Path.GetExtension(file.FileName).Equals(".csv", StringComparison.OrdinalIgnoreCase))
-    // {
-    //     // Use CsvHelper or similar to process CSV files.
-    // }
+    // Skriv ut alt til terminalen som JSON (valgfritt)
+    Console.WriteLine("\n🔹 **Final Parsed Data (StandardImport):**");
+    Console.WriteLine(JsonSerializer.Serialize(stdImport, new JsonSerializerOptions { WriteIndented = true }));
 
-    return Results.Ok(new { message = "File uploaded successfully", fileName = file.FileName });
+    // Returner data i HTTP-responsen
+    return Results.Ok(new
+    {
+        message = "File uploaded and processed successfully",
+        fileName = file.FileName,
+        standardImport = stdImport
+    });
 });
 
 app.Run();
