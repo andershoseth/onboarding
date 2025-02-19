@@ -1,4 +1,5 @@
 import Card from '../card';
+import Link from 'next/link';
 
 function Home() {
     return (
@@ -14,12 +15,14 @@ function Home() {
 
             <div className="flex flex-wrap justify-center gap-8 p-10">
                 {/*import*/}
+                <Link href="/systemvalg">
                 <Card
                     logoSrc="import.png"
                     title="Begynn importen"
                     description="Få inn nøkkeltall fra systemet du kommer fra"
                     link="/systemvalg"
                 />
+                </Link>
                 {/*links*/}
                 <Card
                     logoSrc="link.png"
