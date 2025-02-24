@@ -5,6 +5,8 @@ import ImportContext from '../components/ImportContext';
 import React from 'react';
 
 function SystemChoice() {
+    const { setSelectedSystem } = React.useContext(ImportContext);
+
     const cards = [
         {
             logoSrc: "import.png",
