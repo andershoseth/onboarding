@@ -1,8 +1,6 @@
-﻿using System.Xml.Linq;
-using onboarding_backend.Models;
-using onboarding_backend.Services;
-using System.Xml.Serialization;
+﻿using System.Text.Json;
 using Microsoft.AspNetCore.Http.Features;
+using onboarding_backend; // Inneholder SaftParser og StandardImport
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,12 +22,18 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 app.UseCors("AllowLocalhostAllPorts");
 
+// Øk maks request-body størrelse (f.eks. 100MB)
 app.Use(async (context, next) =>
 {
-    context.Features.Get<IHttpMaxRequestBodySizeFeature>()!.MaxRequestBodySize = 104857600; // e.g., 100MB
+    var maxRequestBodySizeFeature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
+    if (maxRequestBodySizeFeature != null)
+    {
+        maxRequestBodySizeFeature.MaxRequestBodySize = 104857600; // 100 MB
+    }
     await next.Invoke();
 });
 
+// API-endepunkt for filopplasting
 app.MapPost("/api/upload", async (HttpRequest request) =>
 {
     if (!request.HasFormContentType)
@@ -38,75 +42,42 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
     }
 
     var form = await request.ReadFormAsync();
-    var file = form.Files["file"]; // ensure your form data key is "file"
+    var file = form.Files["file"];
 
     if (file == null || file.Length == 0)
     {
         return Results.BadRequest("No file uploaded.");
     }
 
-    // Define where to store the file temporarily (or process it immediately)
-    var uploads = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
-    Directory.CreateDirectory(uploads);
-    var filePath = Path.Combine(uploads, file.FileName);
+    var saftParser = new SaftParser();
+    // Kaller parseren -> får StandardImport-objekt
+    StandardImport stdImport = await saftParser.ProcessSaftFileAsync(file);
 
-    // Save the file locally
-    using (var stream = new FileStream(filePath, FileMode.Create))
+    // Du kan sjekke om vi fant noen data (f.eks. kontakter, bilag, osv.)
+    bool hasData = (stdImport.Contacts.Any() ||
+                    stdImport.Products.Any() ||
+                    stdImport.Projects.Any() ||
+                    stdImport.ProjectTeamMembers.Any() ||
+                    stdImport.ProjectActivities.Any() ||
+                    stdImport.Departments.Any() ||
+                    stdImport.Vouchers.Any());
+
+    if (!hasData)
     {
-        await file.CopyToAsync(stream);
+        return Results.BadRequest(new { error = "No valid data found in XML file." });
     }
 
-    AuditFile saft;
-    try
+    // Skriv ut alt til terminalen som JSON (valgfritt)
+    Console.WriteLine("\n🔹 **Final Parsed Data (StandardImport):**");
+    Console.WriteLine(JsonSerializer.Serialize(stdImport, new JsonSerializerOptions { WriteIndented = true }));
+
+    // Returner data i HTTP-responsen
+    return Results.Ok(new
     {
-        var serializer = new XmlSerializer(typeof(AuditFile));
-        using (var reader = new FileStream(filePath, FileMode.Open))
-        {
-            saft = (AuditFile)serializer.Deserialize(reader)!;
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error parsing XML: {ex.Message}");
-        return Results.BadRequest("Failed to parse the XML file");
-    }
-
-    var (customers, suppliers) = Converter.ConvertFromSaft(saft);
-
-    var doc = new XDocument(
-        new XElement("PowerOfficeImport",
-            new XElement("Customer",
-                customers.Select(c =>
-                    new XElement("Customer",
-                        new XElement("CustomerNo", c.CustomerNo),
-                        new XElement("Name", c.Name),
-                        new XElement("Phone", c.Phone),
-                        new XElement("Email", c.Email),
-                        new XElement("OrganizationNo", c.OrganizationNo)
-                    )
-                )
-            ),
-        new XElement("PowerOfficeImport",
-            new XElement("Suppliers",
-                suppliers.Select(c =>
-                    new XElement("Supplier",
-                        new XElement("SupplierNO", c.SupplierNo),
-                        new XElement("Name", c.Name),
-                        new XElement("Phone", c.Phone),
-                        new XElement("Email", c.Email),
-                        new XElement("OrganizationNo", c.OrganizationNo)
-                        )
-                    )
-                )
-            )
-        )
-    );
-
-    var filteredPath = Path.Combine(uploads, "New_SAF-T.xml");
-    doc.Save(filteredPath);
-
-
-    return Results.Ok(new { message = "File uploaded successfully", filteredFile = filteredPath });
+        message = "File uploaded and processed successfully",
+        fileName = file.FileName,
+        standardImport = stdImport
+    });
 });
 
 app.Run();

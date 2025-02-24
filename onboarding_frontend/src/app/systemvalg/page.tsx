@@ -1,8 +1,10 @@
+'use client';
 import Card from '../card';
 import Link from "next/link";
+import ImportContext from '../components/ImportContext';
+import React from 'react';
 
 function SystemChoice() {
-    {/* liste over regnskapssystemer */ }
     const cards = [
         {
             logoSrc: "import.png",
@@ -40,7 +42,12 @@ function SystemChoice() {
             description: "Importer data fra et egendefinert regnskapssystem",
             link: "/upload"
         },
-    ]
+    ];
+
+    const handleClick = (title: string) => {
+        // Save the selected card's title in the context
+        setSelectedSystem(title);
+    };
 
     return (
         <>
@@ -51,15 +58,20 @@ function SystemChoice() {
             <div className="flex flex-wrap justify-center gap-8 p-10">
                 {/* genererer kort for hver item i lista */}
                 {cards.map((card, index) => (
-                    <Card
-                        key={index}
-                        logoSrc={card.logoSrc}
-                        title={card.title}
-                        description={card.description}
-                        link={card.link}
-                    />
+                    <Link key={index} href={card.link} passHref>
+                        <div
+                            onClick={() => handleClick(card.title)}
+                            className="cursor-pointer"
+                        >
+                            <Card
+                                logoSrc={card.logoSrc}
+                                title={card.title}
+                                description={card.description}
+                                link={card.link}
+                            />
+                        </div>
+                    </Link>
                 ))}
-
             </div>
             <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
                 <Link
