@@ -30,6 +30,15 @@ const ImportVelger: React.FC = () => {
                             onChange={() => handleBoxChange("faktura")}
                         />
                     </div>
+
+                    <div className="mt-6 flex justify-end">
+                        <Link
+                            href="/upload"
+                            className="bg-[#E17044] text-white px-4 py-2 rounded-md shadow-md hover:bg-[#c85b34] transition"
+                        >
+                            Next
+                        </Link>
+                    </div>
                 </div>
             </MenuContainer>
             <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
