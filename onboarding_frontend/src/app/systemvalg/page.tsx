@@ -12,37 +12,37 @@ function SystemChoice() {
             logoSrc: "import.png",
             title: "Visma",
             description: "Importer data fra Visma",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Tripletex",
             description: "Importer data fra Tripletex",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Xledger",
             description: "Importer data fra Xledger",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Bank + regnskap",
             description: "Importer data fra Bank + regnskap",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Fiken",
             description: "Importer data fra Fiken",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Egendefinert",
             description: "Importer data fra et egendefinert regnskapssystem",
-            link: "/upload"
+            link: "/importvelger"
         },
     ];
 
