@@ -194,7 +194,7 @@
 		<Suppliers>
 			<Supplier>
 				<RegistrationNumber>11121398761</RegistrationNumber>
-				<Name>a</Name>
+				<Name>supplier1</Name>
 				<Address>
 					<StreetName>Veien</StreetName>
 					<Number>123</Number>
@@ -258,6 +258,73 @@
 					<Notes>String</Notes>
 				</PartyInfo>
 			</Supplier>
+			
+			<Supplier>
+			<RegistrationNumber>11122233344455</RegistrationNumber>
+			<Name>supplier2</Name>
+			<Address>
+				<StreetName>Veien</StreetName>
+				<Number>123</Number>
+				<AdditionalAddressDetail>B</AdditionalAddressDetail>
+				<City>Bodø</City>
+				<PostalCode>8000</PostalCode>
+				<Region>Nordland</Region>
+				<Country>NO</Country>
+				<AddressType>ShipFromAddress</AddressType>
+			</Address>
+			<Contact>
+				<ContactPerson>
+					<FirstName>Ola</FirstName>
+					<Initials>ON</Initials>
+					<LastNamePrefix></LastNamePrefix>
+					<LastName>Nordmann</LastName>
+					<BirthName>Ola Nordmann</BirthName>
+					<Salutation>Hr.</Salutation>
+					<OtherTitles>Daglig Leder</OtherTitles>
+				</ContactPerson>
+				<Telephone>75512345</Telephone>
+				<Fax>23456789</Fax>
+				<Email>kontaktperson@domene.offline</Email>
+				<Website>http://www.domene.offline/</Website>
+				<MobilePhone>91234567</MobilePhone>
+			</Contact>
+			<TaxRegistration>
+				<TaxRegistrationNumber>999999999MVA</TaxRegistrationNumber>
+				<TaxAuthority>Skatteetaten</TaxAuthority>
+				<TaxVerificationDate>1957-08-13</TaxVerificationDate>
+			</TaxRegistration>
+			<BankAccount>
+				<IBANNumber>NO123123123</IBANNumber>
+				<BIC>ABCDEFGH</BIC>
+				<CurrencyCode>NOK</CurrencyCode>
+				<GeneralLedgerAccountID>1952</GeneralLedgerAccountID>
+			</BankAccount>
+			<SupplierID>a</SupplierID>
+			<SelfBillingIndicator>a</SelfBillingIndicator>
+			<BalanceAccount>
+				<AccountID>1500</AccountID>
+				<OpeningDebitBalance>1234.56</OpeningDebitBalance>
+				<ClosingDebitBalance>12345.67</ClosingDebitBalance>
+			</BalanceAccount>
+			<PartyInfo>
+				<PaymentTerms>
+					<Days>0</Days>
+					<Months>0</Months>
+					<CashDiscountDays>0</CashDiscountDays>
+					<CashDiscountRate>0</CashDiscountRate>
+					<FreeBillingMonth>true</FreeBillingMonth>
+				</PaymentTerms>
+				<NaceCode>a</NaceCode>
+				<CurrencyCode>NOK</CurrencyCode>
+				<Type>Government</Type>
+				<Status>Passive</Status>
+				<Analysis>
+					<AnalysisType>B</AnalysisType>
+					<AnalysisID>4</AnalysisID>
+				</Analysis>
+				<Notes>String</Notes>
+			</PartyInfo>
+		</Supplier>
 		</Suppliers>
 		<TaxTable>
 			<TaxTableEntry>

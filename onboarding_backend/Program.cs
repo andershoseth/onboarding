@@ -82,28 +82,89 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
 });
 
 app.MapGet("/api/getflattened", async (HttpRequest request) =>
+{
+    // Hardcoded file path for testing
+    string relativePath = Path.Combine("..", "..", "..", "examplefiles", "saft_examplefile.xml");
+    string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
+
+    try
     {
-        // Hardcoded file path for testing
-        string relativePath = Path.Combine("..", "..", "..", "examplefiles", "saft_examplefile.xml");
-        string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
-        
-        
-        try
+        var dictResult = SafTFlattener.FlattenSafTAsDictionary(filePath);
+
+        // You can serialize a list the same way
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        var jsonOutput = JsonSerializer.Serialize(dictResult, options);
+
+        // Example console output
+        foreach (var kvp in dictResult)
         {
-            Dictionary<string, string> flattenedData = SafTFlattener.FlattenSafT(filePath);
-            foreach (var entry in flattenedData)
-            {
-                Console.WriteLine($"Key: {entry.Key}, Value: {entry.Value}");
-                
-            }
+            Console.WriteLine($"Path = {kvp.Key}, Value = {kvp.Value}");
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("An error occurred while flattening the file: " + ex.Message);
-            throw;
-        }
-        
+
+        return jsonOutput;
     }
-);
+    catch (Exception ex)
+    {
+        Console.WriteLine("An error occurred while flattening the file: " + ex.Message);
+        throw;
+    }
+});
+
+
+
+app.MapGet("/api/getflattenedlist", async (HttpRequest request) =>
+{
+    // Hardcoded file path for testing
+    string relativePath = Path.Combine("..", "..", "..", "examplefiles", "saft_examplefile.xml");
+    string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
+
+    try
+    {
+        var listResult = SafTFlattener.FlattenSafTAsList(filePath);
+
+        // You can serialize a list the same way
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        var jsonOutput = JsonSerializer.Serialize(listResult, options);
+
+        // Example console output
+        foreach (var entry in listResult)
+        {
+            Console.WriteLine($"Path = {entry.Path}, Value = {entry.Value}");
+        }
+        
+        Console.WriteLine(listResult);
+        return jsonOutput;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("An error occurred while flattening the file: " + ex.Message);
+        throw;
+    }
+});
+
+app.MapGet("/api/getnested", async (HttpRequest request) =>
+{
+    // Hardcoded file path for testing
+    string relativePath = Path.Combine("..", "..", "..", "examplefiles", "saft_examplefile.xml");
+    string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
+
+    try
+    {
+        // Call our nested structure method
+        var nestedData = SafTNestedFlattener.FlattenSafTAsNested(filePath);
+
+        // Convert to indented JSON string
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        string jsonOutput = JsonSerializer.Serialize(nestedData, options);
+
+        // Return as JSON
+        return Results.Content(jsonOutput, "application/json");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("An error occurred while reading the file: " + ex.Message);
+        return Results.Problem(ex.Message);
+    }
+});
 
 app.Run();
