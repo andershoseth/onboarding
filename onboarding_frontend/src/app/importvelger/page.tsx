@@ -1,8 +1,8 @@
 'use client'
 import React from "react";
 import Link from "next/link";
-import MenuContainer, { useBoxState } from "../components/menuContainer";
-import CheckBox from "../components/checkBox";
+import MenuContainer, { useBoxState } from "../components/MenuContainer";
+import CheckBox from "../components/CheckBox";
 
 const ImportVelger: React.FC = () => {
     const { selected, handleBoxChange } = useBoxState(); /* for the checkboxes */

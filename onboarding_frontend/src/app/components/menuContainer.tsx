@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface BoxState {
     kontakter: boolean;
@@ -20,11 +20,21 @@ const MenuContainer: React.FC<MenuContainerProps> = ({ children }) => {
 };
 
 export const useBoxState = () => {
-    const [selected, setSelected] = useState<BoxState>({
-        kontakter: false,
-        avdeling: false,
-        faktura: false
-    });
+    const getSavedState = () => {
+        if (typeof window !== "undefined") {
+            const savedState = localStorage.getItem("checkboxState");
+            return savedState ? JSON.parse(savedState) : { kontakter: false, avdeling: false, faktura: false };
+        }
+        return { kontakter: false, avdeling: false, faktura: false }
+    };
+
+    const [selected, setSelected] = useState<BoxState>(getSavedState);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            localStorage.setItem("checkboxState", JSON.stringify(selected))
+        }
+    }, [selected]);
 
     const handleBoxChange = (name: keyof BoxState) => {
         setSelected((prev) => ({ ...prev, [name]: !prev[name] }));
