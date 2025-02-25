@@ -1,11 +1,28 @@
-// pages/upload.tsx
-import React from 'react';
+'use client';
+import React, { useContext, useEffect, useState } from 'react';
 import FileUploader from '../components/FileUploader';
+import ImportContext from '../components/ImportContext';
+
 
 export default function UploadPage() {
+  const { selectedSystem } = useContext(ImportContext);
+  const [hasMounted, setHasMounted] = useState(false);
+
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-center">
+        <p>
+          {selectedSystem ? `You selected ${selectedSystem}` : "No system selected"}
+        </p>
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
         </h1>
