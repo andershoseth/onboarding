@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,22 @@ namespace onboarding_backend
 {
     public class SaftParser
     {
+        private string GetElementValueWithMapping(XElement parent, XNamespace ns, string standardFieldName)
+        {
+            if (FieldMappings.Mappings.TryGetValue(standardFieldName, out var possibleNames))
+            {
+                foreach (var name in possibleNames)
+                {
+                    var element = parent.Element(ns + name);
+                    if (element != null && !string.IsNullOrWhiteSpace(element.Value))
+                    {
+                        return element.Value.Trim();
+                    }
+                }
+            }
+
+            return null; // Ingen treff
+        }
         /* <summary>
          Leser en SAF-T XML-fil og mapper dataene til StandardImport
          med lister for Contacts, Departments, Products, Projects, m.m.
@@ -40,7 +57,7 @@ namespace onboarding_backend
             return await Task.Run(() =>
             {
                 string detectedNs = DetectDefaultNamespace(file);
-                XNamespace ns = string.IsNullOrEmpty(detectedNs) ? XNamespace.None : detectedNs; 
+                XNamespace ns = string.IsNullOrEmpty(detectedNs) ? XNamespace.None : detectedNs;
 
                 XDocument xdoc;
                 using (var stream = file.OpenReadStream())
@@ -51,22 +68,21 @@ namespace onboarding_backend
                 var stdImport = new StandardImport();
 
                 // =================== PARSE CONTACTS ===================
-                var contactNodes = xdoc.Descendants(ns+"Contact");
+                var contactNodes = xdoc.Descendants(ns + "Contact");
                 foreach (var c in contactNodes)
                 {
-                    var contactPerson = c.Element(ns + "ContactPerson");
 
+
+                    var contactPerson = c.Element(ns + "ContactPerson");
                     var contact = new Contacts
                     {
                         // Identifikasjon
-                        CustomerNo = (int?)c.Element(ns+"CustomerNo"),
+                        CustomerNo = (int?)c.Element(ns + "CustomerNo"),
                         SupplierNo = (int?)c.Element(ns + "SupplierNo"),
                         EmployeeNo = (int?)c.Element(ns + "EmployeeNo"),
 
                         // Navn/gruppe
-                        ContactName = contactPerson != null
-            ? $"{(string)contactPerson.Element(ns + "FirstName")} {(string)contactPerson.Element(ns + "LastName")}".Trim()
-            : (string)c.Element(ns + "ContactName") ?? string.Empty,
+                        ContactName = (string)c.Element(ns + "ContactName"),
                         ContactGroup = (string)c.Element(ns + "ContactGroup"),
 
                         // Tidsstempler
@@ -77,10 +93,10 @@ namespace onboarding_backend
                         // MVA
                         IsVatFree = (int?)c.Element(ns + "IsVatFree"),
 
-                        // Generell kontaktinfo
-                        Phone = (string)c.Element(ns + "Phone"),
-                        Email = (string)c.Element(ns + "Email"),
-                        Web = (string)c.Element(ns + "Web"),
+                        // Generell kontaktinfo til Firma
+                        Phone = (string)GetElementValueWithMapping(c, ns, "Phone"),
+                        Email = (string)GetElementValueWithMapping(c, ns, "Email"),
+                        Web = (string)c.Element(ns + "WebSite"),
 
                         // Organisasjonsinfo
                         OrganizationNo = (string)c.Element(ns + "OrganizationNo"),
@@ -88,27 +104,30 @@ namespace onboarding_backend
                         // Postadresse
                         MailAddress1 = (string)c.Element(ns + "MailAddress1"),
                         MailAddress2 = (string)c.Element(ns + "MailAddress2"),
-                        MailPostcode = (string)c.Element(ns+"MailPostcode"),
+                        MailPostcode = (string)c.Element(ns + "MailPostcode"),
                         MailCity = (string)c.Element(ns + "MailCity"),
-                        MailCountry = (string)c.Element(ns +"MailCountry"),
+                        MailCountry = (string)c.Element(ns + "MailCountry"),
 
                         // Leveringsadresse
                         DeliveryAddress1 = (string)c.Element(ns + "DeliveryAddress1"),
-                        DeliveryAddress2 = (string)c.Element(ns +"DeliveryAddress2"),
-                        DeliveryPostcode = (string)c.Element(ns+"DeliveryPostcode"),
-                        DeliveryCity = (string)c.Element(ns+"DeliveryCity"),
-                        DeliveryCountry = (string)c.Element(ns +"DeliveryCountry"),
+                        DeliveryAddress2 = (string)c.Element(ns + "DeliveryAddress2"),
+                        DeliveryPostcode = (string)c.Element(ns + "DeliveryPostcode"),
+                        DeliveryCity = (string)c.Element(ns + "DeliveryCity"),
+                        DeliveryCountry = (string)c.Element(ns + "DeliveryCountry"),
 
                         // Bank
-                        BankAccount = (string)c.Element(ns +"BankAccount"),
-                        IBAN = (string)c.Element(ns +"IBAN"),
-                        SWIFT = (string)c.Element(ns +"SWIFT"),
+                        BankAccount = (string)c.Element(ns + "BankAccount"),
+                        IBAN = (string)c.Element(ns + "IBAN"),
+                        SWIFT = (string)c.Element(ns + "SWIFT"),
 
                         // Kontaktperson
-                        ContactPersonFirstName = (string)c.Element(ns +"ContactPersonFirstName"),
-                        ContactPersonLastName = (string)c.Element(ns +"ContactPersonLastName"),
-                        ContactPersonPhone = (string)c.Element(ns + "ContactPersonPhone"),
-                        ContactPersonEmail = (string)c.Element(ns + "ContactPersonEmail"),
+
+                        ContactPersonFirstName = (string)GetElementValueWithMapping(contactPerson, ns, "FirstName"),
+                        ContactPersonLastName = (string)GetElementValueWithMapping(contactPerson, ns, "lastName"),
+                        ContactPersonPhone = (string)GetElementValueWithMapping(c, ns, "Phone"),
+
+
+                        ContactPersonEmail = (string)GetElementValueWithMapping(c, ns, "Email"),
 
                         // Faktura
                         InvoiceDelivery = (int?)c.Element(ns + "InvoiceDelivery"),
@@ -117,13 +136,13 @@ namespace onboarding_backend
                         // Privatperson / ansatt
                         IsPerson = (int?)c.Element("IsPerson"),
                         SocialSecurityNumber = (string)c.Element(ns + "SocialSecurityNumber"),
-                        InternationalIdNumber = (string)c.Element(ns +"InternationalIdNumber"),
+                        InternationalIdNumber = (string)c.Element(ns + "InternationalIdNumber"),
                         InternationalIdCountryCode = (string)c.Element(ns + "InternationalIdCountryCode"),
                         InternationalIdType = (int?)c.Element(ns + "InternationalIdType"),
-                        DateOfBirth = (string)c.Element( ns+ "DateOfBirth"),
+                        DateOfBirth = (string)c.Element(ns + "DateOfBirth"),
 
                         // Ansatt-detaljer
-                        JobTitle = (string)c.Element(ns+     "JobTitle"),
+                        JobTitle = (string)c.Element(ns + "JobTitle"),
                         DepartmentCode = (string)c.Element(ns + "DepartmentCode"),
                         DepartmentName = (string)c.Element(ns + "DepartmentName"),
                         PayslipEmail = (string)c.Element(ns + "PayslipEmail"),
@@ -139,7 +158,7 @@ namespace onboarding_backend
 
                         // Leverandørspesifikke
                         SupplierStandardAccount = (int?)c.Element(ns + "SupplierStandardAccount"),
-                        SupplierStandardAccountAgricultureDepartment = (int?)c.Element( ns+"SupplierStandardAccountAgricultureDepartment"),
+                        SupplierStandardAccountAgricultureDepartment = (int?)c.Element(ns + "SupplierStandardAccountAgricultureDepartment"),
                         SupplierEHFCoding = (string)c.Element(ns + "SupplierEHFCoding"),
                         SupplierApprover = (string)c.Element(ns + "SupplierApprover"),
                         SubmitAutomaticallyForApproval = (int?)c.Element(ns + "SubmitAutomaticallyForApproval")
@@ -149,31 +168,31 @@ namespace onboarding_backend
                 }
 
                 // =================== PARSE DEPARTMENTS ===================
-                var deptNodes = xdoc.Descendants(ns+   "Department");
+                var deptNodes = xdoc.Descendants(ns + "Department");
                 foreach (var d in deptNodes)
                 {
                     var dept = new Departments
                     {
-                        DepartmentCode = (string)d.Element(ns+ "DepartmentCode"),
+                        DepartmentCode = (string)d.Element(ns + "DepartmentCode"),
                         DepartmentName = (string)d.Element(ns + "DepartmentName"),
-                        DepartmentManagerCode = (int?)d.Element(ns+"DepartmentManagerCode"),
-                        DepartmentManagerName = (string)d.Element(ns+"DepartmentManagerName")
+                        DepartmentManagerCode = (int?)d.Element(ns + "DepartmentManagerCode"),
+                        DepartmentManagerName = (string)d.Element(ns + "DepartmentManagerName")
                     };
 
                     stdImport.Departments.Add(dept);
                 }
 
                 // =================== PARSE PRODUCTS ===================
-                var productNodes = xdoc.Descendants(ns+"Product");
+                var productNodes = xdoc.Descendants(ns + "Product");
                 foreach (var p in productNodes)
                 {
                     var product = new Products
                     {
                         ProductCode = (string)p.Element(ns + "ProductCode"),
                         ProductName = (string)p.Element(ns + "ProductName"),
-                        ProductGroup = (string)p.Element(ns +"ProductGroup"),
+                        ProductGroup = (string)p.Element(ns + "ProductGroup"),
                         ProductDescription = (string)p.Element(ns + "ProductDescription"),
-                        ProductType = (int?)p.Element(ns +"ProductType"),
+                        ProductType = (int?)p.Element(ns + "ProductType"),
                         ProductUnit = (string)p.Element(ns + "ProductUnit"),
                         ProductSalesPrice = (decimal?)p.Element(ns + "ProductSalesPrice"),
                         ProductCostPrice = (decimal?)p.Element(ns + "ProductCostPrice"),
@@ -357,7 +376,7 @@ namespace onboarding_backend
                             DeliveryCountry = (string)ln.Element(ns + "DeliveryCountry"),
 
                             BankAccount = (string)ln.Element(ns + "BankAccount"),
-                            IBAN = (string)ln.Element(ns + "IBAN"),
+                            IBAN = (string)ln.Element(ns + "IBANNumber"),
                             SWIFT = (string)ln.Element(ns + "SWIFT"),
 
                             ContactPersonFirstName = (string)ln.Element(ns + "ContactPersonFirstName"),
@@ -728,5 +747,7 @@ namespace onboarding_backend
                 return stdImport;
             });
         }
+
+        
     }
 }
