@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Http.Features;
-using onboarding_backend; // Inneholder SaftParser og StandardImport
+using onboarding_backend;
+using onboarding_backend.Services; // Inneholder SaftParser og StandardImport
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,5 +80,30 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         standardImport = stdImport
     });
 });
+
+app.MapGet("/api/getflattened", async (HttpRequest request) =>
+    {
+        // Hardcoded file path for testing
+        string relativePath = Path.Combine("..", "..", "..", "examplefiles", "saft_examplefile.xml");
+        string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
+        
+        
+        try
+        {
+            Dictionary<string, string> flattenedData = SafTFlattener.FlattenSafT(filePath);
+            foreach (var entry in flattenedData)
+            {
+                Console.WriteLine($"Key: {entry.Key}, Value: {entry.Value}");
+                
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while flattening the file: " + ex.Message);
+            throw;
+        }
+        
+    }
+);
 
 app.Run();

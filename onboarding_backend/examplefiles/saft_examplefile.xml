@@ -106,6 +106,12 @@
 	</Header>
 	<MasterFiles>
 		<GeneralLedgerAccounts>
+			<TESTFIELD>
+				<TESTATTRIBUTE>1</TESTATTRIBUTE>
+				<TESTCHILD>
+					<TESTCHILDATTRIBUTE>2</TESTCHILDATTRIBUTE>
+				</TESTCHILD>
+			</TESTFIELD>>
 			<Account>
 				<AccountID>1500</AccountID>
 				<AccountDescription>Lorem ipsum dolor sit amet...</AccountDescription>
@@ -340,7 +346,7 @@
 			<Description>Lorem ipsum dolor sit amet...</Description>
 			<Type>A</Type>
 			<Transaction>
-				<TransactionID>4567</TransactionID>
+				<TransactionID>456700</TransactionID>
 				<Period>10</Period>
 				<PeriodYear>2015</PeriodYear>
 				<TransactionDate>2015-10-30</TransactionDate>
