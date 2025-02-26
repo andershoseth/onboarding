@@ -3,12 +3,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 import FileUploader from '../components/FileUploader';
 import ImportContext from '../components/ImportContext';
+import ProgressBar from '../components/ProgressBar';
 
 
 export default function UploadPage() {
   const { selectedSystem } = useContext(ImportContext);
   const [hasMounted, setHasMounted] = useState(false);
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
+  const [uploading, setUploading] = useState(false);
 
 
   useEffect(() => {
