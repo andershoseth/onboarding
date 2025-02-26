@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import MenuContainer, { useBoxState } from "../components/MenuContainer";
-import InfoPage from "../components/InfoContainer";
 import CheckBox from "../components/CheckBox";
 
 const ImportVelger: React.FC = () => {
@@ -35,7 +34,6 @@ const ImportVelger: React.FC = () => {
                         </div>
                     </div>
                 </MenuContainer>
-                <InfoPage />
             </div>
             <footer className="mt-auto py-6">
                 <Link className="text-white hover:underline" href="/home">
