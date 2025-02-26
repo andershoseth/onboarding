@@ -8,10 +8,21 @@ import ImportContext from '../components/ImportContext';
 export default function UploadPage() {
   const { selectedSystem } = useContext(ImportContext);
   const [hasMounted, setHasMounted] = useState(false);
+  const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
 
 
   useEffect(() => {
     setHasMounted(true);
+
+    const savedCheckBoxes = localStorage.getItem("checkboxState"); //saves the checked boxes in the array
+    if (savedCheckBoxes) {
+      const parsedCheckBoxes = JSON.parse(savedCheckBoxes);
+      const selectedLabels = Object.entries(parsedCheckBoxes)
+        .filter(([_, value]) => value)
+        .map(([key]) => key);
+      setCheckedBoxes(selectedLabels)
+    }
+
   }, []);
 
   if (!hasMounted) {
@@ -23,6 +34,9 @@ export default function UploadPage() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-center">
         <p>
           {selectedSystem ? `You selected ${selectedSystem}` : "No system selected"}
+        </p>
+        <p>
+          {`You selected: ${checkedBoxes.join(", ")}`}
         </p>
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files

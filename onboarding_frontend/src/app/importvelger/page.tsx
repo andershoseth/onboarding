@@ -16,19 +16,19 @@ const ImportVelger: React.FC = () => {
 
                     <div className="space-y-3">
                         <CheckBox
-                            label="Kunder"
+                            label="Kontakter"
                             checked={selected.kontakter}
                             onChange={() => handleBoxChange("kontakter")}
                         />
                         <CheckBox
-                            label="Bilag"
+                            label="Avdeling"
                             checked={selected.avdeling}
                             onChange={() => handleBoxChange("avdeling")}
                         />
                         <CheckBox
                             label="Saldobalanse"
-                            checked={selected.faktura}
-                            onChange={() => handleBoxChange("faktura")}
+                            checked={selected.saldobalanse}
+                            onChange={() => handleBoxChange("saldobalanse")}
                         />
                     </div>
 

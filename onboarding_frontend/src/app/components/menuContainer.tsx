@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 export interface BoxState {
     kontakter: boolean;
     avdeling: boolean;
-    faktura: boolean;
+    saldobalanse: boolean;
 }
 
 interface MenuContainerProps {
@@ -23,7 +23,7 @@ export const useBoxState = () => {
     const [selected, setSelected] = useState<BoxState>({
         kontakter: false,
         avdeling: false,
-        faktura: false
+        saldobalanse: false
     });
 
     const [isMounted, setIsMounted] = useState(false); //makes sure the boxes stays checked when going back
