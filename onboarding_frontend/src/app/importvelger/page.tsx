@@ -11,9 +11,7 @@ const ImportVelger: React.FC = () => {
 
     return (
         <div className="flex flex-col items-center min-h-screen p-10">
-            {/* Main content container (flex row for checkbox + info) */}
             <div className="flex items-start justify-center gap-10">
-                {/* Checkbox Container */}
                 <MenuContainer>
                     <div className="p-6 bg-gray-100 rounded-lg shadow-sm w-96">
                         <h2 className="text-xl font-semibold text-[#E17044]">Hva ønsker du å importere?</h2>
@@ -37,12 +35,8 @@ const ImportVelger: React.FC = () => {
                         </div>
                     </div>
                 </MenuContainer>
-
-                {/* Info Container */}
                 <InfoPage />
             </div>
-
-            {/* Footer */}
             <footer className="mt-auto py-6">
                 <Link className="text-[#E17044] hover:underline" href="/home">
                     Home
