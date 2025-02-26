@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 
-export interface BoxState {
+export interface BoxState { //hardcoded classes to import accords to the standardimport (may change later)
     kontakter: boolean;
     avdeling: boolean;
     saldobalanse: boolean;

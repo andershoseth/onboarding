@@ -36,7 +36,7 @@ export default function UploadPage() {
           {selectedSystem ? `You selected ${selectedSystem}` : "No system selected"}
         </p>
         <p>
-          {`You selected: ${checkedBoxes.join(", ")}`}
+          {`You selected: ${checkedBoxes.join(", ")}`} {/* simple string to display the boxes checked */}
         </p>
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
