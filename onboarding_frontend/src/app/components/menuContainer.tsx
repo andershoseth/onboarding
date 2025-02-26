@@ -32,6 +32,15 @@ export const useBoxState = () => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
+            const savedState = localStorage.getItem("checkboxState");
+            if (savedState) {
+                setSelected(JSON.parse(savedState))
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
             localStorage.setItem("checkboxState", JSON.stringify(selected))
         }
     }, [selected]);
