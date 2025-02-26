@@ -20,30 +20,29 @@ const MenuContainer: React.FC<MenuContainerProps> = ({ children }) => {
 };
 
 export const useBoxState = () => {
-    const getSavedState = () => {
-        if (typeof window !== "undefined") {
-            const savedState = localStorage.getItem("checkboxState");
-            return savedState ? JSON.parse(savedState) : { kontakter: false, avdeling: false, faktura: false };
-        }
-        return { kontakter: false, avdeling: false, faktura: false }
-    };
+    const [selected, setSelected] = useState<BoxState>({
+        kontakter: false,
+        avdeling: false,
+        faktura: false
+    });
 
-    const [selected, setSelected] = useState<BoxState>(getSavedState);
+    const [isMounted, setIsMounted] = useState(false); //makes sure the boxes stays checked when going back
 
-    useEffect(() => {
+    useEffect(() => { //fixes hydration error
         if (typeof window !== "undefined") {
             const savedState = localStorage.getItem("checkboxState");
             if (savedState) {
                 setSelected(JSON.parse(savedState))
             }
+            setIsMounted(true)
         }
     }, []);
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
+        if (isMounted) {
             localStorage.setItem("checkboxState", JSON.stringify(selected))
         }
-    }, [selected]);
+    }, [selected, isMounted]);
 
     const handleBoxChange = (name: keyof BoxState) => {
         setSelected((prev) => ({ ...prev, [name]: !prev[name] }));
