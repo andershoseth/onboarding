@@ -38,7 +38,7 @@ const ImportVelger: React.FC = () => {
                 <InfoPage />
             </div>
             <footer className="mt-auto py-6">
-                <Link className="text-[#E17044] hover:underline" href="/home">
+                <Link className="text-white hover:underline" href="/home">
                     Home
                 </Link>
             </footer>
