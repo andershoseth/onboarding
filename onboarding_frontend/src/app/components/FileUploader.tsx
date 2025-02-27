@@ -11,6 +11,8 @@ export default function FileUploader() {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedFile(e.target.files[0]);
+      setUploadProgress(0);
+      setUploadResponse(null);
     }
   };
 
@@ -27,18 +29,24 @@ export default function FileUploader() {
     xhr.upload.onprogress = (event) => {
       if (event.lengthComputable) {
         const progress = Math.round((event.loaded / event.total) * 100);
-        setUploadProgress(progress);
+
+        setTimeout(() => {
+          setUploadProgress(progress);
+        }, 200 * progress);
       }
     };
 
     xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        setUploadResponse({ message: "Upload successful", fileName: selectedFile.name });
-        setUploadedData(response);
-      } else {
-        console.error("Error uploading the file:", xhr.statusText);
-      }
+      setTimeout(() => {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          setUploadResponse({ message: "Upload successful", fileName: selectedFile.name });
+          setUploadedData(response);
+          setUploadProgress(100);
+        } else {
+          console.error("Error uploading the file:", xhr.statusText);
+        }
+      }, 2000);
     };
 
     xhr.onerror = (error) => {
@@ -55,17 +63,17 @@ export default function FileUploader() {
         <button
           className="bg-white text-black px-4 py-2 rounded hover:bg-gray-800 ml-2"
           onClick={uploadFile}
+          disabled={!selectedFile} // Disable button if no file is selected
         >
           Upload
         </button>
       </div>
 
-      {uploadProgress > 0 && (
-        <div>
-          <progress value={uploadProgress} max="100" className="w-full" />
-          <span>{uploadProgress}%</span>
-        </div>
-      )}
+      {/* Always visible progress bar */}
+      <div className="mt-4">
+        <progress value={uploadProgress} max="100" className="w-full" />
+        <span>{uploadProgress}%</span>
+      </div>
 
       {uploadResponse && (
         <div className="mt-4">
