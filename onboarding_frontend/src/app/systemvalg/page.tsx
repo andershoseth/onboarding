@@ -12,37 +12,37 @@ function SystemChoice() {
             logoSrc: "import.png",
             title: "Visma",
             description: "Importer data fra Visma",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Tripletex",
             description: "Importer data fra Tripletex",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Xledger",
             description: "Importer data fra Xledger",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Bank + regnskap",
             description: "Importer data fra Bank + regnskap",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Fiken",
             description: "Importer data fra Fiken",
-            link: "/upload"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "Egendefinert",
             description: "Importer data fra et egendefinert regnskapssystem",
-            link: "/upload"
+            link: "/importvelger"
         },
     ];
 
@@ -58,11 +58,12 @@ function SystemChoice() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">
+                {/* genererer kort for hver item i lista */}
                 {cards.map((card, index) => (
                     <Link key={index} href={card.link} passHref>
-                        <div 
-                          onClick={() => handleClick(card.title)}
-                          className="cursor-pointer"
+                        <div
+                            onClick={() => handleClick(card.title)}
+                            className="cursor-pointer"
                         >
                             <Card
                                 logoSrc={card.logoSrc}

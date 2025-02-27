@@ -1,5 +1,6 @@
 'use client';
 import React, { useContext, useEffect, useState } from 'react';
+import Link from "next/link";
 import FileUploader from '../components/FileUploader';
 import ImportContext from '../components/ImportContext';
 import Link from 'next/link';
@@ -8,10 +9,21 @@ import Link from 'next/link';
 export default function UploadPage() {
   const { selectedSystem } = useContext(ImportContext);
   const [hasMounted, setHasMounted] = useState(false);
+  const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
 
 
   useEffect(() => {
     setHasMounted(true);
+
+    const savedCheckBoxes = localStorage.getItem("checkboxState"); //saves the checked boxes in the array
+    if (savedCheckBoxes) {
+      const parsedCheckBoxes = JSON.parse(savedCheckBoxes);
+      const selectedLabels = Object.entries(parsedCheckBoxes)
+        .filter(([_, value]) => value)
+        .map(([key]) => key);
+      setCheckedBoxes(selectedLabels)
+    }
+
   }, []);
 
   if (!hasMounted) {
@@ -23,6 +35,9 @@ export default function UploadPage() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-center">
         <p>
           {selectedSystem ? `You selected ${selectedSystem}` : "No system selected"}
+        </p>
+        <p>
+          {`You selected: ${checkedBoxes.join(", ")}`} {/* simple string to display the boxes checked */}
         </p>
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
@@ -36,12 +51,21 @@ export default function UploadPage() {
         <div className="mx-auto">
           <FileUploader />
         </div>
+
+        <div className="mt-6 flex justify-center">
+          <Link
+            href="/importvelger"
+            className="bg-white text-black px-4 py-2 rounded-md shadow-md hover:bg-[#c85b34] transition"
+          >
+            Previous
+          </Link>
+        </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="/home"
-          >
+        >
           Home
         </a>
       </footer>

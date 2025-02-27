@@ -120,13 +120,13 @@ export default function FileUploader() {
 
   return (
     <>
-    <div>
-      <input type="file" onChange={handleFileChange} />
-      <button className="bg-white text-black px-4 py-2 rounded hover:bg-gray-800" onClick={uploadFile}>Upload</button>
-    </div>
-    <div>
-      {uploadResponse && <div>{uploadResponse.message}<br/>{uploadResponse.fileName}</div>}
-    </div>
+      <div>
+        <input type="file" onChange={handleFileChange} />
+        <button className="bg-white text-black px-4 py-2 rounded hover:bg-[#c85b34]" onClick={uploadFile}>Upload</button>
+      </div>
+      <div>
+        {uploadResponse && <div>{uploadResponse.message}<br />{uploadResponse.fileName}</div>}
+      </div>
     </>
   );
 }*/
