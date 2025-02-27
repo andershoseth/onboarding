@@ -9,6 +9,8 @@ export default function UploadPage() {
   const { selectedSystem } = useContext(ImportContext);
   const [hasMounted, setHasMounted] = useState(false);
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
+  const [isTableLoading, setIsTableLoading] = useState(false);
+  const [loadingPorgress, setLoadingProgress] = useState(0);
 
 
   useEffect(() => {
@@ -24,6 +26,20 @@ export default function UploadPage() {
     }
 
   }, []);
+
+  const loadingProgress = () => {
+    setIsTableLoading(true);
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 10;
+      setLoadingProgress(progress);
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setIsTableLoading(false);
+      }
+    }, 500);
+  };
 
   if (!hasMounted) {
     return null;

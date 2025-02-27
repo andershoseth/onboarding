@@ -63,13 +63,11 @@ export default function FileUploader() {
         <button
           className="bg-white text-black px-4 py-2 rounded hover:bg-gray-800 ml-2"
           onClick={uploadFile}
-          disabled={!selectedFile} // Disable button if no file is selected
+          disabled={!selectedFile}
         >
           Upload
         </button>
       </div>
-
-      {/* Always visible progress bar */}
       <div className="mt-4">
         <progress value={uploadProgress} max="100" className="w-full" />
         <span>{uploadProgress}%</span>
