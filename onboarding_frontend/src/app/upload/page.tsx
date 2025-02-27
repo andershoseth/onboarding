@@ -3,14 +3,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 import FileUploader from '../components/FileUploader';
 import ImportContext from '../components/ImportContext';
-import ProgressBar from '../components/ProgressBar';
 
 
 export default function UploadPage() {
   const { selectedSystem } = useContext(ImportContext);
   const [hasMounted, setHasMounted] = useState(false);
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
-  const [uploading, setUploading] = useState(false);
 
 
   useEffect(() => {
@@ -43,7 +41,7 @@ export default function UploadPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
         </h1>
-
+        <h1><Link href="/ResultTable">Gå til ResultTable</Link></h1>
         <p className="text-center">
           Get started by uploading your files to our server.
         </p>
