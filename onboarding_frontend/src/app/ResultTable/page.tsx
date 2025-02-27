@@ -1,30 +1,23 @@
 "use client";
 import React from "react";
 import ResultTable from '../components/ResultsTable';
+import { useUploadContext } from "../components/UploadContext"; 
+
+
 
 export default function ResultPage() {
-  // Dummy-data
-  const dummyData = [
-    {
-      firstName: "Ola",
-      lastName: "Nordmann",
-      age: "30",
-      Surname: {
-        underniv2: "Test1",
-        undernivTo: "test2",
-        underniv3 : {
-               undernv3 : "Test3",
-               under3 : "Test4",
-         } }
-    },
-    { firstName: "Kari", lastName: "Hansen", age: '25' },
-    { firstName: "Jon", lastName: "Olsen", age: '40' },
-  ];
+  const { uploadedData } = useUploadContext(); // 📌 Bruk kontekst
+
+  console.log("🔍 Data i ResultPage:", uploadedData); // 📌 Sjekk hva som blir hentet
+
+  if (!uploadedData) {
+    return <div className="p-4">Ingen data lastet opp ennå.</div>;
+  }
 
   return (
     <main className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Testing Dummy Data</h1>
-      <ResultTable data={dummyData} />
+      <h1 className="text-2xl font-bold mb-4">API data i ResultTable</h1>
+      <ResultTable data={uploadedData} />
     </main>
   );
 }

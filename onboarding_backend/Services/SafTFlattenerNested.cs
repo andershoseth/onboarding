@@ -80,7 +80,7 @@ public static class SafTNestedFlattener
             else
             {
                 // 3. If no child elements, store the text content (if any) as "#text"
-                nodeObj["#text"] = element.Value ?? "";
+                nodeObj[""] = element.Value ?? "";
             }
 
             return nodeObj;

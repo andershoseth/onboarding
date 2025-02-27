@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Http.Features;
 using onboarding_backend;
 using onboarding_backend.Services; // Inneholder SaftParser og StandardImport
@@ -52,35 +53,27 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         return Results.BadRequest("No file uploaded.");
     }
 
-    var saftParser = new SaftParser();
-    // Kaller parseren -> får StandardImport-objekt
-    StandardImport stdImport = await saftParser.ProcessSaftFileAsync(file);
-
-    // Du kan sjekke om vi fant noen data (f.eks. kontakter, bilag, osv.)
-    bool hasData = (stdImport.Contacts.Any() ||
-                    stdImport.Products.Any() ||
-                    stdImport.Projects.Any() ||
-                    stdImport.ProjectTeamMembers.Any() ||
-                    stdImport.ProjectActivities.Any() ||
-                    stdImport.Departments.Any() ||
-                    stdImport.Vouchers.Any());
-
-    if (!hasData)
+    try
     {
-        return Results.BadRequest(new { error = "No valid data found in XML file." });
+        // Les filen til en MemoryStream
+        using var memoryStream = new MemoryStream();
+        await file.CopyToAsync(memoryStream);
+        memoryStream.Position = 0;
+
+        // Last inn XML direkte fra minnet
+        var doc = XDocument.Load(memoryStream);
+
+        // Flat ut XML-strukturen
+        var results = SafTFlattener.FlattenSafTAsList(doc.Root!);
+
+        // Konverter til JSON og returner til klienten
+        return Results.Json(results);
     }
-
-    // Skriv ut alt til terminalen som JSON (valgfritt)
-    Console.WriteLine("\n🔹 **Final Parsed Data (StandardImport):**");
-    Console.WriteLine(JsonSerializer.Serialize(stdImport, new JsonSerializerOptions { WriteIndented = true }));
-
-    // Returner data i HTTP-responsen
-    return Results.Ok(new
+    catch (Exception ex)
     {
-        message = "File uploaded and processed successfully",
-        fileName = file.FileName,
-        standardImport = stdImport
-    });
+        Console.WriteLine("Error processing file: " + ex.Message);
+        return Results.Problem("Failed to process the uploaded file.");
+    }
 });
 
 app.MapGet("/api/getflattened", async (HttpRequest request) =>
@@ -114,35 +107,7 @@ app.MapGet("/api/getflattened", async (HttpRequest request) =>
 
 
 
-app.MapGet("/api/getflattenedlist", async (HttpRequest request) =>
-{
-    // Hardcoded file path for testing
-    string relativePath = Path.Combine("..", "..", "..", "examplefiles", "saft_examplefile.xml");
-    string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
 
-    try
-    {
-        var listResult = SafTFlattener.FlattenSafTAsList(filePath);
-
-        // You can serialize a list the same way
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        var jsonOutput = JsonSerializer.Serialize(listResult, options);
-
-        // Example console output
-        foreach (var entry in listResult)
-        {
-            Console.WriteLine($"Path = {entry.Path}, Value = {entry.Value}");
-        }
-        
-        Console.WriteLine(listResult);
-        return jsonOutput;
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("An error occurred while flattening the file: " + ex.Message);
-        throw;
-    }
-});
 
 app.MapGet("/api/getnested", async (HttpRequest request) =>
 {

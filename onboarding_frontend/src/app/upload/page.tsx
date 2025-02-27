@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import FileUploader from '../components/FileUploader';
 import ImportContext from '../components/ImportContext';
+import Link from 'next/link';
 
 
 export default function UploadPage() {
@@ -26,7 +27,7 @@ export default function UploadPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
         </h1>
-
+        <h1><Link href="/ResultTable">Gå til ResultTable</Link></h1>
         <p className="text-center">
           Get started by uploading your files to our server.
         </p>

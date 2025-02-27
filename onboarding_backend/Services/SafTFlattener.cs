@@ -11,28 +11,25 @@ namespace onboarding_backend.Services;
 
     public static class SafTFlattener
     {
-        /// <summary>
-        /// Flattens a SAF-T XML file and returns a List of FlattenedEntry (Path, Value).
-        /// Includes [index] for repeated sibling elements.
-        /// </summary>
-        public static List<FlattenedEntry> FlattenSafTAsList(string filePath)
+   
+    public static List<FlattenedEntry> FlattenSafTAsList(XElement rootElement)
+    {
+        var results = new List<FlattenedEntry>();
+
+        if (rootElement != null)
         {
-            var doc = XDocument.Load(filePath);
-            var results = new List<FlattenedEntry>();
-
-            if (doc.Root != null)
-            {
-                FlattenElementToList(doc.Root, parentPath: "", results);
-            }
-
-            return results;
+            FlattenElementToList(rootElement, "", results);
         }
 
-        /// <summary>
-        /// Flattens a SAF-T XML file and returns a Dictionary of (Path -> Value).
-        /// Includes [index] for repeated sibling elements to avoid collisions.
-        /// </summary>
-        public static Dictionary<string, string> FlattenSafTAsDictionary(string filePath)
+        return results;
+    }
+
+
+    /// <summary>
+    /// Flattens a SAF-T XML file and returns a Dictionary of (Path -> Value).
+    /// Includes [index] for repeated sibling elements to avoid collisions.
+    /// </summary>
+    public static Dictionary<string, string> FlattenSafTAsDictionary(string filePath)
         {
             var doc = XDocument.Load(filePath);
             var dict = new Dictionary<string, string>();

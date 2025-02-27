@@ -7,10 +7,12 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { flattenObject } from "../utils/flattenObject";
 
-type AnyData = Record<string, unknown>;
 
+type AnyData = {
+  path: string;
+  value: string;
+};
 interface ResultTableProps {
   data: AnyData[];
 }
@@ -18,13 +20,11 @@ interface ResultTableProps {
 export default function ResultTable({ data }: ResultTableProps) {
   // 1) Flate ut hver rad i data
   const Data: AnyData[] = React.useMemo(() => {
-    const out = data.map((row) => flattenObject(row));
- 
-    console.log("Flattened data:", JSON.stringify(out, null, 2));
-    return out;
-   
+    console.log("✅ Flattened data:", JSON.stringify(data, null, 2));
+    return data;
   }, [data]);
-
+ 
+    
 
   const columns = React.useMemo<ColumnDef<AnyData>[]>(() => {
     if (!Data.length) return [];
@@ -55,7 +55,7 @@ export default function ResultTable({ data }: ResultTableProps) {
     <table className="border border-gray-300 w-full">
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id} className="bg-gray-100">
+          <tr key={headerGroup.id} className="bg-black-100">
             {headerGroup.headers.map((header) => (
               <th key={header.id} className="border px-4 py-2 text-left">
                 {header.isPlaceholder
