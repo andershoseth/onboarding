@@ -1,5 +1,6 @@
 'use client';
 import React, { useContext, useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import FileUploader from '../components/FileUploader';
 import ImportContext from '../components/ImportContext';
@@ -11,6 +12,7 @@ export default function UploadPage() {
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
   const [isTableLoading, setIsTableLoading] = useState(false);
   const [loadingPorgress, setLoadingProgress] = useState(0);
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -26,6 +28,25 @@ export default function UploadPage() {
     }
 
   }, []);
+
+  const startLoading = () => {
+    setIsTableLoading(true);
+    setLoadingProgress(0)
+
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 10;
+      setLoadingProgress(progress)
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setIsTableLoading(false);
+          router.push("/ResultTable");
+        }, 500)
+      }
+    }, 500)
+  }
 
   const loadingProgress = () => {
     setIsTableLoading(true);
@@ -57,7 +78,22 @@ export default function UploadPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
         </h1>
-        <h1><Link href="/ResultTable">Gå til ResultTable</Link></h1>
+
+        {isTableLoading && (
+          <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden mt-4">
+            <div className="bg-blue-500 h-4 roudned-full transition-all duration-500" style={{ width: `${loadingPorgress}%` }}>
+            </div>
+          </div>
+        )}
+
+        {!isTableLoading && (
+          <button
+            onClick={startLoading}
+            className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transtition"
+          >
+            Gå til ResultTable
+          </button>
+        )}
 
         <div className="mx-auto">
           <FileUploader />
