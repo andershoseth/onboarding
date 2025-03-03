@@ -29,24 +29,21 @@ export default function FileUploader() {
     xhr.upload.onprogress = (event) => {
       if (event.lengthComputable) {
         const progress = Math.round((event.loaded / event.total) * 100);
-
-        setTimeout(() => {
-          setUploadProgress(progress);
-        }, 200 * progress);
+        setUploadProgress(progress)
       }
     };
 
     xhr.onload = () => {
-      setTimeout(() => {
-        if (xhr.status === 200) {
+      if (xhr.status === 200) {
+        setTimeout(() => {
           const response = JSON.parse(xhr.responseText);
           setUploadResponse({ message: "Upload successful", fileName: selectedFile.name });
           setUploadedData(response);
           setUploadProgress(100);
-        } else {
-          console.error("Error uploading the file:", xhr.statusText);
-        }
-      }, 2000);
+        }, 500);
+      } else {
+        console.error("Error uploading the file:", xhr.statusText);
+      }
     };
 
     xhr.onerror = (error) => {

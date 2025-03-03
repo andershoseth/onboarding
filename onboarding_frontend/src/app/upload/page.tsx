@@ -58,11 +58,7 @@ export default function UploadPage() {
           Upload your files
         </h1>
         <h1><Link href="/ResultTable">Gå til ResultTable</Link></h1>
-        <p className="text-center">
-          Get started by uploading your files to our server.
-        </p>
 
-        {/* Render the FileUploader component here */}
         <div className="mx-auto">
           <FileUploader />
         </div>
