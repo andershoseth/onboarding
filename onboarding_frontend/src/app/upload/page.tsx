@@ -11,8 +11,7 @@ export default function UploadPage() {
   const [hasMounted, setHasMounted] = useState(false);
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
   const [isTableLoading, setIsTableLoading] = useState(false);
-  const [loadingPorgress, setLoadingProgress] = useState(0);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const router = useRouter();
 
 
@@ -50,21 +49,6 @@ export default function UploadPage() {
     }, 500)
   }
 
-  //PROGRESSBAR FOR UPLOAD FILE
-  const loadingProgress = () => {
-    setIsTableLoading(true);
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += 10;
-      setLoadingProgress(progress);
-
-      if (progress >= 100) {
-        clearInterval(interval);
-        setIsTableLoading(false);
-      }
-    }, 500);
-  };
-
   if (!hasMounted) {
     return null;
   }
@@ -89,7 +73,7 @@ export default function UploadPage() {
         {!isTableLoading && (
           <button
             onClick={startLoading}
-            className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transtition"
+            className="bg-white text-black px-4 py-2 rounded shadow hover:bg-[#c85b34] transtition"
           >
             Gå til ResultTable
           </button>
@@ -97,14 +81,14 @@ export default function UploadPage() {
 
         {isTableLoading && (
           <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden mt-4">
-            <div className="bg-blue-500 h-4 rounded-full transition-all duration-500" style={{ width: `${loadingPorgress}%` }}>
+            <div className="bg-blue-500 h-4 rounded-full transition-all duration-500" style={{ width: `${loadingProgress}%` }}>
             </div>
           </div>
         )}
 
         {isTableLoading && (
           <div className="w-full text-white mt-4">
-            {loadingPorgress}%
+            {loadingProgress}%
           </div>
         )}
 

@@ -4,9 +4,10 @@ import { useUploadContext } from "../components/UploadContext";
 
 export default function FileUploader() {
   const { setUploadedData } = useUploadContext();
+  const { uploadProgress, setUploadProgress } = useUploadContext();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadResponse, setUploadResponse] = useState<{ message: string; fileName: string } | null>(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
+
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
