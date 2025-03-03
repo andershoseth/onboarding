@@ -1,10 +1,12 @@
 'use client'
 // components/FileUploader.tsx
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useContext } from "react";
+import ImportContext from "./ImportContext";
 
 export default function FileUploader() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadResponse, setUploadResponse] = useState<{ message: string; fileName: string } | null>(null);
+  const { setFileName } = useContext(ImportContext);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -23,20 +25,21 @@ export default function FileUploader() {
         method: "POST",
         body: formData,
       });
-
+      
       interface UploadResponse {
         message: string;
         fileName: string;
       }
-
+      
       const data: UploadResponse = await res.json();
       setUploadResponse(data);
+      setFileName(data.fileName)
       console.log(data);
     } catch (error) {
       console.error("Error uploading file:", error);
     }
   };
-
+  
   return (
     <>
       <div>
