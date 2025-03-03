@@ -65,13 +65,17 @@ export default function FileUploader() {
           Upload
         </button>
       </div>
-      <div className="mt-4">
-        <progress value={uploadProgress} max="100" className="w-full" />
-        <span>{uploadProgress}%</span>
-      </div>
+
+      {uploadProgress > 0 && (
+        <div className="w-full bg-gray-200 h-6 rounded-full overflow-hidden mt-4 relative">
+          <div className="bg-blue-500 h-6 rounded-full transition-all duration-500 flex items-center justify-center text-white text-sm font-bold">
+            {uploadProgress}%
+          </div>
+        </div>
+      )}
 
       {uploadResponse && (
-        <div className="mt-4">
+        <div className="mt-4 text-center">
           <p>{uploadResponse.message}</p>
           <p>File Name: {uploadResponse.fileName}</p>
         </div>

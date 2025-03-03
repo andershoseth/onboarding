@@ -103,7 +103,7 @@ export default function UploadPage() {
         )}
 
         {isTableLoading && (
-          <div className="w-full text-center text-white mb-2">
+          <div className="w-full text-white mt-4">
             {loadingPorgress}%
           </div>
         )}
