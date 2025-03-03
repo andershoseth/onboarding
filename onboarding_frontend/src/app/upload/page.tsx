@@ -12,6 +12,7 @@ export default function UploadPage() {
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
   const [isTableLoading, setIsTableLoading] = useState(false);
   const [loadingPorgress, setLoadingProgress] = useState(0);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
   const router = useRouter();
 
 
@@ -96,8 +97,14 @@ export default function UploadPage() {
 
         {isTableLoading && (
           <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden mt-4">
-            <div className="bg-blue-500 h-4 roudned-full transition-all duration-500" style={{ width: `${loadingPorgress}%` }}>
+            <div className="bg-blue-500 h-4 rounded-full transition-all duration-500" style={{ width: `${loadingPorgress}%` }}>
             </div>
+          </div>
+        )}
+
+        {isTableLoading && (
+          <div className="w-full text-center text-white mb-2">
+            {loadingPorgress}%
           </div>
         )}
 
