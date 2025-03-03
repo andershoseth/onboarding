@@ -29,6 +29,7 @@ export default function UploadPage() {
 
   }, []);
 
+  //PROGRESSBAR FOR RESULTTABLE
   const startLoading = () => {
     setIsTableLoading(true);
     setLoadingProgress(0)
@@ -48,6 +49,7 @@ export default function UploadPage() {
     }, 500)
   }
 
+  //PROGRESSBAR FOR UPLOAD FILE
   const loadingProgress = () => {
     setIsTableLoading(true);
     let progress = 0;
@@ -79,12 +81,9 @@ export default function UploadPage() {
           Upload your files
         </h1>
 
-        {isTableLoading && (
-          <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden mt-4">
-            <div className="bg-blue-500 h-4 roudned-full transition-all duration-500" style={{ width: `${loadingPorgress}%` }}>
-            </div>
-          </div>
-        )}
+        <div className="mx-auto">
+          <FileUploader />
+        </div>
 
         {!isTableLoading && (
           <button
@@ -95,9 +94,12 @@ export default function UploadPage() {
           </button>
         )}
 
-        <div className="mx-auto">
-          <FileUploader />
-        </div>
+        {isTableLoading && (
+          <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden mt-4">
+            <div className="bg-blue-500 h-4 roudned-full transition-all duration-500" style={{ width: `${loadingPorgress}%` }}>
+            </div>
+          </div>
+        )}
 
         <div className="mt-6 flex justify-center">
           <Link
