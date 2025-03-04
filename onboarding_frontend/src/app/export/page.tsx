@@ -49,12 +49,11 @@ function SaftModeInstructions({ system, checkedBoxes }: { system: string; checke
   const coverage = systemCoverage[system]?.safTSubjects || [];
   const covered = checkedBoxes.filter(cb => coverage.includes(cb));
   const leftover = checkedBoxes.filter(cb => !coverage.includes(cb));
-
-  // Because your config now uses an array for SAF-T
+  // SAF-T needs to be an array, even if there's only one step
   const safTSteps = instructionConfig[system]?.["SAF-T"] || [];
 
   return (
-    <div>
+    <div className="p-10">
       <Instructions title={`${system} - SAF-T Export`} steps={safTSteps} />
       <p>SAF-T covers the following subjects automatically: {covered.join(", ")}</p>
       {leftover.length > 0 && (

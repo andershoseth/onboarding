@@ -4,5 +4,9 @@ export const systemCoverage = {
     safTSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling"],
     csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"]
     
-}
-  };
+},
+"Tripletex": {
+    safTSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling"],
+    csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"]
+  }
+};
