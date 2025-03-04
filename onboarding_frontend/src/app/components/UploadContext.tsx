@@ -10,15 +10,18 @@ interface FlattenedEntry {
 interface UploadContextType {
   uploadedData: FlattenedEntry[] | null;
   setUploadedData: React.Dispatch<React.SetStateAction<FlattenedEntry[] | null>>;
+  uploadProgress: number;
+  setUploadProgress: React.Dispatch<React.SetStateAction<number>>
 }
 
 const UploadContext = createContext<UploadContextType | null>(null);
 
 export function UploadProvider({ children }: { children: React.ReactNode }) {
   const [uploadedData, setUploadedData] = useState<FlattenedEntry[] | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   return (
-    <UploadContext.Provider value={{ uploadedData, setUploadedData }}>
+    <UploadContext.Provider value={{ uploadedData, setUploadedData, uploadProgress, setUploadProgress }}>
       {children}
     </UploadContext.Provider>
   );

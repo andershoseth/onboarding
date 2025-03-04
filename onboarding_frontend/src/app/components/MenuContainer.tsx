@@ -19,6 +19,7 @@ const MenuContainer: React.FC<MenuContainerProps> = ({ children }) => {
     )
 };
 
+//Hardcoded variables. Could possibly get them straight from the list. More DRY
 export const useBoxState = () => {
     const [selected, setSelected] = useState<BoxState>({
         kontakter: false,

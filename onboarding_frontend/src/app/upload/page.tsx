@@ -1,15 +1,18 @@
 'use client';
 import React, { useContext, useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import FileUploader from '../components/FileUploader';
 import ImportContext from '../components/ImportContext';
-import Link from 'next/link';
 
 
 export default function UploadPage() {
   const { selectedSystem } = useContext(ImportContext);
   const [hasMounted, setHasMounted] = useState(false);
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]); //array for the checked boxes
+  const [isTableLoading, setIsTableLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -25,6 +28,26 @@ export default function UploadPage() {
     }
 
   }, []);
+
+  //PROGRESSBAR FOR RESULTTABLE
+  const startLoading = () => {
+    setIsTableLoading(true);
+    setLoadingProgress(0)
+
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 10;
+      setLoadingProgress(progress)
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setIsTableLoading(false);
+          router.push("/ResultTable");
+        }, 500)
+      }
+    }, 500)
+  }
 
   if (!hasMounted) {
     return null;
@@ -42,15 +65,32 @@ export default function UploadPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-center">
           Upload your files
         </h1>
-        <h1><Link href="/ResultTable">Gå til ResultTable</Link></h1>
-        <p className="text-center">
-          Get started by uploading your files to our server.
-        </p>
 
-        {/* Render the FileUploader component here */}
         <div className="mx-auto">
           <FileUploader />
         </div>
+
+        {!isTableLoading && (
+          <button
+            onClick={startLoading}
+            className="bg-white text-black px-4 py-2 rounded shadow hover:bg-[#c85b34] transtition"
+          >
+            Gå til ResultTable
+          </button>
+        )}
+
+        {isTableLoading && (
+          <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden mt-4">
+            <div className="bg-blue-500 h-4 rounded-full transition-all duration-500" style={{ width: `${loadingProgress}%` }}>
+            </div>
+          </div>
+        )}
+
+        {isTableLoading && (
+          <div className="w-full text-white mt-4">
+            {loadingProgress}%
+          </div>
+        )}
 
         <div className="mt-6 flex justify-center">
           <Link

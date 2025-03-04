@@ -2,9 +2,18 @@
 
 import Image from 'next/image';
 import { useBoxState } from '../components/MenuContainer';
+import ImportContext from '../components/ImportContext';
+import { useContext, useEffect, useState } from 'react';
 
 function Success() {
   const { selected } = useBoxState();
+  const { fileName } = useContext(ImportContext);
+
+  const [clientFileName, setClientFileName] = useState<string | null>(null);
+
+  useEffect(() => {
+    setClientFileName(fileName);
+  }, [fileName]);
 
   const checkedBoxes = Object.keys(selected)
     .filter((key) => selected[key as keyof typeof selected]) 
@@ -22,6 +31,9 @@ function Success() {
             Du er nå i mål med importen!
             <div className="mt-4 text-xl text-gray-700 w-full">
               <p>Du har importert følgende:</p>
+              <p className="font-bold text-lg text-gray-800">
+                {clientFileName ? clientFileName : "Ingen fil lastet opp"}
+              </p>
               <ul className="mt-2">
                 {checkedBoxes.length > 0 ? (
                   checkedBoxes.map((box, index) => (
@@ -42,14 +54,13 @@ function Success() {
             </div>
             <div className="h-40 bg-white text-blue-600 rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg">
               <div className="flex items-start">
-              <Image 
-                src="/global-news-4305.png" 
-                alt="global news" 
-                width={300} 
-                height={300} 
-                className="w-auto h-auto"
+                <Image 
+                  src="/global-news-4305.png" 
+                  alt="global news" 
+                  width={300} 
+                  height={300} 
+                  className="w-auto h-auto"
                 />
-
               </div>
               <div className="flex items-center justify-center text-center w-full">
                 Les de siste<br />nyhetene våre
