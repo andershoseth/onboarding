@@ -1,7 +1,7 @@
 export const systemCoverage = {
     "Visma": {
 
-    safTSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling"],
+    safTSubjects: ["hovedboktransaksjoner", "avdeling"],
     csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"]
     
 },
