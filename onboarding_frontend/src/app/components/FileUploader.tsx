@@ -1,10 +1,11 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useContext } from "react";
 import { useUploadContext } from "../components/UploadContext";
+import ImportContext from "./ImportContext";
 
 export default function FileUploader() {
-  const { setUploadedData } = useUploadContext();
-  const { uploadProgress, setUploadProgress } = useUploadContext();
+  const { setUploadedData, uploadProgress, setUploadProgress } = useUploadContext();
+  const { setFileName } = useContext(ImportContext);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadResponse, setUploadResponse] = useState<{ message: string; fileName: string } | null>(null);
 
@@ -23,7 +24,6 @@ export default function FileUploader() {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:5116/api/upload", true);
 
@@ -39,8 +39,10 @@ export default function FileUploader() {
         setTimeout(() => {
           const response = JSON.parse(xhr.responseText);
           setUploadResponse({ message: "Upload successful", fileName: selectedFile.name });
+          setFileName(response.fileName)
           setUploadedData(response);
           setUploadProgress(100);
+          console.log(response)
         }, 500);
       } else {
         console.error("Error uploading the file:", xhr.statusText);
