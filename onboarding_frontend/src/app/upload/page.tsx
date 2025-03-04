@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 import FileUploader from '../components/FileUploader';
 import ImportContext from '../components/ImportContext';
-import Link from 'next/link';
+
 
 
 export default function UploadPage() {

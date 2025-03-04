@@ -1,4 +1,4 @@
-﻿namespace onboarding_backend
+﻿namespace onboarding_backend.Models.StandardImport
 {
     public class Contacts
     {

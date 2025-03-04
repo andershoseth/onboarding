@@ -1,33 +1,33 @@
-﻿namespace onboarding_backend
+﻿namespace onboarding_backend.Models.StandardImport
 {
-    public class StandardImport
+    public class Standardimport
     {
 
-        public List<Contacts> Contacts { get; set; } = new ();
+        public List<Contacts> Contact { get; set; } = new ();
 
 
-        public List<Products> Products { get; set; } = new ();
+        public List<Products> Product { get; set; } = new ();
 
 
-        public List<Projects> Projects { get; set; } = new ();
+        public List<Projects> Project { get; set; } = new ();
 
    
-        public List<ProjectTeamMembers> ProjectTeamMembers { get; set; } = new ();
+        public List<ProjectTeamMembers> ProjectTeamMember { get; set; } = new ();
 
       
-        public List<ProjectActivity> ProjectActivities { get; set; } = new ();
+        public List<ProjectActivity> ProjectActivitie { get; set; } = new ();
 
 
-        public List<Departments> Departments { get; set; } = new ();
+        public List<Departments> Department { get; set; } = new ();
 
   
-        public List<Voucher> Vouchers { get; set; } = new ();
-        public List<Order> Orders { get; set; } = new();
-        public List<Quote> Quotes { get; set; } = new();
-        public List<InvoiceCid> InvoiceCids { get; set; } = new();
-        public List<ChartOfAccount> ChartOfAccounts { get; set; } = new();
-        public List<FixedAsset> FixedAssets { get; set; } = new();
-        public List<YTDPayrollBalance> YTDPayrollBalances { get; set; } = new();
+        public List<Voucher> Voucher { get; set; } = new ();
+        public List<Order> Order { get; set; } = new();
+        public List<Quote> Quote { get; set; } = new();
+        public List<InvoiceCid> InvoiceCid { get; set; } = new();
+        public List<ChartOfAccount> ChartOfAccount { get; set; } = new();
+        public List<FixedAsset> FixedAsset { get; set; } = new();
+        public List<YTDPayrollBalance> YTDPayrollBalance { get; set; } = new();
         public List<SalaryBasis> SalaryBasis { get; set; } = new();
         public List<SalaryAdjustment> SalaryAdjustments { get; set; } = new();
 

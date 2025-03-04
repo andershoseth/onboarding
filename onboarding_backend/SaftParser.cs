@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
 
-namespace onboarding_backend
+/*namespace onboarding_backend
 {
     public class SaftParser
     {
@@ -27,10 +27,7 @@ namespace onboarding_backend
 
             return null; // Ingen treff
         }
-        /* <summary>
-         Leser en SAF-T XML-fil og mapper dataene til StandardImport
-         med lister for Contacts, Departments, Products, Projects, m.m.
-         </summary>*/
+        
         public string DetectDefaultNamespace(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -49,7 +46,7 @@ namespace onboarding_backend
             // Hvis root er null (veldig uvanlig), returner tom streng
             return root?.Name.NamespaceName ?? string.Empty;
         }
-        public async Task<StandardImport> ProcessSaftFileAsync(IFormFile file)
+        public async Task<Standardimport> ProcessSaftFileAsync(IFormFile file)
         {
             if (file == null || file.Length == 0)
                 throw new ArgumentException("Ingen fil opplastet.", nameof(file));
@@ -751,3 +748,4 @@ namespace onboarding_backend
         
     }
 }
+*/

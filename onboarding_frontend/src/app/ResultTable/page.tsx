@@ -1,23 +1,38 @@
 "use client";
-import React from "react";
-import ResultTable from '../components/ResultsTable';
-import { useUploadContext } from "../components/UploadContext"; 
-
-
+import React, { useEffect, useState } from "react";
+import StandardImportTables, { TableGroup } from "../components/StandardImportTables";
 
 export default function ResultPage() {
-  const { uploadedData } = useUploadContext(); // 📌 Bruk kontekst
+  const [data, setData] = useState<TableGroup[] | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  console.log("🔍 Data i ResultPage:", uploadedData); // 📌 Sjekk hva som blir hentet
+  useEffect(() => {
+    // Hent standard import mapping fra API-et
+    fetch("http://localhost:5116/api/standard-import-mapping")
+      .then((res) => res.json())
+      .then((fetchedData: TableGroup[]) => {
+        console.log("Hentet standard import mapping:", fetchedData);
+        setData(fetchedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Feil under henting:", error);
+        setLoading(false);
+      });
+  }, []);
 
-  if (!uploadedData) {
-    return <div className="p-4">Ingen data lastet opp ennå.</div>;
+  if (loading) {
+    return <div className="p-4">Laster...</div>;
+  }
+
+  if (!data) {
+    return <div className="p-4">Ingen data hentet .</div>;
   }
 
   return (
     <main className="p-4">
-      <h1 className="text-2xl font-bold mb-4">API data i ResultTable</h1>
-      <ResultTable data={uploadedData} />
+      <h1 className="text-2xl font-bold mb-4">Standard Import Felter</h1>
+      <StandardImportTables data={data} />
     </main>
   );
 }
