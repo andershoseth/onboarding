@@ -1,9 +1,11 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useContext } from "react";
 import { useUploadContext } from "../components/UploadContext";
+import ImportContext from "./ImportContext";
 
 export default function FileUploader() {
   const { setUploadedData, uploadProgress, setUploadProgress } = useUploadContext();
+  const { setFileName } = useContext(ImportContext);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadResponse, setUploadResponse] = useState<{ message: string; fileName: string } | null>(null);
 
@@ -39,6 +41,8 @@ export default function FileUploader() {
           const response = JSON.parse(xhr.responseText);
           setUploadResponse({ message: "Upload successful", fileName: selectedFile.name });
           setUploadedData(response);
+          setFileName(selectedFile.name)
+          console.log("Uploaded response:", response);
           setUploadProgress(100);
         }, 500);
       } else {
