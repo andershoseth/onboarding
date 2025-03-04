@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -7,12 +7,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-// Definer typen for hvert felt
+// Typene våre
 export interface StandardImportField {
   field: string;
 }
 
-// Definer typen for en gruppe (tabell)
 export interface TableGroup {
   tableName: string;
   fields: StandardImportField[];
@@ -22,19 +21,52 @@ interface GroupTableProps {
   tableGroup: TableGroup;
 }
 
-
 function GroupTable({ tableGroup }: GroupTableProps) {
-  // data for react-table er en array med objekter ({ field: string })
-  const data = useMemo(() => tableGroup.fields, [tableGroup.fields]);
 
-  const columns = useMemo<ColumnDef<StandardImportField>[]>(() => [
-    {
-      accessorKey: "field",
-      header: "Field",
-    },
-  ], []);
+  const initialData = useMemo(
+    () =>
+      tableGroup.fields.map((item) => ({
+        ...item,
+        mapping: "",
+      })),
+    [tableGroup.fields]
+  );
+  const [data, setData] = useState(initialData);
 
- 
+  // Definer kolonner med to kolonner: Field og Mapping
+  const columns = useMemo<ColumnDef<(StandardImportField & { mapping: string })>[]>(
+    () => [
+      {
+        accessorKey: "field",
+        header: "Field",
+      },
+      {
+        accessorKey: "mapping",
+        header: "Mapping",
+        cell: ({ row }) => {
+          return (
+            <input
+              type="text"
+              value={row.original.mapping}
+              onChange={(e) => {
+                const newMapping = e.target.value;
+                setData((oldData) =>
+                  oldData.map((item, index) =>
+                    index === row.index ? { ...item, mapping: newMapping } : item
+                  )
+                );
+              }}
+              className="border p-1 w-full text-black"
+              placeholder="Skriv mapping..."
+            />
+          );
+        },
+      },
+    ],
+    [setData]
+  );
+
+
   const table = useReactTable({
     data,
     columns,
@@ -52,10 +84,7 @@ function GroupTable({ tableGroup }: GroupTableProps) {
                 <th key={header.id} className="border px-4 py-2 text-left">
                   {header.isPlaceholder
                     ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                    : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>
@@ -63,7 +92,7 @@ function GroupTable({ tableGroup }: GroupTableProps) {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="hover:bg-gray-50">
+            <tr key={row.id} className="hover:bg-svart-50">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="border px-4 py-2">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -81,7 +110,7 @@ interface StandardImportTablesProps {
   data: TableGroup[];
 }
 
-// Hovedkomponenten som itererer over alle grupper og viser en egen tabell for hver gruppe
+// Denne komponenten itererer over alle grupper og viser en egen tabell for hver gruppe.
 export default function StandardImportTables({ data }: StandardImportTablesProps) {
   return (
     <div className="p-4">
@@ -92,7 +121,6 @@ export default function StandardImportTables({ data }: StandardImportTablesProps
     </div>
   );
 }
-
 
 
 
