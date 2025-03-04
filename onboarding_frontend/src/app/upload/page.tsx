@@ -96,7 +96,7 @@ export default function UploadPage() {
 
         <div className="mt-6 flex justify-center">
           <Link
-            href="/importvelger"
+            href="/export"
             className="bg-white text-black px-4 py-2 rounded-md shadow-md hover:bg-[#c85b34] transition"
           >
             Previous
