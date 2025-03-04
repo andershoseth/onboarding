@@ -75,6 +75,22 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         return Results.Problem("Failed to process the uploaded file.");
     }
 });
+app.MapGet("/api/standard-import-mapping", () =>
+{
+    var groupedFields = FieldMappingHelper.GetStandardImportGroupedFields();
+
+    Console.WriteLine("Mapping for StandardImport:");
+    foreach (var tableMapping in groupedFields)
+    {
+        Console.WriteLine($"Table: {tableMapping.TableName}");
+        foreach (var field in tableMapping.Fields)
+        {
+            Console.WriteLine($"  {field.Field}");
+        }
+    }
+
+    return Results.Json(groupedFields);
+});
 
 
 app.Run();
