@@ -7,6 +7,12 @@ import { instructionConfig } from "./InstructionConfig";
 import { systemCoverage } from "./systemCoverage";
 import Link from "next/link";
 
+// The data for the instructions is stored in instructionConfig.tsx at the same level as this page
+// systemCoverage.tsx is used to determine which subjects are covered by SAF-T for each system
+// eg. for Visma, if safTSubjects is set to "hovedboktransaksjoner", "avdeling"
+// the page will not render the buttons for these pages, as they are covered by SAF-T
+// subjects are retrieved from the checked boxes in importvelger
+
 export default function ExportPage() {
     const { selectedSystem } = useContext(ImportContext);
 
