@@ -97,7 +97,7 @@ export default function UploadPage() {
         <div className="mt-6 flex justify-center">
           <Link
             href="/export"
-            className="bg-white text-black px-4 py-2 rounded-md shadow-md hover:bg-[#c85b34] transition"
+            className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
           >
             Previous
           </Link>
