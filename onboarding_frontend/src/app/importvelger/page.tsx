@@ -22,7 +22,13 @@ const ImportVelger: React.FC = () => {
                             <CheckBox label="Saldobalanse" checked={selected.saldobalanse} onChange={() => handleBoxChange("saldobalanse")} />
                         </div>
 
-                        <div className="mt-6 flex justify-end">
+                        <div className="mt-6 flex justify-between">
+                            <Link
+                                className={`px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]`} href="/filtype"
+                            >
+                                Previous
+                            </Link>
+
                             <Link
                                 href={isDisabled ? "#" : "/export"}
                                 className={`px-4 py-2 rounded-md shadow-md transition ${isDisabled ? "bg-gray-400 text-gray-200 cursor-not-allowed" : "bg-[#E17044] text-white hover:bg-[#c85b34]"

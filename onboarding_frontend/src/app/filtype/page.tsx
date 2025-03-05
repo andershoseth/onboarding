@@ -10,40 +10,22 @@ function SystemChoice() {
     const cards = [
         {
             logoSrc: "import.png",
-            title: "Visma",
+            title: "Excel (.xlxs)",
             description: "Importer data fra Visma",
-            link: "/filtype"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
-            title: "Tripletex",
+            title: "CSV (.csv)",
             description: "Importer data fra Tripletex",
-            link: "/filtype"
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
-            title: "Xledger",
+            title: "SAF-T (.xml)",
             description: "Importer data fra Xledger",
-            link: "/filtype"
-        },
-        {
-            logoSrc: "import.png",
-            title: "Bank + regnskap",
-            description: "Importer data fra Bank + regnskap",
-            link: "/filtype"
-        },
-        {
-            logoSrc: "import.png",
-            title: "Fiken",
-            description: "Importer data fra Fiken",
-            link: "/filtype"
-        },
-        {
-            logoSrc: "import.png",
-            title: "Egendefinert",
-            description: "Importer data fra et egendefinert regnskapssystem",
-            link: "/filtype"
-        },
+            link: "/importvelger"
+        }
     ];
 
     const handleClick = (title: string) => {
