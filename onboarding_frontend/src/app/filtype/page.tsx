@@ -11,19 +11,19 @@ function SystemChoice() {
         {
             logoSrc: "import.png",
             title: "Excel (.xlxs)",
-            description: "Importer data fra Visma",
+            description: "Last opp filer i Excel-format",
             link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "CSV (.csv)",
-            description: "Importer data fra Tripletex",
+            description: "Last opp filer i CSV-format",
             link: "/importvelger"
         },
         {
             logoSrc: "import.png",
             title: "SAF-T (.xml)",
-            description: "Importer data fra Xledger",
+            description: "Last opp filer i SAF-T-format",
             link: "/importvelger"
         }
     ];
