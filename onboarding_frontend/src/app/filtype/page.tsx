@@ -5,7 +5,7 @@ import ImportContext from '../components/ImportContext';
 import React from 'react';
 
 function SystemChoice() {
-    const { setSelectedSystem } = React.useContext(ImportContext);
+    const { setSelectedFileType } = React.useContext(ImportContext);
 
     const cards = [
         {
@@ -30,7 +30,7 @@ function SystemChoice() {
 
     const handleClick = (title: string) => {
         // Save the selected card's title in the context
-        setSelectedSystem(title);
+        setSelectedFileType(title);
     };
 
     return (

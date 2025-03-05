@@ -4,15 +4,19 @@ import React, { createContext, useState, useEffect } from "react";
 interface ImportContextType {
   selectedSystem: string | null;
   setSelectedSystem: (system: string | null) => void;
+  selectedFileType: string | null;
+  setSelectedFileType: (filetype: string | null) => void;
   fileName: string | null;
   setFileName: (name: string | null) => void;
 }
 
 const ImportContext = createContext<ImportContextType>({
   selectedSystem: null,
-  setSelectedSystem: () => {},
+  setSelectedSystem: () => { },
+  selectedFileType: null,
+  setSelectedFileType: () => { },
   fileName: null,
-  setFileName: () => {},
+  setFileName: () => { },
 });
 
 export function ImportProvider({ children }: { children: React.ReactNode }) {
@@ -21,6 +25,13 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
       return localStorage.getItem("selectedSystem");
     }
     return null;
+  });
+
+  const [selectedFileType, setSelectedFileType] = useState<string | null>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("selectedFileType")
+    }
+    return null
   });
 
   const [fileName, setFileName] = useState<string | null>(() => {
@@ -39,6 +50,14 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   }, [selectedSystem]);
 
   useEffect(() => {
+    if (selectedFileType) {
+      localStorage.setItem("selectedFileType", selectedFileType);
+    } else {
+      localStorage.removeItem("selectedFileType");
+    }
+  }, [selectedFileType]);
+
+  useEffect(() => {
     if (fileName) {
       localStorage.setItem("uploadedFileName", fileName);
     } else {
@@ -47,7 +66,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   }, [fileName]);
 
   return (
-    <ImportContext.Provider value={{ selectedSystem, setSelectedSystem, fileName, setFileName }}>
+    <ImportContext.Provider value={{ selectedSystem, setSelectedSystem, selectedFileType, setSelectedFileType, fileName, setFileName }}>
       {children}
     </ImportContext.Provider>
   );
