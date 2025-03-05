@@ -55,16 +55,35 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
 
     try
     {
+
+        var fileExtension = Path.GetExtension(file.FileName).ToLower();
+
         // Les filen til en MemoryStream
         using var memoryStream = new MemoryStream();
         await file.CopyToAsync(memoryStream);
         memoryStream.Position = 0;
 
-        // Last inn XML direkte fra minnet
-        var doc = XDocument.Load(memoryStream);
+        object results;
 
-        // Flat ut XML-strukturen
-        var results = SafTFlattener.FlattenSafTAsList(doc.Root!);
+        if (fileExtension == ".xml")
+        {
+            // Last inn XML direkte fra minnet
+            var doc = XDocument.Load(memoryStream);
+            // Flat ut XML-strukturen
+            results = SafTFlattener.FlattenSafTAsList(doc.Root!);
+        }
+        else if (fileExtension == ".csv")
+        {
+            results = FileProcessor.ProcessCsv(memoryStream);
+        }
+        else if (fileExtension == ".xlsx")
+        {
+            results = FileProcessor.ProcessExcel(memoryStream);
+        }
+        else
+        {
+            return Results.BadRequest("Unsupported filetype.");
+        }
 
         // Konverter til JSON og returner til klienten
         return Results.Json(results);

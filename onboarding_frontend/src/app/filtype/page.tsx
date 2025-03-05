@@ -10,7 +10,7 @@ function SystemChoice() {
     const cards = [
         {
             logoSrc: "import.png",
-            title: "Excel (.xlxs)",
+            title: "Excel (.xlsx)",
             description: "Last opp filer i Excel-format",
             link: "/importvelger"
         },

@@ -5,16 +5,30 @@ import ImportContext from "./ImportContext";
 
 export default function FileUploader() {
   const { setUploadedData, uploadProgress, setUploadProgress } = useUploadContext();
-  const { setFileName } = useContext(ImportContext);
+  const { setFileName, selectedFileType } = useContext(ImportContext);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadResponse, setUploadResponse] = useState<{ message: string; fileName: string } | null>(null);
 
 
+  const fileTypeMapping: Record<string, string> = {
+    "Excel (.xlsx)": ".xlsx",
+    "CSV (.csv)": ".csv",
+    "SAF-T (.xml)": ".xml"
+  };
+
+  const acceptedFileTypes = fileTypeMapping[selectedFileType || ""] || ""
+
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
-      setUploadProgress(0);
-      setUploadResponse(null);
+      const file = e.target.files[0]
+
+      if (!acceptedFileTypes || file.name.endsWith(acceptedFileTypes)) {
+        setSelectedFile(e.target.files[0]);
+        setUploadProgress(0);
+        setUploadResponse(null);
+      } else {
+        alert(`Invalid file type. Please upload a ${selectedFileType} file.`)
+      }
     }
   };
 
@@ -60,7 +74,7 @@ export default function FileUploader() {
   return (
     <div className="space-y-4">
       <div>
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" accept={acceptedFileTypes} onChange={handleFileChange} />
         <button
           className="bg-white text-black px-4 py-2 rounded hover:bg-gray-800 ml-2"
           onClick={uploadFile}
