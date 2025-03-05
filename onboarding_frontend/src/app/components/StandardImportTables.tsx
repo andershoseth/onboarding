@@ -1,11 +1,12 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useMapping } from "../components/MappingContext";
 
 // Typene våre
 export interface StandardImportField {
@@ -21,19 +22,33 @@ interface GroupTableProps {
   tableGroup: TableGroup;
 }
 
-function GroupTable({ tableGroup }: GroupTableProps) {
 
-  const initialData = useMemo(
-    () =>
-      tableGroup.fields.map((item) => ({
-        ...item,
-        mapping: "",
-      })),
-    [tableGroup.fields]
-  );
-  const [data, setData] = useState(initialData);
+export function GroupTable({ tableGroup }: GroupTableProps) {
+  const { mappingData, setMappingData } = useMapping();
 
-  // Definer kolonner med to kolonner: Field og Mapping
+  // Initialiser data:
+  // Hvis context allerede har mapping for denne tabellen, bruk den.
+  // Ellers bygg en ny liste fra tableGroup.fields med en tom mapping.
+  const initialData = useMemo(() => {
+    return mappingData[tableGroup.tableName]
+      ? mappingData[tableGroup.tableName]
+      : tableGroup.fields.map((item) => ({
+          ...item,
+          mapping: "",
+        }));
+  }, [mappingData, tableGroup]);
+
+  const [data, setData] = useState<(StandardImportField & { mapping: string })[]>(initialData);
+
+ 
+  useEffect(() => {
+    setMappingData((prev) => ({
+      ...prev,
+      [tableGroup.tableName]: data,
+    }));
+  }, [data, setMappingData, tableGroup.tableName]);
+
+  // Definer kolonner med to kolonner: Field og Mapping (input)
   const columns = useMemo<ColumnDef<(StandardImportField & { mapping: string })>[]>(
     () => [
       {
@@ -43,30 +58,28 @@ function GroupTable({ tableGroup }: GroupTableProps) {
       {
         accessorKey: "mapping",
         header: "Mapping",
-        cell: ({ row }) => {
-          return (
-            <input
-              type="text"
-              value={row.original.mapping}
-              onChange={(e) => {
-                const newMapping = e.target.value;
-                setData((oldData) =>
-                  oldData.map((item, index) =>
-                    index === row.index ? { ...item, mapping: newMapping } : item
-                  )
-                );
-              }}
-              className="border p-1 w-full text-black"
-              placeholder="Skriv mapping..."
-            />
-          );
-        },
+        cell: ({ row }) => (
+          <input
+            type="text"
+            value={row.original.mapping}
+            onChange={(e) => {
+              const newMapping = e.target.value;
+              setData((oldData) =>
+                oldData.map((item, index) =>
+                  index === row.index ? { ...item, mapping: newMapping } : item
+                )
+              );
+            }}
+            className="border p-1 w-full text-black"
+            placeholder="Skriv mapping..."
+          />
+        ),
       },
     ],
     [setData]
   );
 
-
+  // Opprett React Table-instans
   const table = useReactTable({
     data,
     columns,
@@ -92,7 +105,7 @@ function GroupTable({ tableGroup }: GroupTableProps) {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="hover:bg-svart-50">
+            <tr key={row.id} className="hover:bg-gray-50">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="border px-4 py-2">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -110,7 +123,7 @@ interface StandardImportTablesProps {
   data: TableGroup[];
 }
 
-// Denne komponenten itererer over alle grupper og viser en egen tabell for hver gruppe.
+
 export default function StandardImportTables({ data }: StandardImportTablesProps) {
   return (
     <div className="p-4">
