@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  const pagesWithStepperBar = ["/systemvalg", "/importvelger", "/upload"]
+  const pagesWithStepperBar = ["/systemvalg", "/importvelger", "/upload", "/export", "upload"]
 
   const showStepperBar = pagesWithStepperBar.includes(pathname || '')
   
