@@ -4,6 +4,7 @@ import Link from "next/link";
 import ImportContext from '../components/ImportContext';
 import React from 'react';
 
+//FIKS HYDRATION ERROR (TA INSPIRASJON FRA MENUCONTAINER.TSX)
 function SystemChoice() {
     const { setSelectedFileType } = React.useContext(ImportContext);
 
