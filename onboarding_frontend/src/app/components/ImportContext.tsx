@@ -8,6 +8,8 @@ interface ImportContextType {
   setSelectedFileType: (filetype: string | null) => void;
   fileName: string | null;
   setFileName: (name: string | null) => void;
+  selectedColumns: { kontakter: boolean; avdeling: boolean; saldobalanse: boolean };
+  setSelectedColumns: (columns: { kontakter: boolean; avdeling: boolean; saldobalanse: boolean }) => void;
 }
 
 const ImportContext = createContext<ImportContextType>({
@@ -17,6 +19,8 @@ const ImportContext = createContext<ImportContextType>({
   setSelectedFileType: () => { },
   fileName: null,
   setFileName: () => { },
+  selectedColumns: { kontakter: false, avdeling: false, saldobalanse: false },
+  setSelectedColumns: () => {},
 });
 
 export function ImportProvider({ children }: { children: React.ReactNode }) {
@@ -41,6 +45,13 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
     return null;
   });
 
+  const [selectedColumns, setSelectedColumns] = useState<{ kontakter: boolean; avdeling: boolean; saldobalanse: boolean }>({
+    kontakter: false,
+    avdeling: false,
+    saldobalanse: false,
+  });
+
+  // Update context and localStorage whenever system or fileName changes
   useEffect(() => {
     if (selectedSystem) {
       localStorage.setItem("selectedSystem", selectedSystem);
@@ -65,8 +76,13 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
     }
   }, [fileName]);
 
+  // Update the selectedColumns in localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("checkboxState", JSON.stringify(selectedColumns));
+  }, [selectedColumns]);
+
   return (
-    <ImportContext.Provider value={{ selectedSystem, setSelectedSystem, selectedFileType, setSelectedFileType, fileName, setFileName }}>
+    <ImportContext.Provider value={{ selectedSystem, setSelectedSystem, selectedFileType, setSelectedFileType, fileName, setFileName, selectedColumns, setSelectedColumns }}>
       {children}
     </ImportContext.Provider>
   );
