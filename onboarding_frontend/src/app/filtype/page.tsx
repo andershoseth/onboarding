@@ -5,56 +5,38 @@ import ImportContext from '../components/ImportContext';
 import React from 'react';
 
 function SystemChoice() {
-    const { setSelectedSystem } = React.useContext(ImportContext);
+    const { setSelectedFileType } = React.useContext(ImportContext);
 
     const cards = [
         {
             logoSrc: "import.png",
-            title: "Visma",
-            description: "Importer data fra Visma",
-            link: "/filtype"
+            title: "Excel (.xlsx)",
+            description: "Last opp filer i Excel-format",
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
-            title: "Tripletex",
-            description: "Importer data fra Tripletex",
-            link: "/filtype"
+            title: "CSV (.csv)",
+            description: "Last opp filer i CSV-format",
+            link: "/importvelger"
         },
         {
             logoSrc: "import.png",
-            title: "Xledger",
-            description: "Importer data fra Xledger",
-            link: "/filtype"
-        },
-        {
-            logoSrc: "import.png",
-            title: "Bank + regnskap",
-            description: "Importer data fra Bank + regnskap",
-            link: "/filtype"
-        },
-        {
-            logoSrc: "import.png",
-            title: "Fiken",
-            description: "Importer data fra Fiken",
-            link: "/filtype"
-        },
-        {
-            logoSrc: "import.png",
-            title: "Egendefinert",
-            description: "Importer data fra et egendefinert regnskapssystem",
-            link: "/filtype"
-        },
+            title: "SAF-T (.xml)",
+            description: "Last opp filer i SAF-T-format",
+            link: "/importvelger"
+        }
     ];
 
     const handleClick = (title: string) => {
         // Save the selected card's title in the context
-        setSelectedSystem(title);
+        setSelectedFileType(title);
     };
 
     return (
         <>
             <div className="flex flex-col items-center text-center mt-10">
-                <h1 className="text-4xl font-bold">Hvilket system kommer du fra?</h1>
+                <h1 className="text-4xl font-bold">Hvilken filtype vil du laste opp?</h1>
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">

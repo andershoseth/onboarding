@@ -7,6 +7,7 @@ import { UploadProvider } from "./components/UploadContext";
 import StepperBar from "./components/StepperBar"
 import Sidebar from "./components/StepperBar";
 import { usePathname } from "next/navigation";
+import { MappingProvider } from "./components/MappingContext";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const showStepperBar = pagesWithStepperBar.includes(pathname || '')
   
   return (
-   
+    <MappingProvider> 
     <UploadProvider> 
     <ImportProvider>
     <html lang="en">
@@ -32,5 +33,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
     </ImportProvider>
     </UploadProvider> 
+    </MappingProvider> 
   );
 }
