@@ -2,10 +2,19 @@
 import Card from '../card';
 import Link from "next/link";
 import ImportContext from '../components/ImportContext';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function SystemChoice() {
-    const { setSelectedSystem } = React.useContext(ImportContext);
+    const [isMounted, setIsMounted] = useState(false)
+    const context = React.useContext(ImportContext);
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, []);
+
+    if (!isMounted) return null
+
+    const { setSelectedSystem } = context
 
     const cards = [
         {

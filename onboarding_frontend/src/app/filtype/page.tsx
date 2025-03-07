@@ -2,11 +2,21 @@
 import Card from '../card';
 import Link from "next/link";
 import ImportContext from '../components/ImportContext';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-//FIKS HYDRATION ERROR (TA INSPIRASJON FRA MENUCONTAINER.TSX)
-function SystemChoice() {
-    const { setSelectedFileType } = React.useContext(ImportContext);
+function FileTypeChoice() {
+    const [isMounted, setIsMounted] = useState(false)
+    const context = React.useContext(ImportContext);
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, []);
+
+    if (!isMounted) {
+        return <div className="flex items-center justify-center min-h-screen text-white">Loading...</div>;
+    }
+
+    const { setSelectedFileType } = context;
 
     const cards = [
         {
@@ -70,4 +80,4 @@ function SystemChoice() {
     );
 }
 
-export default SystemChoice;
+export default FileTypeChoice;

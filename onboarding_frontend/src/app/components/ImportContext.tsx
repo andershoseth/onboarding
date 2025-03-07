@@ -20,30 +20,19 @@ const ImportContext = createContext<ImportContextType>({
   fileName: null,
   setFileName: () => { },
   selectedColumns: { kontakter: false, avdeling: false, saldobalanse: false },
-  setSelectedColumns: () => {},
+  setSelectedColumns: () => { },
 });
 
 export function ImportProvider({ children }: { children: React.ReactNode }) {
-  const [selectedSystem, setSelectedSystem] = useState<string | null>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("selectedSystem");
-    }
-    return null;
-  });
+  const [selectedSystem, setSelectedSystem] = useState<string | null>(null);
+  const [selectedFileType, setSelectedFileType] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
 
-  const [selectedFileType, setSelectedFileType] = useState<string | null>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("selectedFileType")
-    }
-    return null
-  });
-
-  const [fileName, setFileName] = useState<string | null>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("uploadedFileName");
-    }
-    return null;
-  });
+  useEffect(() => {
+    setSelectedSystem(localStorage.getItem("selectedSystem"));
+    setSelectedFileType(localStorage.getItem("selectedFileType"));
+    setFileName(localStorage.getItem("uploadedFileName"));
+  }, []);
 
   const [selectedColumns, setSelectedColumns] = useState<{ kontakter: boolean; avdeling: boolean; saldobalanse: boolean }>({
     kontakter: false,
