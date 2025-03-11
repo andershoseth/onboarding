@@ -24,11 +24,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`p-4 font-bold text-white shadow-md transition-all duration-300 border-[0.1px] ${
-        scrolled
-          ? "bg-[rgba(0,0,0,0.6)]" // Semi-transparent black background to prevent navbar opaqueness rfom covering the text
-          : "bg-transparent"
-      } z-50 fixed w-full top-0`}
+      className={`p-2 font-bold text-white transition-all duration-300 ${scrolled
+        ? "bg-[rgba(0,0,0,0.6)]" // Semi-transparent black background to prevent navbar opaqueness rfom covering the text
+        : "bg-transparent"
+        } z-50 fixed w-full top-0`}
     >
       <ul className="flex space-x-4">
         <li>
