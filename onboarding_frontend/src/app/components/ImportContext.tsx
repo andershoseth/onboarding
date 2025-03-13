@@ -28,47 +28,12 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedFileType, setSelectedFileType] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
 
-  useEffect(() => {
-    setSelectedSystem(localStorage.getItem("selectedSystem"));
-    setSelectedFileType(localStorage.getItem("selectedFileType"));
-    setFileName(localStorage.getItem("uploadedFileName"));
-  }, []);
 
   const [selectedColumns, setSelectedColumns] = useState<{ kontakter: boolean; avdeling: boolean; saldobalanse: boolean }>({
     kontakter: false,
     avdeling: false,
     saldobalanse: false,
   });
-
-  // Update context and localStorage whenever system or fileName changes
-  useEffect(() => {
-    if (selectedSystem) {
-      localStorage.setItem("selectedSystem", selectedSystem);
-    } else {
-      localStorage.removeItem("selectedSystem");
-    }
-  }, [selectedSystem]);
-
-  useEffect(() => {
-    if (selectedFileType) {
-      localStorage.setItem("selectedFileType", selectedFileType);
-    } else {
-      localStorage.removeItem("selectedFileType");
-    }
-  }, [selectedFileType]);
-
-  useEffect(() => {
-    if (fileName) {
-      localStorage.setItem("uploadedFileName", fileName);
-    } else {
-      localStorage.removeItem("uploadedFileName");
-    }
-  }, [fileName]);
-
-  // Update the selectedColumns in localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("checkboxState", JSON.stringify(selectedColumns));
-  }, [selectedColumns]);
 
   return (
     <ImportContext.Provider value={{ selectedSystem, setSelectedSystem, selectedFileType, setSelectedFileType, fileName, setFileName, selectedColumns, setSelectedColumns }}>
