@@ -1,7 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-import { useBoxState } from '../components/MenuContainer';
+import { useBoxState } from '../importvelger/MenuContainer';
 import ImportContext from '../components/ImportContext';
 import { useContext, useEffect, useState } from 'react';
 
@@ -16,7 +16,7 @@ function Success() {
   }, [fileName]);
 
   const checkedBoxes = Object.keys(selected)
-    .filter((key) => selected[key as keyof typeof selected]) 
+    .filter((key) => selected[key as keyof typeof selected])
     .map((key) => key.charAt(0).toUpperCase() + key.slice(1));
 
   return (
@@ -54,11 +54,11 @@ function Success() {
             </div>
             <div className="h-40 bg-white text-blue-600 rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg">
               <div className="flex items-start">
-                <Image 
-                  src="/global-news-4305.png" 
-                  alt="global news" 
-                  width={300} 
-                  height={300} 
+                <Image
+                  src="/global-news-4305.png"
+                  alt="global news"
+                  width={300}
+                  height={300}
                   className="w-auto h-auto"
                 />
               </div>
