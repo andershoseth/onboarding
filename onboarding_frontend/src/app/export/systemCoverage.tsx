@@ -1,11 +1,11 @@
 export const systemCoverage = {
-    "Visma": {
+  "Visma": {
 
     safTSubjects: ["hovedboktransaksjoner", "avdeling"],
     csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"]
-    
-},
-"Tripletex": {
+
+  },
+  "Tripletex": {
     safTSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling"],
     csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"]
   }
