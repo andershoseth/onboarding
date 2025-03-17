@@ -19,9 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }, [pathname]);
 
   return (
-    <MappingProvider>
+    <ImportProvider>
       <UploadProvider>
-        <ImportProvider>
+        <MappingProvider>
           <html lang="en">
             <body className="bg-gradient-to-b from-[#54155C] to-[#AF554E] min-h-screen">
               <div className="flex">
@@ -33,8 +33,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </body>
           </html>
-        </ImportProvider>
+        </MappingProvider>
       </UploadProvider>
-    </MappingProvider>
+    </ImportProvider>
   );
 }

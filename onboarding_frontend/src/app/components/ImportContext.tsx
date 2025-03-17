@@ -26,7 +26,14 @@ const ImportContext = createContext<ImportContextType>({
 export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedSystem, setSelectedSystem] = useState<string | null>(null);
   const [selectedFileType, setSelectedFileType] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(
+    () => sessionStorage.getItem("fileName") || null);
+
+  useEffect(() => {
+    if (fileName) {
+      sessionStorage.setItem("fileName", fileName);
+    }
+  }, [fileName]);
 
 
   const [selectedColumns, setSelectedColumns] = useState<{ kontakter: boolean; avdeling: boolean; saldobalanse: boolean }>({

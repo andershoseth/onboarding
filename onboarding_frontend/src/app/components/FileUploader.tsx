@@ -21,6 +21,7 @@ export default function FileUploader() {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0]
+      console.log("Selected file:", file.name); // DEBUGGING
 
       if (!acceptedFileTypes || file.name.endsWith(acceptedFileTypes)) {
         setSelectedFile(e.target.files[0]);
