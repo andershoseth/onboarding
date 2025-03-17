@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }, [pathname]);
 
   return (
-    <MappingProvider>
+   
       <UploadProvider>
         <ImportProvider>
           <html lang="en">
@@ -35,6 +35,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </html>
         </ImportProvider>
       </UploadProvider>
-    </MappingProvider>
+   
   );
 }

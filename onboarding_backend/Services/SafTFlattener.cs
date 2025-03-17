@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using onboarding_backend.Models;
 namespace onboarding_backend.Services;
 
 
@@ -23,6 +24,24 @@ namespace onboarding_backend.Services;
 
         return results;
     }
+    public static List<GroupedSafTEntries> GroupSafTEntries(List<FlattenedEntry> flattenedEntries)
+    {
+        var groups = flattenedEntries
+            .GroupBy(e =>
+            {
+                var segments = e.Path.Split('.');
+                return segments.Length >= 2 ? $"{segments[0]}.{segments[1]}" : e.Path;
+            })
+            .Select(g => new GroupedSafTEntries
+            {
+                GroupKey = g.Key,
+                Entries = g.ToList()
+            })
+            .ToList();
+
+        return groups;
+    }
+  
 
 
     /// <summary>

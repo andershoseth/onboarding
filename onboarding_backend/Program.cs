@@ -67,10 +67,20 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
 
         if (fileExtension == ".xml")
         {
-            // Last inn XML direkte fra minnet
             var doc = XDocument.Load(memoryStream);
-            // Flat ut XML-strukturen
-            results = SafTFlattener.FlattenSafTAsList(doc.Root!);
+
+          
+            var flattened = SafTFlattener.FlattenSafTAsList(doc.Root!);
+
+           
+            var grouped = SafTFlattener.GroupSafTEntries(flattened);
+            var filteredGroups = grouped
+                .Where(g => g.GroupKey == "AuditFile.Header"
+                         || g.GroupKey == "AuditFile.MasterFiles")
+                .ToList();
+
+           
+            results = filteredGroups;
         }
         else if (fileExtension == ".csv")
         {
