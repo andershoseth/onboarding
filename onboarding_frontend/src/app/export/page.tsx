@@ -6,7 +6,6 @@ import Instructions from "../components/Instructions";
 import { instructionConfig } from "./InstructionConfig";
 import { systemCoverage } from "./systemCoverage";
 import Link from "next/link";
-import FileUploader from "@/app/components/FileUploader";
 
 // The data for the instructions is stored in instructionConfig.tsx at the same level as this page
 // systemCoverage.tsx is used to determine which subjects are covered by SAF-T for each system
@@ -137,14 +136,6 @@ function SaftModeInstructions({
                     Next
                 </Link>
             </div>
-            <div className="mt-6 flex justify-end absolute bottom-4 right-28">
-                <Link
-                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
-                    href="/uploadtest"
-                >
-                    Test
-                </Link>
-            </div>
             <div className="mt-6 flex justify-end absolute bottom-4 left-4">
                 <Link
                     className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
@@ -271,7 +262,13 @@ function CsvModeInstructions({
 }
 
 /** Helper to render CSV instructions for exactly one subject. */
-function CsvInstructionsForSubject({ system, subject }: { system: string; subject: string }) {
+function CsvInstructionsForSubject({
+                                       system,
+                                       subject,
+                                   }: {
+    system: string;
+    subject: string;
+}) {
     const steps = instructionConfig[system]?.CSV?.[subject] || null;
     if (!steps) return <p>No CSV instructions found for {subject}</p>;
 
