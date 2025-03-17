@@ -1,50 +1,36 @@
-// UploadContext.tsx (example)
 "use client";
 import React, { createContext, useContext, useState } from "react";
 
-type UploadedFileData = {
-  fileName: string;
-  data: unknown;  // This will hold whatever .NET returns (object, array, etc.)
-};
+// Riktig type for API-responsen
+interface FlattenedEntry {
+  path: string;
+  value: string;
+}
 
-type UploadContextValue = {
-  // Old single-file data (optional to keep):
-  uploadedData: unknown;
-  setUploadedData: (data: unknown) => void;
-
-  // The new dictionary keyed by subject:
-  uploadedFiles: Record<string, UploadedFileData>;
-  setUploadedFiles: React.Dispatch<React.SetStateAction<Record<string, UploadedFileData>>>;
-
-  // Progress:
+interface UploadContextType {
+  uploadedData: FlattenedEntry[] | null;
+  setUploadedData: React.Dispatch<React.SetStateAction<FlattenedEntry[] | null>>;
   uploadProgress: number;
-  setUploadProgress: (n: number) => void;
-};
+  setUploadProgress: React.Dispatch<React.SetStateAction<number>>
+}
 
-const UploadContext = createContext<UploadContextValue>(null!);
+const UploadContext = createContext<UploadContextType | null>(null);
 
 export function UploadProvider({ children }: { children: React.ReactNode }) {
-  const [uploadedData, setUploadedData] = useState<any>(null);
-
-  // New dictionary for multiple uploaded files by subject:
-  const [uploadedFiles, setUploadedFiles] = useState<Record<string, UploadedFileData>>({});
-
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [uploadedData, setUploadedData] = useState<FlattenedEntry[] | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   return (
-      <UploadContext.Provider
-          value={{
-            uploadedData,
-            setUploadedData,
-            uploadedFiles,
-            setUploadedFiles,
-            uploadProgress,
-            setUploadProgress
-          }}
-      >
-        {children}
-      </UploadContext.Provider>
+    <UploadContext.Provider value={{ uploadedData, setUploadedData, uploadProgress, setUploadProgress }}>
+      {children}
+    </UploadContext.Provider>
   );
 }
 
-export const useUploadContext = () => useContext(UploadContext);
+export function useUploadContext() {
+  const context = useContext(UploadContext);
+  if (!context) {
+    throw new Error("useUploadContext must be used within an UploadProvider");
+  }
+  return context;
+}
