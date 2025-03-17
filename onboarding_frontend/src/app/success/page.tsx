@@ -12,7 +12,10 @@ function Success() {
   const [clientFileName, setClientFileName] = useState<string | null>(null);
 
   useEffect(() => {
-    setClientFileName(fileName);
+
+    if (fileName) {
+      setClientFileName(fileName);
+    }
   }, [fileName]);
 
   const checkedBoxes = Object.keys(selected)
@@ -53,13 +56,13 @@ function Success() {
               Sjekk ut kom-i-gang-artiklene våre!
             </div>
             <div className="h-40 bg-white text-blue-600 rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg">
-              <div className="flex items-start">
-                <Image 
-                  src="/global-news-4305.png" 
-                  alt="global news" 
-                  width={300} 
-                  height={300} 
-                  className="w-auto h-auto"
+              <div className="relative w-full h-full p-4 flex items-start">  
+                <Image
+                  src="/global-news-4305.png"
+                  alt="global news"
+                  width={300}
+                  height={300}
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex items-center justify-center text-center w-full">
