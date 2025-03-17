@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { ImportProvider } from "./components/ImportContext";
 import { UploadProvider } from "./components/UploadContext";
 import StepperBar from "./components/StepperBar"
-import Sidebar from "./components/StepperBar";
+
 import { usePathname } from "next/navigation";
 import { MappingProvider } from "./components/MappingContext";
 
@@ -19,9 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }, [pathname]);
 
   return (
-   
+    <ImportProvider>
       <UploadProvider>
-        <ImportProvider>
+        <MappingProvider>
           <html lang="en">
             <body className="bg-gradient-to-b from-[#54155C] to-[#AF554E] min-h-screen">
               <div className="flex">
@@ -33,8 +33,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </body>
           </html>
-        </ImportProvider>
+        </MappingProvider>
       </UploadProvider>
-   
+    </ImportProvider>
   );
 }
