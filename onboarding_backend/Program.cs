@@ -37,7 +37,7 @@ app.Use(async (context, next) =>
     await next.Invoke();
 });
 
-// API-endepunkt for filopplasting
+
 app.MapPost("/api/upload", async (HttpRequest request) =>
 {
     if (!request.HasFormContentType)
@@ -46,8 +46,11 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
     }
 
     var form = await request.ReadFormAsync();
-    var file = form.Files["file"];
 
+    // GET the subject from the form data
+    var subject = form["subject"].ToString();
+
+    var file = form.Files["file"];
     if (file == null || file.Length == 0)
     {
         return Results.BadRequest("No file uploaded.");
@@ -55,10 +58,8 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
 
     try
     {
-
         var fileExtension = Path.GetExtension(file.FileName).ToLower();
 
-        // Les filen til en MemoryStream
         using var memoryStream = new MemoryStream();
         await file.CopyToAsync(memoryStream);
         memoryStream.Position = 0;
@@ -95,8 +96,11 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
             return Results.BadRequest("Unsupported filetype.");
         }
 
-        // Konverter til JSON og returner til klienten
-        return Results.Json(results);
+        // Return object containing both subject & the processed data:
+        return Results.Json(new {
+            subject,  // e.g. "kontakter", "saldobalanse", etc.
+            data = results // Processed data
+        });
     }
     catch (Exception ex)
     {
@@ -104,6 +108,7 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         return Results.Problem("Failed to process the uploaded file.");
     }
 });
+
 app.MapGet("/api/standard-import-mapping", () =>
 {
     var groupedFields = FieldMappingHelper.GetStandardImportGroupedFields();

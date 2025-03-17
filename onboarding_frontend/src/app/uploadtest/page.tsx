@@ -5,17 +5,14 @@ import { useUploadContext } from "../components/UploadContext";
 export default function TestPage() {
     const { uploadedFiles } = useUploadContext();
 
-    // State to hold the user’s checked subjects (from localStorage)
     const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
-    // Which subject are we currently viewing (could be a CSV subject or safTExport)
     const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
 
     useEffect(() => {
-        // 1) Read the user's checked boxes from localStorage
+        // Read user’s selected checkboxes from localStorage
         const savedCheckBoxes = localStorage.getItem("checkboxState");
         if (savedCheckBoxes) {
             const parsedCheckBoxes = JSON.parse(savedCheckBoxes);
-            // Filter keys where the value was true
             const selectedLabels = Object.entries(parsedCheckBoxes)
                 .filter(([_, value]) => value === true)
                 .map(([key]) => key);
@@ -23,7 +20,6 @@ export default function TestPage() {
         }
     }, []);
 
-    // Keys for all subjects actually uploaded in context
     const fileKeys = Object.keys(uploadedFiles);
 
     return (

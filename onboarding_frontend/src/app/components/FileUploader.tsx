@@ -1,17 +1,20 @@
+// app/components/FileUploader.tsx
 "use client";
-import { ChangeEvent, useState } from "react";
-import { useUploadContext } from "../components/UploadContext";
+import React, { ChangeEvent, useState } from "react";
+import { useUploadContext } from "./UploadContext";
 
 interface FileUploaderProps {
-  subject: string;    // e.g. "kontakter", "safTExport"
-  accept: string;     // e.g. ".xml" or ".csv,.xlsx"
+  subject: string;        // e.g. "kontakter", "safTExport", etc.
+  accept: string;         // e.g. ".xml" or ".csv,.xlsx"
 }
 
 export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const {
-    setUploadedData,
     uploadProgress,
     setUploadProgress,
+    uploadedData,     // old single-file approach if you still need it
+    setUploadedData,
+    uploadedFiles,
     setUploadedFiles
   } = useUploadContext();
 
@@ -21,27 +24,28 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      // Manual extension check:
+
+      // optional extra check:
       const allowedExtensions = accept
           .split(",")
-          .map((x) => x.trim().toLowerCase())
-          .filter(Boolean); // e.g. [".xml", ".csv", ".xlsx"]
+          .map(x => x.trim().toLowerCase())
+          .filter(Boolean);
 
-      // native file dialog filtering
-      const lowerName = file.name.toLowerCase();
-      const isValid = allowedExtensions.some((ext) => lowerName.endsWith(ext));
-      if (!isValid && allowedExtensions.length > 0) {
-        alert(`Invalid file type. Allowed types are: ${accept}`);
-        return;
+      if (allowedExtensions.length > 0) {
+        const fileNameLower = file.name.toLowerCase();
+        const isValid = allowedExtensions.some(ext => fileNameLower.endsWith(ext));
+        if (!isValid) {
+          alert(`Invalid file type. Allowed: ${accept}`);
+          return;
+        }
       }
-
       setSelectedFile(file);
       setUploadProgress(0);
       setUploadResponse(null);
     }
   };
 
-  const uploadFile = () => {
+  const uploadFile = async () => {
     if (!selectedFile) return;
 
     const formData = new FormData();
@@ -53,26 +57,29 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
 
     xhr.upload.onprogress = (event) => {
       if (event.lengthComputable) {
-        const progress = Math.round((event.loaded / event.total) * 100);
-        setUploadProgress(progress);
+        setUploadProgress(Math.round((event.loaded / event.total) * 100));
       }
     };
 
     xhr.onload = () => {
       if (xhr.status === 200) {
+        // parse the JSON
         const response = JSON.parse(xhr.responseText);
         setUploadResponse({ message: "Upload successful", fileName: selectedFile.name });
+
+        // old single-file approach if you still want to store it:
         setUploadedData(response);
 
-        // Update multi-file dictionary
+        // store in new multi-file approach:
         const { subject, data } = response;
-        setUploadedFiles((prev) => ({
+        setUploadedFiles(prev => ({
           ...prev,
           [subject]: {
             fileName: selectedFile.name,
             data
           }
         }));
+
         setUploadProgress(100);
       } else {
         console.error("Error uploading the file:", xhr.statusText);
@@ -89,7 +96,6 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   return (
       <div className="space-y-4">
         <div>
-          {/* Use the accept prop here */}
           <input type="file" accept={accept} onChange={handleFileChange} />
           <button
               className="bg-white text-black px-4 py-2 rounded hover:bg-gray-800 ml-2"
