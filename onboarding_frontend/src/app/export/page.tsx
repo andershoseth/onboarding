@@ -6,7 +6,6 @@ import Instructions from "../components/Instructions";
 import { instructionConfig } from "./InstructionConfig";
 import { systemCoverage } from "./systemCoverage";
 import Link from "next/link";
-import FileUploader from "@/app/components/FileUploader";
 
 // The data for the instructions is stored in instructionConfig.tsx at the same level as this page
 // systemCoverage.tsx is used to determine which subjects are covered by SAF-T for each system
@@ -113,12 +112,7 @@ function SaftModeInstructions({
 
             {/* SAF-T instructions if we clicked "SAF-T Export" */}
             {selectedSubject === "safTExport" && hasSaftCoverage && (
-                <div className="flex flex-wrap gap-4 mt-4 justify-center py-10">
-                    <Instructions title={`${system} – SAF‐T Export`} steps={safTSteps} />
-
-                    {/* SAF‐T File Uploader */}
-                    <FileUploader subject="safTExport" accept=".xml" />
-                </div>
+                <Instructions title={`${system} – SAF‐T Export`} steps={safTSteps} />
             )}
 
             {/* If the user clicked a leftover subject => show CSV instructions */}
@@ -135,14 +129,6 @@ function SaftModeInstructions({
                     href="/upload"
                 >
                     Next
-                </Link>
-            </div>
-            <div className="mt-6 flex justify-end absolute bottom-4 right-28">
-                <Link
-                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
-                    href="/uploadtest"
-                >
-                    Test
                 </Link>
             </div>
             <div className="mt-6 flex justify-end absolute bottom-4 left-4">
@@ -271,15 +257,16 @@ function CsvModeInstructions({
 }
 
 /** Helper to render CSV instructions for exactly one subject. */
-function CsvInstructionsForSubject({ system, subject }: { system: string; subject: string }) {
+function CsvInstructionsForSubject({
+                                       system,
+                                       subject,
+                                   }: {
+    system: string;
+    subject: string;
+}) {
     const steps = instructionConfig[system]?.CSV?.[subject] || null;
-    if (!steps) return <p>No CSV instructions found for {subject}</p>;
-
-    return (
-        <div className="flex flex-wrap gap-4 mt-4 justify-center py-10">
-            <Instructions title={`${system} – CSV – ${subject}`} steps={steps} />
-            {/* Here is the subject-specific file uploader: */}
-            <FileUploader subject={subject} accept=".csv,.xlsx" />
-        </div>
-    );
+    if (!steps) {
+        return <p className="mt-4">No CSV instructions found for {subject}</p>;
+    }
+    return <Instructions title={`${system} – CSV – ${subject}`} steps={steps} />;
 }
