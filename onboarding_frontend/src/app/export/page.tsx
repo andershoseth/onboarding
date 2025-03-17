@@ -112,7 +112,12 @@ function SaftModeInstructions({
 
             {/* SAF-T instructions if we clicked "SAF-T Export" */}
             {selectedSubject === "safTExport" && hasSaftCoverage && (
-                <Instructions title={`${system} – SAF‐T Export`} steps={safTSteps} />
+                <div className="flex flex-col items-center space-y-4 mt-4 py-10">
+                    <Instructions title={`${system} – SAF‐T Export`} steps={safTSteps} />
+
+                    {/* SAF‐T File Uploader */}
+                    <FileUploader subject="safTExport" accept=".xml" />
+                </div>
             )}
 
             {/* If the user clicked a leftover subject => show CSV instructions */}
@@ -265,8 +270,13 @@ function CsvInstructionsForSubject({
     subject: string;
 }) {
     const steps = instructionConfig[system]?.CSV?.[subject] || null;
-    if (!steps) {
-        return <p className="mt-4">No CSV instructions found for {subject}</p>;
-    }
-    return <Instructions title={`${system} – CSV – ${subject}`} steps={steps} />;
+    if (!steps) return <p>No CSV instructions found for {subject}</p>;
+
+    return (
+        <div className="flex flex-col items-center space-y-4 mt-4 py-10">
+            <Instructions title={`${system} – CSV – ${subject}`} steps={steps} />
+            {/* Here is the subject-specific file uploader: */}
+            <FileUploader subject={subject} accept=".csv,.xlsx" />
+        </div>
+    );
 }
