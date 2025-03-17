@@ -14,27 +14,38 @@ interface ImportContextType {
 
 const ImportContext = createContext<ImportContextType>({
   selectedSystem: null,
-  setSelectedSystem: () => { },
+  setSelectedSystem: () => {},
   selectedFileType: null,
-  setSelectedFileType: () => { },
+  setSelectedFileType: () => {},
   fileName: null,
-  setFileName: () => { },
+  setFileName: () => {},
   selectedColumns: { kontakter: false, avdeling: false, saldobalanse: false },
-  setSelectedColumns: () => { },
+  setSelectedColumns: () => {},
 });
 
 export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedSystem, setSelectedSystem] = useState<string | null>(null);
   const [selectedFileType, setSelectedFileType] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(
-    () => sessionStorage.getItem("fileName") || null);
 
+  // 1) Start off with null (or empty)
+  const [fileName, setFileName] = useState<string | null>(null);
+
+  // 2) In a useEffect, read sessionStorage on the client
   useEffect(() => {
-    if (fileName) {
+    if (typeof window !== "undefined") {
+      const storedFileName = sessionStorage.getItem("fileName");
+      if (storedFileName) {
+        setFileName(storedFileName);
+      }
+    }
+  }, []);
+
+  // 3) Whenever fileName changes on the client, store it
+  useEffect(() => {
+    if (typeof window !== "undefined" && fileName) {
       sessionStorage.setItem("fileName", fileName);
     }
   }, [fileName]);
-
 
   const [selectedColumns, setSelectedColumns] = useState<{ kontakter: boolean; avdeling: boolean; saldobalanse: boolean }>({
     kontakter: false,
@@ -43,9 +54,20 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   });
 
   return (
-    <ImportContext.Provider value={{ selectedSystem, setSelectedSystem, selectedFileType, setSelectedFileType, fileName, setFileName, selectedColumns, setSelectedColumns }}>
-      {children}
-    </ImportContext.Provider>
+      <ImportContext.Provider
+          value={{
+            selectedSystem,
+            setSelectedSystem,
+            selectedFileType,
+            setSelectedFileType,
+            fileName,
+            setFileName,
+            selectedColumns,
+            setSelectedColumns,
+          }}
+      >
+        {children}
+      </ImportContext.Provider>
   );
 }
 
