@@ -1,4 +1,3 @@
-// FileUploader.tsx
 "use client";
 import { ChangeEvent, useState } from "react";
 import { useUploadContext } from "../components/UploadContext";
@@ -22,14 +21,13 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      // If you want to do a manual extension check:
+      // Manual extension check:
       const allowedExtensions = accept
           .split(",")
           .map((x) => x.trim().toLowerCase())
           .filter(Boolean); // e.g. [".xml", ".csv", ".xlsx"]
 
-      // If the user wants to rely on the native file dialog filtering only,
-      // you can skip this check. But here's an example:
+      // native file dialog filtering
       const lowerName = file.name.toLowerCase();
       const isValid = allowedExtensions.some((ext) => lowerName.endsWith(ext));
       if (!isValid && allowedExtensions.length > 0) {
