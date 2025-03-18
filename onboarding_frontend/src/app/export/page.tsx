@@ -94,7 +94,7 @@ function SaftModeInstructions({
     }, [selectedSubject, hasSaftCoverage, leftover]);
 
     return (
-        <div className="p-6 space-y-4 relative">
+        <div className="p-6 space-y-4 relative capitalize">
             {/*
         Centered row of buttons:
           - One "SAF-T Export" if we have coverage
@@ -174,17 +174,17 @@ function SubjectButtonRow({
 }) {
     return (
         // py to avoid topbar, change it when topbar is fixed
-        <div className="flex flex-wrap gap-4 mt-4 justify-center py-10">
+        <div className="flex flex-wrap gap-4 mt-4 justify-center py-10 capitalize">
             {/* SAF‐T button */}
             {hasSaftCoverage && (
                 <button
                     onClick={() => onSubjectSelect("safTExport")}
                     className="
-            bg-teal-500 text-white
+            bg-orange-600 text-white
             px-6 py-3
             rounded-full
             text-lg font-semibold
-            hover:bg-teal-600
+            hover:bg-orange-700
           "
                 >
                     SAF‐T Export
@@ -197,11 +197,12 @@ function SubjectButtonRow({
                     key={subject}
                     onClick={() => onSubjectSelect(subject)}
                     className="
-            bg-blue-500 text-white
+            bg-orange-600 text-white
             px-6 py-3
             rounded-full
             text-lg font-semibold
-            hover:bg-blue-600
+            hover:bg-orange-700
+            capitalize
           "
                 >
                     {subject}
