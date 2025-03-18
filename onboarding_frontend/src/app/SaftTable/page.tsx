@@ -1,44 +1,24 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useUploadContext } from "../components/UploadContext";
+import SaftData, { GroupedSaftEntries } from "../components/SaftData";
 
-import SaftData ,{ GroupedSaftEntries } from "../components/SaftData";
+export default function SaftTablePage() {
+  // Vi forutsetter at FileUploader har lagret SAF-T-data under subject "safTExport"
+  const { uploadedFiles } = useUploadContext();
+  const subject = "safTExport";
 
-export default function ResultPage() {
-  const [saftData, setSaftData] = useState<GroupedSaftEntries[]>([]);
-  const [loading, setLoading] = useState(true);
- 
-  useEffect(() => {
-    const formData = new FormData();
-    
+  // Hent dataen for det gitte subjectet
+  const data: GroupedSaftEntries[] = uploadedFiles[subject]?.data || [];
 
-  fetch("http://localhost:5116/api/upload", {
-    method: "POST",
-    body: formData,
-  })
-      .then((res) => res.json())
-      .then((fetchedData: GroupedSaftEntries[]) => {
-        console.log("Hentet saf-t fil data:", fetchedData);
-        setSaftData(fetchedData);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Feil under henting:", error);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return <div className="p-4">Laster...</div>;
-  }
-
-  if (!saftData) {
-    return <div className="p-4">Ingen data hentet .</div>;
+  if (data.length === 0) {
+    return <div className="p-4">Ingen SAF-T data tilgjengelig.</div>;
   }
 
   return (
-    <main className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Saf-t fil</h1>
-      <SaftData data={saftData} />
-    </main>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">SAF-T Table</h1>
+      <SaftData data={data} />
+    </div>
   );
 }

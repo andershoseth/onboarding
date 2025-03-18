@@ -66,7 +66,7 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
         // parse the JSON
         const response = JSON.parse(xhr.responseText);
         setUploadResponse({ message: "Upload successful", fileName: selectedFile.name });
-
+        console.log("Uploaded data:", response)
         // old single-file approach if you still want to store it:
         setUploadedData(response);
 

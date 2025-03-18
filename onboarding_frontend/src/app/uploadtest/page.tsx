@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useUploadContext } from "../components/UploadContext";
-
+import Link from "next/link";
 export default function TestPage() {
     const { uploadedFiles } = useUploadContext();
 
@@ -52,8 +52,17 @@ export default function TestPage() {
                 >
                     SAF-T
                 </button>
+                
             </div>
-
+            {/* Link for å navigere til en egen side for SAF-T data */}
+      <div style={{ marginBottom: "1rem" }}>
+      <Link 
+  href="/SaftTable" 
+  style={{ color: "blue", textDecoration: "underline" }}
+>
+  Gå til SAF-T Page
+</Link>
+      </div>
             {/* If a subject is selected, show the uploaded data if it exists */}
             {selectedSubject && (
                 <div style={{ marginTop: "2rem" }}>
