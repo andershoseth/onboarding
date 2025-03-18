@@ -8,78 +8,112 @@ import {
 } from "@tanstack/react-table";
 
 export interface FlattenedEntry {
-    path: string;
-    value: string;
-  }
-export interface GroupedSaftEntries{
-    groupKey : string;
-    entries :FlattenedEntry[]
+  path: string;
+  value: string;
 }
+
+export interface GroupedSaftEntries {
+  groupKey: string;
+  entries: FlattenedEntry[];
+}
+
 interface SaftDataProps {
-    data : GroupedSaftEntries []
+  data: GroupedSaftEntries[];
 }
 
-// 3) Lag en underkomponent som viser én enkelt gruppe
+
+//Pivoterer group.entries
+
 function SaftGroup({ group }: { group: GroupedSaftEntries }) {
-    
-    const columns = useMemo<ColumnDef<FlattenedEntry>[]>(
-      () => [
-        {
-          accessorKey: "path",
-         
-          cell: ({ row }) => {
-            const fullPath = row.original.path;
-            const segments = fullPath.split(".");
-            const lastSegment = segments[segments.length - 1] || fullPath;
-            return lastSegment;
-          },
-        },
-        {
-          accessorKey: "value",
-          
-        },
-      ],
-      []
-    );
-// Opprett tabellinstans
-const table = useReactTable({
-    data: group.entries,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
+    const { rows, columns } = useMemo(() => pivotByLastSegment(group.entries), [group.entries]);
+  
 
-  return (
-    <div className="mb-6">
-      <h2 className="text-lg font-bold mb-2">{group.groupKey}</h2>
-      <table className="border border-gray-300 w-full">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className="bg-gray-100">
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className="border px-4 py-2 text-left">
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="hover:bg-gray-50">
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="border px-4 py-2">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-// rendrer en SaftGroup-tabell per gruppe
-export default function SaftData({ data }: SaftDataProps) {
+    const columnDefs = useMemo<ColumnDef<Record<string, string>>[]>(
+      () => {
+        
+        // { accessorKey: "rowKey", header: "Prefix" },
+    
+        return columns.map((colKey) => ({
+          accessorKey: colKey,
+          header: colKey, // overskriften
+        }));
+      },
+      [columns]
+    );
+  
+    // Data: rows (hver row har rowKey og felter for de unike segmentene)
+    // Hvis du ikke vil vise prefix i tabellen, kan du la rowKey bli der men ikke definere kolonne for den
+    const data = rows; 
+  
+    const table = useReactTable({
+      data,
+      columns: columnDefs,
+      getCoreRowModel: getCoreRowModel(),
+    });
+  
+    return (
+      <div className="mb-6">
+        <h2 className="text-lg font-bold mb-2">{group.groupKey}</h2>
+        <table className="border border-gray-300 w-full">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id} className="bg-black-100">
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className="border px-4 py-2 text-left">
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id} className="hover:bg-gray-50">
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} className="border px-4 py-2">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+  
+  // Hjelpefunksjonen for pivot
+  function pivotByLastSegment(entries: FlattenedEntry[]) {
+    const rowMap: Record<string, Record<string, string>> = {};
+    const allSegments = new Set<string>();
+  
+    for (const entry of entries) {
+      const segments = entry.path.split(".");
+      const lastSegment = segments[segments.length - 1] || entry.path;
+      const prefix = segments.slice(0, -1).join(".");
+  
+      if (!rowMap[prefix]) {
+        rowMap[prefix] = {};
+      }
+      rowMap[prefix][lastSegment] = entry.value;
+      allSegments.add(lastSegment);
+    }
+  
+    const rows = Object.keys(rowMap).map((rowKey) => ({
+      rowKey,
+      ...rowMap[rowKey],
+    }));
+    const columns = Array.from(allSegments);
+  
+    return { rows, columns };
+  }
+  
+
+  
+  /**
+   * Rendre en SaftGroup for hver gruppe i dataen
+   */
+  export default function SaftData({ data }: SaftDataProps) {
     return (
       <div>
         {data.map((group) => (
