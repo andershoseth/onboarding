@@ -7,8 +7,7 @@ export default function ResultPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Hent standard import mapping fra API-et
-    fetch("http://localhost:5116/api/standard-import-mapping")
+    fetch("http://localhost:5116/api/upload")
       .then((res) => res.json())
       .then((fetchedData: TableGroup[]) => {
         console.log("Hentet standard import mapping:", fetchedData);

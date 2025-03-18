@@ -45,7 +45,7 @@ export default function UploadPage() {
         clearInterval(interval);
         setTimeout(() => {
           setIsTableLoading(false);
-          router.push("/ResultTable");
+          router.push("/SaftTable");
         }, 500)
       }
     }, 500)
