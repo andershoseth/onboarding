@@ -7,7 +7,7 @@ export const systemCoverage: { [key: string]: { [key: string]: string[] } } = {
 
   },
   "Tripletex": {
-    safTSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling"],
+    safTSubjects: ["hovedboktransaksjoner", "kontakter"],
     csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"],
     excelSubjects: ["hovedboktransaksjoner", "kontakter", "tilbudimport"]
   }

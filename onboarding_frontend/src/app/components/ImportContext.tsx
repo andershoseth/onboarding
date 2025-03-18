@@ -54,11 +54,8 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    console.log("Selected System:", selectedSystem);
-    console.log("Selected File Type:", selectedFileType);
 
     if (selectedSystem && selectedFileType) {
-      console.log("System Coverage:", systemCoverage);
 
       const fileTypeMap: Record<string, string> = {
         "SAF-T (.xml)": "safTSubjects",
@@ -68,11 +65,6 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
 
       const correctedFileType = fileTypeMap[selectedFileType] || selectedFileType;
       const availableSubjects = systemCoverage[selectedSystem]?.[correctedFileType];
-
-
-      console.log("Available Types for", selectedSystem, ":", Object.keys(systemCoverage[selectedSystem] || {}));
-
-      console.log("Available Subjects:", availableSubjects);
 
       if (!availableSubjects || availableSubjects.length === 0) {
         console.warn("No subjects found for selected system and file type!");
@@ -84,7 +76,6 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
         return acc;
       }, {} as { [key: string]: boolean });
 
-      console.log("Initial Checkbox State:", initialCheckBoxState);
       setSelectedColumns(initialCheckBoxState);
     }
   }, [selectedSystem, selectedFileType]);

@@ -1,29 +1,29 @@
 "use client";
 
 import Image from 'next/image';
-import { useBoxState } from '../importvelger/MenuContainer';
+import { useContext, useState, useEffect } from 'react';
 import ImportContext from '../components/ImportContext';
-import { useContext, useEffect, useState } from 'react';
 
 function Success() {
-  const { selected } = useBoxState();
-  const { fileName } = useContext(ImportContext);
+  const { selectedColumns, fileName } = useContext(ImportContext);
 
+  // State to handle the file name on the client side
   const [clientFileName, setClientFileName] = useState<string | null>(null);
 
+  // Set the file name from sessionStorage or context
   useEffect(() => {
-
     if (fileName) {
       setClientFileName(fileName);
     }
   }, [fileName]);
 
-  const checkedBoxes = Object.keys(selected)
-    .filter((key) => selected[key as keyof typeof selected])
-    .map((key) => key.charAt(0).toUpperCase() + key.slice(1));
+  // Get the selected checkboxes (only the ones that are checked)
+  const checkedBoxes = Object.keys(selectedColumns)
+    .filter((key) => selectedColumns[key])  // Filter out only checked boxes
+    .map((key) => key.charAt(0).toUpperCase() + key.slice(1)); // Capitalize the first letter of each subject
 
   return (
-    <div className="flex flex-col items-center text-center mt-10 w-full ">
+    <div className="flex flex-col items-center text-center mt-10 w-full">
       <h1 className="text-5xl font-bold mt-10">
         <span className="text-black">Suksess!</span>
       </h1>
@@ -86,3 +86,4 @@ function Success() {
 }
 
 export default Success;
+
