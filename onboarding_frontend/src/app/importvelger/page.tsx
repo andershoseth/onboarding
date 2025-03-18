@@ -1,30 +1,22 @@
-'use client'
+"use client";
 import React, { useContext } from "react";
-import { useBoxState } from "./MenuContainer";
-import CheckBox from "./CheckBox";
 import ImportContext from "../components/ImportContext";
+import CheckBox from "./CheckBox";
 import Link from "next/link";
-import MenuContainer from "./MenuContainer"; // Ensure this is imported
-
-interface BoxState {
-  kontakter: boolean;
-  avdeling: boolean;
-  saldobalanse: boolean;
-}
+import MenuContainer from "./MenuContainer";
 
 const ImportVelger: React.FC = () => {
-  const { selected, handleBoxChange } = useBoxState();
-  const isDisabled = !Object.values(selected || {}).some(Boolean); // Ensure selected is always an object
-  const importContext = useContext(ImportContext);
+  const { selectedColumns, setSelectedColumns } = useContext(ImportContext);
+  const isDisabled = !Object.values(selectedColumns || {}).some(Boolean);
 
-  const { setSelectedColumns } = importContext; // Using context for sidebar recomposition
 
-  const handleCheckboxChange = (column: keyof BoxState) => {
-    const updatedColumns = { ...selected, [column]: !selected[column] };
-
-    handleBoxChange(column);
-    setSelectedColumns(updatedColumns);
+  const handleCheckboxChange = (column: string) => {
+    setSelectedColumns((prev) => ({
+      ...prev,
+      [column]: !prev[column],
+    }));
   };
+
 
   return (
     <div className="flex flex-col items-center min-h-screen p-10">
@@ -35,9 +27,18 @@ const ImportVelger: React.FC = () => {
             <p className="text-gray-600 text-sm mb-4">Huk av hva du vil importere fra filene dine.</p>
 
             <div className="space-y-3">
-              <CheckBox label="Kontakter" checked={selected.kontakter} onChange={() => handleCheckboxChange("kontakter")} />
-              <CheckBox label="Avdeling" checked={selected.avdeling} onChange={() => handleCheckboxChange("avdeling")} />
-              <CheckBox label="Saldobalanse" checked={selected.saldobalanse} onChange={() => handleCheckboxChange("saldobalanse")} />
+              {selectedColumns && Object.keys(selectedColumns).length > 0 ? (
+                Object.keys(selectedColumns).map((subject) => (
+                  <CheckBox
+                    key={subject}
+                    label={subject}
+                    checked={selectedColumns[subject]}
+                    onChange={() => handleCheckboxChange(subject)}
+                  />
+                ))
+              ) : (
+                <p className="text-gray-500">No options available. Please select a system and file type.</p>
+              )}
             </div>
 
             <div className="mt-6 flex justify-between">
