@@ -1,1 +1,8 @@
-{}
+{
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.3.15"
+  }
+}
