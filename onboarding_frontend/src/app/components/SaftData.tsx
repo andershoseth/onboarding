@@ -31,7 +31,7 @@ function SaftGroup({ group }: { group: GroupedSaftEntries }) {
     const columnDefs = useMemo<ColumnDef<Record<string, string>>[]>(
       () => {
         
-        // { accessorKey: "rowKey", header: "Prefix" },
+        // { accessorKey: "rowKey", header: "Prefix" }
     
         return columns.map((colKey) => ({
           accessorKey: colKey,
@@ -42,7 +42,7 @@ function SaftGroup({ group }: { group: GroupedSaftEntries }) {
     );
   
     // Data: rows (hver row har rowKey og felter for de unike segmentene)
-    // Hvis du ikke vil vise prefix i tabellen, kan du la rowKey bli der men ikke definere kolonne for den
+
     const data = rows; 
   
     const table = useReactTable({
@@ -100,8 +100,8 @@ function SaftGroup({ group }: { group: GroupedSaftEntries }) {
     }
   
     const rows = Object.keys(rowMap).map((rowKey) => ({
-      rowKey,
-      ...rowMap[rowKey],
+      rowKey,// f.eks. "AuditFile.MasterFiles.GeneralLedgerAccounts.Account[1]"
+      ...rowMap[rowKey],//f.eks. { "AccountID": "1000", "AccountDescription": "Forskning og utvikling", ... }
     }));
     const columns = Array.from(allSegments);
   
@@ -109,10 +109,7 @@ function SaftGroup({ group }: { group: GroupedSaftEntries }) {
   }
   
 
-  
-  /**
-   * Rendre en SaftGroup for hver gruppe i dataen
-   */
+ 
   export default function SaftData({ data }: SaftDataProps) {
     return (
       <div>
