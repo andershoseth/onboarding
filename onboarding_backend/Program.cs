@@ -97,6 +97,7 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         }
 
         // Return object containing both subject & the processed data:
+        // Console.WriteLine(JsonSerializer.Serialize(results));
         return Results.Json(new {
             subject,  // e.g. "kontakter", "saldobalanse", etc.
             data = results // Processed data
