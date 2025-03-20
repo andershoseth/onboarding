@@ -1,7 +1,9 @@
 // app/components/FileUploader.tsx
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useContext } from "react";
 import { useUploadContext } from "./UploadContext";
+import ImportContext from "./ImportContext";
+
 
 interface FileUploaderProps {
   subject: string;        // e.g. "kontakter", "safTExport", etc.
@@ -18,12 +20,14 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
     setUploadedFiles
   } = useUploadContext();
 
+  const { setFileName } = useContext(ImportContext);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadResponse, setUploadResponse] = useState<{ message: string; fileName: string } | null>(null);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+
 
       // optional extra check:
       const allowedExtensions = accept
@@ -69,6 +73,8 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
         console.log("Uploaded data:", response)
         // old single-file approach if you still want to store it:
         setUploadedData(response);
+        setFileName(selectedFile.name);
+
 
         // store in new multi-file approach:
         const { subject, data } = response;

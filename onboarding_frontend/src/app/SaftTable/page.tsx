@@ -4,7 +4,7 @@ import { useUploadContext } from "../components/UploadContext";
 import SaftData, { GroupedSaftEntries } from "../components/SaftData";
 
 export default function SaftTablePage() {
-  // Vi forutsetter at FileUploader har lagret SAF-T-data under subject "safTExport"
+
   const { uploadedFiles } = useUploadContext();
   const subject = "safTExport";
 
