@@ -13,7 +13,6 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const handleUploadComplete = (e: any) => {
     try {
       const response = JSON.parse(e.xhr.response);
-      // Do whatever you want with the server response:
       setUploadedData(response.data);
       setUploadedFiles(prev => ({
         ...prev,
@@ -31,6 +30,14 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
     console.error("Upload error:", e.xhr);
   };
 
+  const handleFileRemove = (e: any) => {
+    setUploadedFiles(prev => {
+      const updated = { ...prev };
+      delete updated[subject];
+      return updated;
+    });
+  }
+
   return (
       <FileUpload
           name="file"
@@ -39,11 +46,12 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
           mode="advanced"
           accept={accept}
           onBeforeUpload={(event) => {
-            // Append extra form fields here:
+            // Adds subject to the form data
             event.formData.append("subject", subject);
           }}
           onUpload={handleUploadComplete}
           onError={handleUploadError}
+          onRemove={handleFileRemove}
           chooseLabel="Choose"
           uploadLabel="Upload"
           cancelLabel="Cancel"
