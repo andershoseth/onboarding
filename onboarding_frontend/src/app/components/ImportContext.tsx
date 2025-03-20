@@ -60,7 +60,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
       const fileTypeMap: Record<string, string> = {
         "SAF-T (.xml)": "safTSubjects",
         "CSV (.csv)": "csvSubjects",
-        "Excel (.xlsx)": "excelSubjects"
+        "Excel (.xlsx)": "csvSubjects"
       };
 
       const correctedFileType = fileTypeMap[selectedFileType] || selectedFileType;
