@@ -17,8 +17,6 @@ const ImportVelger: React.FC = () => {
     }));
   };
 
-  //console.log('Selected Columns:', selectedColumns);
-
   return (
     <div className="flex flex-col items-center min-h-screen p-10">
       <div className="flex items-start justify-center gap-10">

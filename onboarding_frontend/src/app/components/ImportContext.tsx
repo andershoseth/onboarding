@@ -54,6 +54,12 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("checkboxState", JSON.stringify(selectedColumns));
+    }
+  }, [selectedColumns]); //local storage for checked boxes so that export-page works
+
+  useEffect(() => {
 
     if (selectedSystem && selectedFileType) {
 
@@ -64,14 +70,20 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
       };
 
       const correctedFileType = fileTypeMap[selectedFileType] || selectedFileType;
-      const availableSubjects = systemCoverage[selectedSystem]?.[correctedFileType];
 
-      if (!availableSubjects || availableSubjects.length === 0) {
+      const safTSubjects = systemCoverage[selectedSystem]?.safTSubjects || [];
+      const csvSubjects = systemCoverage[selectedSystem]?.csvSubjects || [];
+
+      const combinedSubjects = correctedFileType === "safTSubjects" //sort the new list in alphabetical order
+        ? Array.from(new Set([...safTSubjects, ...csvSubjects])).sort((a, b) => a.localeCompare(b))
+        : csvSubjects.sort((a, b) => a.localeCompare(b));
+
+      if (!combinedSubjects.length) {
         console.warn("No subjects found for selected system and file type!");
         return;
       }
 
-      const initialCheckBoxState = availableSubjects.reduce((acc, subject) => {
+      const initialCheckBoxState = combinedSubjects.reduce((acc, subject) => {
         acc[subject] = false;
         return acc;
       }, {} as { [key: string]: boolean });
