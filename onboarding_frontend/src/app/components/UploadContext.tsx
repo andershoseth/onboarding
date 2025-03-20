@@ -23,7 +23,7 @@ interface UploadContextType {
   // New multi-file approach:
   uploadedFiles: Record<string, UploadedFileEntry>;
   setUploadedFiles: React.Dispatch<
-      React.SetStateAction<Record<string, UploadedFileEntry>>
+    React.SetStateAction<Record<string, UploadedFileEntry>>
   >;
 }
 
@@ -37,18 +37,18 @@ export function UploadProvider({ children }: { children: React.ReactNode }) {
   const [uploadedFiles, setUploadedFiles] = useState<Record<string, UploadedFileEntry>>({});
 
   return (
-      <UploadContext.Provider
-          value={{
-            uploadedData,
-            setUploadedData,
-            uploadProgress,
-            setUploadProgress,
-            uploadedFiles,
-            setUploadedFiles,
-          }}
-      >
-        {children}
-      </UploadContext.Provider>
+    <UploadContext.Provider
+      value={{
+        uploadedData,
+        setUploadedData,
+        uploadProgress,
+        setUploadProgress,
+        uploadedFiles,
+        setUploadedFiles,
+      }}
+    >
+      {children}
+    </UploadContext.Provider>
   );
 }
 
