@@ -17,6 +17,7 @@ interface UploadContextType {
     setUploadedData: React.Dispatch<React.SetStateAction<FlattenedEntry[] | null>>;
     uploadedFiles: Record<string, UploadedFileEntry>;
     setUploadedFiles: React.Dispatch<React.SetStateAction<Record<string, UploadedFileEntry>>>;
+
 }
 
 const UploadContext = createContext<UploadContextType | null>(null);
@@ -37,6 +38,7 @@ export function UploadProvider({ children }: { children: React.ReactNode }) {
             {children}
         </UploadContext.Provider>
     );
+
 }
 
 export function useUploadContext() {
