@@ -153,6 +153,15 @@ function SaftModeInstructions({
                     Previous
                 </Link>
             </div>
+            <div className="mt-6 flex justify-end absolute bottom-4 right-52">
+                <Link
+                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                    href="/displaycsvexcel"
+                >
+                    View Uploaded Data
+                </Link>
+            </div>
+
         </div>
     );
 }
