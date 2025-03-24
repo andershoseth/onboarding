@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const [showStepperBar, setShowStepperBar] = useState(false)
 
   useEffect(() => {
-    const pagesWithStepperBar = ["/systemvalg", "/importvelger", "/upload", "/export", "/filtype"]
+    const pagesWithStepperBar = ["/systemvalg", "/importvelger", "/export", "/filtype", "/displaycsvexcel"]
     setShowStepperBar(pagesWithStepperBar.includes(pathname))
   }, [pathname]);
 
