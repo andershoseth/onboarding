@@ -282,13 +282,17 @@ function CsvModeInstructions({
 
 /** Helper to render CSV instructions for exactly one subject. */
 function CsvInstructionsForSubject({ system, subject }: { system: string; subject: string }) {
-    const steps = instructionConfig[system]?.CSV?.[subject] || null;
-    if (!steps) return <p>No CSV instructions found for {subject}</p>;
+    const steps = instructionConfig[system]?.CSV?.[subject];
 
     return (
         <div className="flex flex-col items-center space-y-4 mt-4 py-10">
-            <Instructions title={`${system} – CSV – ${subject}`} steps={steps} />
-            {/* Here is the subject-specific file uploader: */}
+            {steps ? (
+                <Instructions title={`${system} – CSV – ${subject}`} steps={steps} />
+            ) : (
+                <p>No CSV instructions found for {subject}</p>
+            )}
+
+            {/* File Uploader will render regardless of whether we have instructions */}
             <FileUploader subject={subject} accept=".csv,.xlsx" />
         </div>
     );
