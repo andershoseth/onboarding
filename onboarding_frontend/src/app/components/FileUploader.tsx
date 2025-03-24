@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FileUpload } from "primereact/fileupload";
 
 import { useUploadContext } from "./UploadContext";
@@ -12,14 +12,17 @@ interface FileUploaderProps {
 
 export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const { setUploadedData, setUploadedFiles } = useUploadContext();
+  const { setFileName } = useContext(ImportContext)
 
   const handleUploadComplete = (e: any) => {
     try {
       const response = JSON.parse(e.xhr.response);
+      const uploadedFileName = e.files[0]?.name ?? "unknown"
       console.log("Server Response Data:", response.data);
       console.log("Type of First Entry:", typeof response.data?.[0]);
       console.log("Structure of First Entry:", response.data?.[0]);
 
+      setFileName(uploadedFileName)
       setUploadedData(response.data);
       setUploadedFiles(prev => ({
         ...prev,
@@ -44,6 +47,8 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
       delete updated[subject];
       return updated;
     });
+
+    setFileName(null)
   }
 
   return (

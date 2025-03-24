@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { useReactTable, getCoreRowModel, ColumnDef } from "@tanstack/react-table";
 import { useUploadContext } from "../components/UploadContext";
@@ -62,26 +62,26 @@ export default function FileDisplayPage() {
                             <p className="mb-2">File Name: <strong>{uploadedFiles[selectedSubject].fileName}</strong></p>
                             <div className="overflow-x-auto border border-gray-500 rounded-lg shadow-md bg-white">
                                 <table className="min-w-full">
-                                <thead className="bg-gray-600 text-white">
-                                    <tr>
-                                        {Object.keys(uploadedFiles[selectedSubject]?.data?.[0] || {}).map((header, index) => (
-                                            <th key={index} className="border border-gray-400 px-4 py-2 text-left">
-                                                {header} {/* Display the actual column name without swapping */}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {uploadedFiles[selectedSubject]?.data?.map((row, rowIndex) => (
-                                        <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
-                                            {Object.keys(uploadedFiles[selectedSubject]?.data?.[0] || {}).map((key, cellIndex) => (
-                                                <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900">
-                                                    {row[key]} {/* Ensures values match their headers */}
-                                                </td>
+                                    <thead className="bg-gray-600 text-white">
+                                        <tr>
+                                            {Object.keys(uploadedFiles[selectedSubject]?.data?.[0] || {}).map((header, index) => (
+                                                <th key={index} className="border border-gray-400 px-4 py-2 text-left">
+                                                    {header} {/* Display the actual column name without swapping */}
+                                                </th>
                                             ))}
                                         </tr>
-                                    ))}
-                                </tbody>
+                                    </thead>
+                                    <tbody>
+                                        {uploadedFiles[selectedSubject]?.data?.map((row, rowIndex) => (
+                                            <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
+                                                {Object.keys(uploadedFiles[selectedSubject]?.data?.[0] || {}).map((key, cellIndex) => (
+                                                    <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900">
+                                                        {row[key]} {/* Ensures values match their headers */}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </table>
                             </div>
                         </>
