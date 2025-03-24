@@ -2,8 +2,6 @@ import React from "react";
 import { FileUpload } from "primereact/fileupload";
 
 import { useUploadContext } from "./UploadContext";
-import ImportContext from "./ImportContext";
-
 
 interface FileUploaderProps {
   subject: string;
@@ -18,7 +16,7 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
       const response = JSON.parse(e.xhr.response);
 
       setUploadedData(response.data);
-      setUploadedFiles(prev => ({
+      setUploadedFiles((prev) => ({
         ...prev,
         [response.subject]: {
           fileName: e.files[0]?.name ?? "unknown",
@@ -32,34 +30,37 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
 
   const handleUploadError = (e: any) => {
     console.error("Upload error:", e.xhr);
+  };
 
+// appends the subject to form data before uploading
+  const handleBeforeUpload = (event: any) => {
+    event.formData.append("subject", subject);
   };
 
   const handleFileRemove = (e: any) => {
-    setUploadedFiles(prev => {
+    setUploadedFiles((prev) => {
       const updated = { ...prev };
       delete updated[subject];
       return updated;
     });
-  }
+  };
 
   return (
       <FileUpload
           name="file"
           url="http://localhost:5116/api/upload"
-          multiple={false}
+          multiple={true}
           mode="advanced"
+          auto={false}
           accept={accept}
-          onBeforeUpload={(event) => {
-            // Adds subject to the form data
-            event.formData.append("subject", subject);
-          }}
+          onBeforeUpload={handleBeforeUpload}
           onUpload={handleUploadComplete}
           onError={handleUploadError}
           onRemove={handleFileRemove}
-          chooseLabel="Choose"
+
+          chooseLabel="Choose File(s)"
           uploadLabel="Upload"
-          cancelLabel="Cancel"
+          cancelLabel="Clear"
       />
   );
 }
