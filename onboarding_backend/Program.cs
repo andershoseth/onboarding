@@ -70,17 +70,17 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         {
             var doc = XDocument.Load(memoryStream);
 
-          
+
             var flattened = SafTFlattener.FlattenSafTAsList(doc.Root!);
 
-           
+
             var grouped = SafTFlattener.GroupSafTEntries(flattened);
             var filteredGroups = grouped
                 .Where(g => g.GroupKey == "AuditFile.Header"
                          || g.GroupKey == "AuditFile.MasterFiles")
                 .ToList();
 
-           
+
             results = filteredGroups;
         }
         else if (fileExtension == ".csv")
@@ -97,7 +97,9 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         }
 
         // Return object containing both subject & the processed data:
-        return Results.Json(new {
+        // Console.WriteLine(JsonSerializer.Serialize(results));
+        return Results.Json(new
+        {
             subject,  // e.g. "kontakter", "saldobalanse", etc.
             data = results // Processed data
         });

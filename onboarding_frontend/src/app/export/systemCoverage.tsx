@@ -1,12 +1,17 @@
-export const systemCoverage = {
-    "Visma": {
+export const systemCoverage: { [key: string]: { [key: string]: string[] } } = {
+  "Visma": {
+    safTSubjects: ["avdelinger", "bilag", "bilagslinjer", "kontoplan", "kontakter", "prosjekter", "prosjektaktiviteter",
+      "prosjektfaktureringsmetode", "prosjektmedlemmer", "prosjektstatus"],
 
-    safTSubjects: ["hovedboktransaksjoner", "avdeling"],
-    csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"]
-    
-},
-"Tripletex": {
-    safTSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling"],
-    csvSubjects: ["hovedboktransaksjoner", "kontakter", "avdeling", "tilbudimport"]
+    csvSubjects: ["anleggsmidler", "bestillinger", "faktura CID", "lønnsgrunnlag", "lønnsjustering",
+      "lønnssaldo hittil i år", "produkter", "timeprisspesifikasjon", "tilbud"],
+  },
+
+  "Tripletex": {
+    safTSubjects: ["anleggsmidler", "bestillinger", "faktura CID", "kontoplan", "lønnsgrunnlag",
+      "lønnsjustering", "lønnssaldo hittil i år", "produkter", "timeprisspesifikasjon", "tilbud"],
+
+    csvSubjects: ["avdelinger", "bilag", "bilagslinjer", "kontoplan", "kontakter", "prosjekter",
+      "prosjektaktiviteter", "prosjektfaktureringsmetode", "prosjektmedlemmer", "prosjektstatus"],
   }
-};
+}; //elementene i listene er tatt fra standardimport-mappa på backenden

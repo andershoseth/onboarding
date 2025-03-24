@@ -1,12 +1,17 @@
 "use client";
 import React, { useContext } from "react";
 import ImportContext from "../components/ImportContext";
+import { useUploadContext } from "@/app/components/UploadContext";
 
 const Sidebar: React.FC = () => {
   const { selectedSystem, fileName, selectedColumns, selectedFileType } = useContext(ImportContext);
 
   // Might change this, since the circle is not "completed" until an action is taken, NOT if anything is saved
   const isColumnsSelected = Object.values(selectedColumns).some(Boolean);
+
+  // Just adding a variable to check if an uploaded file exists for the condition
+  const { uploadedFiles } = useUploadContext(); //
+  const isExportUploaded = Object.keys(uploadedFiles).length > 0;
 
   const renderCircle = (stepNumber: number, conditionMet: boolean) => {
     return (
@@ -54,9 +59,9 @@ const Sidebar: React.FC = () => {
 
         {/* Step 4 */}
         <li className="flex items-center space-x-4">
-          {renderCircle(4, fileName !== null && isColumnsSelected)}
+          {renderCircle(4, isExportUploaded)}
           <a href="/export" className="text-lg hover:underline">
-            Instrukser
+            Eksport
           </a>
         </li>
 

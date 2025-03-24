@@ -8,13 +8,14 @@ import StepperBar from "./components/StepperBar"
 
 import { usePathname } from "next/navigation";
 import { MappingProvider } from "./components/MappingContext";
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [showStepperBar, setShowStepperBar] = useState(false)
 
   useEffect(() => {
-    const pagesWithStepperBar = ["/systemvalg", "/importvelger", "/upload", "/export", "/filtype"]
+    const pagesWithStepperBar = ["/systemvalg", "/importvelger", "/export", "/filtype", "/displaycsvexcel"]
     setShowStepperBar(pagesWithStepperBar.includes(pathname))
   }, [pathname]);
 

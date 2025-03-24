@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@tanstack/react-table": "^8.21.2",
     "exceljs": "^4.4.0"
   },
   "devDependencies": {
