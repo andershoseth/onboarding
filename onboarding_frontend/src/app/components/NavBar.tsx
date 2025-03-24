@@ -14,20 +14,15 @@ export default function Navbar() {
       }
     };
 
-    //Listening to the scroll event here
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`p-2 font-bold text-white transition-all duration-300 ${scrolled
-        ? "bg-[rgba(0,0,0,0.6)]" // Semi-transparent black background to prevent navbar opaqueness rfom covering the text
-        : "bg-transparent"
-        } z-50 fixed w-full top-0`}
+      className={`p-2 font-bold text-white transition-all duration-300 fixed w-full top-0 z-50 
+        ${scrolled ? "bg-[rgba(0,0,0,0.3)]" : "bg-[rgba(0,0,0,0.2)]"}`
+      }
     >
       <ul className="flex space-x-4">
         <li>

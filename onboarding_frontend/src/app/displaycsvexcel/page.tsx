@@ -24,7 +24,7 @@ export default function FileDisplayPage() {
     }, []);
 
     return (
-        <div className="p-6 min-h-screen">
+        <div className="p-6 min-h-screen pt-16"> 
             <h2 className="text-2xl font-bold mb-4">Uploaded File Data</h2>
             <p className="mb-4">Subjects you selected: {checkedBoxes.length > 0 ? checkedBoxes.join(", ") : "No subjects selected."}</p>
             
@@ -54,28 +54,28 @@ export default function FileDisplayPage() {
                     {uploadedFiles[selectedSubject] ? (
                         <>
                             <p className="mb-2">File Name: <strong>{uploadedFiles[selectedSubject].fileName}</strong></p>
-                            <div className="overflow-x-auto border border-gray-500 rounded-lg shadow-md bg-white">
+                            <div className="overflow-y-auto max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white">
                                 <table className="min-w-full">
-                                <thead className="bg-gray-600 text-white">
-                                    <tr>
-                                        {Object.keys(uploadedFiles[selectedSubject]?.data?.[0] || {}).map((header, index) => (
-                                            <th key={index} className="border border-gray-400 px-4 py-2 text-left">
-                                                {header} {/* Display the actual column name without swapping */}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {uploadedFiles[selectedSubject]?.data?.map((row, rowIndex) => (
-                                        <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
-                                            {Object.keys(uploadedFiles[selectedSubject]?.data?.[0] || {}).map((key, cellIndex) => (
-                                                <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900">
-                                                    {row[key]} {/* Ensures values match their headers */}
-                                                </td>
+                                    <thead className="bg-gray-600 text-white sticky top-0 z-10">
+                                        <tr>
+                                            {Object.keys(uploadedFiles[selectedSubject].data[0] || {}).map((header, index) => (
+                                                <th key={index} className="border border-gray-400 px-4 py-2 text-left">
+                                                    {header}
+                                                </th>
                                             ))}
                                         </tr>
-                                    ))}
-                                </tbody>
+                                    </thead>
+                                    <tbody>
+                                        {uploadedFiles[selectedSubject].data.map((row: any, rowIndex: number) => (
+                                            <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
+                                                {Object.keys(uploadedFiles[selectedSubject].data[0] || {}).map((key, cellIndex) => (
+                                                    <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900">
+                                                        {row[key]}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </table>
                             </div>
                         </>

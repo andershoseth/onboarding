@@ -16,9 +16,6 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const handleUploadComplete = (e: any) => {
     try {
       const response = JSON.parse(e.xhr.response);
-      console.log("Server Response Data:", response.data);
-      console.log("Type of First Entry:", typeof response.data?.[0]);
-      console.log("Structure of First Entry:", response.data?.[0]);
 
       setUploadedData(response.data);
       setUploadedFiles(prev => ({
