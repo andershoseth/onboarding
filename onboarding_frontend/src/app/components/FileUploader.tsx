@@ -47,22 +47,22 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   }
 
   return (
-      <FileUpload
-          name="file"
-          url="http://localhost:5116/api/upload"
-          multiple={false}
-          mode="advanced"
-          accept={accept}
-          onBeforeUpload={(event) => {
-            // Adds subject to the form data
-            event.formData.append("subject", subject);
-          }}
-          onUpload={handleUploadComplete}
-          onError={handleUploadError}
-          onRemove={handleFileRemove}
-          chooseLabel="Choose"
-          uploadLabel="Upload"
-          cancelLabel="Cancel"
-      />
+    <FileUpload
+      name="file"
+      url="http://localhost:5116/api/upload"
+      multiple={false}
+      mode="advanced"
+      accept={accept}
+      onBeforeUpload={(event) => {
+        // Adds subject to the form data
+        event.formData.append("subject", subject);
+      }}
+      onUpload={handleUploadComplete}
+      onError={handleUploadError}
+      onRemove={handleFileRemove}
+      chooseLabel="Choose"
+      uploadLabel="Upload"
+      cancelLabel="Cancel"
+    />
   );
 }
