@@ -15,7 +15,7 @@ import FileUploader from "@/app/components/FileUploader";
 // subjects are retrieved from the checked boxes in importvelger
 
 export default function ExportPage() {
-    const { selectedSystem } = useContext(ImportContext);
+    const { selectedSystem, fileName, setFileName } = useContext(ImportContext);
 
     // Hard coded, get from state/localStorage when the filetype selector is implemented
     const fileType = "SAF-T";
@@ -284,7 +284,7 @@ function CsvInstructionsForSubject({ system, subject }: { system: string; subjec
             )}
 
             {/* File Uploader will render regardless of whether we have instructions */}
-            <FileUploader subject={subject} accept=".csv,.xlsx" />
+            <FileUploader subject={subject} accept=".csv,.xlsx" onFileUpload={setFileName} />
         </div>
     );
 }

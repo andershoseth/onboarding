@@ -27,7 +27,7 @@ export default function FileDisplayPage() {
         <div className="p-6 min-h-screen">
             <h2 className="text-2xl font-bold mb-4">Uploaded File Data</h2>
             <p className="mb-4">Subjects you selected: {checkedBoxes.length > 0 ? checkedBoxes.join(", ") : "No subjects selected."}</p>
-            
+
             {/* Buttons for each checked subject */}
             <div className="flex flex-wrap gap-4 mb-6">
                 {checkedBoxes.map((subject) => (
@@ -45,6 +45,12 @@ export default function FileDisplayPage() {
                 >
                     SAF-T
                 </button>
+                <Link
+                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                    href="/success"
+                >
+                    Next
+                </Link>
             </div>
 
             {/* If a subject is selected, show the uploaded data if it exists */}

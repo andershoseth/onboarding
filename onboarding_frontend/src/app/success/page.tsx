@@ -1,21 +1,12 @@
 "use client";
 
 import Image from 'next/image';
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import ImportContext from '../components/ImportContext';
 
 function Success() {
   const { selectedColumns, fileName } = useContext(ImportContext);
-
-  // State to handle the file name on the client side
-  const [clientFileName, setClientFileName] = useState<string | null>(null);
-
-  // Set the file name from sessionStorage or context
-  useEffect(() => {
-    if (fileName) {
-      setClientFileName(fileName);
-    }
-  }, [fileName]);
+  console.log(fileName)
 
   // Get the selected checkboxes (only the ones that are checked)
   const checkedBoxes = Object.keys(selectedColumns)
@@ -35,7 +26,7 @@ function Success() {
             <div className="mt-4 text-xl text-gray-700 w-full">
               <p>Du har importert følgende:</p>
               <p className="font-bold text-lg text-gray-800">
-                {clientFileName ? clientFileName : "Ingen fil lastet opp"}
+                {fileName ? fileName : "Ingen fil lastet opp"}
               </p>
               <ul className="mt-2">
                 {checkedBoxes.length > 0 ? (

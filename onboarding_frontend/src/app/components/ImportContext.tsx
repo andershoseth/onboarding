@@ -30,17 +30,9 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: boolean }>({})
 
   // 1) Start off with null (or empty)
-  const [fileName, setFileName] = useState<string | null>(null);
-
-  // 2) In a useEffect, read sessionStorage on the client
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedFileName = sessionStorage.getItem("fileName");
-      if (storedFileName) {
-        setFileName(storedFileName);
-      }
-    }
-  }, []);
+  const [fileName, setFileName] = useState<string | null>(
+    typeof window !== "undefined" ? sessionStorage.getItem("fileName") : null
+  );
 
   // 3) Whenever fileName changes on the client, store it
   useEffect(() => {
