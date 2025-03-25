@@ -5,11 +5,26 @@ import { useRouter } from "next/navigation";
 import { useReactTable, getCoreRowModel, ColumnDef } from "@tanstack/react-table";
 import { useUploadContext } from "../components/UploadContext";
 import Link from "next/link";
+import { MappingDropdownHeader, TableFieldMapping } from "../components/MappingDropdownHeader";
 
 export default function FileDisplayPage() {
     const { uploadedFiles } = useUploadContext();
     const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
     const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+
+    const [tableFieldMappings, setTableFieldMappings] = useState<TableFieldMapping[]>([]);
+    const [mappingsForCsv, setMappingsForCsv] = useState<Record<string, string>>({});
+    
+
+    useEffect(() => {
+        // Example: Fetch /api/standard-import-mapping once
+        fetch("http://localhost:5116/api/standard-import-mapping")
+          .then((res) => res.json())
+          .then((data: TableFieldMapping[]) => {
+            setTableFieldMappings(data);
+          })
+          .catch((error) => console.error("Error fetching standard import mapping:", error));
+      }, []);
 
     useEffect(() => {
         // Read user’s selected checkboxes from localStorage
@@ -58,9 +73,20 @@ export default function FileDisplayPage() {
                                     <thead className="bg-gray-600 text-white sticky top-0 z-10">
                                         <tr>
                                             {Object.keys(uploadedFiles[selectedSubject].data[0] || {}).map((header, index) => (
-                                                <th key={index} className="border border-gray-400 px-4 py-2 text-left">
-                                                    {header}
-                                                </th>
+                                                <th key={header}>
+                                                <MappingDropdownHeader
+                                                  columnLabel={header}                  // e.g. "Name", "Email", "Price"
+                                                  tableFieldMappings={tableFieldMappings}
+                                                  currentMapping={mappingsForCsv[header] || ""}
+                                                  onMappingSelect={(selected) => {
+                                                    // store the user's chosen tableName.field for this CSV header
+                                                    setMappingsForCsv((prev) => ({
+                                                      ...prev,
+                                                      [header]: selected
+                                                    }));
+                                                  }}
+                                                />
+                                              </th>
                                             ))}
                                         </tr>
                                     </thead>
