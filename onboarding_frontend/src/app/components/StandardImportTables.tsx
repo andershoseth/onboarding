@@ -6,7 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useMapping } from "./MappingContext";
+import { useMapping } from "../components/MappingContext";
 
 // Typene våre
 export interface StandardImportField {

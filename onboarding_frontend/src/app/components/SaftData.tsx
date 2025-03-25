@@ -6,7 +6,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { MappingDropdownHeader, TableFieldMapping } from "./MappingDropdownHeader"
 
 // SAF-T Type
 export interface FlattenedEntry {
@@ -22,6 +21,11 @@ export interface GroupedSaftEntries {
 //Standard Import Type
 export interface StandardImportField {
   field: string;
+}
+
+export interface TableFieldMapping {
+  tableName: string;
+  fields: StandardImportField[];
 }
 
 // Pivot function for SAF-T Data
@@ -166,10 +170,10 @@ function SaftGroup({
       columns.map((colKey) => ({
         accessorKey: colKey,
         header: () => (
-          <MappingDropdownHeader
-            columnLabel={colKey}                 // pass the SAF-T column name
+          <MappingHeader
+            saftColumn={colKey}
             tableFieldMappings={tableFieldMappings}
-            currentMapping={mapping[colKey] || ""} // same as before
+            currentMapping={mapping[colKey] || ""}
             onMappingSelect={(selected) =>
               setMapping((prev) => ({ ...prev, [colKey]: selected }))
             }
