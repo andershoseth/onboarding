@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FileUpload } from "primereact/fileupload";
 import { useUploadContext } from "./UploadContext";
 import ImportContext from "./ImportContext";
@@ -11,7 +11,6 @@ interface FileUploaderProps {
 export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const { setUploadedData, setUploadedFiles } = useUploadContext();
   const { setFileName, fileName } = useContext(ImportContext)
-  console.log("Files: ", fileName)
 
   const handleUploadComplete = (e: any) => {
     try {
@@ -42,12 +41,18 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   };
 
   const handleFileRemove = (e: any) => {
+    const removeFileName = e.files?.name ?? "couldn't fetch filename" //FÅ TAK I NAVNET FØRST
+    console.log(removeFileName) //sjekk at navnet er hentet
     setUploadedFiles((prev) => {
       const updated = { ...prev };
       delete updated[subject];
       return updated;
     });
+
+    setFileName((prev) => prev.filter((name) => name !== removeFileName)); //DENNE VIL IKKE FUNKE HVIS NAVNET IKKE ER HENTET FØRST I removedFileName
   };
+
+  console.log("Files: ", fileName)
 
   return (
     <FileUpload
