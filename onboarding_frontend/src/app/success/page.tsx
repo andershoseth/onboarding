@@ -24,9 +24,14 @@ function Success() {
             Du er nå i mål med importen!
             <div className="mt-4 text-xl text-gray-700 w-full">
               <p>Du har importert følgende  filer:</p>
-              <p className="font-bold text-lg text-gray-800">
-                {fileName ? fileName : "Ingen fil lastet opp"}
-              </p>
+              {fileName.length > 0 ? (
+                <ul className="font-bold text-lg text-gray-800">
+                  {fileName.map((name, index) => (
+                    <li key={index}>- {name}</li>
+                  ))}
+                </ul>
+              ) : (<p className="font-bold text-lg, text-gray-800">
+                Ingen filer lastet opp</p>)}
               <p>Med disse valgene fra importvelgeren:</p>
               <ul className="mt-2">
                 {checkedBoxes.length > 0 ? (

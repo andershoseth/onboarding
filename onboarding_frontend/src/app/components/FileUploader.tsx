@@ -20,7 +20,7 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
       console.log("Type of First Entry:", typeof response.data?.[0]);
       console.log("Structure of First Entry:", response.data?.[0]);
 
-      setFileName(uploadedFileName)
+      setFileName((prev) => [...prev, uploadedFileName]);
       setUploadedData(response.data);
       setUploadedFiles((prev) => ({
         ...prev,
