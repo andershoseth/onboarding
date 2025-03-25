@@ -2,35 +2,31 @@
 "use client";
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
-interface MappingRow {
-  field: string;
-  mapping: string;
-}
-
-interface Mapping {
-  [tableName: string]: MappingRow[];
+export interface Mapping {
+  [columnName: string]: string;
 }
 
 interface MappingContextType {
-  mappingData: Mapping;
-  setMappingData: React.Dispatch<React.SetStateAction<Mapping>>;
+  mapping: Mapping;
+  setMapping: React.Dispatch<React.SetStateAction<Mapping>>;
 }
 
-const MappingContext = createContext<MappingContextType | undefined>(undefined);
+const MappingContext = createContext<MappingContextType | null>(null);
 
-export const MappingProvider = ({ children }: { children: ReactNode }) => {
-  const [mappingData, setMappingData] = useState<Mapping>({});
+export function MappingProvider({ children }: { children: React.ReactNode }) {
+  const [mapping, setMapping] = useState<Mapping>({});
+
   return (
-    <MappingContext.Provider value={{ mappingData, setMappingData }}>
+    <MappingContext.Provider value={{ mapping, setMapping }}>
       {children}
     </MappingContext.Provider>
   );
-};
+}
 
-export const useMapping = () => {
+export function useMapping() {
   const context = useContext(MappingContext);
   if (!context) {
-    throw new Error("useMapping må brukes innenfor MappingProvider");
+    throw new Error("useMapping must be used within a MappingProvider");
   }
   return context;
-};
+}

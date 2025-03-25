@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
+import { useMapping } from "../components/MappingContext";
+import MappingHeader, { MappingHeaderProps } from "../utils/MappingHeader"
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+
 
 // SAF-T Type
 export interface FlattenedEntry {
@@ -46,7 +49,7 @@ function pivotByLastSegment(entries: FlattenedEntry[]) {
   }
 
   const rows = Object.keys(rowMap).map((rowKey) => ({
-    rowKey, // e, "AuditFile.MasterFiles.GeneralLedgerAccounts.Account[1]"
+    rowKey, //  "AuditFile.MasterFiles.GeneralLedgerAccounts.Account[1]"
     ...rowMap[rowKey],
   }));
   const columns = Array.from(allSegments);
@@ -54,101 +57,6 @@ function pivotByLastSegment(entries: FlattenedEntry[]) {
   return { rows, columns };
 }
 
-// Dropdown
-interface MappingHeaderProps {
-  saftColumn: string;
-  tableFieldMappings: TableFieldMapping[];
-  currentMapping: string;
-  onMappingSelect: (mapping: string) => void;
-}
-
-const MappingHeader: React.FC<MappingHeaderProps> = ({
-  saftColumn,
-  tableFieldMappings,
-  currentMapping,
-  onMappingSelect,
-}) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedTable, setSelectedTable] = useState<string | null>(null);
-
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
-
-  return (
-    <div style={{ position: "relative" }}>
-      {/* Display either the current mapping or the dropdown arrow */}
-      <div style={{ cursor: "pointer" }} onClick={toggleMenu}>
-        {currentMapping
-          ? `${saftColumn} → ${currentMapping}`
-          : `${saftColumn} ▼`}
-      </div>
-
-      {/* Dropdown Menu */}
-      {menuOpen && (
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            background: "white",
-            border: "1px solid #ccc",
-            zIndex: 999,
-            minWidth: "200px",
-            padding: "4px",
-          }}
-        >
-          {/* Step 1: choose a table */}
-          {!selectedTable && (
-            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-              {tableFieldMappings.map((tm) => (
-                <li
-                  key={tm.tableName}
-                  style={{ padding: "4px 8px", cursor: "pointer" }}
-                  onClick={() => setSelectedTable(tm.tableName)}
-                >
-                  {tm.tableName}
-                </li>
-              ))}
-            </ul>
-          )}
-          {/* Step 2: choose a field from that table */}
-          {selectedTable && (
-            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-              {/* Back button */}
-              <li
-                style={{
-                  padding: "4px 8px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                }}
-                onClick={() => setSelectedTable(null)}
-              >
-                ← Back
-              </li>
-              {tableFieldMappings
-                .find((tm) => tm.tableName === selectedTable)
-                ?.fields.map((f) => (
-                  <li
-                    key={f.field}
-                    style={{ padding: "4px 8px", cursor: "pointer" }}
-                    onClick={() => {
-                      // Update mapping in parent
-                      onMappingSelect(`${selectedTable}.${f.field}`);
-                      setMenuOpen(false);
-                      setSelectedTable(null);
-                    }}
-                  >
-                    {f.field}
-                  </li>
-                ))}
-            </ul>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
-
-// Renders one group of Saft data with a mapping header for each column
 function SaftGroup({
   group,
   tableFieldMappings,
@@ -161,9 +69,8 @@ function SaftGroup({
     () => pivotByLastSegment(group.entries),
     [group.entries]
   );
-
-  // Maintain the user's mappings of SAF-T fields to standard fields
-  const [mapping, setMapping] = useState<Record<string, string>>({});
+  const { mapping, setMapping } = useMapping();
+ 
 
   const columnDefs = useMemo<ColumnDef<Record<string, string>>[]>(
     () =>
@@ -175,12 +82,12 @@ function SaftGroup({
             tableFieldMappings={tableFieldMappings}
             currentMapping={mapping[colKey] || ""}
             onMappingSelect={(selected) =>
-              setMapping((prev) => ({ ...prev, [colKey]: selected }))
+              setMapping((prev) => ({ ...prev, [colKey]: selected })) 
             }
           />
         ),
       })),
-    [columns, mapping, tableFieldMappings]
+    [columns, mapping, tableFieldMappings, setMapping]
   );
 
   const table = useReactTable({
