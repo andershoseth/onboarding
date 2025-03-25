@@ -9,8 +9,8 @@ interface FileUploaderProps {
 }
 
 export default function FileUploader({ subject, accept }: FileUploaderProps) {
-  const { setUploadedData, setUploadedFiles } = useUploadContext();
-  const { setFileName, fileName } = useContext(ImportContext)
+  const { setUploadedData, setUploadedFiles, uploadedFiles } = useUploadContext();
+  const { setFileName } = useContext(ImportContext)
 
   const handleUploadComplete = (e: any) => {
     try {
@@ -41,18 +41,16 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   };
 
   const handleFileRemove = (e: any) => {
-    const removeFileName = e.files?.name ?? "couldn't fetch filename" //FÅ TAK I NAVNET FØRST
-    console.log(removeFileName) //sjekk at navnet er hentet
+    const removeFileName = uploadedFiles[subject].fileName //får tak i navnet på fila som skal slettes
+
     setUploadedFiles((prev) => {
       const updated = { ...prev };
       delete updated[subject];
       return updated;
     });
 
-    setFileName((prev) => prev.filter((name) => name !== removeFileName)); //DENNE VIL IKKE FUNKE HVIS NAVNET IKKE ER HENTET FØRST I removedFileName
+    setFileName((prev) => prev.filter((name) => name !== removeFileName)); //fjerner valgt fil fra fileName-lista
   };
-
-  console.log("Files: ", fileName)
 
   return (
     <FileUpload
