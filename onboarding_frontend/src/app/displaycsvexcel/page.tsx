@@ -39,12 +39,9 @@ export default function FileDisplayPage() {
                         {subject}
                     </button>
                 ))}
-                <button
-                    onClick={() => setSelectedSubject("safTExport")}
-                    className="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600"
-                >
+                <Link href="/SaftTable" className="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600">
                     SAF-T
-                </button>
+                </Link>
                 <Link
                     className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
                     href="/success"

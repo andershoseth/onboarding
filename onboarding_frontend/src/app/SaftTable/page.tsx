@@ -8,7 +8,7 @@ export default function SaftTablePage() {
   const { uploadedFiles } = useUploadContext();
   const subject = "safTExport";
 
-  // Hent dataen for det gitte subjectet
+  // Retrieve the SAF-T data for the subject 
   const data: GroupedSaftEntries[] = uploadedFiles[subject]?.data || [];
 
   if (data.length === 0) {
@@ -16,9 +16,12 @@ export default function SaftTablePage() {
   }
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">SAF-T Table</h1>
+    <div className="p-6 min-h-screen pt-16 bg-white text-black">
+      
       <SaftData data={data} />
     </div>
   );
 }
+
+
+
