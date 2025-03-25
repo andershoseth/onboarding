@@ -10,15 +10,13 @@ interface FileUploaderProps {
 
 export default function FileUploader({ subject, accept }: FileUploaderProps) {
   const { setUploadedData, setUploadedFiles } = useUploadContext();
-  const { setFileName } = useContext(ImportContext)
+  const { setFileName, fileName } = useContext(ImportContext)
+  console.log("Files: ", fileName)
 
   const handleUploadComplete = (e: any) => {
     try {
       const response = JSON.parse(e.xhr.response);
       const uploadedFileName = e.files[0]?.name ?? "unknown"
-      console.log("Server Response Data:", response.data);
-      console.log("Type of First Entry:", typeof response.data?.[0]);
-      console.log("Structure of First Entry:", response.data?.[0]);
 
       setFileName((prev) => [...prev, uploadedFileName]);
       setUploadedData(response.data);
