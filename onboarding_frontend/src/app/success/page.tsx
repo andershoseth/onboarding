@@ -20,18 +20,21 @@ function Success() {
 
       <div className="mt-10 w-full max-w-6xl">
         <div className="flex flex-col sm:flex-row w-full mb-8">
-          <div className="sm:w-1/2 w-full h-80 bg-white text-blue-600 mr-6 rounded-3xl flex flex-col items-center justify-center p-6 text-2xl font-semibold shadow-lg">
+          <div className="sm:w-1/2 w-full bg-white text-blue-600 mr-6 rounded-3xl flex flex-col items-center justify-center p-6 text-2xl font-semibold shadow-lg min-h-80">
             Du er nå i mål med importen!
             <div className="mt-4 text-xl text-gray-700 w-full">
-              <p>Du har importert følgende  filer:</p>
+              <p>Du har importert følgende filer:</p>
               {fileName.length > 0 ? (
                 <ul className="font-bold text-lg text-gray-800">
                   {fileName.map((name, index) => (
                     <li key={index}>✔ {name}</li>
                   ))}
                 </ul>
-              ) : (<p className="font-bold text-lg, text-gray-800">
-                Ingen filer lastet opp</p>)}
+              ) : (
+                <p className="font-bold text-lg text-gray-800">
+                  Ingen filer lastet opp
+                </p>
+              )}
               <p>Med disse valgene fra importvelgeren:</p>
               <ul className="mt-2">
                 {checkedBoxes.length > 0 ? (
