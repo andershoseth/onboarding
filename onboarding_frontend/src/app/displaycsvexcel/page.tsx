@@ -64,7 +64,7 @@ export default function FileDisplayPage() {
                     className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
                     href="/success"
                 >
-                    Next
+                    Finish
                 </Link>
             </div>
 
