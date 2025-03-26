@@ -5,14 +5,14 @@ import React, { useState } from "react";
 import { TableFieldMapping } from "../components/SaftData"; 
 
 export interface MappingHeaderProps {
-  saftColumn: string;
+  columnLabel: string;
   tableFieldMappings: TableFieldMapping[];
   currentMapping: string;
   onMappingSelect: (mapping: string) => void;
 }
 
 const MappingHeader: React.FC<MappingHeaderProps> = ({
-  saftColumn,
+  columnLabel,
   tableFieldMappings,
   currentMapping,
   onMappingSelect,
@@ -27,8 +27,8 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
       {/* Display either the current mapping or the dropdown arrow */}
       <div style={{ cursor: "pointer" }} onClick={toggleMenu}>
         {currentMapping
-          ? `${saftColumn} → ${currentMapping}`
-          : `${saftColumn} ▼`}
+          ? `${columnLabel} → ${currentMapping}`
+          : `${columnLabel} ▼`}
       </div>
 
       {/* Dropdown Menu */}
@@ -43,6 +43,7 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
             zIndex: 999,
             minWidth: "200px",
             padding: "4px",
+            color: "black",
           }}
         >
           {/* Level 1: Choose a table */}
@@ -97,5 +98,6 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
     </div>
   );
 };
+
 
 export default MappingHeader;

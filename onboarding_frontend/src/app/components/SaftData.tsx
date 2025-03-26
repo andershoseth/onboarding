@@ -78,7 +78,7 @@ function SaftGroup({
         accessorKey: colKey,
         header: () => (
           <MappingHeader
-            saftColumn={colKey}
+            columnLabel={colKey}
             tableFieldMappings={tableFieldMappings}
             currentMapping={mapping[colKey] || ""}
             onMappingSelect={(selected) =>
