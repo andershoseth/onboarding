@@ -12,15 +12,12 @@ export default function FileDisplayPage() {
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
 
-  // 1) Pull from your new MappingContext
-  //    'mapping' is an object like { [columnName: string]: string }
-  //    'setMapping' is a function to update it
+  // From mappingcontext. Mapping is { [columnName: string]: string }
   const { mapping, setMapping } = useMapping();
 
-  // 2) You still need the table/field definitions from your .NET backend
+  // table/field definitions from backend
   const [tableFieldMappings, setTableFieldMappings] = useState<TableFieldMapping[]>([]);
 
-  // 3) Fetch the StandardImport table/field list once on mount
   useEffect(() => {
     fetch("http://localhost:5116/api/standard-import-mapping")
       .then((res) => res.json())
@@ -30,7 +27,6 @@ export default function FileDisplayPage() {
       .catch((error) => console.error("Error fetching standard import mapping:", error));
   }, []);
 
-  // 4) Load user’s selected checkboxes from localStorage
   useEffect(() => {
     const savedCheckBoxes = localStorage.getItem("checkboxState");
     if (savedCheckBoxes) {
@@ -81,11 +77,11 @@ export default function FileDisplayPage() {
                     <tr>
                       {Object.keys(uploadedFiles[selectedSubject].data[0] || {}).map((header, index) => (
                         <th key={index} className="border border-gray-400 px-4 py-2 text-left">
-                          {/* Use your MappingHeader as a clickable dropdown */}
+                          {/* MappingHeader is clickable dropdown */}
                           <MappingHeader
-                            columnLabel={header} // or rename to 'columnLabel'
+                            columnLabel={header}
                             tableFieldMappings={tableFieldMappings}
-                            // The user-chosen mapping for this header (if any)
+                            // The chosen mapping for this header
                             currentMapping={mapping[header] || ""}
                             // Update context whenever user picks a new table.field
                             onMappingSelect={(selected) => {
