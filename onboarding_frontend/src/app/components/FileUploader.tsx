@@ -41,15 +41,13 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
   };
 
   const handleFileRemove = (e: any) => {
-    const removeFileName = uploadedFiles[subject].fileName //får tak i navnet på fila som skal slettes
-
     setUploadedFiles((prev) => {
       const updated = { ...prev };
       delete updated[subject];
       return updated;
     });
 
-    setFileName((prev) => prev.filter((name) => name !== removeFileName)); //fjerner valgt fil fra fileName-lista
+    setFileName((prev) => prev.filter((name) => name !== uploadedFiles[subject].fileName)); //får tak i navnet til fila som skal slettes, og fjerner valgt fil fra fileName-lista
   };
 
   return (

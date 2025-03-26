@@ -27,7 +27,7 @@ function Success() {
               {fileName.length > 0 ? (
                 <ul className="font-bold text-lg text-gray-800">
                   {fileName.map((name, index) => (
-                    <li key={index}>- {name}</li>
+                    <li key={index}>✔ {name}</li>
                   ))}
                 </ul>
               ) : (<p className="font-bold text-lg, text-gray-800">
@@ -37,7 +37,7 @@ function Success() {
                 {checkedBoxes.length > 0 ? (
                   checkedBoxes.map((box, index) => (
                     <li key={index} className="text-lg text-gray-700">
-                      - {box}
+                      ✔ {box}
                     </li>
                   ))
                 ) : (
