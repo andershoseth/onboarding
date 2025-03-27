@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";  // Import usePathname to check t
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname(); // Get the current pathname
 
-  const showStepper = !(pathname === "/SaftTable" || pathname === "/home");
+  const showStepper = !(pathname === "/SaftTable" || pathname === "/home"); //skjuler stepper på hjemmesiden og saft-siden
 
   return (
     <ImportProvider>

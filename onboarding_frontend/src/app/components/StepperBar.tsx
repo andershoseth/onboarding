@@ -37,6 +37,7 @@ const StepperBar: React.FC = () => {
 
   const activeStepIndex = steps.findIndex((step) => step.url === pathname);
 
+  //holder følge på hvilken side du er på
   const [currentStep, setCurrentStep] = useState(activeStepIndex !== -1 ? activeStepIndex : 0);
   useEffect(() => {
     setCurrentStep(activeStepIndex !== -1 ? activeStepIndex : 0);
