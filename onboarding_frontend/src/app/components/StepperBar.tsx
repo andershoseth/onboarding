@@ -6,26 +6,37 @@ import { StepperPanel } from "primereact/stepperpanel";
 import { usePathname, useRouter } from "next/navigation";
 import ImportContext from "../components/ImportContext";
 
+// Define steps function that returns the steps array
+export const getSteps = (
+  selectedSystem: any,
+  selectedColumns: any,
+  selectedFileType: any,
+  uploadedFiles: any
+) => {
+  const isColumnsSelected = Object.values(selectedColumns).some(Boolean);
+  const isExportUploaded = Object.keys(uploadedFiles).length > 0;
+
+  //liste over sider
+  return [
+    { label: "Hjem", url: "/home", description: "Dra til hjemmesiden" },
+    { label: "Systemvalg", url: "/systemvalg", description: "Velg system", completed: selectedSystem !== null },
+    { label: "Filtype", url: "/filtype", description: "Velg filtype", completed: selectedFileType !== null },
+    { label: "Importvelger", url: "/importvelger", description: "Velg hva du vil laste opp", completed: isColumnsSelected },
+    { label: "Eksport", url: "/export", description: "Last opp filene dine", completed: isExportUploaded },
+    { label: "Forhåndsvisning", url: "/displaycsvexcel", description: "Se filene du lastet opp", completed: isExportUploaded },
+  ];
+};
+
 const StepperBar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { selectedSystem, selectedColumns, selectedFileType } = useContext(ImportContext);
   const { uploadedFiles } = useUploadContext();
 
-  const isColumnsSelected = Object.values(selectedColumns).some(Boolean);
-  const isExportUploaded = Object.keys(uploadedFiles).length > 0;
-
-  //liste over sider
-  const steps = [
-    { label: "Systemvalg", url: "/systemvalg", description: "Velg system", completed: selectedSystem !== null },
-    { label: "Filtype", url: "/filtype", description: "Velg filtype", completed: selectedFileType !== null },
-    { label: "Importvelger", url: "/importvelger", description: "Velg hva du vil laste opp", completed: isColumnsSelected },
-    { label: "Eksport", url: "/export", description: "Last opp filene dine", completed: isExportUploaded },
-  ];
+  const steps = getSteps(selectedSystem, selectedColumns, selectedFileType, uploadedFiles);
 
   const activeStepIndex = steps.findIndex((step) => step.url === pathname);
 
-  //følger med på sidene
   const [currentStep, setCurrentStep] = useState(activeStepIndex !== -1 ? activeStepIndex : 0);
   useEffect(() => {
     setCurrentStep(activeStepIndex !== -1 ? activeStepIndex : 0);
@@ -44,7 +55,7 @@ const StepperBar: React.FC = () => {
           </StepperPanel>
         ))}
       </Stepper>
-    </div >
+    </div>
   );
 };
 
