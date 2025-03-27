@@ -1,14 +1,15 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import ImportContext from "../components/ImportContext";
 import { useUploadContext } from "@/app/components/UploadContext";
 import { Stepper } from "primereact/stepper";
 import { StepperPanel } from "primereact/stepperpanel";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import ImportContext from "../components/ImportContext";
 
 const Sidebar: React.FC = () => {
   const pathname = usePathname(); //må ha path for å gå til neste steg
-  const { selectedSystem, fileName, selectedColumns, selectedFileType } = useContext(ImportContext);
+  const router = useRouter(); //navigering til neste side
+  const { selectedSystem, selectedColumns, selectedFileType } = useContext(ImportContext);
   const { uploadedFiles } = useUploadContext();
 
   const isColumnsSelected = Object.values(selectedColumns).some(Boolean);
@@ -16,11 +17,10 @@ const Sidebar: React.FC = () => {
 
   //liste over sider (vurder å fjern completed senere hvis mulig)
   const steps = [
-    { label: "Systemvalg", url: "/systemvalg", completed: selectedSystem !== null },
-    { label: "Filtype", url: "/filtype", completed: selectedFileType !== null },
-    { label: "Importvelger", url: "/importvelger", completed: isColumnsSelected },
-    { label: "Eksport", url: "/export", completed: isExportUploaded },
-    { label: "Last opp", url: "/upload", completed: fileName !== null },
+    { label: "Systemvalg", url: "/systemvalg", description: "Velg system", completed: selectedSystem !== null },
+    { label: "Filtype", url: "/filtype", description: "Velg filtype", completed: selectedFileType !== null },
+    { label: "Importvelger", url: "/importvelger", description: "Velg hva du vil laste opp", completed: isColumnsSelected },
+    { label: "Eksport", url: "/export", description: "Last opp filene dine", completed: isExportUploaded },
   ];
 
   const activeStepIndex = steps.findIndex((step) => step.url === pathname);
@@ -32,12 +32,15 @@ const Sidebar: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className="fixed top-0 left-0 w-64 h-full bg-gray-800 text-white pt-10 flex flex-col items-start pl-6">
+    <div className="fixed top-0 left-0 w-64 h-full bg-white text-black pt-10  items-start pl-1">
       <Stepper activeStep={currentStep} orientation="vertical">
         {steps.map((step, index) => (
-          <StepperPanel
-            key={index}
-            header={step.label}>
+          <StepperPanel key={index} header={step.label}>
+            <button
+              onClick={() => router.push(step.url)}
+              className="text-black hover:text-gray-300 text-left w-full">
+              {step.description}
+            </button>
           </StepperPanel>
         ))}
       </Stepper>
