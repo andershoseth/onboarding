@@ -1,8 +1,7 @@
-// FileUploader.tsx
-
-import React, {useRef} from "react";
-import {FileUpload} from "primereact/fileupload";
-import {useUploadContext} from "./UploadContext";
+import React, { useContext, useEffect, useRef } from "react";
+import { FileUpload } from "primereact/fileupload";
+import { useUploadContext } from "./UploadContext";
+import ImportContext from "./ImportContext";
 
 interface FileUploaderProps {
     subject: string;
@@ -43,10 +42,15 @@ export default function FileUploader({
         // Otherwise we keep the valid files
         e.files = validFiles;
     };
+export default function FileUploader({ subject, accept }: FileUploaderProps) {
+  const { setUploadedData, setUploadedFiles, uploadedFiles } = useUploadContext();
+  const { setFileName } = useContext(ImportContext)
 
     const handleUploadComplete = (e: any) => {
         try {
             const response = JSON.parse(e.xhr.response);
+            const uploadedFileName = e.files[0]?.name ?? "unknown"
+            setFileName((prev) => [...prev, uploadedFileName]);
             setUploadedData(response.data);
 
             setUploadedFiles((prev) => ({
@@ -67,17 +71,20 @@ export default function FileUploader({
         onShowErrorToast?.("Upload failed or unsupported file.");
     };
 
-    const handleBeforeUpload = (event: any) => {
-        event.formData.append("subject", subject);
-    };
+  // appends the subject to form data before uploading
+  const handleBeforeUpload = (event: any) => {
+    event.formData.append("subject", subject);
+  };
 
-    const handleFileRemove = (e: any) => {
-        setUploadedFiles((prev) => {
-            const updated = {...prev};
-            delete updated[subject];
-            return updated;
-        });
-    };
+  const handleFileRemove = (e: any) => {
+    setUploadedFiles((prev) => {
+      const updated = { ...prev };
+      delete updated[subject];
+      return updated;
+    });
+
+    setFileName((prev) => prev.filter((name) => name !== uploadedFiles[subject].fileName)); //får tak i navnet til fila som skal slettes, og fjerner valgt fil fra fileName-lista
+  };
 
     return (
         // TODO: Width should match instruction component

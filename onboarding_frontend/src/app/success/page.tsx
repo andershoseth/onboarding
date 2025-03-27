@@ -1,26 +1,19 @@
 "use client";
 
 import Image from 'next/image';
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import ImportContext from '../components/ImportContext';
+import { useSearchParams } from "next/navigation";
 
 function Success() {
   const { selectedColumns, fileName } = useContext(ImportContext);
-
-  // State to handle the file name on the client side
-  const [clientFileName, setClientFileName] = useState<string | null>(null);
-
-  // Set the file name from sessionStorage or context
-  useEffect(() => {
-    if (fileName) {
-      setClientFileName(fileName);
-    }
-  }, [fileName]);
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id"); // e.g., "/success?id=abcdef123..."
 
   // Get the selected checkboxes (only the ones that are checked)
   const checkedBoxes = Object.keys(selectedColumns)
-    .filter((key) => selectedColumns[key])  // Filter out only checked boxes
-    .map((key) => key.charAt(0).toUpperCase() + key.slice(1)); // Capitalize the first letter of each subject
+    .filter((key) => selectedColumns[key]) // Filter out only checked boxes
+    .map((key) => key.charAt(0).toUpperCase() + key.slice(1)); // e.g. "Name" -> "Name"
 
   return (
     <div className="flex flex-col items-center text-center mt-10 w-full">
@@ -30,24 +23,50 @@ function Success() {
 
       <div className="mt-10 w-full max-w-6xl">
         <div className="flex flex-col sm:flex-row w-full mb-8">
-          <div className="sm:w-1/2 w-full h-80 bg-white text-blue-600 mr-6 rounded-3xl flex flex-col items-center justify-center p-6 text-2xl font-semibold shadow-lg">
+          <div className="sm:w-1/2 w-full bg-white text-blue-600 mr-6 rounded-3xl flex flex-col items-center justify-center p-6 text-2xl font-semibold shadow-lg min-h-80">
             Du er nå i mål med importen!
             <div className="mt-4 text-xl text-gray-700 w-full">
-              <p>Du har importert følgende:</p>
-              <p className="font-bold text-lg text-gray-800">
-                {clientFileName ? clientFileName : "Ingen fil lastet opp"}
-              </p>
+              <p>Du har importert følgende filer:</p>
+              {fileName.length > 0 ? (
+                <ul className="font-bold text-lg text-gray-800">
+                  {fileName.map((name, index) => (
+                    <li key={index}>✔ {name}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="font-bold text-lg text-gray-800">
+                  Ingen filer lastet opp
+                </p>
+              )}
+
+              <p>Med disse valgene fra importvelgeren:</p>
               <ul className="mt-2">
                 {checkedBoxes.length > 0 ? (
                   checkedBoxes.map((box, index) => (
                     <li key={index} className="text-lg text-gray-700">
-                      - {box}
+                      ✔ {box}
                     </li>
                   ))
                 ) : (
                   <li className="text-lg text-gray-700">Ingen bokser valgt.</li>
                 )}
               </ul>
+
+              {/* 
+                If 'id' is present, show a button/link to download the mapped CSV. 
+                The backend minimal API is at "/api/download/{id}" returning text/csv.
+              */}
+              {id && (
+                <div className="mt-6">
+                  <a
+                    href={`http://localhost:5116/api/download/${id}`}
+                    className="inline-block px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700"
+                    download
+                  >
+                    Last ned mappet CSV
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 
@@ -86,4 +105,3 @@ function Success() {
 }
 
 export default Success;
-

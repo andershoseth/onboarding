@@ -7,8 +7,8 @@ interface ImportContextType {
   setSelectedSystem: (system: string | null) => void;
   selectedFileType: string | null;
   setSelectedFileType: (filetype: string | null) => void;
-  fileName: string | null;
-  setFileName: (name: string | null) => void;
+  fileName: string[];
+  setFileName: React.Dispatch<React.SetStateAction<string[]>>;
   selectedColumns: { [key: string]: boolean };
   setSelectedColumns: (columns: { [key: string]: boolean } | ((prev: { [key: string]: boolean }) => { [key: string]: boolean })) => void;
 }
@@ -18,7 +18,7 @@ const ImportContext = createContext<ImportContextType>({
   setSelectedSystem: () => { },
   selectedFileType: null,
   setSelectedFileType: () => { },
-  fileName: null,
+  fileName: [],
   setFileName: () => { },
   selectedColumns: {},
   setSelectedColumns: () => { },
@@ -30,22 +30,18 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: boolean }>({})
 
   // 1) Start off with null (or empty)
-  const [fileName, setFileName] = useState<string | null>(null);
-
-  // 2) In a useEffect, read sessionStorage on the client
-  useEffect(() => {
+  const [fileName, setFileName] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
-      const storedFileName = sessionStorage.getItem("fileName");
-      if (storedFileName) {
-        setFileName(storedFileName);
-      }
+      return JSON.parse(sessionStorage.getItem("fileName") || "[]");
     }
-  }, []);
+    return [];
+  });
+
 
   // 3) Whenever fileName changes on the client, store it
   useEffect(() => {
     if (typeof window !== "undefined" && fileName) {
-      sessionStorage.setItem("fileName", fileName);
+      sessionStorage.setItem("fileName", JSON.stringify(fileName));
     }
   }, [fileName]);
 
