@@ -3,14 +3,17 @@
 import Image from 'next/image';
 import { useContext } from 'react';
 import ImportContext from '../components/ImportContext';
+import { useSearchParams } from "next/navigation";
 
 function Success() {
   const { selectedColumns, fileName } = useContext(ImportContext);
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id"); // e.g., "/success?id=abcdef123..."
 
   // Get the selected checkboxes (only the ones that are checked)
   const checkedBoxes = Object.keys(selectedColumns)
-    .filter((key) => selectedColumns[key])  // Filter out only checked boxes
-    .map((key) => key.charAt(0).toUpperCase() + key.slice(1)); // Capitalize the first letter of each subject
+    .filter((key) => selectedColumns[key]) // Filter out only checked boxes
+    .map((key) => key.charAt(0).toUpperCase() + key.slice(1)); // e.g. "Name" -> "Name"
 
   return (
     <div className="flex flex-col items-center text-center mt-10 w-full">
@@ -35,6 +38,7 @@ function Success() {
                   Ingen filer lastet opp
                 </p>
               )}
+
               <p>Med disse valgene fra importvelgeren:</p>
               <ul className="mt-2">
                 {checkedBoxes.length > 0 ? (
@@ -47,6 +51,22 @@ function Success() {
                   <li className="text-lg text-gray-700">Ingen bokser valgt.</li>
                 )}
               </ul>
+
+              {/* 
+                If 'id' is present, show a button/link to download the mapped CSV. 
+                The backend minimal API is at "/api/download/{id}" returning text/csv.
+              */}
+              {id && (
+                <div className="mt-6">
+                  <a
+                    href={`http://localhost:5116/api/download/${id}`}
+                    className="inline-block px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700"
+                    download
+                  >
+                    Last ned mappet CSV
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 
