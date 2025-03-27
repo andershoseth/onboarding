@@ -80,15 +80,15 @@ export default function FileUploader({
     };
 
     return (
+        // TODO: Width should match instruction component
         <div className="min-w-[740px]">
-            {/* Attach the ref so we can call fileUploadRef.current?.clear() */}
             <FileUpload
                 ref={fileUploadRef}
                 name="file"
                 url="http://localhost:5116/api/upload"
                 multiple={true}
                 mode="advanced"
-                auto={true}
+                auto={false}
                 accept={accept}
                 onSelect={handleFileSelect}
                 onBeforeUpload={handleBeforeUpload}
@@ -98,6 +98,7 @@ export default function FileUploader({
                 chooseLabel="Choose File(s)"
                 uploadLabel="Upload"
                 cancelLabel="Clear"
+                // Get correct styling from figma
                 emptyTemplate={
                     <div className="text-center">
                         <span className="pi pi-file-plus text-8xl pb-4"></span>
