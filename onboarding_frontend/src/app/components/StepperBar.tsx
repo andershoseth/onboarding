@@ -35,7 +35,7 @@ const StepperBar: React.FC = () => {
     <div className="fixed top-0 left-0 w-64 bg-white h-full pt-10 pl-1">
       <Stepper activeStep={currentStep} orientation="vertical">
         {steps.map((step) => (
-          <StepperPanel key={step.url} header={step.label}>
+          <StepperPanel key={step.url} header={`${step.label} ${step.completed ? "✔" : ""}`}>
             <button
               onClick={() => router.push(step.url)}
               className="text-black hover:text-gray-300 text-left w-full">
@@ -44,7 +44,7 @@ const StepperBar: React.FC = () => {
           </StepperPanel>
         ))}
       </Stepper>
-    </div>
+    </div >
   );
 };
 
