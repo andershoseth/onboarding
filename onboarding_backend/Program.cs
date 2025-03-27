@@ -149,8 +149,8 @@ app.MapPost("/api/perform-mapping", (MappingRequest request) =>
             }
             else
             {
-                // If no mapping, either skip or keep original
-                // newRow[columnName] = value;
+                // Keep the original column and value
+                newRow[columnName] = value;
             }
         }
         transformedRows.Add(newRow);
