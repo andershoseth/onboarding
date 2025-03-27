@@ -18,12 +18,12 @@ export const getSteps = (
 
   //liste over sider
   return [
-    { label: "Hjem", url: "/home", description: "Dra til hjemmesiden" },
     { label: "Systemvalg", url: "/systemvalg", description: "Velg system", completed: selectedSystem !== null },
     { label: "Filtype", url: "/filtype", description: "Velg filtype", completed: selectedFileType !== null },
     { label: "Importvelger", url: "/importvelger", description: "Velg hva du vil laste opp", completed: isColumnsSelected },
     { label: "Eksport", url: "/export", description: "Last opp filene dine", completed: isExportUploaded },
-    { label: "Forhåndsvisning", url: "/displaycsvexcel", description: "Se filene du lastet opp", completed: isExportUploaded },
+    { label: "Forhåndsvisning", url: "/displaycsvexcel", description: "Se filene som er lastet opp", completed: isExportUploaded },
+    { label: "Mål", url: "/success" },
   ];
 };
 
