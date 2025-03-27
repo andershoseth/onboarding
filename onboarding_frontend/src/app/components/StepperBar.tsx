@@ -7,15 +7,15 @@ import { usePathname, useRouter } from "next/navigation";
 import ImportContext from "../components/ImportContext";
 
 const StepperBar: React.FC = () => {
-  const pathname = usePathname(); // Current path to determine active step
-  const router = useRouter(); // Navigation for steps
+  const pathname = usePathname();
+  const router = useRouter();
   const { selectedSystem, selectedColumns, selectedFileType } = useContext(ImportContext);
   const { uploadedFiles } = useUploadContext();
 
   const isColumnsSelected = Object.values(selectedColumns).some(Boolean);
   const isExportUploaded = Object.keys(uploadedFiles).length > 0;
 
-  // Define steps, including a new "isPage" property
+  //liste over sider
   const steps = [
     { label: "Systemvalg", url: "/systemvalg", description: "Velg system", completed: selectedSystem !== null },
     { label: "Filtype", url: "/filtype", description: "Velg filtype", completed: selectedFileType !== null },
@@ -25,7 +25,7 @@ const StepperBar: React.FC = () => {
 
   const activeStepIndex = steps.findIndex((step) => step.url === pathname);
 
-  // Track the current step index
+  //følger med på sidene
   const [currentStep, setCurrentStep] = useState(activeStepIndex !== -1 ? activeStepIndex : 0);
   useEffect(() => {
     setCurrentStep(activeStepIndex !== -1 ? activeStepIndex : 0);

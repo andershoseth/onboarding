@@ -12,7 +12,6 @@ import "primeicons/primeicons.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [showStepperBar, setShowStepperBar] = useState(false);
 
   const isStepperPage = [
     "/systemvalg", "/importvelger", "/export", "/filtype", "/displaycsvexcel"
