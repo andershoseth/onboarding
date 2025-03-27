@@ -6,7 +6,7 @@ import Instructions from "../components/Instructions";
 import {instructionConfig} from "./InstructionConfig";
 import {systemCoverage} from "./systemCoverage";
 import Link from "next/link";
-import {Toast} from "primereact/toast"; // <-- import Toast
+import {Toast} from "primereact/toast";
 import FileUploader from "@/app/components/FileUploader";
 
 function SaftModeInstructions({

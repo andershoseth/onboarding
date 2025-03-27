@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { FileUpload } from "primereact/fileupload";
-import { useUploadContext } from "./UploadContext";
+import React, {useContext, useEffect, useRef} from "react";
+import {FileUpload} from "primereact/fileupload";
+import {useUploadContext} from "./UploadContext";
 import ImportContext from "./ImportContext";
 
 interface FileUploaderProps {
@@ -14,10 +14,16 @@ export default function FileUploader({
                                          accept,
                                          onShowErrorToast
                                      }: FileUploaderProps) {
-    const {setUploadedData, setUploadedFiles} = useUploadContext();
-    // Create a ref to the FileUpload instance
+    // Merge all the logic from both old functions:
+
+    // Access multiple contexts as needed
+    const {setUploadedData, setUploadedFiles, uploadedFiles} = useUploadContext();
+    const {setFileName} = useContext(ImportContext);
+
+    // Create a ref for the <FileUpload> so we can call `clear()`
     const fileUploadRef = useRef<FileUpload>(null);
 
+    // e.g. from your first default export
     const handleFileSelect = (e: any) => {
         const acceptedExtensions = accept
             .split(",")
@@ -29,34 +35,31 @@ export default function FileUploader({
         });
 
         if (validFiles.length < e.files.length) {
-            // Show error toast (if available)
-            onShowErrorToast?.("One or more files were dropped that do not match the accepted extensions.");
-
+            onShowErrorToast?.(
+                "One or more files were dropped that do not match the accepted extensions."
+            );
             // Clear the entire queue from the UI:
             fileUploadRef.current?.clear();
-
-            // Optionally exit early
             return;
         }
 
-        // Otherwise we keep the valid files
+        // Otherwise keep the valid files
         e.files = validFiles;
     };
-export default function FileUploader({ subject, accept }: FileUploaderProps) {
-  const { setUploadedData, setUploadedFiles, uploadedFiles } = useUploadContext();
-  const { setFileName } = useContext(ImportContext)
 
+    // e.g. from your second default export
     const handleUploadComplete = (e: any) => {
         try {
             const response = JSON.parse(e.xhr.response);
-            const uploadedFileName = e.files[0]?.name ?? "unknown"
+            const uploadedFileName = e.files[0]?.name ?? "unknown";
+
             setFileName((prev) => [...prev, uploadedFileName]);
             setUploadedData(response.data);
 
             setUploadedFiles((prev) => ({
                 ...prev,
                 [response.subject]: {
-                    fileName: e.files[0]?.name ?? "unknown",
+                    fileName: uploadedFileName,
                     data: response.data,
                 },
             }));
@@ -71,29 +74,32 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
         onShowErrorToast?.("Upload failed or unsupported file.");
     };
 
-  // appends the subject to form data before uploading
-  const handleBeforeUpload = (event: any) => {
-    event.formData.append("subject", subject);
-  };
+    const handleBeforeUpload = (event: any) => {
+        event.formData.append("subject", subject);
+    };
 
-  const handleFileRemove = (e: any) => {
-    setUploadedFiles((prev) => {
-      const updated = { ...prev };
-      delete updated[subject];
-      return updated;
-    });
+    const handleFileRemove = (e: any) => {
+        // E.g. remove from contexts
+        setUploadedFiles((prev) => {
+            const updated = {...prev};
+            delete updated[subject];
+            return updated;
+        });
 
-    setFileName((prev) => prev.filter((name) => name !== uploadedFiles[subject].fileName)); //får tak i navnet til fila som skal slettes, og fjerner valgt fil fra fileName-lista
-  };
+        // Also remove from fileName array
+        if (uploadedFiles[subject]) {
+            const removedFileName = uploadedFiles[subject].fileName;
+            setFileName((prev) => prev.filter((name) => name !== removedFileName));
+        }
+    };
 
     return (
-        // TODO: Width should match instruction component
         <div className="min-w-[740px]">
             <FileUpload
                 ref={fileUploadRef}
                 name="file"
                 url="http://localhost:5116/api/upload"
-                multiple={true}
+                multiple
                 mode="advanced"
                 auto={false}
                 accept={accept}
@@ -105,7 +111,6 @@ export default function FileUploader({ subject, accept }: FileUploaderProps) {
                 chooseLabel="Choose File(s)"
                 uploadLabel="Upload"
                 cancelLabel="Clear"
-                // Get correct styling from figma
                 emptyTemplate={
                     <div className="text-center">
                         <span className="pi pi-file-plus text-8xl pb-4"></span>
