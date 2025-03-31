@@ -12,6 +12,8 @@ interface ImportContextType {
   removeFileName: (nameToRemove: string) => void;
   selectedColumns: { [key: string]: boolean };
   setSelectedColumns: (columns: { [key: string]: boolean } | ((prev: { [key: string]: boolean }) => { [key: string]: boolean })) => void;
+  mappingCompleted: boolean;
+  setMappingCompleted: (completed: boolean) => void;
 }
 
 const ImportContext = createContext<ImportContextType>({
@@ -21,15 +23,18 @@ const ImportContext = createContext<ImportContextType>({
   setSelectedFileType: () => { },
   fileName: [],
   setFileName: () => { },
-  removeFileName: () => {},
+  removeFileName: () => { },
   selectedColumns: {},
   setSelectedColumns: () => { },
+  mappingCompleted: false,
+  setMappingCompleted: () => { }
 });
 
 export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedSystem, setSelectedSystem] = useState<string | null>(null);
   const [selectedFileType, setSelectedFileType] = useState<string | null>(null);
   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: boolean }>({})
+  const [mappingCompleted, setMappingCompleted] = useState<boolean>(false)
 
   // 1) Start off with null (or empty)
   const [fileName, setFileName] = useState<string[]>([]);
@@ -56,7 +61,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
       const fileTypeMap: Record<string, string> = {
         "SAF-T (.xml)": "safTSubjects",
         "CSV (.csv)": "csvSubjects",
-        "Excel (.xlsx)": "csvSubjects" //fjerne senere?? Jeg er usikker -Linn
+        "Excel (.xlsx)": "csvSubjects" //fjern senere?? Jeg er usikker -Linn
       };
 
       const correctedFileType = fileTypeMap[selectedFileType] || selectedFileType;
@@ -95,6 +100,8 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
         removeFileName,
         selectedColumns,
         setSelectedColumns: updateSelectedColumns,
+        mappingCompleted,
+        setMappingCompleted
       }}
     >
       {children}

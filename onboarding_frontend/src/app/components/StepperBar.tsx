@@ -11,7 +11,8 @@ export const getSteps = (
   selectedSystem: any,
   selectedColumns: any,
   selectedFileType: any,
-  uploadedFiles: any
+  uploadedFiles: any,
+  mappingCompleted: boolean
 ) => {
   const isColumnsSelected = Object.values(selectedColumns).some(Boolean);
   const isExportUploaded = Object.keys(uploadedFiles).length > 0;
@@ -23,7 +24,7 @@ export const getSteps = (
     { label: "Importvelger", url: "/importvelger", description: "Velg hva du vil laste opp", completed: isColumnsSelected },
     { label: "Eksport", url: "/export", description: "Last opp filene dine", completed: isExportUploaded },
     { label: "Forhåndsvisning", url: "/displaycsvexcel", description: "Se filene som er lastet opp", completed: isExportUploaded },
-    { label: "Mål", url: "/success" },
+    { label: "Mål", url: "/success", completed: mappingCompleted },
     //legg til completed-condition senere i Mål-elementet at denne blir fullført når brukeren har trykket på en eventuell "last ned"-knapp for å laste ned den ferdig konverterte filen
   ];
 };
@@ -31,10 +32,10 @@ export const getSteps = (
 const StepperBar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { selectedSystem, selectedColumns, selectedFileType } = useContext(ImportContext);
+  const { selectedSystem, selectedColumns, selectedFileType, mappingCompleted } = useContext(ImportContext);
   const { uploadedFiles } = useUploadContext();
 
-  const steps = getSteps(selectedSystem, selectedColumns, selectedFileType, uploadedFiles);
+  const steps = getSteps(selectedSystem, selectedColumns, selectedFileType, uploadedFiles, mappingCompleted);
 
   const activeStepIndex = steps.findIndex((step) => step.url === pathname);
 
