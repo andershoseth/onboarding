@@ -1,22 +1,25 @@
 "use client";
 
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ImportContext from "../components/ImportContext";
 import Instructions from "../components/Instructions";
 import { instructionConfig } from "./InstructionConfig";
 import { systemCoverage } from "./systemCoverage";
 import Link from "next/link";
-import { Toast } from "primereact/toast";
 import FileUploader from "@/app/components/FileUploader";
 
+/**
+ * SAF-T Mode:
+ * 1) Figure out which subjects are “covered by SAF-T” => we represent them with a single subject “safTExport”
+ * 2) Whatever is leftover is CSV
+ * 3) We show a row of “buttons” to pick the active subject, but we actually mount all subject sections.
+ */
 function SaftModeInstructions({
-    system,
-    checkedBoxes,
-    showErrorToast, // <-- accept the callback as a prop
-}: {
+                                  system,
+                                  checkedBoxes,
+                              }: {
     system: string;
     checkedBoxes: string[];
-    showErrorToast: (msg: string) => void;
 }) {
     // Which subjects are covered by SAF-T in this system?
     const coverage = systemCoverage[system]?.safTSubjects || [];
@@ -29,8 +32,10 @@ function SaftModeInstructions({
         subjectList.unshift("safTExport");
     }
 
+    // Let user pick which subject is “active” on screen
     const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
 
+    // On first load, auto-select something
     useEffect(() => {
         if (!selectedSubject) {
             if (covered.length > 0) {
@@ -41,6 +46,8 @@ function SaftModeInstructions({
         }
     }, [covered, leftover, selectedSubject]);
 
+    // Get the instructions for SAF-T.
+    // We’ll just do “safTSteps” = instructionConfig[system]?.["SAF-T"]
     const safTSteps = instructionConfig[system]?.["SAF-T"] || [];
 
     return (
@@ -60,40 +67,39 @@ function SaftModeInstructions({
                     );
                 })}
             </div>
-
-            {/* Render each subject's instructions + FileUploader */}
+            {/* Render each page, but only show the actiave one */}
             {subjectList.map((sub) => {
                 const isActive = sub === selectedSubject;
 
+                // Get instructions for the active subject
                 let instructionsTitle = "";
                 let instructionsSteps: any[] = [];
                 let accept = ".csv,.xlsx"; // default
-
+                // Edgecase for SAF-T
                 if (sub === "safTExport") {
                     instructionsTitle = `${system} – SAF‐T Export`;
                     instructionsSteps = safTSteps;
                     accept = ".xml";
                 } else {
+                    // Not SAF-T so it's CSV/Excel
                     instructionsTitle = `${system} – CSV – ${sub}`;
-                    instructionsSteps = instructionConfig[system]?.CSV?.[sub] ?? [];
+                    instructionsSteps =
+                        instructionConfig[system]?.CSV?.[sub] ?? [];
                     accept = ".csv,.xlsx";
                 }
 
                 return (
                     <div key={sub} style={{ display: isActive ? "block" : "none" }}>
                         <div className="flex flex-col items-center space-y-4 mt-4 py-10">
+                            {/* Instructions */}
                             {instructionsSteps.length > 0 ? (
                                 <Instructions title={instructionsTitle} steps={instructionsSteps} />
                             ) : (
                                 <p>No instructions found for {sub}.</p>
                             )}
 
-                            {/* Pass showErrorToast down to FileUploader */}
-                            <FileUploader
-                                subject={sub}
-                                accept={accept}
-                                onShowErrorToast={showErrorToast}
-                            />
+                            {/* Each subject has its own FileUploader instance in advanced mode */}
+                            <FileUploader subject={sub} accept={accept} />
                         </div>
                     </div>
                 );
@@ -108,6 +114,14 @@ function SaftModeInstructions({
                     Next
                 </Link>
             </div>
+            <div className="mt-6 flex justify-end absolute bottom-4 right-28">
+                <Link
+                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                    href="/uploadtest"
+                >
+                    Test
+                </Link>
+            </div>
             <div className="mt-6 flex justify-end absolute bottom-4 left-4">
                 <Link
                     className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
@@ -120,22 +134,29 @@ function SaftModeInstructions({
     );
 }
 
+/**
+ * CSV Mode Example
+ * You can do the exact same approach:
+ * Always mount all leftover subjects, hide with display:none,
+ * so each subject’s queue remains.
+ */
 function CsvModeInstructions({
-    system,
-    checkedBoxes,
-    showErrorToast,
-}: {
+                                 system,
+                                 checkedBoxes,
+                             }: {
     system: string;
     checkedBoxes: string[];
-    showErrorToast: (msg: string) => void;
 }) {
     const allCsvSubjects = Object.keys(instructionConfig[system]?.CSV || {});
     const relevantSubjects = allCsvSubjects.filter((sub) =>
-        checkedBoxes.map((s) => s.toLowerCase()).includes(sub.toLowerCase())
+        checkedBoxes
+            .map((s) => s.toLowerCase())
+            .includes(sub.toLowerCase())
     );
 
     const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
 
+    // Pick a default
     useEffect(() => {
         if (!selectedSubject && relevantSubjects.length > 0) {
             setSelectedSubject(relevantSubjects[0]);
@@ -159,7 +180,7 @@ function CsvModeInstructions({
                 ))}
             </div>
 
-            {/* Always render a pane for each relevant CSV subject. */}
+            {/* Always render a pane for each relevant CSV subject. Hide with style if not selected. */}
             {relevantSubjects.map((sub) => {
                 const isActive = sub === selectedSubject;
                 const steps = instructionConfig[system]?.CSV?.[sub];
@@ -168,16 +189,15 @@ function CsvModeInstructions({
                     <div key={sub} style={{ display: isActive ? "block" : "none" }}>
                         <div className="flex flex-col items-center space-y-4 mt-4 py-10">
                             {steps ? (
-                                <Instructions title={`${system} – CSV – ${sub}`} steps={steps} />
+                                <Instructions
+                                    title={`${system} – CSV – ${sub}`}
+                                    steps={steps}
+                                />
                             ) : (
                                 <p>No CSV instructions found for {sub}</p>
                             )}
 
-                            <FileUploader
-                                subject={sub}
-                                accept=".csv,.xlsx"
-                                onShowErrorToast={showErrorToast}
-                            />
+                            <FileUploader subject={sub} accept=".csv,.xlsx" />
                         </div>
                     </div>
                 );
@@ -188,19 +208,6 @@ function CsvModeInstructions({
 
 export default function ExportPage() {
     const { selectedSystem } = useContext(ImportContext);
-
-    // 1) Create a ref for the Toast
-    const toastRef = useRef<Toast>(null);
-
-    // 2) Function to show error messages
-    const showErrorToast = (msg: string) => {
-        toastRef.current?.show({
-            severity: "error",
-            summary: "Upload Error",
-            detail: msg,
-            life: 10000,
-        });
-    };
 
     // Hard coded for demonstration
     const fileType = "SAF-T";
@@ -226,24 +233,15 @@ export default function ExportPage() {
         return <p>Please pick a system first.</p>;
     }
 
-    return (
-        <div>
-            {/* 3) Render the Toast once at the top level */}
-            <Toast ref={toastRef} />
-
-            {fileType === "SAF-T" ? (
-                <SaftModeInstructions
-                    system={selectedSystem}
-                    checkedBoxes={checkedBoxes}
-                    showErrorToast={showErrorToast} // pass callback down
-                />
-            ) : (
-                <CsvModeInstructions
-                    system={selectedSystem}
-                    checkedBoxes={checkedBoxes}
-                    showErrorToast={showErrorToast} // pass callback down
-                />
-            )}
-        </div>
+    return fileType === "SAF-T" ? (
+        <SaftModeInstructions
+            system={selectedSystem}
+            checkedBoxes={checkedBoxes}
+        />
+    ) : (
+        <CsvModeInstructions
+            system={selectedSystem}
+            checkedBoxes={checkedBoxes}
+        />
     );
 }

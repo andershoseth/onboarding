@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
 import { useMapping } from "../components/MappingContext";
-import MappingHeader from "../utils/MappingHeader";
-import EditableCell from "../utils/EditableCell";
+import MappingHeader, { MappingHeaderProps } from "../utils/MappingHeader"
 import {
   ColumnDef,
   flexRender,
@@ -10,24 +9,29 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-// Types 
+
+// SAF-T Type
 export interface FlattenedEntry {
   path: string;
   value: string;
 }
+
 export interface GroupedSaftEntries {
   groupKey: string;
   entries: FlattenedEntry[];
 }
+
+//Standard Import Type
 export interface StandardImportField {
   field: string;
 }
+
 export interface TableFieldMapping {
   tableName: string;
   fields: StandardImportField[];
 }
 
-
+// Pivot function for SAF-T Data
 function pivotByLastSegment(entries: FlattenedEntry[]) {
   const rowMap: Record<string, Record<string, string>> = {};
   const allSegments = new Set<string>();
@@ -45,7 +49,7 @@ function pivotByLastSegment(entries: FlattenedEntry[]) {
   }
 
   const rows = Object.keys(rowMap).map((rowKey) => ({
-    rowKey, // 
+    rowKey, //  "AuditFile.MasterFiles.GeneralLedgerAccounts.Account[1]"
     ...rowMap[rowKey],
   }));
   const columns = Array.from(allSegments);
@@ -53,7 +57,6 @@ function pivotByLastSegment(entries: FlattenedEntry[]) {
   return { rows, columns };
 }
 
-//  SaftGroup (handles one group) 
 function SaftGroup({
   group,
   tableFieldMappings,
@@ -61,30 +64,13 @@ function SaftGroup({
   group: GroupedSaftEntries;
   tableFieldMappings: TableFieldMapping[];
 }) {
-  const { mapping, setMapping, groupedRows, setGroupedRows } = useMapping();
-
-  const { rows: pivotedRows, columns } = useMemo(
+  // Pivot SAF-T data
+  const { rows, columns } = useMemo(
     () => pivotByLastSegment(group.entries),
     [group.entries]
   );
-
-  useEffect(() => {
-    if (!groupedRows[group.groupKey]) {
-      setGroupedRows((prev) => ({ ...prev, [group.groupKey]: pivotedRows }));
-    }
-  }, [group.groupKey, pivotedRows, groupedRows, setGroupedRows]);
-
-  const contextRows = groupedRows[group.groupKey] || [];
-
-  function handleCellSave(rowIndex: number, columnId: string, newValue: string) {
-    setGroupedRows((prev) => {
-      const updated = { ...prev };
-      const arrCopy = [...(updated[group.groupKey] || [])];
-      arrCopy[rowIndex] = { ...arrCopy[rowIndex], [columnId]: newValue };
-      updated[group.groupKey] = arrCopy;
-      return updated;
-    });
-  }
+  const { mapping, setMapping } = useMapping();
+ 
 
   const columnDefs = useMemo<ColumnDef<Record<string, string>>[]>(
     () =>
@@ -92,38 +78,30 @@ function SaftGroup({
         accessorKey: colKey,
         header: () => (
           <MappingHeader
-            columnLabel={colKey}
+            saftColumn={colKey}
             tableFieldMappings={tableFieldMappings}
             currentMapping={mapping[colKey] || ""}
             onMappingSelect={(selected) =>
-              setMapping((prev) => ({ ...prev, [colKey]: selected }))
+              setMapping((prev) => ({ ...prev, [colKey]: selected })) 
             }
           />
         ),
-        cell: (info) => {
-          const value = String(info.getValue() ?? "");
-          return (
-            <EditableCell
-              row={info.row}
-              columnId={colKey}
-              value={value}
-              onSave={handleCellSave}
-            />
-          );
-        },
       })),
-    [columns, mapping, setMapping, tableFieldMappings]
+    [columns, mapping, tableFieldMappings, setMapping]
   );
 
   const table = useReactTable({
-    data: contextRows,
+    data: rows,
     columns: columnDefs,
     getCoreRowModel: getCoreRowModel(),
   });
 
   return (
     <div className="mb-6">
+      {/* Group heading */}
       <h2 className="text-xl font-bold mb-2">{group.groupKey}</h2>
+
+      {/* Excel-style container for each group's table */}
       <div className="overflow-y-auto max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white">
         <table className="min-w-full">
           <thead className="bg-gray-600 text-black sticky top-0 z-10">
@@ -147,6 +125,7 @@ function SaftGroup({
             {table.getRowModel().rows.map((row) => (
               <tr
                 key={row.id}
+                // Alternate row color (Excel-like)
                 className={row.index % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}
               >
                 {row.getVisibleCells().map((cell) => (
@@ -166,11 +145,12 @@ function SaftGroup({
   );
 }
 
-// SaftData (renders multiple groups) 
+// Fetches Standard Import fields and renders all SAF-T groups
 export default function SaftData({ data }: { data: GroupedSaftEntries[] }) {
   const [tableFieldMappings, setTableFieldMappings] = useState<TableFieldMapping[]>([]);
 
   useEffect(() => {
+
     fetch("http://localhost:5116/api/standard-import-mapping")
       .then((res) => res.json())
       .then((fetchedData: TableFieldMapping[]) => {
@@ -181,13 +161,16 @@ export default function SaftData({ data }: { data: GroupedSaftEntries[] }) {
       );
   }, []);
 
-  if (data.length === 0) {
-    return <p className="p-4 text-gray-500">Ingen SAF-T data tilgjengelig.</p>;
-  }
 
   return (
     <div className="p-6 min-h-screen pt-16">
       <h2 className="text-2xl font-bold mb-4">SAF-T Data</h2>
+
+      {data.length === 0 && (
+        <p className="text-gray-500">Ingen SAF-T data tilgjengelig.</p>
+      )}
+
+      {/* Render a table for each group */}
       {data.map((group) => (
         <SaftGroup
           key={group.groupKey}

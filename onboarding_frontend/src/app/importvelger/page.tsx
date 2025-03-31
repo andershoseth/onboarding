@@ -25,7 +25,7 @@ const ImportVelger: React.FC = () => {
             <h2 className="text-xl font-semibold text-[#E17044]">Hva ønsker du å importere?</h2>
             <p className="text-gray-600 text-sm mb-4">Huk av hva du vil importere fra filene dine.</p>
 
-            <div className="space-y-3 capitalize">
+            <div className="space-y-3">
               {selectedColumns && Object.keys(selectedColumns).length > 0 ? (
                 Object.keys(selectedColumns).map((subject) => (
                   <CheckBox

@@ -6,34 +6,18 @@ export interface Mapping {
   [columnName: string]: string;
 }
 
-
-export interface RowData {
-  [fieldName: string]: any;
-}
-
-
-export interface GroupedRowsDict {
-  [groupKey: string]: RowData[];
-}
-
 interface MappingContextType {
-
   mapping: Mapping;
   setMapping: React.Dispatch<React.SetStateAction<Mapping>>;
-
-  // groupKey → array of pivoted row objects
-  groupedRows: GroupedRowsDict;
-  setGroupedRows: React.Dispatch<React.SetStateAction<GroupedRowsDict>>;
 }
 
 const MappingContext = createContext<MappingContextType | null>(null);
 
-export function MappingProvider({ children }: { children: ReactNode }) {
+export function MappingProvider({ children }: { children: React.ReactNode }) {
   const [mapping, setMapping] = useState<Mapping>({});
-  const [groupedRows, setGroupedRows] = useState<GroupedRowsDict>({});
 
   return (
-    <MappingContext.Provider value={{ mapping, setMapping, groupedRows, setGroupedRows }}>
+    <MappingContext.Provider value={{ mapping, setMapping }}>
       {children}
     </MappingContext.Provider>
   );

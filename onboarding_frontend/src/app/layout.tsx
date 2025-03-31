@@ -1,18 +1,23 @@
 "use client";
 import Navbar from "./components/NavBar";
 import "./globals.css";
+import React, { useEffect, useState } from "react";
 import { ImportProvider } from "./components/ImportContext";
 import { UploadProvider } from "./components/UploadContext";
-import StepperBar from "./components/StepperBar";
+import StepperBar from "./components/StepperBar"
+
+import { usePathname } from "next/navigation";
 import { MappingProvider } from "./components/MappingContext";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import "primeicons/primeicons.css";
-import { usePathname } from "next/navigation";  // Import usePathname to check the current URL
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname(); // Get the current pathname
+  const pathname = usePathname();
+  const [showStepperBar, setShowStepperBar] = useState(false)
 
-  const showStepper = !(pathname === "/SaftTable" || pathname === "/home"); //skjuler stepper på hjemmesiden og saft-siden
+  useEffect(() => {
+    const pagesWithStepperBar = ["/systemvalg", "/importvelger", "/export", "/filtype", "/displaycsvexcel"]
+    setShowStepperBar(pagesWithStepperBar.includes(pathname))
+  }, [pathname]);
 
   return (
     <ImportProvider>
@@ -21,8 +26,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <html lang="en">
             <body className="bg-gradient-to-b from-[#54155C] to-[#AF554E] min-h-screen">
               <div className="flex">
-                {showStepper && <StepperBar />}
-                <div className={`flex-1 ${showStepper ? 'ml-64' : ''}`}>
+                {showStepperBar && <StepperBar />}
+                <div className={`flex-1 ${showStepperBar ? 'ml-64' : ''}`}>
                   <Navbar />
                   <main>{children}</main>
                 </div>
