@@ -55,7 +55,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
     }
   }, [selectedColumns]); //local storage for checked boxes so that export-page works
 
-  useEffect(() => {
+  useEffect(() => { //dette er for importvelgeren (bruker systemCoverage.tsx)
 
     if (selectedSystem && selectedFileType) {
 

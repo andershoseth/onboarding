@@ -24,6 +24,7 @@ export const getSteps = (
     { label: "Eksport", url: "/export", description: "Last opp filene dine", completed: isExportUploaded },
     { label: "Forhåndsvisning", url: "/displaycsvexcel", description: "Se filene som er lastet opp", completed: isExportUploaded },
     { label: "Mål", url: "/success" },
+    //legg til completed-condition senere i Mål-elementet at denne blir fullført når brukeren har trykket på en eventuell "last ned"-knapp for å laste ned den ferdig konverterte filen
   ];
 };
 

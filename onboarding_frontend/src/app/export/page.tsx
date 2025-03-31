@@ -1,19 +1,19 @@
 "use client";
 
-import React, {useState, useEffect, useContext, useRef} from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import ImportContext from "../components/ImportContext";
 import Instructions from "../components/Instructions";
-import {instructionConfig} from "./InstructionConfig";
-import {systemCoverage} from "./systemCoverage";
+import { instructionConfig } from "./InstructionConfig";
+import { systemCoverage } from "./systemCoverage";
 import Link from "next/link";
-import {Toast} from "primereact/toast";
+import { Toast } from "primereact/toast";
 import FileUploader from "@/app/components/FileUploader";
 
 function SaftModeInstructions({
-                                  system,
-                                  checkedBoxes,
-                                  showErrorToast, // <-- accept the callback as a prop
-                              }: {
+    system,
+    checkedBoxes,
+    showErrorToast, // <-- accept the callback as a prop
+}: {
     system: string;
     checkedBoxes: string[];
     showErrorToast: (msg: string) => void;
@@ -80,10 +80,10 @@ function SaftModeInstructions({
                 }
 
                 return (
-                    <div key={sub} style={{display: isActive ? "block" : "none"}}>
+                    <div key={sub} style={{ display: isActive ? "block" : "none" }}>
                         <div className="flex flex-col items-center space-y-4 mt-4 py-10">
                             {instructionsSteps.length > 0 ? (
-                                <Instructions title={instructionsTitle} steps={instructionsSteps}/>
+                                <Instructions title={instructionsTitle} steps={instructionsSteps} />
                             ) : (
                                 <p>No instructions found for {sub}.</p>
                             )}
@@ -108,14 +108,6 @@ function SaftModeInstructions({
                     Next
                 </Link>
             </div>
-            <div className="mt-6 flex justify-end absolute bottom-4 right-28">
-                <Link
-                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
-                    href="/uploadtest"
-                >
-                    Test
-                </Link>
-            </div>
             <div className="mt-6 flex justify-end absolute bottom-4 left-4">
                 <Link
                     className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
@@ -129,10 +121,10 @@ function SaftModeInstructions({
 }
 
 function CsvModeInstructions({
-                                 system,
-                                 checkedBoxes,
-                                 showErrorToast,
-                             }: {
+    system,
+    checkedBoxes,
+    showErrorToast,
+}: {
     system: string;
     checkedBoxes: string[];
     showErrorToast: (msg: string) => void;
@@ -173,10 +165,10 @@ function CsvModeInstructions({
                 const steps = instructionConfig[system]?.CSV?.[sub];
 
                 return (
-                    <div key={sub} style={{display: isActive ? "block" : "none"}}>
+                    <div key={sub} style={{ display: isActive ? "block" : "none" }}>
                         <div className="flex flex-col items-center space-y-4 mt-4 py-10">
                             {steps ? (
-                                <Instructions title={`${system} – CSV – ${sub}`} steps={steps}/>
+                                <Instructions title={`${system} – CSV – ${sub}`} steps={steps} />
                             ) : (
                                 <p>No CSV instructions found for {sub}</p>
                             )}
@@ -195,7 +187,7 @@ function CsvModeInstructions({
 }
 
 export default function ExportPage() {
-    const {selectedSystem} = useContext(ImportContext);
+    const { selectedSystem } = useContext(ImportContext);
 
     // 1) Create a ref for the Toast
     const toastRef = useRef<Toast>(null);
@@ -237,7 +229,7 @@ export default function ExportPage() {
     return (
         <div>
             {/* 3) Render the Toast once at the top level */}
-            <Toast ref={toastRef}/>
+            <Toast ref={toastRef} />
 
             {fileType === "SAF-T" ? (
                 <SaftModeInstructions
