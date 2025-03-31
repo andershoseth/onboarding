@@ -5,16 +5,18 @@ using onboarding_backend;
 using onboarding_backend.Services; // Inneholder SaftParser og StandardImport
 using System.Text;
 using System.Collections.Concurrent;
-
+using Microsoft.OpenApi.Models; // For OpenAPI/Swagger
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 1) Add Services for Controllers
+builder.Services.AddControllers();
 
+// 2) Add CORS policy (as you already did)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhostAllPorts", policy =>
     {
-
         policy
             .SetIsOriginAllowed(origin =>
             {
@@ -23,13 +25,33 @@ builder.Services.AddCors(options =>
             })
             .AllowAnyMethod()
             .AllowAnyHeader();
+    });
+});
 
+// 3) Add Endpoint Explorer and SwaggerGen
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Onboarding API",
+        Version = "v1",
+        Description = "Sample endpoints for file processing"
     });
 });
 
 var mappedCsvStore = new ConcurrentDictionary<string, byte[]>();
 
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Onboarding API V1");
+    c.RoutePrefix = ""; // Swagger UI at root
+});
+
+// Continue with the rest of your pipeline:
 app.UseCors("AllowLocalhostAllPorts");
 
 
@@ -200,4 +222,5 @@ app.MapGet("/api/download/{id}", (string id) =>
 
 
 
+app.MapControllers();
 app.Run();
