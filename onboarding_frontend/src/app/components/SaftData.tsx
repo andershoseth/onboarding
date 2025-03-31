@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
-import { useMapping } from "../components/MappingContext"; // Must contain groupedRows + setGroupedRows
+import { useMapping } from "../components/MappingContext";
 import MappingHeader from "../utils/MappingHeader";
 import EditableCell from "../utils/EditableCell";
 import {
@@ -10,7 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-// ----------- Types -----------
+// Types 
 export interface FlattenedEntry {
   path: string;
   value: string;
@@ -27,7 +27,7 @@ export interface TableFieldMapping {
   fields: StandardImportField[];
 }
 
-// ----------- Pivot Function -----------
+
 function pivotByLastSegment(entries: FlattenedEntry[]) {
   const rowMap: Record<string, Record<string, string>> = {};
   const allSegments = new Set<string>();
@@ -45,7 +45,7 @@ function pivotByLastSegment(entries: FlattenedEntry[]) {
   }
 
   const rows = Object.keys(rowMap).map((rowKey) => ({
-    rowKey, // "AuditFile.Header.SomeChild[1]"
+    rowKey, // 
     ...rowMap[rowKey],
   }));
   const columns = Array.from(allSegments);
@@ -63,23 +63,19 @@ function SaftGroup({
 }) {
   const { mapping, setMapping, groupedRows, setGroupedRows } = useMapping();
 
-
   const { rows: pivotedRows, columns } = useMemo(
     () => pivotByLastSegment(group.entries),
     [group.entries]
   );
 
-  
   useEffect(() => {
     if (!groupedRows[group.groupKey]) {
       setGroupedRows((prev) => ({ ...prev, [group.groupKey]: pivotedRows }));
     }
   }, [group.groupKey, pivotedRows, groupedRows, setGroupedRows]);
 
- 
   const contextRows = groupedRows[group.groupKey] || [];
 
-  //Edits => update dictionary for this groupKey
   function handleCellSave(rowIndex: number, columnId: string, newValue: string) {
     setGroupedRows((prev) => {
       const updated = { ...prev };
@@ -90,7 +86,6 @@ function SaftGroup({
     });
   }
 
-  // Build columns (header → MappingHeader, cell → EditableCell)
   const columnDefs = useMemo<ColumnDef<Record<string, string>>[]>(
     () =>
       columns.map((colKey) => ({
@@ -119,7 +114,6 @@ function SaftGroup({
       })),
     [columns, mapping, setMapping, tableFieldMappings]
   );
-
 
   const table = useReactTable({
     data: contextRows,
@@ -175,7 +169,6 @@ function SaftGroup({
 // SaftData (renders multiple groups) 
 export default function SaftData({ data }: { data: GroupedSaftEntries[] }) {
   const [tableFieldMappings, setTableFieldMappings] = useState<TableFieldMapping[]>([]);
-
 
   useEffect(() => {
     fetch("http://localhost:5116/api/standard-import-mapping")
