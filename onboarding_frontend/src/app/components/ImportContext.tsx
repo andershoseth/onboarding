@@ -9,6 +9,7 @@ interface ImportContextType {
   setSelectedFileType: (filetype: string | null) => void;
   fileName: string[];
   setFileName: React.Dispatch<React.SetStateAction<string[]>>;
+  removeFileName: (nameToRemove: string) => void;
   selectedColumns: { [key: string]: boolean };
   setSelectedColumns: (columns: { [key: string]: boolean } | ((prev: { [key: string]: boolean }) => { [key: string]: boolean })) => void;
 }
@@ -20,6 +21,7 @@ const ImportContext = createContext<ImportContextType>({
   setSelectedFileType: () => { },
   fileName: [],
   setFileName: () => { },
+  removeFileName: () => {},
   selectedColumns: {},
   setSelectedColumns: () => { },
 });
@@ -30,20 +32,12 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: boolean }>({})
 
   // 1) Start off with null (or empty)
-  const [fileName, setFileName] = useState<string[]>(() => {
-    if (typeof window !== "undefined") {
-      return JSON.parse(sessionStorage.getItem("fileName") || "[]");
-    }
-    return [];
-  });
+  const [fileName, setFileName] = useState<string[]>([]);
 
 
-  // 3) Whenever fileName changes on the client, store it
-  useEffect(() => {
-    if (typeof window !== "undefined" && fileName) {
-      sessionStorage.setItem("fileName", JSON.stringify(fileName));
-    }
-  }, [fileName]);
+  const removeFileName = (nameToRemove: string) => {
+    setFileName((prev) => prev.filter((name) => name !== nameToRemove));
+  };
 
   const updateSelectedColumns = (columns: { [key: string]: boolean } | ((prev: { [key: string]: boolean }) => { [key: string]: boolean })) => {
     setSelectedColumns(columns);
@@ -98,6 +92,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
         setSelectedFileType,
         fileName,
         setFileName,
+        removeFileName,
         selectedColumns,
         setSelectedColumns: updateSelectedColumns,
       }}
