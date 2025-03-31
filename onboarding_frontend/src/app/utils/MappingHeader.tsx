@@ -1,15 +1,12 @@
-
 "use client";
-
 import React, { useState } from "react";
-import { TableFieldMapping } from "../components/SaftData"; 
+import { TableFieldMapping } from "../components/SaftData";
 
 export interface MappingHeaderProps {
   columnLabel: string; 
   tableFieldMappings: TableFieldMapping[];
   currentMapping: string; 
   onMappingSelect: (mapping: string) => void;
-  onLabelChange: (newLabel: string) => void;
 }
 
 const MappingHeader: React.FC<MappingHeaderProps> = ({
@@ -17,71 +14,21 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
   tableFieldMappings,
   currentMapping,
   onMappingSelect,
-  onLabelChange,
 }) => {
-  
   const [menuOpen, setMenuOpen] = useState(false);
-
   const [selectedTable, setSelectedTable] = useState<string | null>(null);
-
-  const [isEditingLabel, setIsEditingLabel] = useState(false);
-  const [editedLabel, setEditedLabel] = useState(columnLabel);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
-
-  const handleLabelEdit = (e: React.MouseEvent) => {
-    e.stopPropagation(); // prevent dropdown toggle
-    setIsEditingLabel(true);
-  };
-
-  const handleLabelBlur = () => {
-    setIsEditingLabel(false);
-    onLabelChange(editedLabel);
-  };
-
-  const handleLabelKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      setIsEditingLabel(false);
-      onLabelChange(editedLabel);
-    }
-  };
-
   return (
     <div style={{ position: "relative" }}>
-      <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
-        {isEditingLabel ? (
-          <input
-            type="text"
-            value={editedLabel}
-            onChange={(e) => setEditedLabel(e.target.value)}
-            onBlur={handleLabelBlur}
-            onKeyDown={handleLabelKeyDown}
-            autoFocus
-            className="border px-1 py-0.5"
-          />
-        ) : (
-          <div onClick={toggleMenu}>
-            {editedLabel}
-            {currentMapping ? ` → ${currentMapping}` : " ▼"}
-          </div>
-        )}
-        <button
-          onClick={handleLabelEdit}
-          style={{
-            marginLeft: "8px",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "0.8rem",
-          }}
-          title="Edit column label"
-        >
-          ✎
-        </button>
+      {}
+      <div style={{ cursor: "pointer" }} onClick={toggleMenu}>
+        {columnLabel} {currentMapping ? `→ ${currentMapping}` : "▼"}
       </div>
 
-      {menuOpen && !isEditingLabel && (
+      {/* Dropdown Menu */}
+      {menuOpen && (
         <div
           style={{
             position: "absolute",
@@ -92,7 +39,7 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
             zIndex: 999,
             minWidth: "200px",
             padding: "4px",
-            color: "black"
+            color: "black",
           }}
         >
           {/* Level 1: Choose a table */}
@@ -131,7 +78,6 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
                     key={f.field}
                     style={{ padding: "4px 8px", cursor: "pointer" }}
                     onClick={() => {
-                      // Update mapping in parent, e.g., "Contact.SupplierNo"
                       onMappingSelect(`${selectedTable}.${f.field}`);
                       setMenuOpen(false);
                       setSelectedTable(null);
