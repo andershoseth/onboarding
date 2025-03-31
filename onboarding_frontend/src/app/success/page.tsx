@@ -6,7 +6,7 @@ import ImportContext from '../components/ImportContext';
 import { useSearchParams } from "next/navigation";
 
 function Success() {
-  const { selectedColumns, fileName } = useContext(ImportContext);
+  const { selectedColumns, fileName, removeFileName } = useContext(ImportContext);
   const searchParams = useSearchParams();
   const id = searchParams.get("id"); // e.g., "/success?id=abcdef123..."
 
@@ -28,9 +28,19 @@ function Success() {
             <div className="mt-4 text-xl text-gray-700 w-full">
               <p>Du har importert følgende filer:</p>
               {fileName.length > 0 ? (
-                <ul className="font-bold text-lg text-gray-800">
+                <ul className="font-bold text-lg text-gray-800 flex flex-col items-center gap-2">
                   {fileName.map((name, index) => (
-                    <li key={index}>✔ {name}</li>
+                    <li key={index} className="flex items-center justify-center gap-2">
+                      <span>✔ {name}</span>
+                      {/* The 'X' remove button */}
+                      <button
+                        onClick={() => removeFileName(name)}
+                        className="ml-2 text-red-600 font-bold"
+                        title="Fjern fil"
+                      >
+                        X
+                      </button>
+                    </li>
                   ))}
                 </ul>
               ) : (
