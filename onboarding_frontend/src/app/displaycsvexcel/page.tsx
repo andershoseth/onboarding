@@ -7,7 +7,6 @@ import { useUploadContext } from "../components/UploadContext";
 import { useMapping } from "../components/MappingContext";
 import MappingHeader from "../utils/MappingHeader";
 import { TableFieldMapping } from "../components/SaftData";
-import ImportContext from "../components/ImportContext";
 
 export default function FileDisplayPage() {
   const router = useRouter();

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useContext, useState } from 'react';
 import ImportContext from '../components/ImportContext';
 import { useSearchParams } from "next/navigation";
+import { Button } from 'primereact/button';
 
 function Success() {
   const { selectedColumns, fileName, setMappingCompleted } = useContext(ImportContext);
@@ -66,13 +67,13 @@ function Success() {
               */}
               {id && (
                 <div className="mt-6">
-                  <a
-                    href={`http://localhost:5116/api/download/${id}`}
-                    className="inline-block px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700"
-                    download
-                    onClick={handleDownload}
-                  >
-                    Last ned mappet CSV
+                  <a href={`http://localhost:5116/api/download/${id}`} download>
+                    <Button
+                      rounded
+                      label="Last ned mappet CSV"
+                      className="inline-block px-4 py-2 text-white bg-green-600 hover:bg-green-700"
+                      onClick={handleDownload}
+                    />
                   </a>
                 </div>
               )}
