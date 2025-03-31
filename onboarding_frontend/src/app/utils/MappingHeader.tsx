@@ -1,18 +1,16 @@
-
 "use client";
-
 import React, { useState } from "react";
-import { TableFieldMapping } from "../components/SaftData"; 
+import { TableFieldMapping } from "../components/SaftData";
 
 export interface MappingHeaderProps {
-  saftColumn: string;
+  columnLabel: string; 
   tableFieldMappings: TableFieldMapping[];
-  currentMapping: string;
+  currentMapping: string; 
   onMappingSelect: (mapping: string) => void;
 }
 
 const MappingHeader: React.FC<MappingHeaderProps> = ({
-  saftColumn,
+  columnLabel,
   tableFieldMappings,
   currentMapping,
   onMappingSelect,
@@ -24,11 +22,9 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
 
   return (
     <div style={{ position: "relative" }}>
-      {/* Display either the current mapping or the dropdown arrow */}
+      {}
       <div style={{ cursor: "pointer" }} onClick={toggleMenu}>
-        {currentMapping
-          ? `${saftColumn} → ${currentMapping}`
-          : `${saftColumn} ▼`}
+        {columnLabel} {currentMapping ? `→ ${currentMapping}` : "▼"}
       </div>
 
       {/* Dropdown Menu */}
@@ -43,6 +39,7 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
             zIndex: 999,
             minWidth: "200px",
             padding: "4px",
+            color: "black",
           }}
         >
           {/* Level 1: Choose a table */}
@@ -60,7 +57,7 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
             </ul>
           )}
 
-          {/* Level 2: Choose a field from that table */}
+          {/* Level 2: Choose a field from the selected table */}
           {selectedTable && (
             <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
               {/* Back button */}
@@ -81,7 +78,6 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
                     key={f.field}
                     style={{ padding: "4px 8px", cursor: "pointer" }}
                     onClick={() => {
-                      // Update mapping in parent, e.g., "Contact.SupplierNo"
                       onMappingSelect(`${selectedTable}.${f.field}`);
                       setMenuOpen(false);
                       setSelectedTable(null);

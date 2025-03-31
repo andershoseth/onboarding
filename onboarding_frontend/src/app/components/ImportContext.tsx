@@ -7,10 +7,13 @@ interface ImportContextType {
   setSelectedSystem: (system: string | null) => void;
   selectedFileType: string | null;
   setSelectedFileType: (filetype: string | null) => void;
-  fileName: string | null;
-  setFileName: (name: string | null) => void;
+  fileName: string[];
+  setFileName: React.Dispatch<React.SetStateAction<string[]>>;
+  removeFileName: (nameToRemove: string) => void;
   selectedColumns: { [key: string]: boolean };
   setSelectedColumns: (columns: { [key: string]: boolean } | ((prev: { [key: string]: boolean }) => { [key: string]: boolean })) => void;
+  mappingCompleted: boolean;
+  setMappingCompleted: (completed: boolean) => void;
 }
 
 const ImportContext = createContext<ImportContextType>({
@@ -18,36 +21,28 @@ const ImportContext = createContext<ImportContextType>({
   setSelectedSystem: () => { },
   selectedFileType: null,
   setSelectedFileType: () => { },
-  fileName: null,
+  fileName: [],
   setFileName: () => { },
+  removeFileName: () => { },
   selectedColumns: {},
   setSelectedColumns: () => { },
+  mappingCompleted: false,
+  setMappingCompleted: () => { }
 });
 
 export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedSystem, setSelectedSystem] = useState<string | null>(null);
   const [selectedFileType, setSelectedFileType] = useState<string | null>(null);
   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: boolean }>({})
+  const [mappingCompleted, setMappingCompleted] = useState<boolean>(false)
 
   // 1) Start off with null (or empty)
-  const [fileName, setFileName] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string[]>([]);
 
-  // 2) In a useEffect, read sessionStorage on the client
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedFileName = sessionStorage.getItem("fileName");
-      if (storedFileName) {
-        setFileName(storedFileName);
-      }
-    }
-  }, []);
 
-  // 3) Whenever fileName changes on the client, store it
-  useEffect(() => {
-    if (typeof window !== "undefined" && fileName) {
-      sessionStorage.setItem("fileName", fileName);
-    }
-  }, [fileName]);
+  const removeFileName = (nameToRemove: string) => {
+    setFileName((prev) => prev.filter((name) => name !== nameToRemove));
+  };
 
   const updateSelectedColumns = (columns: { [key: string]: boolean } | ((prev: { [key: string]: boolean }) => { [key: string]: boolean })) => {
     setSelectedColumns(columns);
@@ -59,14 +54,14 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
     }
   }, [selectedColumns]); //local storage for checked boxes so that export-page works
 
-  useEffect(() => {
+  useEffect(() => { //dette er for importvelgeren (bruker systemCoverage.tsx)
 
     if (selectedSystem && selectedFileType) {
 
       const fileTypeMap: Record<string, string> = {
         "SAF-T (.xml)": "safTSubjects",
         "CSV (.csv)": "csvSubjects",
-        "Excel (.xlsx)": "csvSubjects"
+        "Excel (.xlsx)": "csvSubjects" //fjern senere?? Jeg er usikker -Linn
       };
 
       const correctedFileType = fileTypeMap[selectedFileType] || selectedFileType;
@@ -102,8 +97,11 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
         setSelectedFileType,
         fileName,
         setFileName,
+        removeFileName,
         selectedColumns,
         setSelectedColumns: updateSelectedColumns,
+        mappingCompleted,
+        setMappingCompleted
       }}
     >
       {children}
