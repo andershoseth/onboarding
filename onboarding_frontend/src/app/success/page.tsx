@@ -1,14 +1,20 @@
 "use client";
 
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import ImportContext from '../components/ImportContext';
 import { useSearchParams } from "next/navigation";
 
 function Success() {
-  const { selectedColumns, fileName, removeFileName } = useContext(ImportContext);
+  const { selectedColumns, fileName, setMappingCompleted } = useContext(ImportContext);
+  const [downloadClicked, setDownloadClicked] = useState(false)
   const searchParams = useSearchParams();
   const id = searchParams.get("id"); // e.g., "/success?id=abcdef123..."
+
+  const handleDownload = () => {
+    setDownloadClicked(true);
+    setMappingCompleted(true);
+  }
 
   // Get the selected checkboxes (only the ones that are checked)
   const checkedBoxes = Object.keys(selectedColumns)
@@ -64,6 +70,7 @@ function Success() {
                     href={`http://localhost:5116/api/download/${id}`}
                     className="inline-block px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700"
                     download
+                    onClick={handleDownload}
                   >
                     Last ned mappet CSV
                   </a>

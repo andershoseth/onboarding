@@ -13,7 +13,6 @@ export default function FileDisplayPage() {
   const router = useRouter();
 
   const { uploadedFiles } = useUploadContext();
-  const { setMappingCompleted } = useContext(ImportContext)
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
 
