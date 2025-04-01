@@ -1,12 +1,12 @@
 "use client";
-
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUploadContext } from "../components/UploadContext";
 import { useMapping } from "../components/MappingContext";
 import MappingHeader from "../utils/MappingHeader";
 import { TableFieldMapping } from "../components/SaftData";
+import { Button } from "primereact/button";
 
 export default function FileDisplayPage() {
   const router = useRouter();
@@ -98,26 +98,32 @@ export default function FileDisplayPage() {
 
       <div className="flex flex-wrap gap-4 mb-6">
         {checkedBoxes.map((subject) => (
-          <button
+          <Button
+            rounded
             key={subject}
             onClick={() => setSelectedSubject(subject)}
             className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
           >
             {subject}
-          </button>
+          </Button>
         ))}
 
-        <Link href="/SaftTable" className="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600">
-          SAF-T
+        <Link href="/SaftTable">
+          <Button
+            rounded
+            label="Saf-T"
+            className="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600"
+          />
         </Link>
 
         {/* Instead of Link to /success, we do a button that triggers handleCompleteMapping */}
-        <button
+        <Button
+          rounded
+          label="Complete mapping"
           onClick={handleCompleteMapping}
           className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
         >
-          Complete Mapping
-        </button>
+        </Button>
       </div>
 
       {selectedSubject && (

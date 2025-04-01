@@ -8,6 +8,7 @@ import { systemCoverage } from "./systemCoverage";
 import Link from "next/link";
 import { Toast } from "primereact/toast";
 import FileUploader from "@/app/components/FileUploader";
+import { Button } from "primereact/button";
 
 function SaftModeInstructions({
     system,
@@ -50,13 +51,13 @@ function SaftModeInstructions({
                 {subjectList.map((sub) => {
                     const label = sub === "safTExport" ? "SAF‐T Export" : sub;
                     return (
-                        <button
+                        <Button
                             key={sub}
                             onClick={() => setSelectedSubject(sub)}
                             className="bg-orange-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-orange-700 capitalize"
                         >
                             {label}
-                        </button>
+                        </Button>
                     );
                 })}
             </div>
@@ -101,19 +102,23 @@ function SaftModeInstructions({
 
             {/* Nav buttons */}
             <div className="mt-6 flex justify-end absolute bottom-4 right-4">
-                <Link
-                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
-                    href="/displaycsvexcel"
+                <Link href="/displaycsvexcel"
                 >
-                    Next
+                    <Button
+                        rounded
+                        label="Next"
+                        className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                    />
                 </Link>
             </div>
             <div className="mt-6 flex justify-end absolute bottom-4 left-4">
-                <Link
-                    className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
-                    href="/importvelger"
+                <Link href="/importvelger"
                 >
-                    Previous
+                    <Button
+                        rounded
+                        label="Previous"
+                        className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                    />
                 </Link>
             </div>
         </div>
