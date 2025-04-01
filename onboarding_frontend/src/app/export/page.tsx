@@ -54,7 +54,7 @@ function SaftModeInstructions({
                         <Button // implementert figma design
                             key={sub}
                             onClick={() => setSelectedSubject(sub)}
-                            className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 h-[64px] shadow-md rounded-full text-lg font-semibold capitalize"
+                            className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 h-[55px] shadow-md rounded-full text-lg font-semibold capitalize"
                         >
                             {label}
                         </Button>
