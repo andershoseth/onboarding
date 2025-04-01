@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUploadContext } from "../components/UploadContext";
+import ImportContext from "../components/ImportContext";
 import { useMapping } from "../components/MappingContext";
 import MappingHeader from "../utils/MappingHeader";
 import { TableFieldMapping } from "../components/SaftData";
@@ -12,8 +13,11 @@ export default function FileDisplayPage() {
   const router = useRouter();
 
   const { uploadedFiles } = useUploadContext();
+  const { selectedFileType } = useContext(ImportContext);
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+
+  const showSaftButton = selectedFileType === "SAF-T (.xml)"; //vise saft-knapp hvis saf-t er valgt filtype
 
   // From mappingcontext. Mapping is { [columnName: string]: string }
   const { mapping, setMapping } = useMapping();
@@ -108,15 +112,18 @@ export default function FileDisplayPage() {
           </Button>
         ))}
 
-        <Link href="/SaftTable"> {/* Var snakk om å endre på denne senere, så figma design er ikke implementert */}
-          <Button
-            rounded
-            label="Saf-T"
-            className="bg-blue-500 text-white px-4 py-2 shadow hover:bg-blue-600 h-[32px]"
-          />
-        </Link>
+        {/* condition for å vise saf-t knapp kun hvis SAF-T er valgt i filtype-velgeren */}
+        {showSaftButton && (
+          <Link href="/SaftTable">
+            <Button
+              rounded
+              label="Saf-T"
+              className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 w-[100px] h-[32px] shadow-md"
+            />
+          </Link>
+        )}
 
-        {/* Instead of Link to /success, we do a button that triggers handleCompleteMapping */}
+        {/* button to map and render download-button in success-page */}
         <Button
           rounded
           label="Submit"
