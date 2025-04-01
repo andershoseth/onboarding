@@ -51,10 +51,10 @@ function SaftModeInstructions({
                 {subjectList.map((sub) => {
                     const label = sub === "safTExport" ? "SAF‐T Export" : sub;
                     return (
-                        <Button
+                        <Button // implementert figma design
                             key={sub}
                             onClick={() => setSelectedSubject(sub)}
-                            className="bg-orange-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-orange-700 capitalize"
+                            className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-6 py-3 rounded-full text-lg font-semibold capitalize"
                         >
                             {label}
                         </Button>
@@ -101,13 +101,13 @@ function SaftModeInstructions({
             })}
 
             {/* Nav buttons */}
-            <div className="mt-6 flex justify-end absolute bottom-4 right-4">
+            <div className="mt-6 flex justify-end absolute bottom-4 right-4"> {/* implementert figma design */}
                 <Link href="/displaycsvexcel"
                 >
                     <Button
                         rounded
                         label="Next"
-                        className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                        className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md transition"
                     />
                 </Link>
             </div>
@@ -117,7 +117,7 @@ function SaftModeInstructions({
                     <Button
                         rounded
                         label="Previous"
-                        className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                        className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md transition"
                     />
                 </Link>
             </div>

@@ -22,7 +22,7 @@ const ImportVelger: React.FC = () => {
     <div className="flex flex-col items-center min-h-screen p-10">
       <div className="flex items-start justify-center gap-10">
         <MenuContainer>
-          <div className="p-6 bg-gray-100 rounded-lg shadow-sm w-96">
+          <div className="p-6 bg-white rounded-lg">
             <h2 className="text-xl font-semibold text-[#E17044]">Hva ønsker du å importere?</h2>
             <p className="text-gray-600 text-sm mb-4">Huk av hva du vil importere fra filene dine.</p>
 
@@ -41,12 +41,12 @@ const ImportVelger: React.FC = () => {
               )}
             </div>
 
-            <div className="mt-6 flex justify-between">
+            <div className="mt-6 flex justify-between"> {/* implementert figma design */}
               <Link href="/filtype">
                 <Button
                   rounded
                   label="Previous"
-                  className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+                  className="px-4 py-2 shadow-md transition bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D]"
                 />
               </Link>
 
@@ -54,8 +54,9 @@ const ImportVelger: React.FC = () => {
                 <Button
                   rounded
                   label="Next"
-                  className={`px-4 py-2 rounded-md shadow-md transition ${isDisabled ? "bg-gray-400 text-gray-200 cursor-not-allowed" : "bg-[#E17044] text-white hover:bg-[#c85b34]"
-                    }`}
+                  className={`px-4 py-2 shadow-md transition ${isDisabled
+                    ? "bg-[#DAF0DA] text-white cursor-not-allowed"
+                    : "bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607]"}`}
                   aria-disabled={isDisabled}
                 />
               </Link>

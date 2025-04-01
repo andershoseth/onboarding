@@ -96,32 +96,32 @@ export default function FileDisplayPage() {
         Subjects you selected: {checkedBoxes.length > 0 ? checkedBoxes.join(", ") : "No subjects selected."}
       </p>
 
-      <div className="flex flex-wrap gap-4 mb-6">
+      <div className="flex flex-wrap gap-4 mb-6"> {/* implementert figma design */}
         {checkedBoxes.map((subject) => (
           <Button
             rounded
             key={subject}
             onClick={() => setSelectedSubject(subject)}
-            className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
+            className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow"
           >
             {subject}
           </Button>
         ))}
 
-        <Link href="/SaftTable">
+        <Link href="/SaftTable"> {/* Var snakk om å endre på denne senere, så figma design er ikke implementert */}
           <Button
             rounded
             label="Saf-T"
-            className="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600"
+            className="bg-blue-500 text-white px-4 py-2 shadow hover:bg-blue-600"
           />
         </Link>
 
         {/* Instead of Link to /success, we do a button that triggers handleCompleteMapping */}
         <Button
           rounded
-          label="Complete mapping"
+          label="Submit"
           onClick={handleCompleteMapping}
-          className="px-4 py-2 rounded-md shadow-md transition bg-[#E17044] text-white hover:bg-[#c85b34]"
+          className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md transition"
         >
         </Button>
       </div>

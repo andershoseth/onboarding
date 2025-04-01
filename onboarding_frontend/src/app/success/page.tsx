@@ -60,12 +60,12 @@ function Success() {
                 The backend minimal API is at "/api/download/{id}" returning text/csv.
               */}
               {id && (
-                <div className="mt-6">
+                <div className="mt-6"> {/* implementert figma design */}
                   <a href={`http://localhost:5116/api/download/${id}`} download>
                     <Button
                       rounded
                       label="Last ned mappet CSV"
-                      className="inline-block px-4 py-2 text-white bg-green-600 hover:bg-green-700"
+                      className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md transition inline-block"
                       onClick={() => { setMappingCompleted(true) }}
                     />
                   </a>

@@ -3,8 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useUploadContext } from "@/app/components/UploadContext";
 import { Stepper } from "primereact/stepper";
 import { StepperPanel } from "primereact/stepperpanel";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import ImportContext from "../components/ImportContext";
+import Link from "next/link";
 
 // Define steps function that returns the steps array
 export const getSteps = (
@@ -30,7 +31,6 @@ export const getSteps = (
 
 const StepperBar: React.FC = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const { selectedSystem, selectedColumns, selectedFileType, mappingCompleted } = useContext(ImportContext);
   const { uploadedFiles } = useUploadContext();
 
@@ -49,15 +49,15 @@ const StepperBar: React.FC = () => {
       <Stepper activeStep={currentStep} orientation="vertical">
         {steps.map((step) => (
           <StepperPanel key={step.url} header={`${step.label} ${step.completed ? "✔" : ""}`}>
-            <button
-              onClick={() => router.push(step.url)}
-              className="text-black hover:text-gray-300 text-left w-full">
+            <Link
+              href={step.url}
+              className="text-black hover:text-gray-300 text-left rounded w-full">
               {step.description}
-            </button>
+            </Link>
           </StepperPanel>
         ))}
       </Stepper>
-    </div>
+    </div >
   );
 };
 
