@@ -106,7 +106,7 @@ export default function FileDisplayPage() {
             rounded
             key={subject}
             onClick={() => setSelectedSubject(subject)}
-            className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md h-[32px]"
+            className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md h-[32px] capitalize"
           >
             {subject}
           </Button>
