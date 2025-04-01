@@ -46,7 +46,7 @@ const ImportVelger: React.FC = () => {
                 <Button
                   rounded
                   label="Previous"
-                  className="px-4 py-2 shadow-md transition bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D]"
+                  className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md w-[100px] h-[32px]"
                 />
               </Link>
 
@@ -55,8 +55,8 @@ const ImportVelger: React.FC = () => {
                   rounded
                   label="Next"
                   className={`px-4 py-2 shadow-md transition ${isDisabled
-                    ? "bg-[#DAF0DA] text-white cursor-not-allowed"
-                    : "bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607]"}`}
+                    ? "bg-[#DAF0DA] text-white cursor-not-allowed px-4 py-2 shadow-md w-[100px] h-[32px]"
+                    : "bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md w-[100px] h-[32px]"}`}
                   aria-disabled={isDisabled}
                 />
               </Link>

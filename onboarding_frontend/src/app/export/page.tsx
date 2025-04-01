@@ -54,7 +54,7 @@ function SaftModeInstructions({
                         <Button // implementert figma design
                             key={sub}
                             onClick={() => setSelectedSubject(sub)}
-                            className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-6 py-3 rounded-full text-lg font-semibold capitalize"
+                            className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 h-[64px] shadow-md rounded-full text-lg font-semibold capitalize"
                         >
                             {label}
                         </Button>
@@ -107,7 +107,7 @@ function SaftModeInstructions({
                     <Button
                         rounded
                         label="Next"
-                        className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md transition"
+                        className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md w-[100px] h-[32px]"
                     />
                 </Link>
             </div>
@@ -117,7 +117,7 @@ function SaftModeInstructions({
                     <Button
                         rounded
                         label="Previous"
-                        className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md transition"
+                        className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md w-[100px] h-[32px]"
                     />
                 </Link>
             </div>

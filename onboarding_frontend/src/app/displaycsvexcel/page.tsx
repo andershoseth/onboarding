@@ -102,7 +102,7 @@ export default function FileDisplayPage() {
             rounded
             key={subject}
             onClick={() => setSelectedSubject(subject)}
-            className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow"
+            className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md h-[32px]"
           >
             {subject}
           </Button>
@@ -112,7 +112,7 @@ export default function FileDisplayPage() {
           <Button
             rounded
             label="Saf-T"
-            className="bg-blue-500 text-white px-4 py-2 shadow hover:bg-blue-600"
+            className="bg-blue-500 text-white px-4 py-2 shadow hover:bg-blue-600 h-[32px]"
           />
         </Link>
 
@@ -121,7 +121,7 @@ export default function FileDisplayPage() {
           rounded
           label="Submit"
           onClick={handleCompleteMapping}
-          className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md transition"
+          className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 w-[100px] h-[32px] shadow-md"
         >
         </Button>
       </div>

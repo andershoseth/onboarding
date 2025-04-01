@@ -65,7 +65,7 @@ function Success() {
                     <Button
                       rounded
                       label="Last ned mappet CSV"
-                      className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md transition inline-block"
+                      className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 h-[64px] shadow-md inline-block"
                       onClick={() => { setMappingCompleted(true) }}
                     />
                   </a>
