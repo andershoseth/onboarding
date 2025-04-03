@@ -62,7 +62,7 @@ const StepperBar: React.FC = () => {
       </div>
 
       {/* PowerOffice support logo*/}
-      <div className="w-full py-80 pr-5">
+      <div className="w-full absolute bottom-10 pb-10 pr-5">
         <Link href="https://support.poweroffice.com/hc/no" target="_blank" rel="noopener noreferreer">
           <Image
             src="/po_support_logo.png"

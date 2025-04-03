@@ -29,12 +29,6 @@ export default function Navbar() {
                 <li>
                     <Link href="/"> <Image src="/po-logo.png" alt="logo" width={165} height={165} /> </Link>
                 </li>
-                <li>
-                    <Link href="/about" className="hover:underline">Info</Link>
-                </li>
-                <li>
-                    <Link href="/success" className="hover:underline">Suksess</Link>
-                </li>
             </ul>
         </nav>
     );
