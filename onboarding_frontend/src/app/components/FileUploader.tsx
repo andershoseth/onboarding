@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useRef} from "react";
-import {FileUpload} from "primereact/fileupload";
-import {useUploadContext} from "./UploadContext";
+import React, { useContext, useEffect, useRef } from "react";
+import { FileUpload } from "primereact/fileupload";
+import { useUploadContext } from "./UploadContext";
 import ImportContext from "./ImportContext";
 
 interface FileUploaderProps {
@@ -10,15 +10,15 @@ interface FileUploaderProps {
 }
 
 export default function FileUploader({
-                                         subject,
-                                         accept,
-                                         onShowErrorToast
-                                     }: FileUploaderProps) {
+    subject,
+    accept,
+    onShowErrorToast
+}: FileUploaderProps) {
     // Merge all the logic from both old functions:
 
     // Access multiple contexts as needed
-    const {setUploadedData, setUploadedFiles, uploadedFiles} = useUploadContext();
-    const {setFileName} = useContext(ImportContext);
+    const { setUploadedData, setUploadedFiles, uploadedFiles } = useUploadContext();
+    const { setFileName } = useContext(ImportContext);
 
     // Create a ref for the <FileUpload> so we can call `clear()`
     const fileUploadRef = useRef<FileUpload>(null);
@@ -81,7 +81,7 @@ export default function FileUploader({
     const handleFileRemove = (e: any) => {
         // E.g. remove from contexts
         setUploadedFiles((prev) => {
-            const updated = {...prev};
+            const updated = { ...prev };
             delete updated[subject];
             return updated;
         });
@@ -108,13 +108,13 @@ export default function FileUploader({
                 onUpload={handleUploadComplete}
                 onError={handleUploadError}
                 onRemove={handleFileRemove}
-                chooseLabel="Choose File(s)"
-                uploadLabel="Upload"
-                cancelLabel="Clear"
+                chooseLabel="Velg fil(er)"
+                uploadLabel="Last opp"
+                cancelLabel="Fjern"
                 emptyTemplate={
                     <div className="text-center">
                         <span className="pi pi-file-plus text-8xl pb-4"></span>
-                        <p>Drag and drop files to here to upload.</p>
+                        <p>Klikk og slipp filer her for å laste opp</p>
                     </div>
                 }
             />

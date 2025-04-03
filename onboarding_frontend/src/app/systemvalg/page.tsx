@@ -2,12 +2,10 @@
 import Card from '../card';
 import Link from "next/link";
 import ImportContext from '../components/ImportContext';
-import React from 'react';
+import React, { useContext } from 'react';
 
 function SystemChoice() {
-    const context = React.useContext(ImportContext);
-
-    const { setSelectedSystem } = context
+    const { setSelectedSystem } = useContext(ImportContext)
 
     const cards = [
         {
@@ -26,25 +24,25 @@ function SystemChoice() {
             logoSrc: "import.png",
             title: "Xledger",
             description: "Importer data fra Xledger",
-            link: "/filtype"
+            link: ""
         },
         {
             logoSrc: "import.png",
             title: "Bank + regnskap",
             description: "Importer data fra Bank + regnskap",
-            link: "/filtype"
+            link: ""
         },
         {
             logoSrc: "import.png",
             title: "Fiken",
             description: "Importer data fra Fiken",
-            link: "/filtype"
+            link: ""
         },
         {
             logoSrc: "import.png",
             title: "Egendefinert",
             description: "Importer data fra et egendefinert regnskapssystem",
-            link: "/filtype"
+            link: ""
         },
     ];
 
@@ -57,6 +55,9 @@ function SystemChoice() {
         <>
             <div className="flex flex-col items-center text-center mt-10">
                 <h1 className="text-4xl font-bold">Hvilket system kommer du fra?</h1>
+            </div>
+            <div className="flex flex-col items-center text-center mt-5">
+                <h2 className="text-xl">Klikk på regnskapssystemet du skal migrere fra.</h2>
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">
@@ -82,7 +83,7 @@ function SystemChoice() {
                     className="flex items-center gap-2 hover:underline hover:underline-offset-4"
                     href="/home"
                 >
-                    Home
+                    Hjem
                 </Link>
             </footer>
         </>

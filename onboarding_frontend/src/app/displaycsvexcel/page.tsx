@@ -49,14 +49,14 @@ export default function FileDisplayPage() {
   // The function to call on "Next" or "Complete Mapping"
   const handleCompleteMapping = async () => {
     if (!selectedSubject) {
-      alert("No subject selected!");
+      alert("Ingen subjekt valgt!");
       return;
     }
 
     // 1) Get the CSV data for the selected subject
     const csvRows = uploadedFiles[selectedSubject]?.data;
     if (!csvRows) {
-      alert("No CSV data found for this subject.");
+      alert("Ingen CSV-data funnet for dette subjektet.");
       return;
     }
 
@@ -94,13 +94,24 @@ export default function FileDisplayPage() {
   };
 
   return (
-    <div className="p-6 min-h-screen pt-16">
-      <h2 className="text-2xl font-bold mb-4">Uploaded File Data</h2>
-      <p className="mb-4">
-        Subjects you selected: {checkedBoxes.length > 0 ? checkedBoxes.join(", ") : "No subjects selected."}
-      </p>
+    <div className="p-6 min-h-screen pt-8">
+      <div className="flex flex-col items-center text-center mt-5">
+        <h1 className="text-4xl font-bold">Visning av filene</h1>
+      </div>
 
-      <div className="flex flex-wrap gap-4 mb-6"> {/* implementert figma design */}
+      <div className="flex flex-col items-center text-center mt-5">
+        <h2 className="text-xl">Trykk på knappene for å få en visning av filene du lastet opp.</h2>
+      </div>
+
+      <div className="flex flex-col items-center text-center mt-5">
+        <h2 className="text-xl">Klikk på kolonnene for å endre navn med hjelp av dropdown-menyen. </h2>
+      </div>
+
+      <div className="flex flex-col items-center text-center mt-5">
+        <h2 className="text-xl">Ved å klikke på "Send inn"-knappen blir du tatt videre til neste side hvor du kan laste ned de konverterte filene. </h2>
+      </div>
+
+      <div className="flex flex-wrap gap-6 mb-6 mt-10"> {/* implementert figma design */}
         {checkedBoxes.map((subject) => (
           <Button
             rounded
@@ -126,7 +137,7 @@ export default function FileDisplayPage() {
         {/* button to map and render download-button in success-page */}
         <Button
           rounded
-          label="Submit"
+          label="Send inn"
           onClick={handleCompleteMapping}
           className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 w-[100px] h-[32px] shadow-md"
         >
@@ -135,11 +146,11 @@ export default function FileDisplayPage() {
 
       {selectedSubject && (
         <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Data for: {selectedSubject}</h2>
+          <h2 className="text-xl font-semibold mb-2 capitalize">Data for: {selectedSubject}</h2>
           {uploadedFiles[selectedSubject] ? (
             <>
               <p className="mb-2">
-                File Name: <strong>{uploadedFiles[selectedSubject].fileName}</strong>
+                Filnavn: <strong>{uploadedFiles[selectedSubject].fileName}</strong>
               </p>
               <div className="overflow-y-auto max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white">
                 <table className="min-w-full">
@@ -180,7 +191,7 @@ export default function FileDisplayPage() {
               </div>
             </>
           ) : (
-            <p className="text-gray-500">No data uploaded yet for "{selectedSubject}"</p>
+            <p className="text-white">Ingen data lastet opp for "{selectedSubject}"</p>
           )}
         </div>
       )}

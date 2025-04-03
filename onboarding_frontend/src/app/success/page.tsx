@@ -19,7 +19,7 @@ function Success() {
   return (
     <div className="flex flex-col items-center text-center mt-10 w-full">
       <h1 className="text-5xl font-bold mt-10">
-        <span className="text-black">Suksess!</span>
+        <span className="text-white">Suksess!</span>
       </h1>
 
       <div className="mt-10 w-full max-w-6xl">
@@ -54,29 +54,28 @@ function Success() {
                   <li className="text-lg text-gray-700">Ingen bokser valgt.</li>
                 )}
               </ul>
+            </div>
+          </div>
 
+          <div className="flex flex-col w-full sm:w-1/2">
+            <div className="h-40 bg-white flex flex-col mb-6 justify-center p-6 rounded-3xl items-center text-center mt-5 shadow-lg">
+              <h2 className="text-blue-600 font-semibold text-2xl">Last ned de konverterte filene ved å trykke på knappen nedenfor: </h2>
               {/* 
                 If 'id' is present, show a button/link to download the mapped CSV. 
                 The backend minimal API is at "/api/download/{id}" returning text/csv.
               */}
               {id && (
-                <div className="mt-6"> {/* implementert figma design */}
+                <div className="mt-3"> {/* implementert figma design */}
                   <a href={`http://localhost:5116/api/download/${id}`} download>
                     <Button
                       rounded
-                      label="Last ned mappet CSV"
-                      className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 h-[64px] shadow-md inline-block"
+                      label="Last ned"
+                      className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 h-[45px] shadow-md inline-block text-xl"
                       onClick={() => { setMappingCompleted(true) }}
                     />
                   </a>
                 </div>
               )}
-            </div>
-          </div>
-
-          <div className="flex flex-col w-full sm:w-1/2">
-            <div className="h-40 bg-white text-blue-600 mb-6 rounded-3xl flex items-center justify-center p-6 text-2xl font-semibold shadow-lg">
-              Sjekk ut kom-i-gang-artiklene våre!
             </div>
             <div className="h-40 bg-white text-blue-600 rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg">
               <div className="relative w-full h-full p-4 flex items-start">
@@ -88,9 +87,11 @@ function Success() {
                   className="w-full h-full object-contain"
                 />
               </div>
+
               <div className="flex items-center justify-center text-center w-full">
                 Les de siste<br />nyhetene våre
               </div>
+
             </div>
           </div>
         </div>

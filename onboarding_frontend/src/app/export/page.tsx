@@ -45,9 +45,19 @@ function SaftModeInstructions({
     const safTSteps = instructionConfig[system]?.["SAF-T"] || [];
 
     return (
-        <div className="p-6 space-y-4 relative capitalize">
+        <div className="p-6 space-y-4 relative">
+            <div className="flex flex-col items-center text-center mt-5">
+                <h1 className="text-4xl font-bold">Last opp filene dine!</h1>
+            </div>
+            <div className="flex flex-col items-center text-center mt-10">
+                <h2 className="text-xl">Trykk på knappene laget av importvelgeren fra trinn 3, og last opp filene helt nederst på siden.</h2>
+            </div>
+            <div className="flex flex-col items-center text-center mt-10">
+                <h2 className="text-xl">Veiledning vil også vise hvordan du eksporterer filene fra ditt gamle regnskapssystem når du trykker på knappene.</h2>
+            </div>
+
             {/* Row of subject buttons */}
-            <div className="flex flex-wrap gap-4 mt-4 justify-center py-10 capitalize">
+            <div className="flex flex-wrap gap-4 mt-4 justify-center py-5 capitalize">
                 {subjectList.map((sub) => {
                     const label = sub === "safTExport" ? "SAF‐T Export" : sub;
                     return (
@@ -82,11 +92,11 @@ function SaftModeInstructions({
 
                 return (
                     <div key={sub} style={{ display: isActive ? "block" : "none" }}>
-                        <div className="flex flex-col items-center space-y-4 mt-4 py-10">
+                        <div className="flex flex-col items-center space-y-4 mt-4 py-1">
                             {instructionsSteps.length > 0 ? (
                                 <Instructions title={instructionsTitle} steps={instructionsSteps} />
                             ) : (
-                                <p>No instructions found for {sub}.</p>
+                                <p>Ingen instruksjoner funnet for {sub}.</p>
                             )}
 
                             {/* Pass showErrorToast down to FileUploader */}
@@ -106,7 +116,7 @@ function SaftModeInstructions({
                 >
                     <Button
                         rounded
-                        label="Next"
+                        label="Neste"
                         className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md w-[100px] h-[32px]"
                     />
                 </Link>
@@ -116,7 +126,7 @@ function SaftModeInstructions({
                 >
                     <Button
                         rounded
-                        label="Previous"
+                        label="Forrige"
                         className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md w-[100px] h-[32px]"
                     />
                 </Link>
@@ -175,7 +185,7 @@ function CsvModeInstructions({
                             {steps ? (
                                 <Instructions title={`${system} – CSV – ${sub}`} steps={steps} />
                             ) : (
-                                <p>No CSV instructions found for {sub}</p>
+                                <p>Ingen CSV instruksjoner funnet for {sub}</p>
                             )}
 
                             <FileUploader
@@ -228,7 +238,7 @@ export default function ExportPage() {
 
     if (!hasMounted) return null;
     if (!selectedSystem) {
-        return <p>Please pick a system first.</p>;
+        return <p>Vennligst velg et system først</p>;
     }
 
     return (

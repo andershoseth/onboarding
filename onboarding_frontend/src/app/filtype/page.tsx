@@ -2,11 +2,10 @@
 import Card from '../card';
 import Link from "next/link";
 import ImportContext from '../components/ImportContext';
-import React from 'react';
+import React, { useContext } from 'react';
 
 function FileTypeChoice() {
-    const context = React.useContext(ImportContext);
-    const { setSelectedFileType } = context;
+    const { setSelectedFileType } = useContext(ImportContext);
 
     const cards = [
         {
@@ -63,7 +62,7 @@ function FileTypeChoice() {
                     className="flex items-center gap-2 hover:underline hover:underline-offset-4"
                     href="/home"
                 >
-                    Home
+                    Hjem
                 </Link>
             </footer>
         </>

@@ -19,12 +19,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <UploadProvider>
         <MappingProvider>
           <html lang="en">
-            <body className="bg-gradient-to-b from-[#54155C] to-[#AF554E] min-h-screen">
+            <body className="min-h-screen"
+              style={{ background: "linear-gradient(13.92deg, #FAB270 2.22%, #984798 49.7%, #422163 97.18%)" }}>
               <div className="flex">
                 {showStepper && <StepperBar />}
                 <div className={`flex-1 ${showStepper ? 'ml-64' : ''}`}>
                   <Navbar />
-                  <main>{children}</main>
+                  <main className="pt-[30px]">{children}</main>
                 </div>
               </div>
             </body>
