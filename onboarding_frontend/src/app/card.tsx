@@ -9,7 +9,7 @@ interface CardInfo {
 
 const Card: React.FC<CardInfo> = ({ logoSrc, title, description }) => {
     return (
-        <div className="w-80 h-64 p-10 bg-[#FAFAFA] rounded-lg shadow-[#6A48B5] text-center flex flex-col justify-between">
+        <div className="w-80 h-64 p-10 bg-[#FAFAFA] rounded-lg shadow-[#6A48B5] border border-black text-center flex flex-col justify-between">
             <img src={logoSrc} alt="Logo" className="w-33 h-20 mx-auto bg-transparent" />
             <h2 className="text-black text-xl font-bold">
                 {title}
