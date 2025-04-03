@@ -6,6 +6,7 @@ import { StepperPanel } from "primereact/stepperpanel";
 import { usePathname } from "next/navigation";
 import ImportContext from "../components/ImportContext";
 import Link from "next/link";
+import Image from "next/image";
 
 // Define steps function that returns the steps array
 export const getSteps = (
@@ -45,18 +46,32 @@ const StepperBar: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className="fixed top-0 left-0 w-64 bg-white h-full pt-10 pl-1">
-      <Stepper activeStep={currentStep} orientation="vertical">
-        {steps.map((step) => (
-          <StepperPanel key={step.url} header={`${step.label} ${step.completed ? "✔" : ""}`}>
-            <Link
-              href={step.url}
-              className="text-black hover:text-gray-300 text-left rounded w-full">
-              {step.description}
-            </Link>
-          </StepperPanel>
-        ))}
-      </Stepper>
+    <div className="fixed top-0 left-0 w-64 bg-white h-full felx flex-col justify-between">
+      <div className="pt-10 pl-1">
+        <Stepper activeStep={currentStep} orientation="vertical">
+          {steps.map((step) => (
+            <StepperPanel key={step.url} header={`${step.label} ${step.completed ? "✔" : ""}`}>
+              <Link
+                href={step.url}
+                className="text-black hover:text-gray-300 text-left rounded w-full">
+                {step.description}
+              </Link>
+            </StepperPanel>
+          ))}
+        </Stepper>
+      </div>
+
+      {/* PowerOffice support logo*/}
+      <div className="w-full py-80 pr-5">
+        <Link href="https://support.poweroffice.com/hc/no" target="_blank" rel="noopener noreferreer">
+          <Image
+            src="/po_support_logo.png"
+            alt="PowerOffice support logo"
+            width={150}
+            height={50}
+            className="mx-auto" />
+        </Link>
+      </div>
     </div >
   );
 };
