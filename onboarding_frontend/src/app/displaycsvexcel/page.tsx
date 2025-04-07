@@ -96,7 +96,7 @@ export default function FileDisplayPage() {
   return (
     <div className="p-6 min-h-screen pt-8">
       <div className="flex flex-col items-center text-center mt-5">
-        <h1 className="text-4xl font-bold">Visning av filene</h1>
+        <h1 className="text-4xl font-bold">Visning av filene.</h1>
       </div>
 
       <div className="flex flex-col items-center text-center mt-5">

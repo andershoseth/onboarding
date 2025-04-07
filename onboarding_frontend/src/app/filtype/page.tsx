@@ -36,7 +36,11 @@ function FileTypeChoice() {
     return (
         <>
             <div className="flex flex-col items-center text-center mt-10">
-                <h1 className="text-4xl font-bold">Hvilken filtype vil du laste opp?</h1>
+                <h1 className="text-4xl font-bold">Hvilken filtype skal lastes opp?</h1>
+            </div>
+
+            <div className="flex flex-col items-center text-center mt-5">
+                <h2 className="text-xl">Dette trinnet har betydning senere i prosessen.</h2>
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">

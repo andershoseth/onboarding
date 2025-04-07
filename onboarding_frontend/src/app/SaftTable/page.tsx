@@ -17,7 +17,6 @@ export default function SaftTablePage() {
 
   return (
     <div className="p-6 min-h-screen pt-16 bg-white text-black">
-      
       <SaftData data={data} />
     </div>
   );
