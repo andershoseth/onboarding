@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Microsoft.AspNetCore.Http.Features;
 using onboarding_backend;
 using onboarding_backend.Services; // Inneholder SaftParser og StandardImport
@@ -48,7 +47,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Onboarding API V1");
-    c.RoutePrefix = ""; // Swagger UI at root
+    c.RoutePrefix = "swagger"; // Swagger UI at root
 });
 
 // Continue with the rest of your pipeline:
@@ -106,8 +105,7 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
 
             var grouped = SafTFlattener.GroupSafTEntries(flattened);
             var filteredGroups = grouped
-                .Where(g => g.GroupKey == "AuditFile.Header"
-                         || g.GroupKey == "AuditFile.MasterFiles")
+                .Where(g =>  g.GroupKey == "AuditFile.GeneralLedgerEntries")
                 .ToList();
 
 
@@ -219,6 +217,15 @@ app.MapGet("/api/download/{id}", (string id) =>
     return Results.NotFound("CSV not found or already removed.");
 });
 
+
+app.MapPost("/api/standard-import-object", (onboarding_backend.Models.StandardImport.Standardimport  stdImport) =>
+    {
+        
+        Console.WriteLine($"Received {stdImport.Contact.Count} contacts, etc.");
+        return Results.Ok(new { success = true });
+
+    });
+   
 
 
 
