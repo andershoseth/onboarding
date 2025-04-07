@@ -9,37 +9,37 @@ function SystemChoice() {
 
     const cards = [
         {
-            logoSrc: "import.png",
+            logoSrc: "files.png",
             title: "Visma",
             description: "Importer data fra Visma",
             link: "/filtype"
         },
         {
-            logoSrc: "import.png",
+            logoSrc: "files.png",
             title: "Tripletex",
             description: "Importer data fra Tripletex",
             link: "/filtype"
         },
         {
-            logoSrc: "import.png",
+            logoSrc: "files.png",
             title: "Xledger",
             description: "Importer data fra Xledger",
             link: ""
         },
         {
-            logoSrc: "import.png",
+            logoSrc: "files.png",
             title: "Bank + regnskap",
             description: "Importer data fra Bank + regnskap",
             link: ""
         },
         {
-            logoSrc: "import.png",
+            logoSrc: "files.png",
             title: "Fiken",
             description: "Importer data fra Fiken",
             link: ""
         },
         {
-            logoSrc: "import.png",
+            logoSrc: "files.png",
             title: "Egendefinert",
             description: "Importer data fra et egendefinert regnskapssystem",
             link: ""

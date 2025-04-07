@@ -27,7 +27,7 @@ function Success() {
           <div className="sm:w-1/2 w-full bg-white text-[#1867DD] mr-6 rounded-3xl flex flex-col items-center justify-center p-6 text-2xl font-semibold shadow-lg min-h-80">
             Du er nå i mål med importen!
             <div className="mt-4 text-xl text-black w-full">
-              <p>Du har importert følgende filer:</p>
+              <p className="text-[#AE74EB]">Du har importert følgende filer:</p>
               {fileName.length > 0 ? (
                 <ul className="font-bold text-lg text-black flex flex-col items-center gap-2">
                   {fileName.map((name, index) => (
@@ -42,7 +42,7 @@ function Success() {
                 </p>
               )}
               <br />
-              <p>Med disse valgene fra importvelgeren:</p>
+              <p className="text-[#AE74EB]">Med disse valgene fra importvelgeren:</p>
               <ul className="mt-2">
                 {checkedBoxes.length > 0 ? (
                   checkedBoxes.map((box, index) => (
@@ -79,7 +79,7 @@ function Success() {
             </div>
             <div className="h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg">
               <div className="flex items-center justify-center text-center w-full">
-                Start prosessen på nytt? Klikk&nbsp;<a href="/home" className="underline">her</a>! {/* &nsbp; er mellomrom i html. Refresher siden og tar deg tilbake til start */}
+                Start prosessen på nytt? Klikk&nbsp;<a href="/home" className="text-[#FF8D04] underline">her</a>! {/* &nsbp; er mellomrom i html. Refresher siden og tar deg tilbake til start */}
               </div>
             </div>
           </div>

@@ -9,19 +9,19 @@ function FileTypeChoice() {
 
     const cards = [
         {
-            logoSrc: "import.png",
+            logoSrc: "xls_logo.png",
             title: "Excel (.xlsx)",
             description: "Last opp filer i Excel-format",
             link: "/importvelger"
         },
         {
-            logoSrc: "import.png",
+            logoSrc: "unknown_logo.png",
             title: "CSV (.csv)",
             description: "Last opp filer i CSV-format",
             link: "/importvelger"
         },
         {
-            logoSrc: "import.png",
+            logoSrc: "html_logo.png",
             title: "SAF-T (.xml)",
             description: "Last opp filer i SAF-T-format",
             link: "/importvelger"
@@ -40,7 +40,7 @@ function FileTypeChoice() {
             </div>
 
             <div className="flex flex-col items-center text-center mt-5">
-                <h2 className="text-xl">Dette trinnet har betydning senere i prosessen.</h2>
+                <h2 className="text-xl">Filtypene avhenger av systemet fra trinn 1, og vil ha betydning i neste trinn med generering av sjekklisten.</h2>
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">

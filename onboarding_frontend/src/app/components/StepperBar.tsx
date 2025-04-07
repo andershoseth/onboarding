@@ -46,7 +46,7 @@ const StepperBar: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className="fixed top-0 left-0 w-64 bg-white h-full felx flex-col justify-between">
+    <div className="fixed top-0 left-0 w-64 bg-white h-full flex flex-col justify-between">
       <div className="pt-10 pl-1">
         <Stepper activeStep={currentStep} orientation="vertical">
           {steps.map((step) => (
@@ -64,12 +64,20 @@ const StepperBar: React.FC = () => {
       {/* PowerOffice support logo*/}
       <div className="w-full absolute bottom-10 pb-10 pr-5">
         <Link href="https://support.poweroffice.com/hc/no" target="_blank" rel="noopener noreferreer">
-          <Image
-            src="/po_support_logo.png"
-            alt="PowerOffice support logo"
-            width={150}
-            height={50}
-            className="mx-auto" />
+          <div className="flex items-center justify-center ">
+            <Image
+              src="/po_support_logo.png"
+              alt="PowerOffice support logo"
+              width={150}
+              height={50}
+              className="ml-[2px]" />
+            <Image
+              src="/open_new_window.png"
+              alt="PowerOffice support logo"
+              width={13}
+              height={13}
+              className="ml-[5px]" />
+          </div>
         </Link>
       </div>
     </div >

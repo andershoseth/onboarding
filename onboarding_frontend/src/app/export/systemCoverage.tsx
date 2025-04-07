@@ -8,10 +8,10 @@ export const systemCoverage: { [key: string]: { [key: string]: string[] } } = {
   },
 
   "Tripletex": {
-    safTSubjects: ["anleggsmidler", "bestillinger", "kontoplan", "lønnsgrunnlag",
+    safTSubjects: ["anleggsmidler", "bilag", "bestillinger", "kontoplan", "lønnsgrunnlag",
       "lønnsjustering", "produkter", "timeprisspesifikasjon", "tilbud"],
 
-    csvSubjects: ["avdelinger", "bilag", "bilagslinjer", "faktura CID", "kontakter", "lønnssaldo hittil i år", "prosjekter",
+    csvSubjects: ["avdelinger", "bilagslinjer", "faktura CID", "kontakter", "lønnssaldo hittil i år", "prosjekter",
       "prosjektaktiviteter", "prosjektfaktureringsmetode", "prosjektmedlemmer", "prosjektstatus"],
   }
 }; //elementene i listene er tatt fra standardimport-mappa på backenden
