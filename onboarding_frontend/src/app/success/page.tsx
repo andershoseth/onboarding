@@ -79,7 +79,7 @@ function Success() {
             </div>
             <div className="h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg">
               <div className="flex items-center justify-center text-center w-full">
-                Start prosessen på nytt? Klikk&nbsp;<a href="/home" className="underline">her</a>! {/* &nsbp; er mellomrom i html */}
+                Start prosessen på nytt? Klikk&nbsp;<a href="/home" className="underline">her</a>! {/* &nsbp; er mellomrom i html. Refresher siden og tar deg tilbake til start */}
               </div>
             </div>
           </div>
