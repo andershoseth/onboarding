@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using onboarding_backend.Models.StandardImport;
+using onboarding_backend.Services;
 
 namespace onboarding_backend.Controllers
 {
@@ -14,12 +15,16 @@ namespace onboarding_backend.Controllers
 
             if (model == null)
                 return BadRequest("No data provided.");
-            
-            
 
+
+            var file = ExcelSingleSheetExporter.CreateSingleSheet(model);
             
             
-            return Ok(new { message = "Data imported successfully", model });
+            return File(
+                fileContents: file,
+                contentType: "application/xlsx",
+                fileDownloadName: "StandardImport.xlsx"
+            );
         }
     }
 }
