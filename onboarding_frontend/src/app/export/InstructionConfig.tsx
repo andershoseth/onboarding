@@ -64,7 +64,7 @@ export const instructionConfig = {
 
             }],
             "lønnssaldo hittil i år": [{
-                heading: "Tripletex CSV - Åpningssaldo (saldobalanse)",
+                heading: "Tripletex CSV - Åpningsbalanse (saldobalanse)",
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                     "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 imageSrc: "/export/saldobalanse_tripletex.png",
