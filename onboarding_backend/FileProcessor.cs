@@ -132,6 +132,7 @@ public static class FileProcessor
     }
 
 
+    // The excel parsing expects a bracket title: [title] as the first row, a header row to follow it, and then data until it hits empty rows
     public static List<Dictionary<string, string>> ProcessExcel(Stream stream)
     {
         // Required by ExcelDataReader for xls/xlsx

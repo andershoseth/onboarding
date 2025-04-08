@@ -185,26 +185,21 @@ export default function FileDisplayPage() {
                   // The column headers come from the keys of the first row
                   // except we might skip "TableName"
                   const rowKeys = Object.keys(rowsForTable[0] ?? {}).filter(
-                    (k) => k !== "TableName"
+                    (k) => k && k.trim() !== "" && k !== "TableName"
                   );
 
                   return (
-                    <div key={index} className="mb-8">
+                    <div key={index} className="mb-10">
                       <h3 className="text-lg font-semibold mb-2">Table: {tableName}</h3>
-
-                      <div className="max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white overflow-auto">
-                        <table className="min-w-full">
+                      <div className="inline-block border border-gray-500 rounded-lg shadow-md bg-white mb-8">
+                        <table className="table-auto w-fit">
                           <thead className="bg-gray-600 text-white sticky top-0 z-10">
                             <tr>
                               {rowKeys.map((header, hIndex) => {
-                                const currentMapping =
-                                  csvMapping[tableName]?.[header] || "";
-
+                                const currentMapping = csvMapping[tableName]?.[header] || "";
+      
                                 return (
-                                  <th
-                                    key={hIndex}
-                                    className="border border-gray-400 px-4 py-2 text-left"
-                                  >
+                                  <th key={hIndex} className="border border-gray-400 px-4 py-2 text-left w-48">
                                     <MappingHeader
                                       columnLabel={header}
                                       tableFieldMappings={tableFieldMappings}
@@ -226,17 +221,9 @@ export default function FileDisplayPage() {
                           </thead>
                           <tbody>
                             {rowsForTable.map((row, rowIndex) => (
-                              <tr
-                                key={rowIndex}
-                                className={
-                                  rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"
-                                }
-                              >
+                              <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
                                 {rowKeys.map((key, cellIndex) => (
-                                  <td
-                                    key={cellIndex}
-                                    className="border border-gray-400 px-4 py-2 text-gray-900"
-                                  >
+                                  <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900 w-48">
                                     {row[key]}
                                   </td>
                                 ))}
