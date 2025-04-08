@@ -45,7 +45,7 @@ const StepperBar: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className="fixed top-0 left-0 w-64 bg-white h-full pt-10 pl-1">
+    <div className="fixed top-0 left-0 w-64 bg-white h-full pt-10 pl-1 z-50 shadow-md">
       <Stepper activeStep={currentStep} orientation="vertical">
         {steps.map((step) => (
           <StepperPanel key={step.url} header={`${step.label} ${step.completed ? "✔" : ""}`}>

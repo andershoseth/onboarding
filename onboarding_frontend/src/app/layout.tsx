@@ -8,6 +8,7 @@ import { MappingProvider } from "./components/MappingContext";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import "primeicons/primeicons.css";
 import { usePathname } from "next/navigation";  // Import usePathname to check the current URL
+import { CSVExcelMappingProvider } from "./components/CSVExcelMappingContext";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname(); // Get the current pathname
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ImportProvider>
       <UploadProvider>
         <MappingProvider>
+        <CSVExcelMappingProvider>
           <html lang="en">
             <body className="bg-gradient-to-b from-[#54155C] to-[#AF554E] min-h-screen">
               <div className="flex">
@@ -29,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </body>
           </html>
+          </CSVExcelMappingProvider>
         </MappingProvider>
       </UploadProvider>
     </ImportProvider>

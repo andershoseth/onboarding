@@ -21,7 +21,7 @@ export default function Navbar() {
     return (
         <nav
             className={`p-2 font-bold text-white transition-all duration-300 fixed w-full top-0 z-50 
-        ${scrolled ? "bg-[rgba(0,0,0,0.3)]" : "bg-[rgba(0,0,0,0.2)]"}`
+        ${scrolled ? "bg-[rgba(0,0,0,8)]" : "bg-[rgba(0,0,0,0.3)]"}`
             }
         >
             <ul className="flex space-x-4">
