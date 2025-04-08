@@ -111,7 +111,7 @@ export default function FileDisplayPage() {
         <h4 className="text-xl">Ved å klikke på "Send inn"-knappen blir du tatt videre til neste side hvor du kan laste ned de konverterte filene. </h4>
       </div>
 
-      <div className="flex flex-wrap gap-6 mb-6 mt-10"> {/* implementert figma design */}
+      <div className="flex flex-wrap gap-6 mb-6 mt-10">
         {checkedBoxes.map((subject) => (
           <Button
             rounded
@@ -123,7 +123,6 @@ export default function FileDisplayPage() {
           </Button>
         ))}
 
-        {/* condition for å vise saf-t knapp kun hvis SAF-T er valgt i filtype-velgeren */}
         {showSaftButton && (
           <Link href="/SaftTable">
             <Button
@@ -134,14 +133,12 @@ export default function FileDisplayPage() {
           </Link>
         )}
 
-        {/* button to map and render download-button in success-page */}
         <Button
           rounded
           label="Send inn"
           onClick={handleCompleteMapping}
           className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 w-[100px] h-[32px] shadow-md"
-        >
-        </Button>
+        />
       </div>
 
       {selectedSubject && (
@@ -152,7 +149,7 @@ export default function FileDisplayPage() {
               <h4 className="mb-2">
                 Filnavn: <strong>{uploadedFiles[selectedSubject].fileName}</strong>
               </h4>
-              <div className="overflow-y-auto max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white">
+              <div className="overflow-x-auto max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white">
                 <table className="min-w-full">
                   <thead className="bg-gray-600 text-white sticky top-0 z-10">
                     <tr>

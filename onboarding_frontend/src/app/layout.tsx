@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               style={{ background: "linear-gradient(13.92deg, #FAB270 2.22%, #984798 49.7%, #422163 97.18%)" }}>
               <div className="flex">
                 {showStepper && <StepperBar />}
-                <div className={`flex-1 ${showStepper ? 'ml-64' : ''}`}>
+                <div className={`flex-1 ${showStepper ? 'ml-64' : ''} overflow-x-auto`}>
                   <Navbar />
                   <main className="pt-[30px]">{children}</main>
                 </div>
