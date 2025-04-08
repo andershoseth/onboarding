@@ -218,7 +218,7 @@ export default function FileDisplayPage() {
                               {rowKeys.map((header, hIndex) => {
                                 const currentMapping = csvMapping[tableName]?.[header] || "";
                                 return (
-                                  <th key={hIndex} className="border border-gray-400 px-4 py-2 text-left w-48">
+                                  <th key={hIndex} className="border border-gray-400 px-4 py-4 text-left w-42">
                                     <MappingHeader
                                       columnLabel={header}
                                       tableFieldMappings={tableFieldMappings}
@@ -241,7 +241,7 @@ export default function FileDisplayPage() {
                         </table>
 
                         {/* Add a scrollable container for the table body */}
-                        <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+                        <div style={{ maxHeight: "550px", overflowY: "auto" }}>
                           <table className="table-auto min-w-full">
                             <tbody>
                               {rowsForTable.map((row, rowIndex) => (
@@ -271,5 +271,3 @@ export default function FileDisplayPage() {
     </div>
   );
 }
-
-// END
