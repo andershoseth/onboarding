@@ -209,13 +209,14 @@ export default function FileDisplayPage() {
                   return (
                     <div key={index} className="mb-10">
                       <h3 className="text-lg font-semibold mb-2">Table: {tableName}</h3>
-                      <div className="inline-block border border-gray-500 rounded-lg shadow-md bg-white mb-8">
-                        <table className="table-auto w-fit">
+
+                      {/* Wrapping the table with a div that allows horizontal scrolling */}
+                      <div>
+                        <table className="table-auto min-w-full">
                           <thead className="bg-gray-600 text-white sticky top-0 z-10">
                             <tr>
                               {rowKeys.map((header, hIndex) => {
                                 const currentMapping = csvMapping[tableName]?.[header] || "";
-
                                 return (
                                   <th key={hIndex} className="border border-gray-400 px-4 py-2 text-left w-48">
                                     <MappingHeader
@@ -237,20 +238,27 @@ export default function FileDisplayPage() {
                               })}
                             </tr>
                           </thead>
-                          <tbody>
-                            {rowsForTable.map((row, rowIndex) => (
-                              <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
-                                {rowKeys.map((key, cellIndex) => (
-                                  <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900 w-48">
-                                    {row[key]}
-                                  </td>
-                                ))}
-                              </tr>
-                            ))}
-                          </tbody>
                         </table>
+
+                        {/* Add a scrollable container for the table body */}
+                        <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+                          <table className="table-auto min-w-full">
+                            <tbody>
+                              {rowsForTable.map((row, rowIndex) => (
+                                <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
+                                  {rowKeys.map((key, cellIndex) => (
+                                    <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900 w-48">
+                                      {row[key]}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
+
                   );
                 });
               })()}
