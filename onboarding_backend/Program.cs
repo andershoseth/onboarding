@@ -185,7 +185,15 @@ app.MapPost("/api/perform-mapping", (MappingRequest request) =>
     var sb = new StringBuilder();
 
     // Write the header row
-    sb.AppendLine(string.Join(",", allKeys));
+    var headerRow = allKeys.Select(col =>
+{
+    if (mapping.TryGetValue(col, out var mappedName))
+    {
+        return mappedName; // mapped field name
+    }
+    return col; // fallback to original column
+});
+    sb.AppendLine(string.Join(",", headerRow));
 
     // Write each data row
     foreach (var dict in transformedRows)
