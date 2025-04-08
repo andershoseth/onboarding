@@ -67,7 +67,7 @@ export default function FileDisplayPage() {
       return;
     }
 
-    // Flatten nested table mapping (if you use per-table mapping)
+    // Flatten nested table mapping
     const flattenMapping = (nestedMapping: CSVExcelMapping) => {
       const flat: Record<string, string> = {};
       for (const table in nestedMapping) {
@@ -78,7 +78,6 @@ export default function FileDisplayPage() {
       return flat;
     };
 
-    // Build the payload
     const payload = {
       Mapping: flattenMapping(csvMapping),
       Data: csvRows,
@@ -160,7 +159,7 @@ export default function FileDisplayPage() {
                 File Name: <strong>{uploadedFiles[selectedSubject].fileName}</strong>
               </p>
 
-              {/* NEW: group all rows by TableName */}
+              {/*  group all rows by TableName */}
               {(() => {
                 // allRows is the entire array from the backend
                 const allRows = uploadedFiles[selectedSubject].data as any[];
@@ -169,12 +168,12 @@ export default function FileDisplayPage() {
                   return <p>No rows found</p>;
                 }
 
-                // Group them
+                // extracts the table names using a record type, for the html
                 const grouped = groupByTableName(allRows);
 
-                // We'll create a table for each distinct TableName
+                // Create a table for each distinct TableName
                 return Object.keys(grouped).map((tableName, index) => {
-                  // If tableName is empty, skip or handle
+
                   if (!tableName) return null;
 
                   const rowsForTable = grouped[tableName];
@@ -182,8 +181,8 @@ export default function FileDisplayPage() {
                     return null;
                   }
 
-                  // The column headers come from the keys of the first row
-                  // except we might skip "TableName"
+                  // The column headers come from the keys of the first row (in the record type)
+ 
                   const rowKeys = Object.keys(rowsForTable[0] ?? {}).filter(
                     (k) => k && k.trim() !== "" && k !== "TableName"
                   );
