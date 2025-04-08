@@ -104,11 +104,11 @@ export default function FileDisplayPage() {
       </div>
 
       <div className="flex flex-col items-center text-center mt-5">
-        <h2 className="text-xl">Klikk på kolonnene for å endre navn med hjelp av dropdown-menyen. </h2>
+        <h4 className="text-xl">Klikk på kolonnene for å endre navn med hjelp av dropdown-menyen. </h4>
       </div>
 
       <div className="flex flex-col items-center text-center mt-5">
-        <h2 className="text-xl">Ved å klikke på "Send inn"-knappen blir du tatt videre til neste side hvor du kan laste ned de konverterte filene. </h2>
+        <h4 className="text-xl">Ved å klikke på "Send inn"-knappen blir du tatt videre til neste side hvor du kan laste ned de konverterte filene. </h4>
       </div>
 
       <div className="flex flex-wrap gap-6 mb-6 mt-10"> {/* implementert figma design */}
@@ -149,9 +149,9 @@ export default function FileDisplayPage() {
           <h2 className="text-xl font-semibold mb-2 capitalize">Data for: {selectedSubject}</h2>
           {uploadedFiles[selectedSubject] ? (
             <>
-              <p className="mb-2">
+              <h4 className="mb-2">
                 Filnavn: <strong>{uploadedFiles[selectedSubject].fileName}</strong>
-              </p>
+              </h4>
               <div className="overflow-y-auto max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white">
                 <table className="min-w-full">
                   <thead className="bg-gray-600 text-white sticky top-0 z-10">

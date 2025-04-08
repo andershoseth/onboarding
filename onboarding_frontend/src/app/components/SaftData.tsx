@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useMapping } from "../components/MappingContext";
 import MappingHeader from "../utils/MappingHeader";
 import EditableCell from "../utils/EditableCell";
-import SubmitStandardImportButton from "../components/Submit";
+import SubmitStandardImportButton from "./Submit";
 import {
   ColumnDef,
   flexRender,

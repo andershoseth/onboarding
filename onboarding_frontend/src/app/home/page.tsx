@@ -14,12 +14,12 @@ function Home() {
             </div>
 
             <div className="flex flex-col items-center text-center mt-10">
-                <h2 className="text-xl mt-2 text-white">
-                    Her kan du konvertere filene fra ditt gamle regnskapssystem over til PowerOffice Go!
-                </h2>
-                <h2 className="text-xl mt-2 text-white">
+                <h4 className="text-xl mt-2 text-white">
+                    Her kan du konvertere filene fra ditt gamle regnskapssystem over til PowerOffice Go på en rask og enkel måte!
+                </h4>
+                <h4 className="text-xl mt-2 text-white">
                     La oss starte prosessen med å trykke "Begynn importen" nedenfor:
-                </h2>
+                </h4>
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 p-10">

@@ -53,7 +53,7 @@ const StepperBar: React.FC = () => {
             <StepperPanel key={step.url} header={`${step.label} ${step.completed ? "✔" : ""}`}>
               <Link
                 href={step.url}
-                className="text-black hover:text-gray-300 text-left rounded w-full">
+                className="text-black hover:text-gray-300 text-left rounded w-full font-link">
                 {step.description}
               </Link>
             </StepperPanel>
@@ -74,8 +74,8 @@ const StepperBar: React.FC = () => {
             <Image
               src="/open_new_window.png"
               alt="PowerOffice support logo"
-              width={13}
-              height={13}
+              width={12}
+              height={12}
               className="ml-[5px]" />
           </div>
         </Link>

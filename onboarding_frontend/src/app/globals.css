@@ -18,17 +18,20 @@ body {
   @apply font-sans;
   color: var(--foreground);
   background: var(--background);
-  font-family: Body, sans-serif;
 }
 
 h1 {
-  @apply font-h1;
+  @apply font-h1 text-h1 font-semibold;
 }
 
 h2 {
-  @apply font-h2;
+  @apply font-h2 text-h2 font-bold;
 }
 
 h3 {
-  @apply font-h3;
+  @apply font-h3 text-h3 font-bold;
+}
+
+h4 {
+  @apply font-h4 text-h4 font-regular;
 }

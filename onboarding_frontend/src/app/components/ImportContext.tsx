@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useState, useEffect } from "react";
-import { systemCoverage } from "../export/systemCoverage";
+import { systemCoverage } from "./systemCoverage";
 
 interface ImportContextType {
   selectedSystem: string | null;

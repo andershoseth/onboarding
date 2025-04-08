@@ -1,209 +1,16 @@
 "use client";
-
 import React, { useState, useEffect, useContext, useRef } from "react";
-import ImportContext from "../components/ImportContext";
-import Instructions from "../components/Instructions";
-import { instructionConfig } from "./InstructionConfig";
-import { systemCoverage } from "./systemCoverage";
-import Link from "next/link";
 import { Toast } from "primereact/toast";
-import FileUploader from "@/app/components/FileUploader";
+import { SaftModeInstructions } from "./SaftModeInstructions";
+import { CsvModeInstructions } from "./CsvModeInstructions";
 import { Button } from "primereact/button";
-
-function SaftModeInstructions({
-    system,
-    checkedBoxes,
-    showErrorToast, // <-- accept the callback as a prop
-}: {
-    system: string;
-    checkedBoxes: string[];
-    showErrorToast: (msg: string) => void;
-}) {
-    // Which subjects are covered by SAF-T in this system?
-    const coverage = systemCoverage[system]?.safTSubjects || [];
-    const covered = checkedBoxes.filter((subject) => coverage.includes(subject));
-    const leftover = checkedBoxes.filter((subject) => !coverage.includes(subject));
-
-    // We consider “safTExport” if coverage has anything
-    const subjectList = [...leftover];
-    if (covered.length > 0) {
-        subjectList.unshift("safTExport");
-    }
-
-    const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
-
-    useEffect(() => {
-        if (!selectedSubject) {
-            if (covered.length > 0) {
-                setSelectedSubject("safTExport");
-            } else if (leftover.length > 0) {
-                setSelectedSubject(leftover[0]);
-            }
-        }
-    }, [covered, leftover, selectedSubject]);
-
-    const safTSteps = instructionConfig[system]?.["SAF-T"] || [];
-
-    return (
-        <div className="p-6 space-y-4 relative">
-            <div className="flex flex-col items-center text-center mt-5">
-                <h1 className="text-4xl font-bold">Last opp filene dine!</h1>
-            </div>
-            <div className="flex flex-col items-center text-center mt-10">
-                <h2 className="text-xl">Trykk på knappene laget av importvelgeren fra trinn 3, og last opp filene helt nederst på siden.</h2>
-            </div>
-            <div className="flex flex-col items-center text-center mt-10">
-                <h2 className="text-xl">Veiledning vil også vise hvordan du eksporterer filene fra ditt gamle regnskapssystem når du trykker på knappene.</h2>
-            </div>
-
-            {/* Row of subject buttons */}
-            <div className="flex flex-wrap gap-4 mt-4 justify-center py-5 capitalize">
-                {subjectList.map((sub) => {
-                    const label = sub === "safTExport" ? "SAF‐T Export" : sub;
-                    return (
-                        <Button // implementert figma design
-                            key={sub}
-                            onClick={() => setSelectedSubject(sub)}
-                            className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 h-[55px] shadow-md rounded-full text-lg font-semibold capitalize"
-                        >
-                            {label}
-                        </Button>
-                    );
-                })}
-            </div>
-
-            {/* Render each subject's instructions + FileUploader */}
-            {subjectList.map((sub) => {
-                const isActive = sub === selectedSubject;
-
-                let instructionsTitle = "";
-                let instructionsSteps: any[] = [];
-                let accept = ".csv,.xlsx"; // default
-
-                if (sub === "safTExport") {
-                    instructionsTitle = `${system} – SAF‐T Export`;
-                    instructionsSteps = safTSteps;
-                    accept = ".xml";
-                } else {
-                    instructionsTitle = `${system} – CSV – ${sub}`;
-                    instructionsSteps = instructionConfig[system]?.CSV?.[sub] ?? [];
-                    accept = ".csv,.xlsx";
-                }
-
-                return (
-                    <div key={sub} style={{ display: isActive ? "block" : "none" }}>
-                        <div className="flex flex-col items-center space-y-4 mt-4 py-1">
-                            {instructionsSteps.length > 0 ? (
-                                <Instructions title={instructionsTitle} steps={instructionsSteps} />
-                            ) : (
-                                <p>Ingen instruksjoner funnet for {sub}.</p>
-                            )}
-
-                            {/* Pass showErrorToast down to FileUploader */}
-                            <FileUploader
-                                subject={sub}
-                                accept={accept}
-                                onShowErrorToast={showErrorToast}
-                            />
-                        </div>
-                    </div>
-                );
-            })}
-
-            {/* Nav buttons */}
-            <div className="mt-6 flex justify-end absolute bottom-4 right-4"> {/* implementert figma design */}
-                <Link href="/displaycsvexcel"
-                >
-                    <Button
-                        rounded
-                        label="Neste"
-                        className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md w-[100px] h-[32px]"
-                    />
-                </Link>
-            </div>
-            <div className="mt-6 flex justify-end absolute bottom-4 left-4">
-                <Link href="/importvelger"
-                >
-                    <Button
-                        rounded
-                        label="Forrige"
-                        className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md w-[100px] h-[32px]"
-                    />
-                </Link>
-            </div>
-        </div>
-    );
-}
-
-function CsvModeInstructions({
-    system,
-    checkedBoxes,
-    showErrorToast,
-}: {
-    system: string;
-    checkedBoxes: string[];
-    showErrorToast: (msg: string) => void;
-}) {
-    const allCsvSubjects = Object.keys(instructionConfig[system]?.CSV || {});
-    const relevantSubjects = allCsvSubjects.filter((sub) =>
-        checkedBoxes.map((s) => s.toLowerCase()).includes(sub.toLowerCase())
-    );
-
-    const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
-
-    useEffect(() => {
-        if (!selectedSubject && relevantSubjects.length > 0) {
-            setSelectedSubject(relevantSubjects[0]);
-        }
-    }, [selectedSubject, relevantSubjects]);
-
-    return (
-        <div className="p-6 space-y-4">
-            <h2 className="text-2xl font-bold">{system} – CSV Export</h2>
-
-            {/* Row of CSV subjects */}
-            <div className="flex flex-wrap gap-4 mt-4 justify-center">
-                {relevantSubjects.map((subject) => (
-                    <button
-                        key={subject}
-                        onClick={() => setSelectedSubject(subject)}
-                        className="bg-blue-500 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-blue-600"
-                    >
-                        {subject}
-                    </button>
-                ))}
-            </div>
-
-            {/* Always render a pane for each relevant CSV subject. */}
-            {relevantSubjects.map((sub) => {
-                const isActive = sub === selectedSubject;
-                const steps = instructionConfig[system]?.CSV?.[sub];
-
-                return (
-                    <div key={sub} style={{ display: isActive ? "block" : "none" }}>
-                        <div className="flex flex-col items-center space-y-4 mt-4 py-10">
-                            {steps ? (
-                                <Instructions title={`${system} – CSV – ${sub}`} steps={steps} />
-                            ) : (
-                                <p>Ingen CSV instruksjoner funnet for {sub}</p>
-                            )}
-
-                            <FileUploader
-                                subject={sub}
-                                accept=".csv,.xlsx"
-                                onShowErrorToast={showErrorToast}
-                            />
-                        </div>
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
+import ImportContext from "../components/ImportContext";
+import Link from "next/link";
 
 export default function ExportPage() {
     const { selectedSystem } = useContext(ImportContext);
-
+    const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
+    const fileType = "SAF-T";
     // 1) Create a ref for the Toast
     const toastRef = useRef<Toast>(null);
 
@@ -217,13 +24,6 @@ export default function ExportPage() {
         });
     };
 
-    // Hard coded for demonstration
-    const fileType = "SAF-T";
-    // const fileType = "CSV";
-
-    const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
-    const [hasMounted, setHasMounted] = useState(false);
-
     useEffect(() => {
         const savedCheckBoxes = localStorage.getItem("checkboxState");
         if (savedCheckBoxes) {
@@ -233,16 +33,24 @@ export default function ExportPage() {
                 .map(([key]) => key);
             setCheckedBoxes(selectedLabels);
         }
-        setHasMounted(true);
     }, []);
 
-    if (!hasMounted) return null;
     if (!selectedSystem) {
-        return <p>Vennligst velg et system først</p>;
+        return <h4>Vennligst velg et system først</h4>;
     }
 
     return (
         <div>
+            <div className="flex flex-col items-center text-center mt-10">
+                <h1 className="text-4xl font-bold">Last opp filene dine!</h1>
+            </div>
+            <div className="flex flex-col items-center text-center mt-10">
+                <h2 className="text-xl">Trykk på knappene laget av importvelgeren fra trinn 3, og last opp filene helt nederst på siden.</h2>
+            </div>
+            <div className="flex flex-col items-center text-center mt-10">
+                <h4 className="text-xl">Veiledning vil også vise hvordan du eksporterer filene fra ditt gamle regnskapssystem når du trykker på knappene.</h4>
+            </div>
+
             {/* 3) Render the Toast once at the top level */}
             <Toast ref={toastRef} />
 
@@ -259,6 +67,25 @@ export default function ExportPage() {
                     showErrorToast={showErrorToast} // pass callback down
                 />
             )}
+
+            {/* Nav buttons */}
+            <div className="flex justify-between mt-10 px-10 pb-10">
+                <Link href="/importvelger">
+                    <Button
+                        rounded
+                        label="Forrige"
+                        className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 shadow-md w-[100px] h-[32px]"
+                    />
+                </Link>
+
+                <Link href="/displaycsvexcel">
+                    <Button
+                        rounded
+                        label="Neste"
+                        className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md w-[100px] h-[32px]"
+                    />
+                </Link>
+            </div>
         </div>
     );
 }
