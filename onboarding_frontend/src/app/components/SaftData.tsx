@@ -4,7 +4,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useMapping } from "../components/MappingContext";
 import MappingHeader from "../utils/MappingHeader";
 import EditableCell from "../utils/EditableCell";
-import SubmitStandardImportButton from "./Submit";
 import {
   ColumnDef,
   flexRender,
@@ -188,7 +187,7 @@ export default function SaftData({ data }: { data: GroupedSaftEntries[] }) {
   }
 
   return (
-    <><SubmitStandardImportButton></SubmitStandardImportButton>
+    <>
       <div className="p-6 min-h-screen pt-16">
         <h2 className="text-2xl font-bold mb-4">SAF-T Data</h2>
         {data.map((group) => (
