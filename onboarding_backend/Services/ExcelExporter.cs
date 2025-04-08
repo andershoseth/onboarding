@@ -138,7 +138,7 @@ namespace onboarding_backend.Services
                 IRow row = sheet.CreateRow(rowIndex++);
                 row.CreateCell(0).SetCellValue(prj.ProjectCode ?? "");
                 row.CreateCell(1).SetCellValue(prj.ProjectName ?? "");
-                row.CreateCell(2).SetCellValue(prj.ProjectManagerCode ?? "");
+                row.CreateCell(2).SetCellValue((double?) prj.ProjectManagerCode ?? 0.0);
                 row.CreateCell(3).SetCellValue(prj.ProjectStartDate ?? "");
                 row.CreateCell(4).SetCellValue(prj.ProjectEndDate ?? "");
             }
