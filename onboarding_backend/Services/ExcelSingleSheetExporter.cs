@@ -178,7 +178,9 @@ public static class ExcelSingleSheetExporter
         var headerRow = sheet.CreateRow(startRow++);
         var headers = new[]
         {
-            "ProductCode", "ProductName", "ProductGroup", "ProductSalesPrice", "ProductSalesAccount"
+            "ProductCode", "ProductName", "ProductGroup", "ProductDescription", "ProductType", "ProductUnit",
+            "ProductSalesPrice", "ProductSalesAccount", "ProductAltSalesAccount",
+            "ProductAltSalesAccountName", "AccountAgricultureDepartment", "ProductGTIN", "ProductsOnHand", "IsActive"
         };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
@@ -189,8 +191,18 @@ public static class ExcelSingleSheetExporter
             row.CreateCell(0).SetCellValue(p.ProductCode ?? "");
             row.CreateCell(1).SetCellValue(p.ProductName ?? "");
             row.CreateCell(2).SetCellValue(p.ProductGroup ?? "");
-            row.CreateCell(3).SetCellValue((double?)p.ProductSalesPrice ?? 0.0);
-            row.CreateCell(4).SetCellValue(p.ProductSalesAccount.ToString());
+            row.CreateCell(3).SetCellValue(p.ProductDescription ?? "");
+            row.CreateCell(4).SetCellValue((double?)p.ProductType ?? 0.0);
+            row.CreateCell(5).SetCellValue(p.ProductUnit ?? "");
+            row.CreateCell(6).SetCellValue((double?)p.ProductSalesPrice ?? 0.0);
+            row.CreateCell(7).SetCellValue((double?)p.ProductSalesAccount ?? 0.0);
+            row.CreateCell(8).SetCellValue(p.ProductSalesAccountName ?? "");
+            row.CreateCell(9).SetCellValue(p.ProductAltSalesAccount ?? 0.0);
+            row.CreateCell(10).SetCellValue(p.ProductAltSalesAccountName ?? "");
+            row.CreateCell(11).SetCellValue(p.SupplierStandardAccountAgricultureDepartment);
+            row.CreateCell(12).SetCellValue(p.ProductGTIN ?? "");
+            row.CreateCell(13).SetCellValue((double?)p.ProductsOnHand ?? 0.0);
+            row.CreateCell(14).SetCellValue(p.IsActive ?? false);
         }
 
         startRow++;
@@ -202,10 +214,19 @@ public static class ExcelSingleSheetExporter
         var decRow = sheet.CreateRow(startRow++);
         decRow.CreateCell(0).SetCellValue("[Projects]");
 
+
         var headerRow = sheet.CreateRow(startRow++);
         string[] headers =
         {
-            "ProjectCode", "ProjectName", "ProjectManagerCode", "ProjectStartDate", "ProjectEndDate"
+            "ProjectCode", "SubprojectCode", "ProjectName", "ProjectManagerCode", "ProjectManagerName",
+            "ProjectContactPerson", "ContactPerson", "ProjectBillable", "CustomerNo", "ContactName", "ProjectStartDate",
+            "ProjectEndDate", "ProjectStatus", "ProjectBrandingThemeCode", "FixedPrice", "Progress",
+            "ProjectBillingMethod", "DepartmentCode", "DepartmentName", "ProjectHourlyRateSpecification",
+            "ProjectHourlyRate", "AttachVouchersToInvoice", "AllowAllEmployees", "AllowAllActivities", "Hours",
+            "HourlyRate", "TimeRevenues", "Revenues", "CostOfGoods", "PayrollExpenses", "OtherExpenses",
+            "IsExpenseMarkupEnabled", "MarkupExpensesByFactor",
+            "ExpenseMarkupDescription", "IsFeeMarkupEnabled", "MarkupFeesByFactor",
+            "FeeMarkUpDescription", "LocationCode", "LocationName", "IsInternal"
         };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
@@ -214,10 +235,45 @@ public static class ExcelSingleSheetExporter
         {
             var row = sheet.CreateRow(startRow++);
             row.CreateCell(0).SetCellValue(prj.ProjectCode ?? "");
-            row.CreateCell(1).SetCellValue(prj.ProjectName ?? "");
-            row.CreateCell(2).SetCellValue((double?)prj.ProjectManagerCode ?? 0.0);
-            row.CreateCell(3).SetCellValue(prj.ProjectStartDate ?? "");
-            row.CreateCell(4).SetCellValue(prj.ProjectEndDate ?? "");
+            row.CreateCell(1).SetCellValue(prj.SubprojectCode ?? "");
+            row.CreateCell(2).SetCellValue(prj.ProjectName ?? "");
+            row.CreateCell(3).SetCellValue(prj.ProjectManagerCode ?? 0.0);
+            row.CreateCell(4).SetCellValue(prj.ProjectManagerName ?? "");
+            row.CreateCell(5).SetCellValue(prj.ProjectContactPerson ?? "");
+            row.CreateCell(6).SetCellValue(prj.ContactPerson ?? "");
+            row.CreateCell(7).SetCellValue(prj.ProjectBillable ?? 0.0);
+            row.CreateCell(8).SetCellValue(prj.CustomerNo ?? 0.0);
+            row.CreateCell(9).SetCellValue(prj.ContactName ?? "");
+            row.CreateCell(10).SetCellValue(prj.ProjectStartDate);
+            row.CreateCell(11).SetCellValue(prj.ProjectEndDate);
+            row.CreateCell(12).SetCellValue(prj.ProjectStatus ?? 0.0);
+            row.CreateCell(13).SetCellValue(prj.ProjectBrandingThemeCode ?? "");
+            row.CreateCell(14).SetCellValue((double?)prj.FixedPrice ?? 0.0);
+            row.CreateCell(15).SetCellValue((double?)prj.Progress ?? 0.0);
+            row.CreateCell(16).SetCellValue(prj.ProjectBillingMethod ?? "");
+            row.CreateCell(17).SetCellValue(prj.DepartmentCode ?? "");
+            row.CreateCell(18).SetCellValue(prj.DepartmentName ?? "");
+            row.CreateCell(19).SetCellValue(prj.ProjectHourlyRateSpecification ?? "");
+            row.CreateCell(20).SetCellValue((double?)prj.ProjectHourlyRate ?? 0.0);
+            row.CreateCell(21).SetCellValue(prj.AttachVouchersToInvoice ?? 0.0);
+            row.CreateCell(22).SetCellValue(prj.AllowAllEmployees ?? 0.0);
+            row.CreateCell(23).SetCellValue(prj.AllowAllActivities ?? 0.0);
+            row.CreateCell(24).SetCellValue((double?)prj.Hours ?? 0.0);
+            row.CreateCell(25).SetCellValue((double?)prj.HourlyRate ?? 0.0);
+            row.CreateCell(26).SetCellValue((double?)prj.TimeRevenues ?? 0.0);
+            row.CreateCell(27).SetCellValue((double?)prj.Revenues ?? 0.0);
+            row.CreateCell(28).SetCellValue((double?)prj.CostOfGoods ?? 0.0);
+            row.CreateCell(29).SetCellValue((double?)prj.PayrollExpenses ?? 0.0);
+            row.CreateCell(30).SetCellValue((double?)prj.OtherExpenses ?? 0.0);
+            row.CreateCell(31).SetCellValue(prj.IsExpenseMarkupEnabled ?? 0.0);
+            row.CreateCell(32).SetCellValue((double?)prj.MarkupExpensesByFactor ?? 0.0);
+            row.CreateCell(33).SetCellValue(prj.ExpenseMarkupDescription ?? "");
+            row.CreateCell(34).SetCellValue(prj.IsFeeMarkupEnabled ?? 0.0);
+            row.CreateCell(35).SetCellValue((double?)prj.MarkupFeesByFactor ?? 0.0);
+            row.CreateCell(36).SetCellValue(prj.FeeMarkupDescription ?? "");
+            row.CreateCell(37).SetCellValue(prj.LocationCode ?? "");
+            row.CreateCell(38).SetCellValue(prj.LocationName ?? "");
+            row.CreateCell(39).SetCellValue(prj.IsInternal ?? "");
         }
 
         startRow++;
@@ -230,7 +286,10 @@ public static class ExcelSingleSheetExporter
         decRow.CreateCell(0).SetCellValue("[ProjectTeamMembers]");
 
         var headerRow = sheet.CreateRow(startRow++);
-        string[] headers = { "ProjectCode", "EmployeeNo", "Hours", "HourlyRate" };
+        string[] headers =
+        {
+            "ProjectCode", "SubprojectCode", "ProjectName", "EmployeeNo", "ContactName", "Hours", "HourlyRate"
+        };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
@@ -238,10 +297,15 @@ public static class ExcelSingleSheetExporter
         {
             var row = sheet.CreateRow(startRow++);
             row.CreateCell(0).SetCellValue(m.ProjectCode ?? "");
-            row.CreateCell(1).SetCellValue(m.EmployeeNo.ToString());
-            row.CreateCell(2).SetCellValue((double?)m.Hours ?? 0.0);
-            row.CreateCell(3).SetCellValue((double?)m.HourlyRate ?? 0.0);
+            row.CreateCell(1).SetCellValue(m.SubprojectCode ?? "");
+            row.CreateCell(2).SetCellValue(m.ProjectName ?? "");
+            row.CreateCell(3).SetCellValue((int?)m.EmployeeNo ?? 0);
+            row.CreateCell(4).SetCellValue(m.ContactName ?? "");
+            row.CreateCell(5).SetCellValue((int?)m.Hours ?? 0);
+            row.CreateCell(6).SetCellValue((int?)m.HourlyRate ?? 0);
         }
+
+        ;
 
         startRow++;
         return startRow;
@@ -253,7 +317,11 @@ public static class ExcelSingleSheetExporter
         decRow.CreateCell(0).SetCellValue("[ProjectActivity]");
 
         var headerRow = sheet.CreateRow(startRow++);
-        string[] headers = { "ProjectCode", "ActivityCode", "ActivityName", "ProjectBillable", "HourlyRate" };
+        string[] headers =
+        {
+            "ProjectCode", "SubprojectCode", "ProjectName", "ActivityCode", "ActivityName",
+            "ProjectBillable", "HourlyRate"
+        };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
@@ -261,11 +329,15 @@ public static class ExcelSingleSheetExporter
         {
             var row = sheet.CreateRow(startRow++);
             row.CreateCell(0).SetCellValue(a.ProjectCode ?? "");
-            row.CreateCell(1).SetCellValue(a.ActivityCode ?? "");
-            row.CreateCell(2).SetCellValue(a.ActivityName ?? "");
-            row.CreateCell(3).SetCellValue(a.ProjectBillable?.ToString() ?? "");
-            row.CreateCell(4).SetCellValue((double?)a.HourlyRate ?? 0.0);
+            row.CreateCell(1).SetCellValue(a.SubprojectCode ?? "");
+            row.CreateCell(2).SetCellValue(a.ProjectName ?? "");
+            row.CreateCell(3).SetCellValue(a.ActivityCode ?? "");
+            row.CreateCell(4).SetCellValue(a.ActivityName ?? "");
+            row.CreateCell(5).SetCellValue(a.ProjectBillable ?? 0);
+            row.CreateCell(6).SetCellValue((double?)a.HourlyRate ?? 0.0);
         }
+
+        ;
 
         startRow++;
         return startRow;
@@ -277,7 +349,7 @@ public static class ExcelSingleSheetExporter
         decRow.CreateCell(0).SetCellValue("[Departments]");
 
         var headerRow = sheet.CreateRow(startRow++);
-        string[] headers = { "DepartmentCode", "DepartmentName", "DepartmentManagerCode" };
+        string[] headers = { "DepartmentCode", "DepartmentName", "DepartmentManagerCode", "DepartmentManagerName" };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
@@ -287,6 +359,7 @@ public static class ExcelSingleSheetExporter
             row.CreateCell(0).SetCellValue(d.DepartmentCode ?? "");
             row.CreateCell(1).SetCellValue(d.DepartmentName ?? "");
             row.CreateCell(2).SetCellValue(d.DepartmentManagerCode?.ToString() ?? "");
+            row.CreateCell(3).SetCellValue(d.DepartmentManagerName ?? "");
         }
 
         startRow++;
@@ -295,11 +368,9 @@ public static class ExcelSingleSheetExporter
 
     private static int WriteVouchersBlock(ISheet sheet, IEnumerable<Voucher> vouchers, int startRow)
     {
-        // 1) Write a decorator row like "[Vouchers]" (optional)
         var decRow = sheet.CreateRow(startRow++);
         decRow.CreateCell(0).SetCellValue("[Vouchers]");
 
-        // 2) Write the header row (parent + line fields)
         var headerRow = sheet.CreateRow(startRow++);
         string[] headers =
         {
