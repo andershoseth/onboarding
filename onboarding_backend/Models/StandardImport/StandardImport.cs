@@ -22,6 +22,7 @@
 
   
         public List<Voucher> Voucher { get; set; } = new ();
+        
         public List<Order> Order { get; set; } = new();
         public List<Quote> Quote { get; set; } = new();
         public List<InvoiceCid> InvoiceCid { get; set; } = new();
