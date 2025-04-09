@@ -30,7 +30,7 @@ namespace onboarding_backend.Services;
             .GroupBy(e =>
             {
                 var segments = e.Path.Split('.');
-                return segments.Length >= 2 ? $"{segments[0]}.{segments[1]}" : e.Path;
+                return segments.Length >= 4 ? $"{segments[0]}.{segments[1]}.{segments[2]}.{segments[3]}" : e.Path;
             })
             .Select(g => new GroupedSafTEntries
             {
