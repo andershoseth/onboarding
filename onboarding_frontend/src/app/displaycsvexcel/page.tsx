@@ -206,8 +206,8 @@ export default function FileDisplayPage() {
                   );
 
                   return (
-                    <div className="max-w-full overflow-x-auto">
-                      <div className="min-w-max" style={{ maxHeight: "550px", overflowY: "auto" }}>
+                    <div className="max-w-full overflow-x-auto" style={{ overflowX: "auto" }}> {/* horisontal scroll */}
+                      <div className="min-w-max" style={{ maxHeight: "650px" }}> {/* vertical scroll */}
                         <table className="table-auto w-full">
                           <thead className="bg-gray-600 text-white sticky top-0 z-10">
                             <tr>
