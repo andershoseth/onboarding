@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUploadContext } from "../components/UploadContext";
 import ImportContext from "../components/ImportContext";
-import { useMapping } from "../components/MappingContext";
 import MappingHeader from "../utils/MappingHeader";
 import { TableFieldMapping } from "../components/SaftData";
 import { Button } from "primereact/button";
@@ -207,18 +206,18 @@ export default function FileDisplayPage() {
                   );
 
                   return (
-                    <div key={index} className="mb-10">
-                      <h3 className="text-lg font-semibold mb-2">Table: {tableName}</h3>
-
-                      {/* Wrapping the table with a div that allows horizontal scrolling */}
-                      <div>
-                        <table className="table-auto min-w-full">
+                    <div className="max-w-full overflow-x-auto">
+                      <div className="min-w-max" style={{ maxHeight: "550px", overflowY: "auto" }}>
+                        <table className="table-auto w-full">
                           <thead className="bg-gray-600 text-white sticky top-0 z-10">
                             <tr>
                               {rowKeys.map((header, hIndex) => {
                                 const currentMapping = csvMapping[tableName]?.[header] || "";
                                 return (
-                                  <th key={hIndex} className="border border-gray-400 px-4 py-4 text-left w-42">
+                                  <th
+                                    key={hIndex}
+                                    className="border border-gray-400 px-4 py-4 text-left min-w-[12rem] bg-gray-600"
+                                  >
                                     <MappingHeader
                                       columnLabel={header}
                                       tableFieldMappings={tableFieldMappings}
@@ -238,28 +237,28 @@ export default function FileDisplayPage() {
                               })}
                             </tr>
                           </thead>
+                          <tbody>
+                            {rowsForTable.map((row, rowIndex) => (
+                              <tr
+                                key={rowIndex}
+                                className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}
+                              >
+                                {rowKeys.map((key, cellIndex) => (
+                                  <td
+                                    key={cellIndex}
+                                    className="border border-gray-400 px-4 py-2 text-gray-900 min-w-[12rem]"
+                                  >
+                                    {row[key]}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
                         </table>
-
-                        {/* Add a scrollable container for the table body */}
-                        <div style={{ maxHeight: "550px", overflowY: "auto" }}>
-                          <table className="table-auto min-w-full">
-                            <tbody>
-                              {rowsForTable.map((row, rowIndex) => (
-                                <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}>
-                                  {rowKeys.map((key, cellIndex) => (
-                                    <td key={cellIndex} className="border border-gray-400 px-4 py-2 text-gray-900 w-48">
-                                      {row[key]}
-                                    </td>
-                                  ))}
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
                       </div>
                     </div>
-
                   );
+
                 });
               })()}
             </>
