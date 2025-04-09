@@ -263,9 +263,7 @@ export default function FileDisplayPage() {
                         </div>
                       </div>
                     </div>
-
                   );
-
                 });
               })()}
             </>
