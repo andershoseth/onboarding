@@ -539,65 +539,749 @@ public static class ExcelSingleSheetExporter
 
     private static int WriteOrdersBlock(ISheet sheet, IEnumerable<Order> orders, int startRow)
     {
+        // Denote the Orders block
         var decRow = sheet.CreateRow(startRow++);
         decRow.CreateCell(0).SetCellValue("[Orders]");
 
+        // Create a header row
         var headerRow = sheet.CreateRow(startRow++);
         string[] headers =
         {
-            "OrderNo", "OrderDate", "CustomerNo", "ContactName", "ProductCode", "ProductName", "Quantity",
-            "OrderLineUnitPrice"
+            //  0
+            "OrderNo",
+            //  1
+            "OrderDate",
+            //  2
+            "RecurringInvoiceActive",
+            //  3
+            "RecurringInvoiceRepeatTimes",
+            //  4
+            "RecurringInvoiceEndDate",
+            //  5
+            "RecurringInvoiceSendMethod",
+            //  6
+            "RecurringInvoiceSendFrequency",
+            //  7
+            "RecurringInvoiceSendFrequencyUnit",
+            //  8
+            "NextRecurringInvoiceDate",
+            //  9
+            "SalesPersonEmployeeNo",
+            // 10
+            "SalesPersonName",
+            // 11
+            "ProjectCode",
+            // 12
+            "SubprojectCode",
+            // 13
+            "ProjectName",
+            // 14
+            "ProjectManagerCode",
+            // 15
+            "ProjectManagerName",
+            // 16
+            "ProjectBillable",
+            // 17
+            "ProjectStartDate",
+            // 18
+            "ProjectEndDate",
+            // 19
+            "ProjectStatus",
+            // 20
+            "ProjectContactPerson",
+            // 21
+            "DepartmentCode",
+            // 22
+            "DepartmentName",
+            // 23
+            "DepartmentManagerCode",
+            // 24
+            "DepartmentManagerName",
+            // 25
+            "CustomerNo",
+            // 26
+            "ContactName",
+            // 27
+            "ContactGroup",
+            // 28
+            "CustomerSince",
+            // 29
+            "IsVatFree",
+            // 30
+            "Phone",
+            // 31
+            "Email",
+            // 32
+            "Web",
+            // 33
+            "OrganizationNo",
+            // 34
+            "MailAddress1",
+            // 35
+            "MailAddress2",
+            // 36
+            "MailPostcode",
+            // 37
+            "MailCity",
+            // 38
+            "MailCountry",
+            // 39
+            "DeliveryAddress1",
+            // 40
+            "DeliveryAddress2",
+            // 41
+            "DeliveryPostcode",
+            // 42
+            "DeliveryCity",
+            // 43
+            "DeliveryCountry",
+            // 44
+            "BankAccount",
+            // 45
+            "IBAN",
+            // 46
+            "SWIFT",
+            // 47
+            "InvoiceDelivery",
+            // 48
+            "ContactPersonFirstName",
+            // 49
+            "ContactPersonLastName",
+            // 50
+            "ContactPersonPhone",
+            // 51
+            "ContactPersonEmail",
+            // 52
+            "Reference",
+            // 53
+            "PaymentTerms",
+            // 54
+            "MergeWithPreviousOrder",
+            // 55
+            "Currency",
+            // 56
+            "ProductCode",
+            // 57
+            "ProductName",
+            // 58
+            "ProductGroup",
+            // 59
+            "ProductDescription",
+            // 60
+            "ProductType",
+            // 61
+            "ProductUnit",
+            // 62
+            "ProductSalesPrice",
+            // 63
+            "ProductCostPrice",
+            // 64
+            "ProductSalesAccount",
+            // 65
+            "ProductSalesAccountName",
+            // 66
+            "ProductAltSalesAccount",
+            // 67
+            "ProductAltSalesAccountName",
+            // 68
+            "ProductGTIN",
+            // 69
+            "Discount",
+            // 70
+            "Quantity",
+            // 71
+            "Description",
+            // 72
+            "OrderLineUnitPrice",
+            // 73
+            "SortOrder",
+            // 74
+            "VATReturnSpecification"
         };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
+        // Write each order's data row
         foreach (var o in orders)
         {
             var row = sheet.CreateRow(startRow++);
+
+            //  0: OrderNo (Numeric or string? Adjust as needed)
             row.CreateCell(0).SetCellValue(o.OrderNo?.ToString() ?? "");
+
+            //  1: OrderDate (Numeric, string, or date? Adjust as needed)
             row.CreateCell(1).SetCellValue(o.OrderDate ?? "");
-            row.CreateCell(2).SetCellValue(o.CustomerNo?.ToString() ?? "");
-            row.CreateCell(3).SetCellValue(o.ContactName ?? "");
-            row.CreateCell(4).SetCellValue(o.ProductCode ?? "");
-            row.CreateCell(5).SetCellValue(o.ProductName ?? "");
-            row.CreateCell(6).SetCellValue((double?)o.Quantity ?? 0.0);
-            row.CreateCell(7).SetCellValue((double?)o.OrderLineUnitPrice ?? 0.0);
+
+            //  2: RecurringInvoiceActive (0=F, 1=T). If bool? => row.CreateCell(2).SetCellValue(o.RecurringInvoiceActive == true ? 1.0 : 0.0)
+            row.CreateCell(2).SetCellValue(o.RecurringInvoiceActive ?? 0.0);
+
+            //  3: RecurringInvoiceRepeatTimes (Numeric)
+            row.CreateCell(3).SetCellValue(o.RecurringInvoiceRepeatTimes ?? 0.0);
+
+            //  4: RecurringInvoiceEndDate (DDMMYYYY => string or date)
+            row.CreateCell(4).SetCellValue(o.RecurringInvoiceEndDate ?? "");
+
+            //  5: RecurringInvoiceSendMethod (Numeric)
+            row.CreateCell(5).SetCellValue(o.RecurringInvoiceSendMethod ?? 0.0);
+
+            //  6: RecurringInvoiceSendFrequency (Numeric)
+            row.CreateCell(6).SetCellValue(o.RecurringInvoiceSendFrequency ?? 0.0);
+
+            //  7: RecurringInvoiceSendFrequencyUnit (0,1,2,3)
+            row.CreateCell(7).SetCellValue(o.RecurringInvoiceSendFrequencyUnit ?? 0.0);
+
+            //  8: NextRecurringInvoiceDate
+            row.CreateCell(8).SetCellValue(o.NextRecurringInvoiceDate ?? "");
+
+            //  9: SalesPersonEmployeeNo (Numeric)
+            row.CreateCell(9).SetCellValue(o.SalesPersonEmployeeNo ?? 0.0);
+
+            // 10: SalesPersonName (Text)
+            row.CreateCell(10).SetCellValue(o.SalesPersonName ?? "");
+
+            // 11: ProjectCode
+            row.CreateCell(11).SetCellValue(o.ProjectCode ?? "");
+
+            // 12: SubprojectCode
+            row.CreateCell(12).SetCellValue(o.SubprojectCode ?? "");
+
+            // 13: ProjectName
+            row.CreateCell(13).SetCellValue(o.ProjectName ?? "");
+
+            // 14: ProjectManagerCode (Numeric)
+            row.CreateCell(14).SetCellValue(o.ProjectManagerCode ?? 0.0);
+
+            // 15: ProjectManagerName
+            row.CreateCell(15).SetCellValue(o.ProjectManagerName ?? "");
+
+            // 16: ProjectBillable (0=F, 1=T)
+            row.CreateCell(16).SetCellValue(o.ProjectBillable ?? 0.0);
+
+            // 17: ProjectStartDate
+            row.CreateCell(17).SetCellValue(o.ProjectStartDate ?? "");
+
+            // 18: ProjectEndDate
+            row.CreateCell(18).SetCellValue(o.ProjectEndDate ?? "");
+
+            // 19: ProjectStatus
+            row.CreateCell(19).SetCellValue(o.ProjectStatus ?? 0);
+
+            // 20: ProjectContactPerson
+            row.CreateCell(20).SetCellValue(o.ProjectContactPerson ?? "");
+
+            // 21: DepartmentCode
+            row.CreateCell(21).SetCellValue(o.DepartmentCode ?? "");
+
+            // 22: DepartmentName
+            row.CreateCell(22).SetCellValue(o.DepartmentName ?? "");
+
+            // 23: DepartmentManagerCode (Numeric)
+            row.CreateCell(23).SetCellValue(o.DepartmentManagerCode ?? 0.0);
+
+            // 24: DepartmentManagerName
+            row.CreateCell(24).SetCellValue(o.DepartmentManagerName ?? "");
+
+            // 25: CustomerNo (Numeric)
+            row.CreateCell(25).SetCellValue(o.CustomerNo ?? 0.0);
+
+            // 26: ContactName
+            row.CreateCell(26).SetCellValue(o.ContactName ?? "");
+
+            // 27: ContactGroup
+            row.CreateCell(27).SetCellValue(o.ContactGroup ?? "");
+
+            // 28: CustomerSince (DDMMYYYY)
+            row.CreateCell(28).SetCellValue(o.CustomerSince ?? "");
+
+            // 29: IsVatFree (0=F, 1=T)
+            row.CreateCell(29).SetCellValue(o.IsVatFree ?? 0.0);
+
+            // 30: Phone
+            row.CreateCell(30).SetCellValue(o.Phone ?? "");
+
+            // 31: Email
+            row.CreateCell(31).SetCellValue(o.Email ?? "");
+
+            // 32: Web
+            row.CreateCell(32).SetCellValue(o.Web ?? "");
+
+            // 33: OrganizationNo
+            row.CreateCell(33).SetCellValue(o.OrganizationNo ?? "");
+
+            // 34: MailAddress1
+            row.CreateCell(34).SetCellValue(o.MailAddress1 ?? "");
+
+            // 35: MailAddress2
+            row.CreateCell(35).SetCellValue(o.MailAddress2 ?? "");
+
+            // 36: MailPostcode
+            row.CreateCell(36).SetCellValue(o.MailPostcode ?? "");
+
+            // 37: MailCity
+            row.CreateCell(37).SetCellValue(o.MailCity ?? "");
+
+            // 38: MailCountry (2 characters)
+            row.CreateCell(38).SetCellValue(o.MailCountry ?? "");
+
+            // 39: DeliveryAddress1
+            row.CreateCell(39).SetCellValue(o.DeliveryAddress1 ?? "");
+
+            // 40: DeliveryAddress2
+            row.CreateCell(40).SetCellValue(o.DeliveryAddress2 ?? "");
+
+            // 41: DeliveryPostcode
+            row.CreateCell(41).SetCellValue(o.DeliveryPostcode ?? "");
+
+            // 42: DeliveryCity
+            row.CreateCell(42).SetCellValue(o.DeliveryCity ?? "");
+
+            // 43: DeliveryCountry (2 characters)
+            row.CreateCell(43).SetCellValue(o.DeliveryCountry ?? "");
+
+            // 44: BankAccount
+            row.CreateCell(44).SetCellValue(o.BankAccount ?? "");
+
+            // 45: IBAN
+            row.CreateCell(45).SetCellValue(o.IBAN ?? "");
+
+            // 46: SWIFT
+            row.CreateCell(46).SetCellValue(o.SWIFT ?? "");
+
+            // 47: InvoiceDelivery
+            row.CreateCell(47).SetCellValue(o.InvoiceDelivery ?? 0);
+
+            // 48: ContactPersonFirstName
+            row.CreateCell(48).SetCellValue(o.ContactPersonFirstName ?? "");
+
+            // 49: ContactPersonLastName
+            row.CreateCell(49).SetCellValue(o.ContactPersonLastName ?? "");
+
+            // 50: ContactPersonPhone
+            row.CreateCell(50).SetCellValue(o.ContactPersonPhone ?? "");
+
+            // 51: ContactPersonEmail
+            row.CreateCell(51).SetCellValue(o.ContactPersonEmail ?? "");
+
+            // 52: Reference
+            row.CreateCell(52).SetCellValue(o.Reference ?? "");
+
+            // 53: PaymentTerms (Numeric)
+            row.CreateCell(53).SetCellValue(o.PaymentTerms ?? 0.0);
+
+            // 54: MergeWithPreviousOrder (0=F, 1=T)
+            row.CreateCell(54).SetCellValue(o.MergeWithPreviousOrder ?? 0.0);
+
+            // 55: Currency
+            row.CreateCell(55).SetCellValue(o.Currency ?? "");
+
+            // 56: ProductCode
+            row.CreateCell(56).SetCellValue(o.ProductCode ?? "");
+
+            // 57: ProductName
+            row.CreateCell(57).SetCellValue(o.ProductName ?? "");
+
+            // 58: ProductGroup
+            row.CreateCell(58).SetCellValue(o.ProductGroup ?? "");
+
+            // 59: ProductDescription
+            row.CreateCell(59).SetCellValue(o.ProductDescription ?? "");
+
+            // 60: ProductType
+            row.CreateCell(60).SetCellValue(o.ProductType ?? 0);
+
+            // 61: ProductUnit
+            row.CreateCell(61).SetCellValue(o.ProductUnit ?? "");
+
+            // 62: ProductSalesPrice (decimal)
+            row.CreateCell(62).SetCellValue((double?)o.ProductSalesPrice ?? 0.0);
+
+            // 63: ProductCostPrice (decimal)
+            row.CreateCell(63).SetCellValue((double?)o.ProductCostPrice ?? 0.0);
+
+            // 64: ProductSalesAccount (numeric)
+            row.CreateCell(64).SetCellValue(o.ProductSalesAccount ?? 0.0);
+
+            // 65: ProductSalesAccountName
+            row.CreateCell(65).SetCellValue(o.ProductSalesAccountName ?? "");
+
+            // 66: ProductAltSalesAccount (numeric)
+            row.CreateCell(66).SetCellValue(o.ProductAltSalesAccount ?? 0.0);
+
+            // 67: ProductAltSalesAccountName
+            row.CreateCell(67).SetCellValue(o.ProductAltSalesAccountName ?? "");
+
+            // 68: ProductGTIN
+            row.CreateCell(68).SetCellValue(o.ProductGTIN ?? "");
+
+            // 69: Discount (decimal)
+            row.CreateCell(69).SetCellValue((double?)o.Discount ?? 0.0);
+
+            // 70: Quantity (decimal)
+            row.CreateCell(70).SetCellValue((double?)o.Quantity ?? 0.0);
+
+            // 71: Description (Freetext line if ProductCode is empty)
+            row.CreateCell(71).SetCellValue(o.Description ?? "");
+
+            // 72: OrderLineUnitPrice (decimal)
+            row.CreateCell(72).SetCellValue((double?)o.OrderLineUnitPrice ?? 0.0);
+
+            // 73: SortOrder (numeric)
+            row.CreateCell(73).SetCellValue(o.SortOrder ?? 0.0);
+
+            // 74: VATReturnSpecification
+            row.CreateCell(74).SetCellValue(o.VATReturnSpecification ?? "");
         }
 
+        // Return the next available row index after finishing
         startRow++;
         return startRow;
     }
 
+
     private static int WriteQuotesBlock(ISheet sheet, IEnumerable<Quote> quotes, int startRow)
     {
+        // Denote the Quotes block
         var decRow = sheet.CreateRow(startRow++);
         decRow.CreateCell(0).SetCellValue("[Quotes]");
 
+        // Create header row
         var headerRow = sheet.CreateRow(startRow++);
         string[] headers =
         {
-            "QuoteNo", "QuoteDate", "CustomerNo", "ContactName", "ProductCode", "ProductName", "Quantity",
-            "QuoteLineUnitPrice"
+            //  0
+            "QuoteNo",
+            //  1
+            "QuoteDate",
+            //  2
+            "QuoteExpiryDate",
+            //  3
+            "SalesPersonEmployeeNo",
+            //  4
+            "SalesPersonName",
+            //  5
+            "ProjectCode",
+            //  6
+            "SubprojectCode",
+            //  7
+            "ProjectName",
+            //  8
+            "ProjectManagerCode",
+            //  9
+            "ProjectManagerName",
+            // 10
+            "ProjectBillable",
+            // 11
+            "ProjectStartDate",
+            // 12
+            "ProjectEndDate",
+            // 13
+            "ProjectStatus",
+            // 14
+            "ProjectContactPerson",
+            // 15
+            "DepartmentCode",
+            // 16
+            "DepartmentName",
+            // 17
+            "DepartmentManagerCode",
+            // 18
+            "DepartmentManagerName",
+            // 19
+            "CustomerNo",
+            // 20
+            "ContactName",
+            // 21
+            "ContactGroup",
+            // 22
+            "CustomerSince",
+            // 23
+            "IsVatFree",
+            // 24
+            "Phone",
+            // 25
+            "Email",
+            // 26
+            "Web",
+            // 27
+            "OrganizationNo",
+            // 28
+            "MailAddress1",
+            // 29
+            "MailAddress2",
+            // 30
+            "MailPostcode",
+            // 31
+            "MailCity",
+            // 32
+            "MailCountry",
+            // 33
+            "DeliveryAddress1",
+            // 34
+            "DeliveryAddress2",
+            // 35
+            "DeliveryPostcode",
+            // 36
+            "DeliveryCity",
+            // 37
+            "DeliveryCountry",
+            // 38
+            "BankAccount",
+            // 39
+            "IBAN",
+            // 40
+            "SWIFT",
+            // 41
+            "InvoiceDelivery",
+            // 42
+            "ContactPersonFirstName",
+            // 43
+            "ContactPersonLastName",
+            // 44
+            "ContactPersonPhone",
+            // 45
+            "ContactPersonEmail",
+            // 46
+            "ProductCode",
+            // 47
+            "ProductName",
+            // 48
+            "ProductGroup",
+            // 49
+            "ProductDescription",
+            // 50
+            "ProductType",
+            // 51
+            "ProductUnit",
+            // 52
+            "ProductSalesPrice",
+            // 53
+            "ProductCostPrice",
+            // 54
+            "ProductSalesAccount",
+            // 55
+            "ProductSalesAccountName",
+            // 56
+            "ProductAltSalesAccount",
+            // 57
+            "ProductAltSalesAccountName",
+            // 58
+            "ProductGTIN",
+            // 59
+            "Discount",
+            // 60
+            "Quantity",
+            // 61
+            "Description",
+            // 62
+            "QuoteLineUnitPrice",
+            // 63
+            "VATReturnSpecification"
         };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
+        // Write each quote's data
         foreach (var q in quotes)
         {
             var row = sheet.CreateRow(startRow++);
+
+            //  0: QuoteNo (Numeric or string; adjust to your data model)
             row.CreateCell(0).SetCellValue(q.QuoteNo?.ToString() ?? "");
+
+            //  1: QuoteDate (DDMMYYYY or date; adjust as needed)
             row.CreateCell(1).SetCellValue(q.QuoteDate ?? "");
-            row.CreateCell(2).SetCellValue(q.CustomerNo?.ToString() ?? "");
-            row.CreateCell(3).SetCellValue(q.ContactName ?? "");
-            row.CreateCell(4).SetCellValue(q.ProductCode ?? "");
-            row.CreateCell(5).SetCellValue(q.ProductName ?? "");
-            row.CreateCell(6).SetCellValue((double?)q.Quantity ?? 0.0);
-            row.CreateCell(7).SetCellValue((double?)q.QuoteLineUnitPrice ?? 0.0);
+
+            //  2: QuoteExpiryDate
+            row.CreateCell(2).SetCellValue(q.QuoteExpiryDate ?? "");
+
+            //  3: SalesPersonEmployeeNo (numeric)
+            row.CreateCell(3).SetCellValue(q.SalesPersonEmployeeNo ?? 0.0);
+
+            //  4: SalesPersonName
+            row.CreateCell(4).SetCellValue(q.SalesPersonName ?? "");
+
+            //  5: ProjectCode
+            row.CreateCell(5).SetCellValue((double?)q.ProjectCode ?? 0);
+
+            //  6: SubprojectCode
+            row.CreateCell(6).SetCellValue(q.SubprojectCode ?? "");
+
+            //  7: ProjectName
+            row.CreateCell(7).SetCellValue(q.ProjectName ?? "");
+
+            //  8: ProjectManagerCode (numeric)
+            row.CreateCell(8).SetCellValue(q.ProjectManagerCode ?? 0.0);
+
+            //  9: ProjectManagerName
+            row.CreateCell(9).SetCellValue(q.ProjectManagerName ?? "");
+
+            // 10: ProjectBillable (0=F, 1=T)
+            row.CreateCell(10).SetCellValue(q.ProjectBillable ?? 0.0);
+
+            // 11: ProjectStartDate
+            row.CreateCell(11).SetCellValue(q.ProjectStartDate ?? "");
+
+            // 12: ProjectEndDate
+            row.CreateCell(12).SetCellValue(q.ProjectEndDate ?? "");
+
+            // 13: ProjectStatus
+            row.CreateCell(13).SetCellValue(q.ProjectStatus ?? 0);
+
+            // 14: ProjectContactPerson
+            row.CreateCell(14).SetCellValue(q.ProjectContactPerson ?? "");
+
+            // 15: DepartmentCode
+            row.CreateCell(15).SetCellValue(q.DepartmentCode ?? "");
+
+            // 16: DepartmentName
+            row.CreateCell(16).SetCellValue(q.DepartmentName ?? "");
+
+            // 17: DepartmentManagerCode (numeric)
+            row.CreateCell(17).SetCellValue(q.DepartmentManagerCode ?? 0.0);
+
+            // 18: DepartmentManagerName
+            row.CreateCell(18).SetCellValue(q.DepartmentManagerName ?? "");
+
+            // 19: CustomerNo (numeric)
+            row.CreateCell(19).SetCellValue(q.CustomerNo ?? 0.0);
+
+            // 20: ContactName
+            row.CreateCell(20).SetCellValue(q.ContactName ?? "");
+
+            // 21: ContactGroup
+            row.CreateCell(21).SetCellValue(q.ContactGroup ?? "");
+
+            // 22: CustomerSince (DDMMYYYY)
+            row.CreateCell(22).SetCellValue(q.CustomerSince ?? "");
+
+            // 23: IsVatFree (0=F, 1=T)
+            row.CreateCell(23).SetCellValue(q.IsVatFree ?? 0.0);
+
+            // 24: Phone
+            row.CreateCell(24).SetCellValue(q.Phone ?? "");
+
+            // 25: Email
+            row.CreateCell(25).SetCellValue(q.Email ?? "");
+
+            // 26: Web
+            row.CreateCell(26).SetCellValue(q.Web ?? "");
+
+            // 27: OrganizationNo
+            row.CreateCell(27).SetCellValue(q.OrganizationNo ?? "");
+
+            // 28: MailAddress1
+            row.CreateCell(28).SetCellValue(q.MailAddress1 ?? "");
+
+            // 29: MailAddress2
+            row.CreateCell(29).SetCellValue(q.MailAddress2 ?? "");
+
+            // 30: MailPostcode
+            row.CreateCell(30).SetCellValue(q.MailPostcode ?? "");
+
+            // 31: MailCity
+            row.CreateCell(31).SetCellValue(q.MailCity ?? "");
+
+            // 32: MailCountry (2 chars if needed)
+            row.CreateCell(32).SetCellValue(q.MailCountry ?? "");
+
+            // 33: DeliveryAddress1
+            row.CreateCell(33).SetCellValue(q.DeliveryAddress1 ?? "");
+
+            // 34: DeliveryAddress2
+            row.CreateCell(34).SetCellValue(q.DeliveryAddress2 ?? "");
+
+            // 35: DeliveryPostcode
+            row.CreateCell(35).SetCellValue(q.DeliveryPostcode ?? "");
+
+            // 36: DeliveryCity
+            row.CreateCell(36).SetCellValue(q.DeliveryCity ?? "");
+
+            // 37: DeliveryCountry (2 chars if needed)
+            row.CreateCell(37).SetCellValue(q.DeliveryCountry ?? "");
+
+            // 38: BankAccount
+            row.CreateCell(38).SetCellValue(q.BankAccount ?? "");
+
+            // 39: IBAN
+            row.CreateCell(39).SetCellValue(q.IBAN ?? "");
+
+            // 40: SWIFT
+            row.CreateCell(40).SetCellValue(q.SWIFT ?? "");
+
+            // 41: InvoiceDelivery
+            row.CreateCell(41).SetCellValue(q.InvoiceDelivery ?? 0);
+
+            // 42: ContactPersonFirstName
+            row.CreateCell(42).SetCellValue(q.ContactPersonFirstName ?? "");
+
+            // 43: ContactPersonLastName
+            row.CreateCell(43).SetCellValue(q.ContactPersonLastName ?? "");
+
+            // 44: ContactPersonPhone
+            row.CreateCell(44).SetCellValue(q.ContactPersonPhone ?? "");
+
+            // 45: ContactPersonEmail
+            row.CreateCell(45).SetCellValue(q.ContactPersonEmail ?? "");
+
+            // 46: ProductCode
+            row.CreateCell(46).SetCellValue(q.ProductCode ?? "");
+
+            // 47: ProductName
+            row.CreateCell(47).SetCellValue(q.ProductName ?? "");
+
+            // 48: ProductGroup
+            row.CreateCell(48).SetCellValue(q.ProductGroup ?? "");
+
+            // 49: ProductDescription
+            row.CreateCell(49).SetCellValue(q.ProductDescription ?? "");
+
+            // 50: ProductType
+            row.CreateCell(50).SetCellValue(q.ProductType ?? 0);
+
+            // 51: ProductUnit
+            row.CreateCell(51).SetCellValue(q.ProductUnit ?? "");
+
+            // 52: ProductSalesPrice (decimal)
+            row.CreateCell(52).SetCellValue((double?)q.ProductSalesPrice ?? 0.0);
+
+            // 53: ProductCostPrice (decimal)
+            row.CreateCell(53).SetCellValue((double?)q.ProductCostPrice ?? 0.0);
+
+            // 54: ProductSalesAccount (numeric)
+            row.CreateCell(54).SetCellValue(q.ProductSalesAccount ?? 0.0);
+
+            // 55: ProductSalesAccountName
+            row.CreateCell(55).SetCellValue(q.ProductSalesAccountName ?? "");
+
+            // 56: ProductAltSalesAccount (numeric)
+            row.CreateCell(56).SetCellValue(q.ProductAltSalesAccount ?? 0.0);
+
+            // 57: ProductAltSalesAccountName
+            row.CreateCell(57).SetCellValue(q.ProductAltSalesAccountName ?? "");
+
+            // 58: ProductGTIN
+            row.CreateCell(58).SetCellValue(q.ProductGTIN ?? "");
+
+            // 59: Discount (decimal)
+            row.CreateCell(59).SetCellValue((double?)q.Discount ?? 0.0);
+
+            // 60: Quantity (decimal)
+            row.CreateCell(60).SetCellValue((double?)q.Quantity ?? 0.0);
+
+            // 61: Description (only used if ProductCode is empty => freetext line)
+            row.CreateCell(61).SetCellValue(q.Description ?? "");
+
+            // 62: QuoteLineUnitPrice (decimal)
+            row.CreateCell(62).SetCellValue((double?)q.QuoteLineUnitPrice ?? 0.0);
+
+            // 63: VATReturnSpecification
+            row.CreateCell(63).SetCellValue(q.VATReturnSpecification ?? "");
         }
 
         startRow++;
         return startRow;
     }
+
 
     private static int WriteInvoiceCidBlock(ISheet sheet, IEnumerable<InvoiceCid> invoiceCids, int startRow)
     {
@@ -622,24 +1306,71 @@ public static class ExcelSingleSheetExporter
 
     private static int WriteChartOfAccountsBlock(ISheet sheet, IEnumerable<ChartOfAccount> charts, int startRow)
     {
+        // Write the block label
         var decRow = sheet.CreateRow(startRow++);
         decRow.CreateCell(0).SetCellValue("[ChartOfAccounts]");
 
+        // Write header row with all columns as specified by the table
         var headerRow = sheet.CreateRow(startRow++);
-        string[] headers = { "Account", "AccountName", "VAT", "AccountAgricultureDepartment", "IsActive" };
-        for (var i = 0; i < headers.Length; i++)
-            headerRow.CreateCell(i).SetCellValue(headers[i]);
+        var headers = new[]
+        {
+            "Account",
+            "AccountName",
+            "AccountAgricultureDepartment",
+            "VAT",
+            "VATReturnSpecification",
+            "BankAccount",
+            "IsProjectRequired",
+            "IsDepartmentRequired",
+            "IsLocationRequired",
+            "IsFixedAssetsRequired",
+            "IsEnterpriseRequired",
+            "IsActivityRequired",
+            "IsDim1Required",
+            "IsDim2Required",
+            "IsDim3Required",
+            "IsQuantityRequired",
+            "IsQuantity2Required",
+            "IsProductRequired",
+            "IsAgricultureProductRequired",
+            "StandardProjectCode",
+            "StandardDepartmentCode",
+            "LockVatCode",
+            "IsActive"
+        };
 
+        for (var i = 0; i < headers.Length; i++) headerRow.CreateCell(i).SetCellValue(headers[i]);
+
+        // Write each ChartOfAccount record in its own row
         foreach (var c in charts)
         {
             var row = sheet.CreateRow(startRow++);
             row.CreateCell(0).SetCellValue(c.Account.ToString());
             row.CreateCell(1).SetCellValue(c.AccountName ?? "");
-            row.CreateCell(2).SetCellValue(c.VAT ?? "");
-            row.CreateCell(3).SetCellValue(c.AccountAgricultureDepartment ?? "");
-            row.CreateCell(4).SetCellValue(c.IsActive?.ToString() ?? "");
+            row.CreateCell(2).SetCellValue(c.AccountAgricultureDepartment ?? "");
+            row.CreateCell(3).SetCellValue(c.VAT ?? "");
+            row.CreateCell(4).SetCellValue(c.VATReturnSpecification ?? "");
+            row.CreateCell(5).SetCellValue(c.BankAccount ?? "");
+            row.CreateCell(6).SetCellValue(c.IsProjectRequired?.ToString() ?? "");
+            row.CreateCell(7).SetCellValue(c.IsDepartmentRequired?.ToString() ?? "");
+            row.CreateCell(8).SetCellValue(c.IsLocationRequired?.ToString() ?? "");
+            row.CreateCell(9).SetCellValue(c.IsFixedAssetsRequired?.ToString() ?? "");
+            row.CreateCell(10).SetCellValue(c.IsEnterpriseRequired?.ToString() ?? "");
+            row.CreateCell(11).SetCellValue(c.IsActivityRequired?.ToString() ?? "");
+            row.CreateCell(12).SetCellValue(c.IsDim1Required?.ToString() ?? "");
+            row.CreateCell(13).SetCellValue(c.IsDim2Required?.ToString() ?? "");
+            row.CreateCell(14).SetCellValue(c.IsDim3Required?.ToString() ?? "");
+            row.CreateCell(15).SetCellValue(c.IsQuantityRequired?.ToString() ?? "");
+            row.CreateCell(16).SetCellValue(c.IsQuantity2Required?.ToString() ?? "");
+            row.CreateCell(17).SetCellValue(c.IsProductRequired?.ToString() ?? "");
+            row.CreateCell(18).SetCellValue(c.IsAgricultureProductRequired?.ToString() ?? "");
+            row.CreateCell(19).SetCellValue(c.StandardProjectCode ?? "");
+            row.CreateCell(20).SetCellValue(c.StandardDepartmentCode ?? "");
+            row.CreateCell(21).SetCellValue(c.LockVatCode?.ToString() ?? "");
+            row.CreateCell(22).SetCellValue(c.IsActive?.ToString() ?? "");
         }
 
+        // Add an extra row for spacing if needed
         startRow++;
         return startRow;
     }
@@ -651,7 +1382,12 @@ public static class ExcelSingleSheetExporter
 
         var headerRow = sheet.CreateRow(startRow++);
         string[] headers =
-            { "AssetCode", "AssetName", "AssetTypeName", "PurchaseDate", "PurchasePrice", "DepreciationMethod" };
+        {
+            "AssetCode", "AssetName", "AssetTypeName", "PurchaseDate", "PurchasePrice", "DepreciationMethod",
+            "Rate", "EconomicLife", "Deprecation0101", "YTDDeprecation", "LastDeprecation", "DepartmentCode",
+            "ProjectCode", "LocationCode",
+            "SerialNumber"
+        };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
@@ -664,6 +1400,14 @@ public static class ExcelSingleSheetExporter
             row.CreateCell(3).SetCellValue(fa.PurchaseDate ?? "");
             row.CreateCell(4).SetCellValue((double?)fa.PurchasePrice ?? 0.0);
             row.CreateCell(5).SetCellValue(fa.DepreciationMethod ?? "");
+            row.CreateCell(6).SetCellValue((double?)fa.Rate ?? 0.0);
+            row.CreateCell(7).SetCellValue((double?)fa.EconomicLife ?? 0.0);
+            row.CreateCell(8).SetCellValue((double?)fa.Deprecation0101 ?? 0.0);
+            row.CreateCell(9).SetCellValue((double?)fa.YTDDepreciation ?? 0.0);
+            row.CreateCell(10).SetCellValue(fa.DepartmentCode ?? "");
+            row.CreateCell(11).SetCellValue(fa.ProjectCode ?? "");
+            row.CreateCell(12).SetCellValue(fa.LocationCode ?? "");
+            row.CreateCell(13).SetCellValue(fa.SerialNumber ?? "");
         }
 
         startRow++;
@@ -676,7 +1420,12 @@ public static class ExcelSingleSheetExporter
         decRow.CreateCell(0).SetCellValue("[YTDPayrollBalances]");
 
         var headerRow = sheet.CreateRow(startRow++);
-        string[] headers = { "SocialSecurityNumber", "EmploymentRelationshipId", "PayItemCode", "Amount", "Year" };
+        string[] headers =
+        {
+            "SocialSecurityNumber", "InternationalIdNumber", "EmploymentRelationshipId", "YtdPayrollBalancesLineType",
+            "PayItemCode",
+            "Amount", "Quantity", "PrivateDrivenKilometers", "HomeWorkKilometers", "Year"
+        };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
@@ -684,10 +1433,15 @@ public static class ExcelSingleSheetExporter
         {
             var row = sheet.CreateRow(startRow++);
             row.CreateCell(0).SetCellValue(y.SocialSecurityNumber ?? "");
-            row.CreateCell(1).SetCellValue(y.EmploymentRelationshipId ?? "");
-            row.CreateCell(2).SetCellValue(y.PayItemCode ?? "");
-            row.CreateCell(3).SetCellValue((double?)y.Amount ?? 0.0);
-            row.CreateCell(4).SetCellValue(y.Year?.ToString() ?? "");
+            row.CreateCell(1).SetCellValue(y.InternationalIdNumber ?? "");
+            row.CreateCell(2).SetCellValue(y.EmploymentRelationshipId ?? "");
+            row.CreateCell(3).SetCellValue(y.YtdPayrollBalancesLineType ?? "");
+            row.CreateCell(4).SetCellValue(y.PayItemCode ?? "");
+            row.CreateCell(5).SetCellValue((double?)y.Amount ?? 0);
+            row.CreateCell(6).SetCellValue((double?)y.Quantity ?? 0);
+            row.CreateCell(7).SetCellValue((double?)y.PrivateDrivenKilometers ?? 0);
+            row.CreateCell(8).SetCellValue((double?)y.HomeWorkKilometers ?? 0);
+            row.CreateCell(9).SetCellValue(y.Year ?? 0);
         }
 
         startRow++;
@@ -700,19 +1454,26 @@ public static class ExcelSingleSheetExporter
         decRow.CreateCell(0).SetCellValue("[SalaryBasis]");
 
         var headerRow = sheet.CreateRow(startRow++);
-        string[] headers = { "EmployeeNo", "PayItemCode", "Rate", "Amount", "Quantity", "PersonType" };
+        string[] headers =
+        {
+            "EmployeeNo", "DepartmentCode", "ProjectCode", "PayItemCode", "Rate", "Amount", "Quantity", "Comment",
+            "PersonType"
+        };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
 
         foreach (var s in salaries)
         {
             var row = sheet.CreateRow(startRow++);
-            row.CreateCell(0).SetCellValue(s.EmployeeNo?.ToString() ?? "");
-            row.CreateCell(1).SetCellValue(s.PayItemCode ?? "");
-            row.CreateCell(2).SetCellValue((double?)s.Rate ?? 0.0);
-            row.CreateCell(3).SetCellValue((double?)s.Amount ?? 0.0);
-            row.CreateCell(4).SetCellValue((double?)s.Quantity ?? 0.0);
-            row.CreateCell(5).SetCellValue(s.PersonType ?? "");
+            row.CreateCell(0).SetCellValue(s.EmployeeNo ?? 0);
+            row.CreateCell(1).SetCellValue(s.DepartmentCode ?? "");
+            row.CreateCell(2).SetCellValue(s.ProjectCode ?? "");
+            row.CreateCell(3).SetCellValue(s.PayItemCode ?? "");
+            row.CreateCell(4).SetCellValue((double?)s.Rate ?? 0.0);
+            row.CreateCell(5).SetCellValue((double?)s.Amount ?? 0);
+            row.CreateCell(6).SetCellValue((double?)s.Quantity ?? 0);
+            row.CreateCell(7).SetCellValue(s.Comment ?? "");
+            row.CreateCell(8).SetCellValue(s.PersonType ?? "");
         }
 
         startRow++;
@@ -729,7 +1490,7 @@ public static class ExcelSingleSheetExporter
         string[] headers =
         {
             "EmployeeNo", "EmploymentRelationshipId", "RemunerationType", "AnnualSalary", "HourlyRate",
-            "LastSalaryChangeDate"
+            "AdjustAnnualSalaryBy", "AdjustHourlyRateBy", "LastSalaryChangeDate"
         };
         for (var i = 0; i < headers.Length; i++)
             headerRow.CreateCell(i).SetCellValue(headers[i]);
@@ -742,7 +1503,9 @@ public static class ExcelSingleSheetExporter
             row.CreateCell(2).SetCellValue(a.RemunerationType ?? "");
             row.CreateCell(3).SetCellValue((double?)a.AnnualSalary ?? 0.0);
             row.CreateCell(4).SetCellValue((double?)a.HourlyRate ?? 0.0);
-            row.CreateCell(5).SetCellValue(a.LastSalaryChangeDate ?? "");
+            row.CreateCell(5).SetCellValue((double?)a.AdjustAnnualSalaryBy ?? 0);
+            row.CreateCell(6).SetCellValue((double?)a.AdjustHourlyRateBy ?? 0);
+            row.CreateCell(7).SetCellValue(a.LastSalaryChangeDate ?? "");
         }
 
         startRow++;
