@@ -89,7 +89,7 @@
         public string ProjectCode { get; set; }
         public string SubprojectCode { get; set; }
         public string ProjectName { get; set; }
-        public string ProjectManagerCode { get; set; }
+        public int? ProjectManagerCode { get; set; }
         public string ProjectManagerName { get; set; }
         public int? ProjectBillable { get; set; }         // 0= false,1= true
         public string ProjectStartDate { get; set; }      // DDMMYYYY

@@ -1,4 +1,4 @@
-//SaftData.tsx
+//saftData.tsx
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
 import { useMapping } from "../components/MappingContext";
@@ -127,7 +127,7 @@ function SaftGroup({
       <h2 className="text-xl font-bold mb-2">{group.groupKey}</h2>
       <div className="overflow-y-auto max-h-[calc(80vh-150px)] border border-gray-500 rounded-lg shadow-md bg-white">
         <table className="min-w-full">
-          <thead className="bg-gray-600 text-black sticky top-0 z-10">
+          <thead className="bg-green-600 text-black sticky top-0 z-10">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -181,21 +181,31 @@ export default function SaftData({ data }: { data: GroupedSaftEntries[] }) {
         console.error("Error fetching standard import mapping:", error)
       );
   }, []);
+  // Filtrer til kun "Voucher" og "VoucherLine"
+  const filteredTableFieldMappings = useMemo(() => {
+    return tableFieldMappings.filter(
+      (mapping) =>
+        mapping.tableName === "Voucher" || mapping.tableName === "VoucherLine"
+    );
+  }, [tableFieldMappings]);
 
-  if (data.length === 0) {
+  if (!data || (Array.isArray(data) && data.length === 0)) {
     return <p className="p-4 text-gray-500">Ingen SAF-T data tilgjengelig.</p>;
   }
 
+  const groups = Array.isArray(data) ? data : [data];
+
   return (
-    <>
-      <div className="p-6 min-h-screen pt-16">
-        <h2 className="text-2xl font-bold mb-4">SAF-T Data</h2>
-        {data.map((group) => (
-          <SaftGroup
-            key={group.groupKey}
-            group={group}
-            tableFieldMappings={tableFieldMappings} />
-        ))}
-      </div></>
+    <div className="p-6 min-h-screen pt-16">
+      <h2 className="text-2xl font-bold mb-4">SAF-T Data</h2>
+      {groups.map((group) => (
+        <SaftGroup
+          key={group.groupKey}
+          group={group}
+          tableFieldMappings={filteredTableFieldMappings}
+        />
+      ))}
+    </div>
   );
+
 }

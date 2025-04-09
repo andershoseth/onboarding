@@ -40,6 +40,8 @@ const MappingHeader: React.FC<MappingHeaderProps> = ({
             minWidth: "200px",
             padding: "4px",
             color: "black",
+            maxHeight: "500px",
+            overflowY: "auto",
           }}
         >
           {/* Level 1: Choose a table */}

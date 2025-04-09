@@ -5,6 +5,7 @@ using onboarding_backend.Services; // Inneholder SaftParser og StandardImport
 using System.Text;
 using System.Collections.Concurrent;
 using Microsoft.OpenApi.Models; // For OpenAPI/Swagger
+using onboarding_backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -104,12 +105,24 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
 
 
             var grouped = SafTFlattener.GroupSafTEntries(flattened);
-            var filteredGroups = grouped
-                .Where(g =>  g.GroupKey == "AuditFile.GeneralLedgerEntries")
-                .ToList();
+
+            var filteredgrouped = grouped
+            .Where(g => g.GroupKey.Contains("Transaction"))
+            .ToList();
 
 
-            results = filteredGroups;
+
+            // Slå sammen alle transaksjonsgruppene 
+            var combinedTransactions = new GroupedSafTEntries
+            {
+                GroupKey = "Transactions",
+                Entries = filteredgrouped.SelectMany(g => g.Entries).ToList()
+            };
+
+            results =  new List<GroupedSafTEntries> { combinedTransactions };
+
+
+            ;
         }
         else if (fileExtension == ".csv")
         {
