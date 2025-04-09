@@ -64,9 +64,9 @@ const ImportVelger: React.FC = () => {
           <Button
             rounded
             label="Neste"
-            className={`px-4 py-2 shadow-md transition ${isDisabled
-              ? "bg-[#DAF0DA] text-white cursor-not-allowed px-4 py-2 shadow-md w-[100px] h-[32px]"
-              : "bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md w-[100px] h-[32px]"}`}
+            className={`px-4 py-2 shadow-md transition w-[100px] h-[32px] ${isDisabled
+              ? "bg-[#DAF0DA] text-white cursor-not-allowed px-4 py-2 shadow-md"
+              : "bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md"}`}
             aria-disabled={isDisabled}
           />
         </Link>

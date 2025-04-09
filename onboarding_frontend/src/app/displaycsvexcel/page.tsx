@@ -31,6 +31,7 @@ export default function FileDisplayPage() {
   const { selectedFileType } = useContext(ImportContext);
   const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const isDisabled = !selectedSubject || checkedBoxes.length === 1; //kun én kategori kan være valgt for å sende inn
 
   const showSaftButton = selectedFileType === "SAF-T (.xml)"; //vise saft-knapp hvis saf-t er valgt filtype
 
@@ -155,7 +156,7 @@ export default function FileDisplayPage() {
             <Button
               rounded
               label="Saf-T"
-              className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 w-[100px] h-[32px] shadow-md"
+              className="bg-[#EAEAEA] text-black hover:bg-[#D0D0D0] active:bg-[#9D9D9D] px-4 py-2 h-[32px] shadow-md w-[100px]"
             />
           </Link>
         )}
@@ -164,7 +165,10 @@ export default function FileDisplayPage() {
           rounded
           label="Send inn"
           onClick={handleCompleteMapping}
-          className="bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 w-[100px] h-[32px] shadow-md"
+          className={`px-4 py-2 w-[100px] h-[32px] shadow-md transition ${isDisabled
+            ? "bg-[#DAF0DA] text-white cursor-not-allowed px-4 py-2 shadow-md"
+            : "bg-[#1E721E] text-white hover:bg-[#449844] active:bg-[#075607] px-4 py-2 shadow-md"
+            }`}
         />
       </div>
 
@@ -205,7 +209,7 @@ export default function FileDisplayPage() {
                     (k) => k && k.trim() !== "" && k !== "TableName"
                   );
                   return (
-                    <div>
+                    <div key={index}>
                       <h2 className="mb-2 mt-5">Table: {tableName}</h2>
                       <div className="max-w-full overflow-x-auto" style={{ overflowX: "auto" }}> {/* horisontal scroll */}
                         <div className="min-w-max" style={{ maxHeight: "550px" }}> {/* vertikal scroll */}
