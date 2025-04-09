@@ -204,59 +204,62 @@ export default function FileDisplayPage() {
                   const rowKeys = Object.keys(rowsForTable[0] ?? {}).filter(
                     (k) => k && k.trim() !== "" && k !== "TableName"
                   );
-
                   return (
-                    <div className="max-w-full overflow-x-auto" style={{ overflowX: "auto" }}> {/* horisontal scroll */}
-                      <div className="min-w-max" style={{ maxHeight: "650px" }}> {/* vertical scroll */}
-                        <table className="table-auto w-full">
-                          <thead className="bg-gray-600 text-white sticky top-0 z-10">
-                            <tr>
-                              {rowKeys.map((header, hIndex) => {
-                                const currentMapping = csvMapping[tableName]?.[header] || "";
-                                return (
-                                  <th
-                                    key={hIndex}
-                                    className="border border-gray-400 px-4 py-4 text-left min-w-[12rem] bg-gray-600"
-                                  >
-                                    <MappingHeader
-                                      columnLabel={header}
-                                      tableFieldMappings={tableFieldMappings}
-                                      currentMapping={currentMapping}
-                                      onMappingSelect={(selected) => {
-                                        setCSVMapping((prev) => ({
-                                          ...prev,
-                                          [tableName]: {
-                                            ...(prev[tableName] || {}),
-                                            [header]: selected,
-                                          },
-                                        }));
-                                      }}
-                                    />
-                                  </th>
-                                );
-                              })}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {rowsForTable.map((row, rowIndex) => (
-                              <tr
-                                key={rowIndex}
-                                className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}
-                              >
-                                {rowKeys.map((key, cellIndex) => (
-                                  <td
-                                    key={cellIndex}
-                                    className="border border-gray-400 px-4 py-2 text-gray-900 min-w-[12rem]"
-                                  >
-                                    {row[key]}
-                                  </td>
-                                ))}
+                    <div>
+                      <h2 className="mb-2 mt-5">Table: {tableName}</h2>
+                      <div className="max-w-full overflow-x-auto" style={{ overflowX: "auto" }}> {/* horisontal scroll */}
+                        <div className="min-w-max" style={{ maxHeight: "550px" }}> {/* vertical scroll */}
+                          <table className="table-auto w-full">
+                            <thead className="bg-gray-600 text-white sticky top-0 z-10">
+                              <tr>
+                                {rowKeys.map((header, hIndex) => {
+                                  const currentMapping = csvMapping[tableName]?.[header] || "";
+                                  return (
+                                    <th
+                                      key={hIndex}
+                                      className="border border-gray-400 px-4 py-4 text-left min-w-[12rem] bg-gray-600"
+                                    >
+                                      <MappingHeader
+                                        columnLabel={header}
+                                        tableFieldMappings={tableFieldMappings}
+                                        currentMapping={currentMapping}
+                                        onMappingSelect={(selected) => {
+                                          setCSVMapping((prev) => ({
+                                            ...prev,
+                                            [tableName]: {
+                                              ...(prev[tableName] || {}),
+                                              [header]: selected,
+                                            },
+                                          }));
+                                        }}
+                                      />
+                                    </th>
+                                  );
+                                })}
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                            </thead>
+                            <tbody>
+                              {rowsForTable.map((row, rowIndex) => (
+                                <tr
+                                  key={rowIndex}
+                                  className={rowIndex % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}
+                                >
+                                  {rowKeys.map((key, cellIndex) => (
+                                    <td
+                                      key={cellIndex}
+                                      className="border border-gray-400 px-4 py-2 text-gray-900 min-w-[12rem]"
+                                    >
+                                      {row[key]}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
+
                   );
 
                 });
