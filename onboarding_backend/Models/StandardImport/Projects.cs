@@ -10,7 +10,7 @@
         public string SubprojectCode { get; set; }
 
         // Prosjektleder, kontaktinfo, kunde
-        public string ProjectManagerCode { get; set; }
+        public int? ProjectManagerCode { get; set; }
         public string ProjectManagerName { get; set; }
         public string ProjectContactPerson { get; set; }
         public string ContactPerson { get; set; }
