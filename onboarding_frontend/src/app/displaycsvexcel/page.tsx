@@ -208,7 +208,7 @@ export default function FileDisplayPage() {
                     <div>
                       <h2 className="mb-2 mt-5">Table: {tableName}</h2>
                       <div className="max-w-full overflow-x-auto" style={{ overflowX: "auto" }}> {/* horisontal scroll */}
-                        <div className="min-w-max" style={{ maxHeight: "550px" }}> {/* vertical scroll */}
+                        <div className="min-w-max" style={{ maxHeight: "550px" }}> {/* vertikal scroll */}
                           <table className="table-auto w-full">
                             <thead className="bg-gray-600 text-white sticky top-0 z-10">
                               <tr>
@@ -266,7 +266,7 @@ export default function FileDisplayPage() {
               })()}
             </>
           ) : (
-            <p className="text-white">Ingen data lastet opp for "{selectedSubject}"</p>
+            <h4 className="text-white">Ingen data lastet opp for "{selectedSubject}"</h4>
           )}
         </div>
       )}
