@@ -3,6 +3,7 @@ namespace onboarding_backend;
 using System.Text;
 using System.Globalization;
 using ExcelDataReader;
+using System.Xml;
 
 public static class FileProcessor
 {
@@ -142,7 +143,30 @@ public static class FileProcessor
             var rowValues = new string[reader.FieldCount];
             for (int c = 0; c < reader.FieldCount; c++)
             {
-                rowValues[c] = reader.GetValue(c)?.ToString()?.Trim() ?? "";
+                var value = reader.GetValue(c);
+                string cellValue = "";
+
+                if (value is DateTime dt)
+                {
+                    if (dt.Year == 1899 && dt.Month == 12 && dt.Day == 31)
+                    {
+                        cellValue = dt.ToString("HH:mm");
+                    }
+                    else if (dt.TimeOfDay == TimeSpan.Zero)
+                    {
+                        cellValue = dt.ToString("dd-MM-yyyy");
+                    }
+                    else
+                    {
+                        cellValue = dt.ToString("dd-MM-yyyy HH:mm");
+                    }
+                }
+                else
+                {
+                    cellValue = value?.ToString()?.Trim() ?? "";
+                }
+
+                rowValues[c] = cellValue;
             }
 
             bool isEmpty = IsEmptyRow(rowValues);
