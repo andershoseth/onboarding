@@ -242,7 +242,7 @@ app.MapGet("/api/download/{id}", (string id) =>
 app.MapPost("/api/standard-import-object", (onboarding_backend.Models.StandardImport.Standardimport  stdImport) =>
     {
         
-        Console.WriteLine($"Received {stdImport.Contact.Count} contacts, etc.");
+        Console.WriteLine($"Received {stdImport.Voucher.Count} contacts, etc.");
         return Results.Ok(new { success = true });
 
     });
