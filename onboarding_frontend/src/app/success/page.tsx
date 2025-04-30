@@ -24,7 +24,7 @@ function Success() {
 
       <div className="mt-10 w-full max-w-6xl">
         <div className="flex flex-col sm:flex-row w-full mb-4">
-          <div className="sm:w-1/2 w-full bg-white text-[#1867DD] mr-6 rounded-3xl flex flex-col items-center justify-center p-6 shadow-lg min-h-80">
+          <div className="sm:w-1/2 w-full bg-white text-[#1867DD] mr-6 rounded-3xl flex flex-col items-center justify-center p-6 shadow-lg min-h-80 border-2 border-black">
             <h1>Du er nå i mål med importen! </h1>
             <div className="mt-4 text-xl text-black w-full">
               <h2 className="text-[#AE74EB]">Du har importert følgende filer:</h2>
@@ -56,7 +56,7 @@ function Success() {
           </div>
 
           <div className="flex flex-col w-full sm:w-1/2">
-            <div className="h-40 bg-white flex flex-col mb-6 justify-center p-6 rounded-3xl items-center text-center mt-5 shadow-lg">
+            <div className="h-40 bg-white flex flex-col mb-6 justify-center p-6 rounded-3xl items-center text-center mt-5 shadow-lg border-2 border-black">
               <h1 className="text-[#1867DD] font-semibold">Last ned de konverterte filene ved å trykke på knappen nedenfor: </h1>
               {/* 
                 If 'id' is present, show a button/link to download the mapped CSV. 
@@ -75,7 +75,7 @@ function Success() {
                 </div>
               )}
             </div>
-            <div className="h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg">
+            <div className="h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg border-2 border-black">
               <div className="flex items-center justify-center text-center w-full">
                 <h1>Start prosessen på nytt? Klikk&nbsp;<a href="/home" className="text-[#FF8D04] underline">her</a> for å bli sendt til start! </h1> {/* &nsbp; er mellomrom i html. Refresher siden og tar deg tilbake til start */}
               </div>
@@ -84,8 +84,7 @@ function Success() {
         </div>
 
         <div className="flex flex-col sm:flex-row w-full">
-
-          <div className="sm:w-1/2 w-full h-40 bg-white text-[#1867DD] mr-6 rounded-3xl flex items-center justify-start p-6 text-2xl font-semibold shadow-lg">
+          <div className="sm:w-1/2 w-full h-40 bg-white text-[#1867DD] mr-6 rounded-3xl flex items-center justify-start p-6 text-2xl font-semibold shadow-lg border-2 border-black">
             <div className="flex items-center w-full h-full">
               <div className="w-1/3 h-full flex items-center justify-center">
                 <Image
@@ -102,7 +101,7 @@ function Success() {
             </div>
           </div>
 
-          <div className="sm:w-1/2 w-full h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-center p-6 text-2xl font-semibold shadow-lg">
+          <div className="sm:w-1/2 w-full h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-center p-6 text-2xl font-semibold shadow-lg border-2 border-black">
             <h1>Bruker du andre system sammen med Go?</h1>
           </div>
 
