@@ -21,18 +21,43 @@ const ImportVelger: React.FC = () => {
 
     const toggleBundle = (bundleName: string) => {
         const subjects = bundlesForSystem[bundleName];
-        const allSelected = subjects.every((s) => selectedColumns[s]);
-        setSelectedColumns((prev) => {
-            const next = { ...prev };
-            subjects.forEach((s) => (next[s] = !allSelected));
+
+        setSelectedColumns(prev => {
+            // Is this bundle already fully selected?
+            const alreadySelected = subjects.every(s => prev[s]);
+
+            // ① start with everybody *unselected*
+            const next: Record<string, boolean> = Object.fromEntries(
+                Object.keys(prev).map(k => [k, false])
+            );
+
+            // ② If we’re **activating** this bundle, tick just its subjects
+            if (!alreadySelected) {
+                subjects.forEach(s => (next[s] = true));
+            }
             return next;
         });
     };
 
     const bundleState = (bundleName: string) => {
-        const subs = bundlesForSystem[bundleName];
-        const checked = subs.every((s) => selectedColumns[s]);
-        const indeterminate = !checked && subs.some((s) => selectedColumns[s]);
+        const subs = bundlesForSystem[bundleName];                  // subjects in *this* bundle
+        const selected = Object.entries(selectedColumns)            // every subject currently selected
+            .filter(([, v]) => v)
+            .map(([s]) => s);
+
+        const onlyMineSelected = selected.every(s => subs.includes(s));
+        const allMine          = subs.every(s => selectedColumns[s]);
+
+        // ✔  “checked”  = all my own subjects selected, and *nothing outside* selected
+        const checked = allMine && onlyMineSelected;
+
+        // ➖ “indeterminate” = some—but not all—of my own subjects selected,
+        //                      and still *nothing outside* selected
+        const indeterminate =
+            !checked &&
+            selected.some(s => subs.includes(s)) &&
+            onlyMineSelected;
+
         return { checked, indeterminate };
     };
 

@@ -7,7 +7,7 @@ export type BundlesPerSystem = {
 
 export const subjectBundles: BundlesPerSystem = {
     Visma: {
-        Bilagsimport: ["bilag", "bilagslinjer"],
+        Bilagsimport: ["kontakter", "produkter", "prosjekter", "avdelinger", "bilag", "bilagslinjer"],
         Prosjekt: [
             "prosjekter",
             "prosjektaktiviteter",

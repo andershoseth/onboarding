@@ -8,10 +8,8 @@ import ImportContext from "../components/ImportContext";
 import Link from "next/link";
 
 export default function ExportPage() {
-    const { selectedSystem } = useContext(ImportContext);
+    const { selectedSystem, selectedFileType } = useContext(ImportContext);
     const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
-    const fileType = "SAF-T";
-    // 1) Create a ref for the Toast
     const toastRef = useRef<Toast>(null);
 
     // 2) Function to show error messages
@@ -54,7 +52,7 @@ export default function ExportPage() {
             {/* 3) Render the Toast once at the top level */}
             <Toast ref={toastRef} />
 
-            {fileType === "SAF-T" ? (
+            {selectedFileType === "SAF-T (.xml)" ? (
                 <SaftModeInstructions
                     system={selectedSystem}
                     checkedBoxes={checkedBoxes}

@@ -1,3 +1,5 @@
+import {useEffect, useRef} from "react";
+
 interface CheckBoxProps {
     label: string;
     checked: boolean;
@@ -5,7 +7,6 @@ interface CheckBoxProps {
     onChange: () => void;
 }
 
-// @ts-expect-error
 const CheckBox: React.FC<CheckBoxProps> = ({
                                                label,
                                                checked,
@@ -16,7 +17,10 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         <input
             type="checkbox"
             checked={checked}
-            ref={(el) => el && (el.indeterminate = indeterminate)}
+            // nullable indeterminate
+            ref={(el) => {
+                if (el) el.indeterminate = indeterminate;
+            }}
             onChange={onChange}
             className="hidden"
         />
