@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "primereact/button";
 import { useMapping } from "../components/MappingContext";
 import { buildStandardImport } from "../utils/BuildStandardImport";
+import { useRouter } from "next/navigation";
 
 export default function SaftTablePage() {
   const { groupedRows, mapping } = useMapping();
@@ -14,6 +15,7 @@ export default function SaftTablePage() {
 
   // Retrieve the SAF-T data for the subject 
   const data: GroupedSaftEntries[] = uploadedFiles[subject]?.data || [];
+  const router = useRouter()
 
   if (data.length === 0) {
     return <div className="p-4">Ingen SAF-T data tilgjengelig.</div>;
@@ -51,6 +53,8 @@ export default function SaftTablePage() {
       URL.revokeObjectURL(url);
 
       alert("Import success! Excel downloaded.");
+      router.push("/success")
+
     } catch (error: any) {
       console.error(error);
       alert("An error occurred: " + error.message);

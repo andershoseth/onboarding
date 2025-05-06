@@ -62,7 +62,7 @@ function Success() {
                 If 'id' is present, show a button/link to download the mapped CSV. 
                 The backend minimal API is at "/api/download/{id}" returning text/csv.
               */}
-              {id && (
+              {id ? (
                 <div className="mt-3"> {/* implementert figma design */}
                   <a href={`http://localhost:5116/api/download/${id}`} download>
                     <Button
@@ -73,6 +73,8 @@ function Success() {
                     />
                   </a>
                 </div>
+              ) : (
+                <h4 className="mt-3 text-black text-lg">Ingen CSV- eller Excel-fil ble konvertert.</h4>
               )}
             </div>
             <div className="h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg border-2 border-black">
