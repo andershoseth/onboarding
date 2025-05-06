@@ -6,6 +6,7 @@ using System.Text;
 using System.Collections.Concurrent;
 using Microsoft.OpenApi.Models; // For OpenAPI/Swagger
 using onboarding_backend.Models;
+using onboarding_backend.Models.StandardImport;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -239,13 +240,24 @@ app.MapGet("/api/download/{id}", (string id) =>
 });
 
 
-app.MapPost("/api/standard-import-object", (onboarding_backend.Models.StandardImport.Standardimport  stdImport) =>
+app.MapPost("/api/standard-import-object", (Standardimport  stdImport) =>
     {
-        
-        Console.WriteLine($"Received {stdImport.Contact.Count} contacts, etc.");
-        return Results.Ok(new { success = true });
 
+        if (stdImport == null)
+            return Results.BadRequest("No data provided.");
+
+        // Generate .xlsx in memory
+        byte[] fileContents = ExcelSingleSheetExporter.CreateSingleSheet(stdImport);
+
+        // Return as downloadable file
+        return Results.File(
+            fileContents,
+            contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            fileDownloadName: "StandardImport.xlsx"
+        );
     });
+
+    
    
 
 

@@ -20,28 +20,42 @@ export default function SaftTablePage() {
   }
 
   async function handleSubmit() {
+    try {
+      const stdImport = buildStandardImport(groupedRows, mapping);
+      console.log("Constructed StandardImport:", stdImport);
 
-    const stdImport = buildStandardImport(groupedRows, mapping);
-    console.log("Constructed StandardImport:", stdImport);
+      const response = await fetch(
+        "http://localhost:5116/api/StandardImport/import",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(stdImport),
+        }
+      );
 
-    const body = JSON.stringify(stdImport);
-    console.log("Sending JSON:", body);
-    const response = await fetch("http://localhost:5116/api/standard-import-object", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(stdImport),
-    });
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error("Failed to POST standard import:", errText);
+        alert("Import failed: " + errText);
+        return;
+      }
 
-    if (!response.ok) {
-      console.error("Failed to POST standard import");
-      return;
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "StandardImport.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      alert("Import success! Excel downloaded.");
+    } catch (error: any) {
+      console.error(error);
+      alert("An error occurred: " + error.message);
     }
-
-    const result = await response.json();
-    console.log("Success result:", result);
-    alert("Import success!");
   }
-
   return (
     <div className="p-6 min-h-screen pt-16 bg-white text-black">
       <Link href="/displaycsvexcel">
