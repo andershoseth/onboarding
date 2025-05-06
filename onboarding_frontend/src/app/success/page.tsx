@@ -56,13 +56,13 @@ function Success() {
           </div>
 
           <div className="flex flex-col w-full sm:w-1/2">
-            <div className="h-40 bg-white flex flex-col mb-6 justify-center p-6 rounded-3xl items-center text-center mt-5 shadow-lg border-2 border-black">
-              <h1 className="text-[#1867DD] font-semibold">Last ned de konverterte filene ved å trykke på knappen nedenfor: </h1>
-              {/* 
-                If 'id' is present, show a button/link to download the mapped CSV. 
-                The backend minimal API is at "/api/download/{id}" returning text/csv.
-              */}
-              {id ? (
+            {/* 
+              If 'id' is present, show a button/link to download the mapped CSV. 
+              The backend minimal API is at "/api/download/{id}" returning text/csv.
+            */}
+            {id ? (
+              <div className="h-40 bg-white flex flex-col mb-6 justify-center p-6 rounded-3xl items-center text-center mt-5 shadow-lg border-2 border-black">
+                <h1 className="text-[#1867DD] font-semibold">Last ned de konverterte filene ved å trykke på knappen nedenfor: </h1>
                 <div className="mt-3"> {/* implementert figma design */}
                   <a href={`http://localhost:5116/api/download/${id}`} download>
                     <Button
@@ -73,10 +73,9 @@ function Success() {
                     />
                   </a>
                 </div>
-              ) : (
-                <h4 className="mt-3 text-black text-lg">Ingen CSV- eller Excel-fil ble konvertert.</h4>
-              )}
-            </div>
+              </div>
+            ) : ""}
+
             <div className="h-40 bg-white text-[#1867DD] rounded-3xl flex items-center justify-between p-6 text-2xl font-semibold shadow-lg border-2 border-black">
               <div className="flex items-center justify-center text-center w-full">
                 <h1>Start prosessen på nytt? Klikk&nbsp;<a href="/home" className="text-[#FF8D04] underline">her</a> for å bli sendt til start! </h1> {/* &nsbp; er mellomrom i html. Refresher siden og tar deg tilbake til start */}
