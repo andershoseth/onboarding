@@ -35,9 +35,7 @@ export function CsvModeInstructions({
         }
     }, [selectedSubject, relevantSubjects]);
 
-    /* ──────────────────────────────────────────────────────────────────── */
-    /* 4) UI                                                               */
-    /* ------------------------------------------------------------------- */
+
     return (
         <div className="p-6 space-y-4">
             <h2>{system} – CSV Export</h2>

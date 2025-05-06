@@ -12,7 +12,6 @@ export default function ExportPage() {
     const [checkedBoxes, setCheckedBoxes] = useState<string[]>([]);
     const toastRef = useRef<Toast>(null);
 
-    // 2) Function to show error messages
     const showErrorToast = (msg: string) => {
         toastRef.current?.show({
             severity: "error",

@@ -26,12 +26,12 @@ const ImportVelger: React.FC = () => {
             // Is this bundle already fully selected?
             const alreadySelected = subjects.every(s => prev[s]);
 
-            // ① start with everybody *unselected*
+            // Start everything as unchecked
             const next: Record<string, boolean> = Object.fromEntries(
                 Object.keys(prev).map(k => [k, false])
             );
 
-            // ② If we’re **activating** this bundle, tick just its subjects
+            // Tick only the subjects in this bundle
             if (!alreadySelected) {
                 subjects.forEach(s => (next[s] = true));
             }
@@ -48,11 +48,8 @@ const ImportVelger: React.FC = () => {
         const onlyMineSelected = selected.every(s => subs.includes(s));
         const allMine          = subs.every(s => selectedColumns[s]);
 
-        // ✔  “checked”  = all my own subjects selected, and *nothing outside* selected
         const checked = allMine && onlyMineSelected;
 
-        // ➖ “indeterminate” = some—but not all—of my own subjects selected,
-        //                      and still *nothing outside* selected
         const indeterminate =
             !checked &&
             selected.some(s => subs.includes(s)) &&

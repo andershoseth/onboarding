@@ -1,7 +1,7 @@
 interface CheckBoxProps {
     label: string;
     checked: boolean;
-    indeterminate?: boolean;   // ← NY
+    indeterminate?: boolean
     onChange: () => void;
 }
 
