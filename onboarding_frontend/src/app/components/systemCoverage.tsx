@@ -4,7 +4,7 @@ export const systemCoverage: { [key: string]: { [key: string]: string[] } } = {
       "prosjektfaktureringsmetode", "prosjektmedlemmer", "prosjektstatus"],
 
     csvSubjects: ["anleggsmidler", "bestillinger", "faktura CID", "lønnsgrunnlag", "lønnsjustering",
-      "lønnssaldo hittil i år", "produkter", "timeprisspesifikasjon", "tilbud"],
+      "lønnssaldo hittil i år", "produkter", "timeprisspesifikasjon", "tilbud","avdelinger", "kontakter", "prosjekter", "aktiviteter", "kontoplan"],
   },
 
   "Tripletex": {
