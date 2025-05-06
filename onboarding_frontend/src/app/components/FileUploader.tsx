@@ -51,6 +51,7 @@ export default function FileUploader({
     const handleUploadComplete = (e: any) => {
         try {
             const response = JSON.parse(e.xhr.response);
+            console.log(response)
             const uploadedFileName = e.files[0]?.name ?? "unknown";
 
             setFileName((prev) => [...prev, uploadedFileName]);

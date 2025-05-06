@@ -10,7 +10,7 @@ namespace onboarding_backend.Controllers
     {
         // POST: api/StandardImport
         [HttpPost("import")]
-        public IActionResult ImportData([FromBody] Standardimport model)
+        public IActionResult ImportData([FromBody] Standardimport model) 
         {   
 
             if (model == null)
