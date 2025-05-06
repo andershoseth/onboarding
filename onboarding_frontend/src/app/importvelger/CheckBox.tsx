@@ -1,5 +1,3 @@
-import {useEffect, useRef} from "react";
-
 interface CheckBoxProps {
     label: string;
     checked: boolean;

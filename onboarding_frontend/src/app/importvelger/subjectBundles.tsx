@@ -1,44 +1,53 @@
 ﻿// app/subjectBundles.ts
+
 export type BundlesPerSystem = {
-    [system: string]: {
-        [bundleNavn: string]: string[];   // hvilke gamle emner som ligger i pakken
-    };
+    [system: string]: Record<string, readonly string[]>;
 };
+
+export const defaultBundles: Record<string, readonly string[]> = {
+    Bilagsimport: [
+        "kontakter",
+        "produkter",
+        "prosjekter",
+        "avdelinger",
+        "bilag",
+        "bilagslinjer",
+    ],
+    Tilbudsimport: [
+        "kontakter",
+        "prosjekter",
+        "avdelinger",
+        "tilbud",
+    ],
+    Ordreimport: [
+        "kontakter",
+        "produkter",
+        "avdelinger",
+        "bestillinger",
+    ],
+    Registerimport: [
+        "avdelinger",
+        "kontakter",
+        "produkter",
+        "prosjekter",
+        "aktiviteter",
+        "kontoplan",
+        "anleggsmidler",
+    ],
+
+
+} as const;
 
 export const subjectBundles: BundlesPerSystem = {
     Visma: {
-        Bilagsimport: ["kontakter", "produkter", "prosjekter", "avdelinger", "bilag", "bilagslinjer"],
-        Prosjekt: [
-            "prosjekter",
-            "prosjektaktiviteter",
-            "prosjektmedlemmer",
-            "prosjektstatus",
-            "prosjektfaktureringsmetode",
-        ],
-        "Produkter & priser": ["produkter", "timeprisspesifikasjon", "tilbud"],
-        Lønn: [
-            "lønnsgrunnlag",
-            "lønnsjustering",
-            "lønnssaldo hittil i år",
-        ],
-        "Kontoplan & dimensjoner": ["kontoplan", "avdelinger", "kontakter"],
+        ...defaultBundles,
     },
-
     Tripletex: {
-        Bilagsimport: ["bilag", "bilagslinjer"],
-        Prosjekt: [
-            "prosjekter",
-            "prosjektaktiviteter",
-            "prosjektmedlemmer",
-            "prosjektstatus",
-            "prosjektfaktureringsmetode",
-        ],
-        "Produkter & priser": ["produkter", "timeprisspesifikasjon", "tilbud"],
-        Lønn: [
-            "lønnsgrunnlag",
-            "lønnsjustering",
-            "lønnssaldo hittil i år",
-        ],
-        "Kontoplan & dimensjoner": ["kontoplan", "avdelinger", "kontakter"],
+        ...defaultBundles,
+        //Bilagsimport: ["bilag", "bilagslinjer"],
     },
 };
+
+
+export const getBundlesFor = (system: string) =>
+    subjectBundles[system] ?? defaultBundles;
