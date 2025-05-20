@@ -4,12 +4,12 @@ namespace onboarding_backend.Services;
 
 public static class SafTNestedFlattener
     {
-        /// <summary>
-        /// Loads the SAF-T XML, then returns a nested Dictionary-of-Dictionaries
-        /// structure. Repeated sibling elements become a List<object>.
-        /// Attributes are stored with an @ prefix (e.g. "@id").
-        /// Leaf text nodes are stored under "#text" by default.
-        /// </summary>
+
+        // Loads the SAF-T XML, then returns a nested Dictionary-of-Dictionaries
+        // structure. Repeated sibling elements become a List<object>.
+        // Attributes are stored with an @ prefix (e.g. "@id").
+        // Leaf text nodes are stored under "#text" by default.
+
         public static Dictionary<string, object> FlattenSafTAsNested(string filePath)
         {
             var doc = XDocument.Load(filePath);
@@ -18,8 +18,7 @@ public static class SafTNestedFlattener
             if (doc.Root == null)
                 return new Dictionary<string, object>();
 
-            // We can decide whether to wrap the root in a dictionary keyed by its name,
-            // or just return the parsed object directly. Here we wrap it with the root name:
+
             var result = new Dictionary<string, object>
             {
                 [doc.Root.Name.LocalName] = ElementToNestedStructure(doc.Root)
@@ -28,13 +27,13 @@ public static class SafTNestedFlattener
             return result;
         }
 
-        /// <summary>
-        /// Recursively converts an XElement into a nested C# structure:
-        ///   - A Dictionary for a single element's children
-        ///   - A List if there are multiple siblings with the same name
-        ///   - String for leaf text
-        ///   - Special keys for attributes and text
-        /// </summary>
+
+        // Recursively converts an XElement into a nested C# structure:
+        //  - A Dictionary for a single element's children
+        //   - A List if there are multiple siblings with the same name
+        //   - String for leaf text
+        //   - Special keys for attributes and text
+
         private static object ElementToNestedStructure(XElement element)
         {
             // This will store all data for 'element' in a dictionary

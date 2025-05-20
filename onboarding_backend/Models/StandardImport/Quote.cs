@@ -81,7 +81,7 @@
 
             public decimal? Discount { get; set; }
             public decimal? Quantity { get; set; }
-            public string Description { get; set; }   // fritekstlinje
+            public string Description { get; set; }   
             public decimal? QuoteLineUnitPrice { get; set; }
             public string VATReturnSpecification { get; set; }
         
