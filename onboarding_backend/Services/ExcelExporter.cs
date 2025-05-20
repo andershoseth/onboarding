@@ -59,8 +59,8 @@ namespace onboarding_backend.Services
 
             // Header row
             var header = sheet.CreateRow(0);
-            header.CreateCell(0).SetCellValue("[Contacts]");  // If you want a "decorator" in the first cell
-                                                              // or you could split the "decorator" from the column headers
+            header.CreateCell(0).SetCellValue("[Contacts]");  
+
             // Example columns: 
             // Row 1: actual column headers
             var columns = new string[]
@@ -84,7 +84,6 @@ namespace onboarding_backend.Services
                 row.CreateCell(6).SetCellValue(c.MailCountry ?? "");
             }
 
-            // Auto-size columns (optional)
             for (int i = 0; i < columns.Length; i++)
                 sheet.AutoSizeColumn(i);
         }
@@ -115,7 +114,6 @@ namespace onboarding_backend.Services
                 row.CreateCell(4).SetCellValue(p.ProductSalesAccount.ToString());
             }
 
-            // Optional auto-size
             for (int i = 0; i < columns.Length; i++)
                 sheet.AutoSizeColumn(i);
         }
@@ -226,8 +224,6 @@ namespace onboarding_backend.Services
             ISheet sheet = workbook.CreateSheet("Vouchers");
             sheet.CreateRow(0).CreateCell(0).SetCellValue("[Vouchers]");
 
-            // This sheet might have to handle multiple lines per voucher
-            // if you want one row per line, for instance:
             var columns = new string[]
             {
                 "VoucherNo","DocumentDate","PostingDate","VoucherType","Account","Amount","Description"
@@ -271,7 +267,6 @@ namespace onboarding_backend.Services
             int rowIndex = 2;
             foreach (var o in orders)
             {
-                // If you only have "one-liner" order data, just do one row per 'Order'
                 IRow row = sheet.CreateRow(rowIndex++);
                 row.CreateCell(0).SetCellValue(o.OrderNo?.ToString() ?? "");
                 row.CreateCell(1).SetCellValue(o.OrderDate ?? "");
