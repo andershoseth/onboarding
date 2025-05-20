@@ -8,7 +8,7 @@ import ImportContext from "../components/ImportContext";
 import Link from "next/link";
 import Image from "next/image";
 
-// Define steps function that returns the steps array
+// function that returns steps array
 export const getSteps = (
   selectedSystem: any,
   selectedColumns: any,

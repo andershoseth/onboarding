@@ -33,21 +33,18 @@ const Instructions: React.FC<InstructionsProps> = ({ title, steps }) => {
       <ol className="space-y-8">
         {steps.map((step, index) => (
           <li key={index}>
-            {/* Optional heading for this step */}
             {step.heading && (
               <h2 className="text-xl font-semibold mb-2">
                 {step.heading}
               </h2>
             )}
 
-            {/* Text (instructions) for this step */}
             {step.text && (
               <p className=" mb-4">
                 {step.text}
               </p>
             )}
 
-            {/* Optional image */}
             {step.imageSrc && (
               <div className="w-full border rounded-lg overflow-hidden">
                 <Image

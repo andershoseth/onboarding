@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
 
-// Example interface for the flattened data from the server
+// interface for the flattened data returned fomr the server
 interface FlattenedEntry {
     path: string;
     value: string;
