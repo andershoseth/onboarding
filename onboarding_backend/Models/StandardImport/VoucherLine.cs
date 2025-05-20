@@ -3,7 +3,7 @@
     public class VoucherLine
     {
         // Konto / Mva
-        public int? Account  { get; set; }                   // Numerisk (Ja, med mindre føres mot reskontro eller fritekst)
+        public int? Account  { get; set; }                   
         public string? AccountName { get; set; }             // Tekst
         public string? AccountAgricultureDepartment   { get; set; } // Se egen tabell (Landbruksavdeling)
         public string? VAT { get; set; }                     // (se egen tabell, f.eks. "0", "1", "3", "14", "K1", etc.)
@@ -11,7 +11,7 @@
 
         // Beløp og valuta
         public decimal? Amount { get; set; }                // Desimaltall i lokal valuta
-        public string? Currency { get; set; }                // Tekst (3 tegn)
+        public string? Currency { get; set; }             
         public decimal? CurrencyAmount { get; set; }        // Desimaltall
         public decimal? Discount { get; set; }              // Desimaltall (prosent)
         public decimal? Quantity { get; set; }              // Numerisk (antall)
@@ -29,28 +29,28 @@
         public int? Accrual { get; set; }                   // Numerisk (periodisering av bilagslinje)
 
         // Reskontro
-        public int? CustomerNo { get; set; }                // Numerisk
-        public int? SupplierNo { get; set; }                // Numerisk
-        public int? EmployeeNo { get; set; }                // Numerisk
-        public string? ContactName { get; set; }             // Tekst
-        public string? ContactGroup { get; set; }            // Tekst
-        public string? CustomerSince { get; set; }           // DDMMYYYY
-        public string? SupplierSince { get; set; }           // DDMMYYYY
-        public string? EmployeeSince { get; set; }           // DDMMYYYY
-        public int? IsVatFree { get; set; }                 // 0= False, 1= True
+        public int? CustomerNo { get; set; }                
+        public int? SupplierNo { get; set; }                
+        public int? EmployeeNo { get; set; }               
+        public string? ContactName { get; set; }             
+        public string? ContactGroup { get; set; }           
+        public string? CustomerSince { get; set; }           
+        public string? SupplierSince { get; set; }           
+        public string? EmployeeSince { get; set; }           
+        public int? IsVatFree { get; set; }             
 
         // Kontaktdata
-        public string? Phone { get; set; }                   // Tekst
-        public string? Email { get; set; }                   // Tekst
-        public string? Web { get; set; }                     // Tekst
-        public string? OrganizationNo { get; set; }          // Tekst
+        public string? Phone { get; set; }                   
+        public string? Email { get; set; }                   
+        public string? Web { get; set; }                    
+        public string? OrganizationNo { get; set; }          
 
         // Postadresse
         public string? MailAddress1 { get; set; }
         public string? MailAddress2 { get; set; }
         public string? MailPostcode { get; set; }
         public string? MailCity { get; set; }
-        public string? MailCountry { get; set; }             // (2 tegn) Landkode ISO 3166-1
+        public string? MailCountry { get; set; }             
 
         // Leveringsadresse
         public string? DeliveryAddress1 { get; set; }
@@ -71,9 +71,9 @@
         public string? ContactPersonEmail { get; set; }
 
         // Produktoppdatering
-        public string? ProductCode { get; set; }             // Tekst
-        public string? ProductName { get; set; }             // Tekst
-        public string? ProductGroup { get; set; }            // Tekst
+        public string? ProductCode { get; set; }             
+        public string? ProductName { get; set; }             
+        public string? ProductGroup { get; set; }            
         public string? ProductDescription { get; set; }      // Tekst (overskrives av "Description" i noen tilfeller)
         public int? ProductType { get; set; }               // Se egen tabell (1=Vare,2=Tjeneste)
         public string?   ProductUnit { get; set; }             // Se egen tabell (EA,HUR, etc.)
