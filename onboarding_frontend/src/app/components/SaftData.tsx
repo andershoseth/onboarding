@@ -1,4 +1,4 @@
-//saftData.tsx
+
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
 import { useMapping } from "../components/MappingContext";
