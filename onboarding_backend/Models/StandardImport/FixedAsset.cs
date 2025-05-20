@@ -7,7 +7,7 @@
             public string AssetTypeName { get; set; } // Navn på anleggsmiddelgruppe (må finnes)
             public string PurchaseDate { get; set; }   // DDMMYYYY
             public decimal? PurchasePrice { get; set; } // anskaffelseskost
-            public string DepreciationMethod { get; set; } // f.eks. "None", "StraightLine", "DecliningBalance"
+            public string DepreciationMethod { get; set; } 
             public decimal? Rate { get; set; }          // sats for saldoavskrivning
             public int? EconomicLife { get; set; }      // levetid i antall måneder
             public decimal? Deprecation0101 { get; set; }
