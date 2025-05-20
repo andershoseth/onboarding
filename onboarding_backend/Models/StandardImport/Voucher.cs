@@ -2,12 +2,12 @@
 {
     public class Voucher
     {
-        public int VoucherNo { get; set; }          // Ja (skille bilag)
+        public int VoucherNo { get; set; }          
         public string? SaftBatchId { get; set; }
         public string? SaftSourceId { get; set; }
-        public string? DocumentDate { get; set; }    // DDMMYYYY (Påkrevd)
-        public string? PostingDate { get; set; }     // DDMMYYYY (valgfritt)
-        public string? VoucherType { get; set; }        // Se egen tabell: 1,2,3,4...
+        public string? DocumentDate { get; set; }    
+        public string? PostingDate { get; set; }    
+        public string? VoucherType { get; set; }        
 
         // Linjer
         public List<VoucherLine> Lines { get; set; } = new();
