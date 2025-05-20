@@ -1,9 +1,8 @@
 namespace onboarding_backend;
 
 using System.Text;
-using System.Globalization;
 using ExcelDataReader;
-using System.Xml;
+
 
 public static class FileProcessor
 {
@@ -133,13 +132,13 @@ public static class FileProcessor
         bool awaitingHeader = false;
         bool inTable = false;
 
-        int rowNumber = 0; // We'll increment this to log each row's index
+        int rowNumber = 0; // Logging row index
 
         while (reader.Read())
         {
             rowNumber++;
 
-            // Build an array of cell values
+            // Array of the cell values
             var rowValues = new string[reader.FieldCount];
             for (int c = 0; c < reader.FieldCount; c++)
             {
@@ -173,7 +172,7 @@ public static class FileProcessor
 
             if (isEmpty)
             {
-                // If currently in a table, an empty row ends it
+                // If currently in a table, an empty row ends it( ergo no completely empty rows allowed in a table)
                 if (inTable)
                 {
                     inTable = false;
@@ -183,7 +182,7 @@ public static class FileProcessor
                 }
                 else
                 {
-                    // Remove if preferrable - if empty cell and not in table, thne do something here
+                    // if empty cell and not in table, then logic can be added here. Not necessary currently
                 }
                 continue;
             }
@@ -198,7 +197,7 @@ public static class FileProcessor
                 continue;
             }
 
-            // If are awaiting the header row
+            // If awaiting the header row
             if (awaitingHeader)
             {
                 currentHeaders = rowValues;
@@ -227,7 +226,7 @@ public static class FileProcessor
             }
             else
             {
-                // Non-empty row outside a table. Shouldn't be necessary
+                // Non-empty row outside a table. Not necessary for us
             }
         }
 

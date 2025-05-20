@@ -14,16 +14,13 @@ export default function FileUploader({
     accept,
     onShowErrorToast
 }: FileUploaderProps) {
-    // Merge all the logic from both old functions:
 
-    // Access multiple contexts as needed
     const { setUploadedData, setUploadedFiles, uploadedFiles } = useUploadContext();
     const { setFileName } = useContext(ImportContext);
 
-    // Create a ref for the <FileUpload> so we can call `clear()`
+    // Create a ref for fileupload so it's possibl to call clear()
     const fileUploadRef = useRef<FileUpload>(null);
 
-    // e.g. from your first default export
     const handleFileSelect = (e: any) => {
         const acceptedExtensions = accept
             .split(",")
@@ -38,16 +35,14 @@ export default function FileUploader({
             onShowErrorToast?.(
                 "One or more files were dropped that do not match the accepted extensions."
             );
-            // Clear the entire queue from the UI:
+            // Clearing the queue from the ui
             fileUploadRef.current?.clear();
             return;
         }
 
-        // Otherwise keep the valid files
         e.files = validFiles;
     };
 
-    // e.g. from your second default export
     const handleUploadComplete = (e: any) => {
         try {
             const response = JSON.parse(e.xhr.response);
@@ -80,7 +75,6 @@ export default function FileUploader({
     };
 
     const handleFileRemove = (e: any) => {
-        // E.g. remove from contexts
         setUploadedFiles((prev) => {
             const updated = { ...prev };
             delete updated[subject];

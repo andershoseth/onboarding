@@ -10,10 +10,8 @@ using onboarding_backend.Models.StandardImport;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1) Add Services for Controllers
 builder.Services.AddControllers();
 
-// 2) Add CORS policy (as you already did)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhostAllPorts", policy =>
@@ -29,7 +27,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// 3) Add Endpoint Explorer and SwaggerGen
+// endpoint explorer and swagger gen
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -52,11 +50,11 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger"; // Swagger UI at root
 });
 
-// Continue with the rest of your pipeline:
+// Continuing the pipeline
 app.UseCors("AllowLocalhostAllPorts");
 
 
-// Øk maks request-body størrelse (f.eks. 100MB)
+// Setting size limit for request body size. Can be changed
 app.Use(async (context, next) =>
 {
     var maxRequestBodySizeFeature = context.Features.Get<IHttpMaxRequestBodySizeFeature>();
@@ -113,14 +111,14 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
 
 
 
-            // Slå sammen alle transaksjonsgruppene 
+            // Combining transaction groups 
             var combinedTransactions = new GroupedSafTEntries
             {
                 GroupKey = "Transactions",
                 Entries = filteredgrouped.SelectMany(g => g.Entries).ToList()
             };
 
-            results =  new List<GroupedSafTEntries> { combinedTransactions };
+            results = new List<GroupedSafTEntries> { combinedTransactions };
 
 
             ;
@@ -139,7 +137,6 @@ app.MapPost("/api/upload", async (HttpRequest request) =>
         }
 
         // Return object containing both subject & the processed data:
-        // Console.WriteLine(JsonSerializer.Serialize(results));
         return Results.Json(new
         {
             subject,  // e.g. "kontakter", "saldobalanse", etc.
@@ -162,20 +159,18 @@ app.MapGet("/api/standard-import-mapping", () =>
 
 app.MapPost("/api/perform-mapping", (MappingRequest request) =>
 {
-    // request.Mapping = dictionary: { "Name": "CustomerTable.NameField", "Email": "CustomerTable.Email" }
-    // request.Data = the list of CSV rows: e.g. [ { "Name": "Alice", "Email": "alice@example.com" }, ...]
 
     var mapping = request.Mapping;
     var rows = request.Data;
 
-    // 1) Transform the CSV rows based on user’s mapping
+    // transforming csv rows based on mapping
     var transformedRows = new List<Dictionary<string, string>>();
     foreach (var row in rows)
     {
         var newRow = new Dictionary<string, string>();
         foreach (var (columnName, value) in row)
         {
-            // If the user mapped "columnName" => "someTable.someField", store it under that key
+            // storing data under new mapped column key
             if (mapping.ContainsKey(columnName))
             {
                 var mappedField = mapping[columnName];
@@ -183,14 +178,14 @@ app.MapPost("/api/perform-mapping", (MappingRequest request) =>
             }
             else
             {
-                // Keep the original column and value
+                // but keeep the original column and value
                 newRow[columnName] = value;
             }
         }
         transformedRows.Add(newRow);
     }
 
-    // 2) Generate CSV from transformedRows
+    // generating the csv from transformedrows
     var allKeys = transformedRows
         .SelectMany(dict => dict.Keys)
         .Distinct()
@@ -198,34 +193,32 @@ app.MapPost("/api/perform-mapping", (MappingRequest request) =>
 
     var sb = new StringBuilder();
 
-    // Write the header row
     var headerRow = allKeys.Select(col =>
 {
     if (mapping.TryGetValue(col, out var mappedName))
     {
-        return mappedName; // mapped field name
+        return mappedName; // mapped FIELD name
     }
-    return col; // fallback to original column
+    return col; // falling back to original column in event of no mapping
 });
     sb.AppendLine(string.Join(",", headerRow));
 
-    // Write each data row
+    // Writing each data row
     foreach (var dict in transformedRows)
     {
         var cells = allKeys.Select(k => dict.ContainsKey(k) ? dict[k] : "");
-        // Simple "quote any double quotes" approach
+        // quoting any double quotes
         var escaped = cells.Select(c => $"\"{c?.Replace("\"", "\"\"")}\"");
         sb.AppendLine(string.Join(",", escaped));
     }
 
-    // Convert to byte[] for storage
+    // Converting to byte[] for storage
     var csvBytes = Encoding.UTF8.GetBytes(sb.ToString());
 
-    // Store in a dictionary with a unique ID
+    // Storing in a dictionary with a unique ID
     var id = Guid.NewGuid().ToString("N");
     mappedCsvStore[id] = csvBytes;
 
-    // Return { success=true, id=theID }
     return Results.Ok(new { success = true, id });
 });
 
@@ -233,14 +226,14 @@ app.MapGet("/api/download/{id}", (string id) =>
 {
     if (mappedCsvStore.TryGetValue(id, out var csvBytes))
     {
-        // Return a CSV file with name 'mapped.csv'
+        // we can change filename later
         return Results.File(csvBytes, "text/csv", "mapped.csv");
     }
     return Results.NotFound("CSV not found or already removed.");
 });
 
 
-app.MapPost("/api/standard-import-object", (Standardimport  stdImport) =>
+app.MapPost("/api/standard-import-object", (Standardimport stdImport) =>
     {
 
         if (stdImport == null)
@@ -249,7 +242,7 @@ app.MapPost("/api/standard-import-object", (Standardimport  stdImport) =>
         // Generate .xlsx in memory
         byte[] fileContents = ExcelSingleSheetExporter.CreateSingleSheet(stdImport);
 
-        // Return as downloadable file
+        // Returning as downloadable file
         return Results.File(
             fileContents,
             contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -257,8 +250,8 @@ app.MapPost("/api/standard-import-object", (Standardimport  stdImport) =>
         );
     });
 
-    
-   
+
+
 
 
 

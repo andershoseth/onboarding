@@ -36,7 +36,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
   const [selectedColumns, setSelectedColumns] = useState<{ [key: string]: boolean }>({})
   const [mappingCompleted, setMappingCompleted] = useState<boolean>(false)
 
-  // 1) Start off with null (or empty)
+  // 1) Initializing with empty state
   const [fileName, setFileName] = useState<string[]>([]);
 
 
@@ -61,7 +61,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
       const fileTypeMap: Record<string, string> = {
         "SAF-T (.xml)": "safTSubjects",
         "CSV (.csv)": "csvSubjects",
-        "Excel (.xlsx)": "csvSubjects" //fjern senere?? Jeg er usikker -Linn
+        "Excel (.xlsx)": "csvSubjects" //fjern senere?? 
       };
 
       const correctedFileType = fileTypeMap[selectedFileType] || selectedFileType;
@@ -69,7 +69,7 @@ export function ImportProvider({ children }: { children: React.ReactNode }) {
       const safTSubjects = systemCoverage[selectedSystem]?.safTSubjects || [];
       const csvSubjects = systemCoverage[selectedSystem]?.csvSubjects || [];
 
-      const combinedSubjects = correctedFileType === "safTSubjects" //sort the new list in alphabetical order
+      const combinedSubjects = correctedFileType === "safTSubjects" //sorting the new list alphabetically
         ? Array.from(new Set([...safTSubjects, ...csvSubjects])).sort((a, b) => a.localeCompare(b))
         : csvSubjects.sort((a, b) => a.localeCompare(b));
 

@@ -4,25 +4,21 @@ import React from 'react';
 import Image from 'next/image';
 
 interface InstructionItem {
-  /** Optional heading/title for this step */
   heading?: string;
-  /** Text or instructions for this step */
   text?: string;
-  /** Image path or URL if you want to show an image */
   imageSrc?: string;
-  /** Alt text for the image, if any */
   imageAlt?: string;
 }
 
 interface InstructionsProps {
-  /** Main heading for the entire instructions block */
+  /** Main heading for the instructions block */
   title?: string;
   /** Array of steps (InstructionItem) to show */
   steps: InstructionItem[];
 }
 
 /**
- * Renders a list of instructions (steps) vertically.
+ * Renders a list of instructions vertically.
  * Each step can include an optional heading, body text, and/or image.
  */
 const Instructions: React.FC<InstructionsProps> = ({ title, steps }) => {

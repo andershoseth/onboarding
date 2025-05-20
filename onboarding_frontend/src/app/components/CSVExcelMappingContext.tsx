@@ -2,12 +2,13 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 /**
- * Store all CSV/Excel mappings as an object:
+ * Storing all CSV/Excel mappings as an object:
  * {
  *   [tableName]: { [columnName]: string }
  * }
  * so that each bracketed table has its own mapping dictionary.
  */
+
 export interface CSVExcelMapping {
   [tableName: string]: {
     [columnName: string]: string;
